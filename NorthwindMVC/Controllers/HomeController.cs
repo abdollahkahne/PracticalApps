@@ -8,6 +8,9 @@ using Microsoft.Extensions.Logging;
 using PracticalApp.NorthwindMVC.Models;
 using PracticalApp.NorthwindContextLib;
 using Microsoft.EntityFrameworkCore;
+using System.Net.Http;
+using Newtonsoft.Json;
+using PracticalApp.NorthwindEntitiesLib;
 
 namespace PracticalApp.NorthwindMVC.Controllers
 {
@@ -15,11 +18,13 @@ namespace PracticalApp.NorthwindMVC.Controllers
     {
         private readonly ILogger<HomeController> _logger;
         private Northwind _db;
+        private readonly IHttpClientFactory _httpClientFactory;
 
-        public HomeController(ILogger<HomeController> logger, Northwind db)
+        public HomeController(ILogger<HomeController> logger, Northwind db, IHttpClientFactory httpClientFactory)
         {
             _logger = logger;
             _db = db;
+            _httpClientFactory = httpClientFactory;
         }
 
         public async Task<IActionResult> Index()
@@ -105,6 +110,31 @@ namespace PracticalApp.NorthwindMVC.Controllers
             }
             ViewData["MinPrice"] = price.Value.ToString("C");
             return View(model);
+        }
+
+        public async Task<IActionResult> Customers(string country)
+        {
+            string endpoint;
+            if (String.IsNullOrEmpty(country))
+            {
+                endpoint = "_api/customers";
+                ViewData["Title"] = "Customers Around the World";
+            }
+            else
+            {
+                endpoint = $"_api/customers?country={country}";
+                ViewData["Title"] = $"Customers in {country.ToUpper()}";
+            }
+
+            // Here we use one Factory for each base address but multiple instance with each thread (each visit)
+            var client = _httpClientFactory.CreateClient("Northwind API");
+            var request = new HttpRequestMessage(method: HttpMethod.Get, requestUri: endpoint);
+            var response = await client.SendAsync(request);
+            // var response = await client.GetAsync(endpoint);
+            var jsonString = await response.Content.ReadAsStringAsync();
+
+            var customers = JsonConvert.DeserializeObject<IEnumerable<Customer>>(jsonString);
+            return View(customers);
         }
     }
 }

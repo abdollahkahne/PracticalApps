@@ -31,6 +31,7 @@ namespace PracticalApp.NorthwindAPI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddCors();
             var dbPath = Path.Combine("..", "Northwind.db");
             services.AddDbContext<Northwind>(options => options.UseSqlite($"Data Source={dbPath}"));
 
@@ -76,6 +77,11 @@ namespace PracticalApp.NorthwindAPI
             app.UseHttpsRedirection();
 
             app.UseRouting();
+            app.UseCors(options =>
+            {
+                options.WithMethods("GET", "POST", "DELETE", "PUT");
+                options.WithOrigins("https://localhost:5002");
+            });
 
             app.UseAuthorization();
 

@@ -87,3 +87,5 @@
 /home/selenium/Desktop/Learning/PracticalApps/NorthwindMVC/obj/Debug/net5.0/Razor/Views/Home/ProductDetails.cshtml.g.cs
 /home/selenium/Desktop/Learning/PracticalApps/NorthwindMVC/obj/Debug/net5.0/Razor/Views/Home/ModelBinding.cshtml.g.cs
 /home/selenium/Desktop/Learning/PracticalApps/NorthwindMVC/obj/Debug/net5.0/Razor/Views/Home/ProductsThatCostsMoreThan.cshtml.g.cs
+/home/selenium/Desktop/Learning/PracticalApps/NorthwindMVC/bin/Debug/net5.0/Newtonsoft.Json.dll
+/home/selenium/Desktop/Learning/PracticalApps/NorthwindMVC/obj/Debug/net5.0/Razor/Views/Home/Customers.cshtml.g.cs

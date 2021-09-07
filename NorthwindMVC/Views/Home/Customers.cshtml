@@ -1,0 +1,20 @@
+@using PracticalApp.NorthwindEntitiesLib
+@model IEnumerable<Customer>
+<h2>@ViewData["Title"]</h2>
+<table class="table">
+    <tr>
+        <th>Company Name</th>
+        <th>Contact Name</th>
+        <th>Address</th>
+        <th>Phone</th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@(Html.DisplayFor(model => item.CompanyName))</td>
+            <td>@(Html.DisplayFor(model => item.ContactName))</td>
+            <td>@(Html.DisplayFor(model => item.Address))</td>
+            <td>@(Html.DisplayFor(model => item.Phone))</td>
+        </tr>
+    }
+</table>

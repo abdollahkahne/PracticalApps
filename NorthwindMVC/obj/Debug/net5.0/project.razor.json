@@ -15644,6 +15644,11 @@
       "FileKind": "mvc"
     },
     {
+      "FilePath": "/home/selenium/Desktop/Learning/PracticalApps/NorthwindMVC/Views/Home/Customers.cshtml",
+      "TargetPath": "Views\\Home\\Customers.cshtml",
+      "FileKind": "mvc"
+    },
+    {
       "FilePath": "/home/selenium/Desktop/Learning/PracticalApps/NorthwindMVC/Views/Shared/_Layout.cshtml",
       "TargetPath": "Views\\Shared\\_Layout.cshtml",
       "FileKind": "mvc"

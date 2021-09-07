@@ -41,6 +41,13 @@ namespace PracticalApp.NorthwindMVC
                 .AddEntityFrameworkStores<ApplicationDbContext>();
             services.AddControllersWithViews();
             services.AddRazorPages();
+            services.AddHttpClient(name: "Northwind API", client =>
+            {
+                client.BaseAddress = new Uri("http://localhost:5000/");
+                client.DefaultRequestHeaders.Accept
+                .Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json", 1.0));
+
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

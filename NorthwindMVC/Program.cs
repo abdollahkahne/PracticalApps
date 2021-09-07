@@ -21,6 +21,7 @@ namespace PracticalApp.NorthwindMVC
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
                     webBuilder.UseStartup<Startup>();
+                    webBuilder.UseUrls("http://localhost:5003");
                 });
     }
 }

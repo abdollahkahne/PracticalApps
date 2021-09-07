@@ -69,6 +69,12 @@
         <p class="lead">
             We have had @Model.VisitorCount visitors this month.
         </p>
+        <h2>Customers Search</h2>
+        <form asp-action="Customers" method="get">
+            <input name="country" placeholder="Enter a country" />
+            <input type="submit" />
+        </form>
+        <h2>Products Search</h2>
         <form asp-action="ProductsThatCostsMoreThan" method="get">
             <input name="price" placeholder="Enter a product price" />
             <input type="submit" />
