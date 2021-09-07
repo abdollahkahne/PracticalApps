@@ -1,0 +1,7 @@
+GET  https://localhost:5001/_api/customers Http/1.1
+
+###
+GET  https://localhost:5001/_api/customers/MEREP http/1.1
+
+###
+GET  https://localhost:5001/_api/customers?country=Germany http/1.1

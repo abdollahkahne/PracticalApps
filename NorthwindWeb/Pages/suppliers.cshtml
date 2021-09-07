@@ -1,0 +1,31 @@
+@page
+@model PracticalApp.NorthwindWeb.SuppliersModel
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+<div class="Row">
+    <p>Enter a Name for New Supplier</p>
+    <form asp-action="OnPost">
+        <div>
+            <input type="text" value="1- Sample Company" asp-for="Supplier.CompanyName">
+        </div>
+        <input type="submit" value="Generate a Supplier" />
+    </form>
+</div>
+<div class="Row">
+    <h1 class="display-2">Suppliers</h1>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Company Name</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Suppliers)
+            {
+                <tr>
+                    <td>@item</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

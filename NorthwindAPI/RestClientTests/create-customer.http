@@ -1,0 +1,17 @@
+POST  https://localhost:5001/_api/customers Http/1.1
+Content-Type: application/json
+
+{
+  "customerID": "Mina",
+  "companyName": "Mère Paillarde",
+  "contactName": "Mehdi Fresnière",
+  "contactTitle": "Marketing Assistant",
+  "address": "43 rue St. Laurent",
+  "city": "Montréal",
+  "region": "Québec",
+  "postalCode": "H1J 1C3",
+  "country": "Iran",
+  "phone": "(98) 555-8054",
+  "fax": "(98) 555-8055",
+  "orders": null
+}

@@ -1,0 +1,27 @@
+@page
+@functions {
+    public string CurrentDay { get; set; }
+    public void OnGet()
+    {
+        Model.CurrentDay = DateTime.Now.ToString("dddd");
+        ViewData["Title"] = "Welcome ASP.NET Core Using Razor Page!";
+    }
+}
+
+<div class="jumbotron">
+    <h1 class="display-3">Welcome to Northwind!</h1>
+    <p class="lead">We supply products to our customers.</p>
+    <hr />
+
+    <p>It is @Model.CurrentDay! Our customers include restaurants, hotels, and cruise
+        lines.</p>
+    <p>
+        <a class="btn btn-primary" href="suppliers">Learn more about
+            our suppliers</a>
+    </p>
+    <p>
+        <a class="btn btn-primary" href="Employee">
+            Contact our employees
+        </a>
+    </p>
+</div>

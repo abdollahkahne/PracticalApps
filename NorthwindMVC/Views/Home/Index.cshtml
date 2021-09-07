@@ -1,0 +1,90 @@
+﻿@model HomeIndexViewModel
+
+@{
+    ViewData["Title"] = "Home Page";
+    string currentItem = "";
+    int c = 0;
+}
+
+<div id="categories" class="carousel slide" data-ride="carousel" data-interval="3000" data-keyboard="true">
+    <ol class="carousel-indicators">
+        @foreach (var item in Model.Categories)
+        {
+            if (c == 0)
+            {
+                currentItem = "active";
+            }
+            else
+            {
+                currentItem = "";
+            }
+
+            <li data-target="#categories" data-slide-to="@c" class="@currentItem"></li>
+
+            // Already we are at code block, so we do not need to use @ here:
+            c++;
+
+        }
+    </ol>
+    @{
+        c = 0;
+    }
+    <div class="carousel-inner">
+        @foreach (var item in Model.Categories)
+        {
+            if (c == 0)
+            {
+                currentItem = "active";
+            }
+            else
+            {
+                currentItem = "";
+            }
+            c++;
+            <div class="carousel-item @currentItem">
+                <img class="d-block w-100" src="~/images/category@(item.CategoryID).jpeg" alt="@(item.CategoryName)" />
+                <div class="carousel-caption d-none d-md-block">
+                    <h2>@(item.CategoryName)</h2>
+                    <h3>@(item.Description)</h3>
+                    <p>
+                        <a class="btn btn-primary" href="/category/@(item.CategoryID)">View</a>
+                    </p>
+                </div>
+            </div>
+
+        }
+    </div>
+    <a class="carousel-control-prev" href="#categories" role="button" data-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+    </a>
+    <a class="carousel-control-next" href="#categories" role="button" data-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+    </a>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <h1>Northwind</h1>
+        <p class="lead">
+            We have had @Model.VisitorCount visitors this month.
+        </p>
+        <form asp-action="ProductsThatCostsMoreThan" method="get">
+            <input name="price" placeholder="Enter a product price" />
+            <input type="submit" />
+        </form>
+        <h2>Products</h2>
+        <div id="newspaper">
+            <ul>
+                @foreach (var item in Model.Products)
+                {
+                    <li>
+                        <a asp-controller="Home" asp-action="ProductDetails" asp-route-id="@(item.ProductID)">
+                            @(item.ProductName) costs @(item.UnitPrice.Value.ToString("C"))
+                        </a>
+                    </li>
+                }
+            </ul>
+        </div>
+    </div>
+</div>

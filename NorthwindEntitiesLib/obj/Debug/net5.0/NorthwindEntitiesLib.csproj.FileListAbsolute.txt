@@ -1,0 +1,12 @@
+/home/selenium/Desktop/Learning/PracticalApps/NorthwindEntitiesLib/bin/Debug/net5.0/NorthwindEntitiesLib.deps.json
+/home/selenium/Desktop/Learning/PracticalApps/NorthwindEntitiesLib/bin/Debug/net5.0/NorthwindEntitiesLib.dll
+/home/selenium/Desktop/Learning/PracticalApps/NorthwindEntitiesLib/bin/Debug/net5.0/ref/NorthwindEntitiesLib.dll
+/home/selenium/Desktop/Learning/PracticalApps/NorthwindEntitiesLib/bin/Debug/net5.0/NorthwindEntitiesLib.pdb
+/home/selenium/Desktop/Learning/PracticalApps/NorthwindEntitiesLib/obj/Debug/net5.0/NorthwindEntitiesLib.csproj.AssemblyReference.cache
+/home/selenium/Desktop/Learning/PracticalApps/NorthwindEntitiesLib/obj/Debug/net5.0/NorthwindEntitiesLib.GeneratedMSBuildEditorConfig.editorconfig
+/home/selenium/Desktop/Learning/PracticalApps/NorthwindEntitiesLib/obj/Debug/net5.0/NorthwindEntitiesLib.AssemblyInfoInputs.cache
+/home/selenium/Desktop/Learning/PracticalApps/NorthwindEntitiesLib/obj/Debug/net5.0/NorthwindEntitiesLib.AssemblyInfo.cs
+/home/selenium/Desktop/Learning/PracticalApps/NorthwindEntitiesLib/obj/Debug/net5.0/NorthwindEntitiesLib.csproj.CoreCompileInputs.cache
+/home/selenium/Desktop/Learning/PracticalApps/NorthwindEntitiesLib/obj/Debug/net5.0/NorthwindEntitiesLib.dll
+/home/selenium/Desktop/Learning/PracticalApps/NorthwindEntitiesLib/obj/Debug/net5.0/ref/NorthwindEntitiesLib.dll
+/home/selenium/Desktop/Learning/PracticalApps/NorthwindEntitiesLib/obj/Debug/net5.0/NorthwindEntitiesLib.pdb
