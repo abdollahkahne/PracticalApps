@@ -20,6 +20,6 @@ namespace PracticalApp.NorthwindEntitiesLib
         public string HomePhone { get; set; }
         public string Extension { get; set; }
         public string Notes { get; set; }
-        public ICollection<Order> Orders { get; set; }
+        public List<Order> Orders { get; set; }
     }
 }

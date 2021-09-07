@@ -9,6 +9,6 @@ namespace PracticalApp.NorthwindEntitiesLib
         public string ShipperName { get; set; }
         public string Phone { get; set; }
         // related entities
-        public ICollection<Order> Orders { get; set; }
+        public List<Order> Orders { get; set; }
     }
 }

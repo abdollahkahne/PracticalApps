@@ -17,6 +17,6 @@ namespace PracticalApp.NorthwindEntitiesLib
         public string Phone { get; set; }
         public string Fax { get; set; }
         public string HomePage { get; set; }
-        public ICollection<Product> Products { get; set; }
+        public List<Product> Products { get; set; }
     }
 }

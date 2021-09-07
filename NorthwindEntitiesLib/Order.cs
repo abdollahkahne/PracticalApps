@@ -16,6 +16,6 @@ namespace PracticalApp.NorthwindEntitiesLib
         public Customer Customer { get; set; }
         public Employee Employee { get; set; }
         public Shipper Shipper { get; set; }
-        public ICollection<OrderDetail> OrderDetails { get; set; }
+        public List<OrderDetail> OrderDetails { get; set; }
     }
 }
