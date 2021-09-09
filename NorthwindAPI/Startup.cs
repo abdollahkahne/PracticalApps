@@ -13,9 +13,12 @@ using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using Microsoft.EntityFrameworkCore;
 using PracticalApp.NorthwindContextLib;
+using PracticalApp.NorthwindAPI.Middlewares;
 using System.IO;
 using Microsoft.AspNetCore.Mvc.Formatters;
 using PracticalApp.NorthwindAPI.Repositories;
+using Microsoft.AspNetCore.Routing;
+using Microsoft.AspNetCore.Http;
 
 namespace PracticalApp.NorthwindAPI
 {
@@ -61,6 +64,8 @@ namespace PracticalApp.NorthwindAPI
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "NorthwindAPI", Version = "v1" });
             });
 
+            services.AddHealthChecks().AddDbContextCheck<Northwind>();
+
             services.AddScoped<ICustomerRepository, CustomerRepository>();
         }
 
@@ -72,6 +77,7 @@ namespace PracticalApp.NorthwindAPI
                 app.UseDeveloperExceptionPage();
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "NorthwindAPI v1"));
+                app.UseHealthChecks(path: "/health-check");
             }
 
             app.UseHttpsRedirection();
@@ -84,6 +90,43 @@ namespace PracticalApp.NorthwindAPI
             });
 
             app.UseAuthorization();
+
+            app.Use(next => async (context) =>
+            {
+                Console.WriteLine("First Custome Middleware On Request");
+                await next(context);
+                Console.WriteLine("Last Custome Middleware On Response");
+            });
+
+            app.Use(next => (context) =>
+            {
+                Console.WriteLine("Second Custome Middleware On Request");
+                var endpoint = context.GetEndpoint();
+                var routeData = context.GetRouteData();
+                if (routeData != null)
+                {
+                    foreach (var item in routeData.Values)
+                    {
+                        Console.WriteLine($"{item.Key}:{item.Value.ToString()}");
+                    }
+
+                }
+                // if (endpoint != null)
+                // {
+                //     Console.WriteLine($"Name:{endpoint.DisplayName};Route: {(endpoint as RouteEndpoint)?.RoutePattern}; Metadata: {String.Join(", ", endpoint.Metadata)}");
+                // }
+
+                return next(context);
+            });
+
+            app.Use(next => async (context) =>
+            {
+                Console.WriteLine("Third Custome Middleware on Request");
+                await next(context);
+                Console.WriteLine("First Custome Middleware on Response");
+            });
+
+            app.UseLogNavigationData();
 
             app.UseEndpoints(endpoints =>
             {

@@ -57,3 +57,6 @@
 /home/selenium/Desktop/Learning/PracticalApps/NorthwindAPI/bin/Debug/net5.0/NorthwindEntitiesLib.dll
 /home/selenium/Desktop/Learning/PracticalApps/NorthwindAPI/bin/Debug/net5.0/NorthwindContextLib.pdb
 /home/selenium/Desktop/Learning/PracticalApps/NorthwindAPI/bin/Debug/net5.0/NorthwindEntitiesLib.pdb
+/home/selenium/Desktop/Learning/PracticalApps/NorthwindAPI/bin/Debug/net5.0/Microsoft.Extensions.Diagnostics.HealthChecks.EntityFrameworkCore.dll
+/home/selenium/Desktop/Learning/PracticalApps/NorthwindAPI/bin/Debug/net5.0/Microsoft.Extensions.Diagnostics.HealthChecks.dll
+/home/selenium/Desktop/Learning/PracticalApps/NorthwindAPI/bin/Debug/net5.0/Microsoft.Extensions.Diagnostics.HealthChecks.Abstractions.dll

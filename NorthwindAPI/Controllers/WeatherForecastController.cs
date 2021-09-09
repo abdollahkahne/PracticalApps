@@ -25,6 +25,7 @@ namespace PracticalApp.NorthwindAPI.Controllers
 
         // Get /weatherforecast
         [HttpGet]
+        [ProducesResponseType(200)]
         public IEnumerable<WeatherForecast> Get()
         {
             return Get(5);
@@ -32,6 +33,7 @@ namespace PracticalApp.NorthwindAPI.Controllers
 
         // Get /weatherforecast/7
         [HttpGet("{days:int}")]
+        [ProducesResponseType(200)]
         public IEnumerable<WeatherForecast> Get(int days)
         {
             var rng = new Random();

@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "jXXgdFDw0xEeMTZ34gil8Jo3nN7g3JBflgtDlwgYT1DO0fa7Nx2b4qLA0RyMovTcRrOUHrAxj7NCiOioOBJZTQ==",
+  "dgSpecHash": "SryDV8lm1l8YqV8CHI+be4UrsW/KqxRSp0a4z2y9SDs1qcdj+4liBtJY5t083YHue37PkseR1oV1gcR0OcVqAg==",
   "success": true,
   "projectFilePath": "/home/selenium/Desktop/Learning/PracticalApps/NorthwindAPI/NorthwindAPI.csproj",
   "expectedPackageFiles": [
@@ -19,6 +19,11 @@
     "/home/selenium/.nuget/packages/microsoft.extensions.dependencyinjection/5.0.2/microsoft.extensions.dependencyinjection.5.0.2.nupkg.sha512",
     "/home/selenium/.nuget/packages/microsoft.extensions.dependencyinjection.abstractions/5.0.0/microsoft.extensions.dependencyinjection.abstractions.5.0.0.nupkg.sha512",
     "/home/selenium/.nuget/packages/microsoft.extensions.dependencymodel/5.0.0/microsoft.extensions.dependencymodel.5.0.0.nupkg.sha512",
+    "/home/selenium/.nuget/packages/microsoft.extensions.diagnostics.healthchecks/5.0.9/microsoft.extensions.diagnostics.healthchecks.5.0.9.nupkg.sha512",
+    "/home/selenium/.nuget/packages/microsoft.extensions.diagnostics.healthchecks.abstractions/5.0.9/microsoft.extensions.diagnostics.healthchecks.abstractions.5.0.9.nupkg.sha512",
+    "/home/selenium/.nuget/packages/microsoft.extensions.diagnostics.healthchecks.entityframeworkcore/5.0.9/microsoft.extensions.diagnostics.healthchecks.entityframeworkcore.5.0.9.nupkg.sha512",
+    "/home/selenium/.nuget/packages/microsoft.extensions.fileproviders.abstractions/5.0.0/microsoft.extensions.fileproviders.abstractions.5.0.0.nupkg.sha512",
+    "/home/selenium/.nuget/packages/microsoft.extensions.hosting.abstractions/5.0.0/microsoft.extensions.hosting.abstractions.5.0.0.nupkg.sha512",
     "/home/selenium/.nuget/packages/microsoft.extensions.logging/5.0.0/microsoft.extensions.logging.5.0.0.nupkg.sha512",
     "/home/selenium/.nuget/packages/microsoft.extensions.logging.abstractions/5.0.0/microsoft.extensions.logging.abstractions.5.0.0.nupkg.sha512",
     "/home/selenium/.nuget/packages/microsoft.extensions.options/5.0.0/microsoft.extensions.options.5.0.0.nupkg.sha512",
