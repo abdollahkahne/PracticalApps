@@ -13566,6 +13566,23 @@
         }
       },
       {
+        "HashCode": -582504247,
+        "Kind": "MVC.ViewComponent",
+        "Name": "__Generated__SupplierViewComponentTagHelper",
+        "AssemblyName": "NorthwindMVC",
+        "CaseSensitive": false,
+        "TagMatchingRules": [
+          {
+            "TagName": "vc:supplier"
+          }
+        ],
+        "Metadata": {
+          "Runtime.Name": "ITagHelper",
+          "Common.TypeName": "__Generated__SupplierViewComponentTagHelper",
+          "MVC.ViewComponent.Name": "Supplier"
+        }
+      },
+      {
         "HashCode": 1342982883,
         "Kind": "Components.Bind",
         "Name": "Bind",

@@ -1,0 +1,25 @@
+@page
+@using Microsoft.AspNetCore.Http
+@using NorthwindIntl.Models
+@using NorthwindIntl.ValueProviders
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@functions {
+    [BindProperty]
+    private Person person {get;set;}
+    public IActionResult OnGet() {
+        if (HttpContext.Request.Headers["HTTP-Referer"].SingleOrDefault().Contains("google.com")){
+            // some one redirect from google to our page
+        }
+        return Page();
+    }
+
+    public async Task OnPostMyHandlerAsync(IFormCollection data) {
+        Console.WriteLine($"{data}");
+        var book=new Book();
+        await TryUpdateModelAsync(book);
+    }
+}
+
+<form method="post">
+    <input type="submit"  value="Submit to A" asp-page-handler="MyHandler" />
+</form>

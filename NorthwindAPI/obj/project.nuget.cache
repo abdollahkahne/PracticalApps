@@ -1,9 +1,14 @@
 {
   "version": 2,
-  "dgSpecHash": "SryDV8lm1l8YqV8CHI+be4UrsW/KqxRSp0a4z2y9SDs1qcdj+4liBtJY5t083YHue37PkseR1oV1gcR0OcVqAg==",
+  "dgSpecHash": "kfXQuhfHgugrRLOfcIbHWkKyPRM0UEKPlW/hkb24H3tvsTGiXNjfZ3zbO6y6sutEBbF2scqtVivIiDD7S+UZNA==",
   "success": true,
   "projectFilePath": "/home/selenium/Desktop/Learning/PracticalApps/NorthwindAPI/NorthwindAPI.csproj",
   "expectedPackageFiles": [
+    "/home/selenium/.nuget/packages/microsoft.aspnetcore.authentication.jwtbearer/5.0.10/microsoft.aspnetcore.authentication.jwtbearer.5.0.10.nupkg.sha512",
+    "/home/selenium/.nuget/packages/microsoft.aspnetcore.mvc.api.analyzers/2.2.6/microsoft.aspnetcore.mvc.api.analyzers.2.2.6.nupkg.sha512",
+    "/home/selenium/.nuget/packages/microsoft.aspnetcore.mvc.versioning/5.0.0/microsoft.aspnetcore.mvc.versioning.5.0.0.nupkg.sha512",
+    "/home/selenium/.nuget/packages/microsoft.aspnetcore.odata/8.0.2/microsoft.aspnetcore.odata.8.0.2.nupkg.sha512",
+    "/home/selenium/.nuget/packages/microsoft.csharp/4.5.0/microsoft.csharp.4.5.0.nupkg.sha512",
     "/home/selenium/.nuget/packages/microsoft.data.sqlite.core/5.0.9/microsoft.data.sqlite.core.5.0.9.nupkg.sha512",
     "/home/selenium/.nuget/packages/microsoft.dotnet.platformabstractions/3.1.6/microsoft.dotnet.platformabstractions.3.1.6.nupkg.sha512",
     "/home/selenium/.nuget/packages/microsoft.entityframeworkcore/5.0.9/microsoft.entityframeworkcore.5.0.9.nupkg.sha512",
@@ -28,7 +33,16 @@
     "/home/selenium/.nuget/packages/microsoft.extensions.logging.abstractions/5.0.0/microsoft.extensions.logging.abstractions.5.0.0.nupkg.sha512",
     "/home/selenium/.nuget/packages/microsoft.extensions.options/5.0.0/microsoft.extensions.options.5.0.0.nupkg.sha512",
     "/home/selenium/.nuget/packages/microsoft.extensions.primitives/5.0.0/microsoft.extensions.primitives.5.0.0.nupkg.sha512",
+    "/home/selenium/.nuget/packages/microsoft.identitymodel.jsonwebtokens/6.7.1/microsoft.identitymodel.jsonwebtokens.6.7.1.nupkg.sha512",
+    "/home/selenium/.nuget/packages/microsoft.identitymodel.logging/6.7.1/microsoft.identitymodel.logging.6.7.1.nupkg.sha512",
+    "/home/selenium/.nuget/packages/microsoft.identitymodel.protocols/6.7.1/microsoft.identitymodel.protocols.6.7.1.nupkg.sha512",
+    "/home/selenium/.nuget/packages/microsoft.identitymodel.protocols.openidconnect/6.7.1/microsoft.identitymodel.protocols.openidconnect.6.7.1.nupkg.sha512",
+    "/home/selenium/.nuget/packages/microsoft.identitymodel.tokens/6.7.1/microsoft.identitymodel.tokens.6.7.1.nupkg.sha512",
+    "/home/selenium/.nuget/packages/microsoft.odata.core/7.9.0/microsoft.odata.core.7.9.0.nupkg.sha512",
+    "/home/selenium/.nuget/packages/microsoft.odata.edm/7.9.0/microsoft.odata.edm.7.9.0.nupkg.sha512",
+    "/home/selenium/.nuget/packages/microsoft.odata.modelbuilder/1.0.7/microsoft.odata.modelbuilder.1.0.7.nupkg.sha512",
     "/home/selenium/.nuget/packages/microsoft.openapi/1.2.3/microsoft.openapi.1.2.3.nupkg.sha512",
+    "/home/selenium/.nuget/packages/microsoft.spatial/7.9.0/microsoft.spatial.7.9.0.nupkg.sha512",
     "/home/selenium/.nuget/packages/sqlitepclraw.bundle_e_sqlite3/2.0.4/sqlitepclraw.bundle_e_sqlite3.2.0.4.nupkg.sha512",
     "/home/selenium/.nuget/packages/sqlitepclraw.core/2.0.4/sqlitepclraw.core.2.0.4.nupkg.sha512",
     "/home/selenium/.nuget/packages/sqlitepclraw.lib.e_sqlite3/2.0.4/sqlitepclraw.lib.e_sqlite3.2.0.4.nupkg.sha512",
@@ -40,7 +54,12 @@
     "/home/selenium/.nuget/packages/system.collections.immutable/5.0.0/system.collections.immutable.5.0.0.nupkg.sha512",
     "/home/selenium/.nuget/packages/system.componentmodel.annotations/5.0.0/system.componentmodel.annotations.5.0.0.nupkg.sha512",
     "/home/selenium/.nuget/packages/system.diagnostics.diagnosticsource/5.0.1/system.diagnostics.diagnosticsource.5.0.1.nupkg.sha512",
-    "/home/selenium/.nuget/packages/system.memory/4.5.3/system.memory.4.5.3.nupkg.sha512"
+    "/home/selenium/.nuget/packages/system.identitymodel.tokens.jwt/6.7.1/system.identitymodel.tokens.jwt.6.7.1.nupkg.sha512",
+    "/home/selenium/.nuget/packages/system.memory/4.5.3/system.memory.4.5.3.nupkg.sha512",
+    "/home/selenium/.nuget/packages/system.runtime.compilerservices.unsafe/4.6.0/system.runtime.compilerservices.unsafe.4.6.0.nupkg.sha512",
+    "/home/selenium/.nuget/packages/system.security.cryptography.cng/4.5.0/system.security.cryptography.cng.4.5.0.nupkg.sha512",
+    "/home/selenium/.nuget/packages/system.text.encodings.web/4.6.0/system.text.encodings.web.4.6.0.nupkg.sha512",
+    "/home/selenium/.nuget/packages/system.text.json/4.6.0/system.text.json.4.6.0.nupkg.sha512"
   ],
   "logs": []
 }

@@ -1,0 +1,29 @@
+@model Book
+@using NorthwindIntl.Extensions
+
+@{
+    var subject=new SelectListGroup {Name="Web Development"};
+
+}
+    @using (Html.BeginForm())
+    {
+        @Html.LabelFor(x=>x.Title)
+        @Html.TextBoxFor(x =>x.Title)
+        @Html.ValidationMessageFor(x=>x.Title)
+        <br/>
+        @Html.Label("Price")
+        @Html.TextBox("Price",null,format:"{0:C}")
+        @Html.ValidationMessage("Price")
+        <br/>
+        @Html.LabelFor(t =>t.Subject)
+        @Html.DropDownListFor(t =>t.Subject,new [] {new SelectListItem {Value="Development",Text="Development"},new SelectListItem {Value="ASP",Text="ASP.NET",Group=subject}})
+        <br/>
+        @Html.LabelFor(model =>model.Size)
+        @Html.DropDownListFor(model =>model.Size,Html.GetEnumSelectList<PaperSize>())        
+        <br/>
+        @Html.LabelFor(model =>model.Description)
+        @Html.TextAreaFor(model =>model.Description)
+        @Html.Raw("<div>This is inserted using Raw helper method</div>")
+        @Html.ValidationSummary(true)
+        @Html.Button("Submit",new {type="submit"})
+    }

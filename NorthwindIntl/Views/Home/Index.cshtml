@@ -1,0 +1,61 @@
+﻿@using Microsoft.Extensions.Logging
+@using NorthwindIntl.ValueProviders
+@using Microsoft.AspNetCore.Mvc.Localization
+@using Microsoft.Extensions.Localization
+@inject ILogger<Views_Home_Index> _logger
+@inject IViewLocalizer _localizer
+@inject IHtmlLocalizer<SharedResource> _htmlLocalizer
+@{
+    ViewData["Title"] = "Home Page";
+}
+@(DateTime.Today-TimeSpan.FromDays(7))
+
+@{
+    DiagnosticSource.Write("MyDiagnostic",new {Message ="This edited at runtime since I added the middleware and nuget package"});
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+    <h2>From Localization:@_localizer["Hello"]</h2>
+    <h3>From Localization:@_localizer["Bye"]</h3>
+    <h4>From Html Shared Localization:@_htmlLocalizer["Shared"]</h4>
+    <p>Added At Runtime</p>
+    @{
+        Output.WriteLine("This is a text using output");
+    }
+
+    @(Html.CurrentUser())
+
+    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+</div>
+
+@foreach (var item in (Html.MetadataProvider.GetMetadataForType(typeof(Person)).Properties))
+{
+    <span>@(item.PropertyName)</span>
+}
+
+<form action="/home/submit" name="info" method="post">
+    <input type="text" name="email" id="email">
+    <input type="text" name="fullname" id="fullname">
+    <button type="submit">Submit</button>
+</form>
+@* @await (Html.PartialAsync("_SamplePartial"))
+@{
+  await (Html.RenderPartialAsync("_SamplePartial"));
+} *@
+
+@{
+    var basePath=Url.Content("~/"); // Return The application absolute path like /
+}
+@* <div>
+    @basePath
+</div> *@
+
+@section Scripts
+{
+    <script>
+         console.log("Section");
+    </script>
+   
+}
+

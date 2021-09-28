@@ -21,6 +21,7 @@ namespace PracticalApp.NorthwindWeb
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
                     webBuilder.UseStartup<Startup>();
+                    // .UseKestrel(options =>options.ListenAnyIP(0)); //This sets port dynamicly
                 });
     }
 }

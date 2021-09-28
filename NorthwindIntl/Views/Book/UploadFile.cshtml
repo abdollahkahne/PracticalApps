@@ -1,0 +1,30 @@
+@using NorthwindIntl.TagHelpers
+@addTagHelper *, NorthwindIntl
+
+<environment include="Development">This is Development Environment</environment>
+<environment exclude="Development">This is non-development Environment</environment>
+<br>
+
+<distributed-cache name="Calculator">
+
+
+<time-format asp-format="yyyy-MM-dd hh:mm:ss">Current Time is {0}</time-format>
+<br>
+<time-format asp-format="MMMM-dddd" style="border: 1px red dashed;">{0}</time-format>
+
+
+
+
+
+@using (Html.BeginForm("UploadFile","Book",FormMethod.Post,new {enctype="multipart/form-data"}))
+{
+     <input type="file" name="uploaded" />
+     <input type="submit" value="UploadFile" />
+}
+
+@(await Component.InvokeAsync("My",new {p1=4,p2=true}))
+</distributed-cache>
+
+
+
+

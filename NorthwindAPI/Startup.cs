@@ -19,11 +19,27 @@ using Microsoft.AspNetCore.Mvc.Formatters;
 using PracticalApp.NorthwindAPI.Repositories;
 using Microsoft.AspNetCore.Routing;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using PracticalApp.NorthwindAPI.Utilities;
+using Microsoft.AspNetCore.Diagnostics;
+using System.Text.Json;
+using Microsoft.AspNetCore.Mvc.Versioning;
+using Microsoft.AspNetCore.OData;
+using Microsoft.OData.Edm;
+using Microsoft.OData.ModelBuilder;
+using PracticalApp.NorthwindEntitiesLib;
 
 namespace PracticalApp.NorthwindAPI
 {
     public class Startup
     {
+        private static IEdmModel GetEdmModel() {
+            var builder=new ODataConventionModelBuilder();
+            builder.EntitySet<Customer>("CustomersOdata");
+            builder.EntitySet<Supplier>("Suppliers");
+            return builder.GetEdmModel();
+        }
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -34,7 +50,45 @@ namespace PracticalApp.NorthwindAPI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            
+
             services.AddCors();
+
+            services.AddApiVersioning(options => {
+                options.ReportApiVersions=true;
+                // options.RouteConstraintName="apiversion";
+                // options.DefaultApiVersion=ApiVersion.Parse("2.0");
+                options.DefaultApiVersion=new ApiVersion(2,0);
+                options.AssumeDefaultVersionWhenUnspecified=true;
+                options.ApiVersionReader=new HeaderApiVersionReader("api-version");
+                // options.ApiVersionReader=new QueryStringApiVersionReader("version");
+                // options.ApiVersionReader=new UrlSegmentApiVersionReader(); // the segment should be constraint using apiversion
+
+            });
+
+
+            services.AddAuthentication(options =>{
+                options.DefaultAuthenticateScheme= JwtBearerDefaults.AuthenticationScheme;
+                options.DefaultChallengeScheme=JwtBearerDefaults.AuthenticationScheme;
+                options.DefaultForbidScheme=JwtBearerDefaults.AuthenticationScheme;
+            }).AddJwtBearer(JwtBearerDefaults.AuthenticationScheme,options =>{
+                options.TokenValidationParameters=new TokenValidationParameters {
+                    ValidateAudience=false,
+                    ValidateIssuer=false,
+                    ValidateIssuerSigningKey=true,
+                    IssuerSigningKey=AuthenticationExtensions.Key,
+                    ValidateLifetime=true,
+                    ClockSkew=TimeSpan.FromMinutes(5),
+
+                };
+            });
+
+            // we can configure ApiBehaviorOptions to change default behaviour enforced by [ApiController] attribute
+            // services.Configure<ApiBehaviorOptions>(option =>{
+            //     option.SuppressModelStateInvalidFilter=true;
+            // });
+
+
             var dbPath = Path.Combine("..", "Northwind.db");
             services.AddDbContext<Northwind>(options => options.UseSqlite($"Data Source={dbPath}"));
 
@@ -56,12 +110,20 @@ namespace PracticalApp.NorthwindAPI
             //     }
             // })
             services.AddControllers()
+            .AddOData(options =>{
+                options.AddRouteComponents("odata",GetEdmModel());
+                options.Select().Expand().Filter().OrderBy().Count().SetMaxTop(5);
+            })
             .AddXmlDataContractSerializerFormatters()
             .AddXmlSerializerFormatters()
             .SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
+
+
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "NorthwindAPI", Version = "v1" });
+                c.SwaggerDoc("v2", new OpenApiInfo { Title = "NorthwindAPI", Version = "2.0" });
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "NorthwindAPI", Version = "1.0" });
+                c.ResolveConflictingActions(apiDesc =>apiDesc.First());
             });
 
             services.AddHealthChecks().AddDbContextCheck<Northwind>();
@@ -76,11 +138,37 @@ namespace PracticalApp.NorthwindAPI
             {
                 app.UseDeveloperExceptionPage();
                 app.UseSwagger();
-                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "NorthwindAPI v1"));
+                app.UseSwaggerUI(c => {
+                    c.SwaggerEndpoint("/swagger/v1/swagger.json", "NorthwindAPI v1");
+                    c.SwaggerEndpoint("/swagger/v2/swagger.json", "NorthwindAPI v2");
+                });
                 app.UseHealthChecks(path: "/health-check");
             }
 
-            app.UseHttpsRedirection();
+            app.UseExceptionHandler(builder =>{
+                builder.Run(async context=>{
+                var exceptionHandlerPathFeature =context.Features.Get<IExceptionHandlerPathFeature>();
+                var exception =exceptionHandlerPathFeature.Error;
+                var path=exceptionHandlerPathFeature.Path;
+                var problemDetails=new ProblemDetails {
+                    Instance=$"urn:my:error:{Guid.NewGuid()}",
+                    Detail=exception.Message,
+                };
+                if (exception is BadHttpRequestException bad) {
+                    problemDetails.Title="Invalid Request";
+                    problemDetails.Status=StatusCodes.Status400BadRequest;
+                } else {
+                    problemDetails.Title="An uexpected error happened";
+                    problemDetails.Status=StatusCodes.Status500InternalServerError;
+                }
+                context.Response.StatusCode=problemDetails.Status.Value;
+                context.Response.ContentType="application/problem+json";
+                await context.Response.WriteAsync(JsonSerializer.Serialize(problemDetails));
+                });
+                
+            });
+
+            app.UseHttpsRedirection();           
 
             app.UseRouting();
             app.UseCors(options =>
@@ -88,7 +176,7 @@ namespace PracticalApp.NorthwindAPI
                 options.WithMethods("GET", "POST", "DELETE", "PUT");
                 options.WithOrigins("https://localhost:5002");
             });
-
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.Use(next => async (context) =>
@@ -96,6 +184,7 @@ namespace PracticalApp.NorthwindAPI
                 Console.WriteLine("First Custome Middleware On Request");
                 await next(context);
                 Console.WriteLine("Last Custome Middleware On Response");
+                
             });
 
             app.Use(next => (context) =>
@@ -117,6 +206,9 @@ namespace PracticalApp.NorthwindAPI
                 // }
 
                 return next(context);
+                
+                // If we have not async-await or next to return a Task we can use the following:
+                // return Task.CompletedTask;
             });
 
             app.Use(next => async (context) =>

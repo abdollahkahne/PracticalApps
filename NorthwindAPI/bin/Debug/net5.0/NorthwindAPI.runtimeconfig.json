@@ -6,6 +6,7 @@
       "version": "5.0.0"
     },
     "configProperties": {
+      "Config1": "This is a sample",
       "System.GC.Server": true,
       "System.Runtime.Serialization.EnableUnsafeBinaryFormatterSerialization": false
     }

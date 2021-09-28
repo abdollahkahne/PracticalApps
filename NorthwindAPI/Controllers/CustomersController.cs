@@ -11,7 +11,9 @@ namespace PracticalApp.NorthwindAPI.Controllers
 {
     // base address: /_api/customers
     [ApiController]
+    [ApiConventionType(typeof(DefaultApiConventions))]
     [Route("_api/[Controller]")]
+    // [ApiVersion("v2")]
     public class CustomersController : ControllerBase
     {
         private ICustomerRepository _repository;
@@ -101,6 +103,7 @@ namespace PracticalApp.NorthwindAPI.Controllers
         }
 
         // DELETE: _api/customers/[id]
+        [ApiConventionMethod(typeof(DefaultApiConventions),nameof(DefaultApiConventions.Delete))]
         [HttpDelete("{id}")]
         [ProducesResponseType(204)]
         [ProducesResponseType(400)]

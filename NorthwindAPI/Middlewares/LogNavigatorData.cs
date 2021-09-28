@@ -2,16 +2,20 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using System;
 using System.Threading.Tasks;
+using System.Linq;
+using Microsoft.AspNetCore.Routing;
 
 namespace PracticalApp.NorthwindAPI.Middlewares
 {
     public class LogNavigatorData
     {
         private readonly RequestDelegate _next;
+        private readonly LinkGenerator _linkGenerator; // this is used for generating links for endpoints
 
-        public LogNavigatorData(RequestDelegate next)
+        public LogNavigatorData(RequestDelegate next, LinkGenerator linkGenerator)
         {
             _next = next;
+            _linkGenerator = linkGenerator;
         }
         public async Task Invoke(HttpContext context)
         {
@@ -19,6 +23,19 @@ namespace PracticalApp.NorthwindAPI.Middlewares
             var ip = context.Connection.RemoteIpAddress;
             Console.WriteLine(userAgent.ToString());
             Console.WriteLine(ip.ToString());
+
+            // Unique Identifier for Request
+            Console.WriteLine(context.TraceIdentifier);
+
+            // Generate RouteUrl using Link Generator Dependency Injection (Learning)
+            var path=_linkGenerator.GetPathByAction(context,action:"getCustomers",controller:"Customers");
+            var url=_linkGenerator.GetUriByAction(context,"getCustomers","Customers");
+            Console.WriteLine(path);
+            Console.WriteLine(url);
+
+
+            // var payload=context.Request.Form["Payload"].SingleOrDefault();
+            // Console.WriteLine(payload);
 
             // we can do Following Middlewares:
             // 1- Content Generation (Like this)

@@ -60,3 +60,16 @@
 /home/selenium/Desktop/Learning/PracticalApps/NorthwindAPI/bin/Debug/net5.0/Microsoft.Extensions.Diagnostics.HealthChecks.EntityFrameworkCore.dll
 /home/selenium/Desktop/Learning/PracticalApps/NorthwindAPI/bin/Debug/net5.0/Microsoft.Extensions.Diagnostics.HealthChecks.dll
 /home/selenium/Desktop/Learning/PracticalApps/NorthwindAPI/bin/Debug/net5.0/Microsoft.Extensions.Diagnostics.HealthChecks.Abstractions.dll
+/home/selenium/Desktop/Learning/PracticalApps/NorthwindAPI/bin/Debug/net5.0/Microsoft.AspNetCore.Authentication.JwtBearer.dll
+/home/selenium/Desktop/Learning/PracticalApps/NorthwindAPI/bin/Debug/net5.0/Microsoft.IdentityModel.JsonWebTokens.dll
+/home/selenium/Desktop/Learning/PracticalApps/NorthwindAPI/bin/Debug/net5.0/Microsoft.IdentityModel.Logging.dll
+/home/selenium/Desktop/Learning/PracticalApps/NorthwindAPI/bin/Debug/net5.0/Microsoft.IdentityModel.Protocols.dll
+/home/selenium/Desktop/Learning/PracticalApps/NorthwindAPI/bin/Debug/net5.0/Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+/home/selenium/Desktop/Learning/PracticalApps/NorthwindAPI/bin/Debug/net5.0/Microsoft.IdentityModel.Tokens.dll
+/home/selenium/Desktop/Learning/PracticalApps/NorthwindAPI/bin/Debug/net5.0/System.IdentityModel.Tokens.Jwt.dll
+/home/selenium/Desktop/Learning/PracticalApps/NorthwindAPI/bin/Debug/net5.0/Microsoft.AspNetCore.Mvc.Versioning.dll
+/home/selenium/Desktop/Learning/PracticalApps/NorthwindAPI/bin/Debug/net5.0/Microsoft.AspNetCore.OData.dll
+/home/selenium/Desktop/Learning/PracticalApps/NorthwindAPI/bin/Debug/net5.0/Microsoft.OData.Core.dll
+/home/selenium/Desktop/Learning/PracticalApps/NorthwindAPI/bin/Debug/net5.0/Microsoft.OData.Edm.dll
+/home/selenium/Desktop/Learning/PracticalApps/NorthwindAPI/bin/Debug/net5.0/Microsoft.OData.ModelBuilder.dll
+/home/selenium/Desktop/Learning/PracticalApps/NorthwindAPI/bin/Debug/net5.0/Microsoft.Spatial.dll

@@ -10,6 +10,7 @@ using Microsoft.Extensions.Hosting;
 using System.IO;
 using Microsoft.EntityFrameworkCore;
 using PracticalApp.NorthwindContextLib;
+using Microsoft.AspNetCore.Hosting.Server.Features;
 
 namespace PracticalApp.NorthwindWeb
 {
@@ -21,13 +22,31 @@ namespace PracticalApp.NorthwindWeb
         {
             services.AddRazorPages();
 
+            // // How to get an instance of service manually
+            // var serviceProvider=services.BuildServiceProvider();
+            // var db=serviceProvider.GetService<Northwind>();
+
             string dbPath = Path.Combine("..", "Northwind.db");
             services.AddDbContext<Northwind>(options => options.UseSqlite($"Data Source={dbPath}"));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env,IHostApplicationLifetime events)
         {
+            //Run in the application start only:
+            events.ApplicationStarted.Register(()=>{
+                var feature=app.ServerFeatures.Get<IServerAddressesFeature>();
+                // Features are found in Microsoft.AspNetCore.Http namespace 
+                // and in the Microsoft.AspNetCore.Hosting.Server namespace.
+                //But all of this features implemented in httpcontext instance
+                var addresses=feature.Addresses;
+                foreach (var item in addresses)
+                {
+                    Console.WriteLine(@"Address{0}",item);
+                }
+            });
+
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
