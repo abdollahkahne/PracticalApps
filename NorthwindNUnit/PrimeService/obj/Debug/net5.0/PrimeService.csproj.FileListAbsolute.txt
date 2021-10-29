@@ -1,0 +1,12 @@
+/home/selenium/Desktop/Learning/PracticalApps/NorthwindNUnit/PrimeService/bin/Debug/net5.0/PrimeService.deps.json
+/home/selenium/Desktop/Learning/PracticalApps/NorthwindNUnit/PrimeService/bin/Debug/net5.0/PrimeService.dll
+/home/selenium/Desktop/Learning/PracticalApps/NorthwindNUnit/PrimeService/bin/Debug/net5.0/ref/PrimeService.dll
+/home/selenium/Desktop/Learning/PracticalApps/NorthwindNUnit/PrimeService/bin/Debug/net5.0/PrimeService.pdb
+/home/selenium/Desktop/Learning/PracticalApps/NorthwindNUnit/PrimeService/obj/Debug/net5.0/PrimeService.csproj.AssemblyReference.cache
+/home/selenium/Desktop/Learning/PracticalApps/NorthwindNUnit/PrimeService/obj/Debug/net5.0/PrimeService.GeneratedMSBuildEditorConfig.editorconfig
+/home/selenium/Desktop/Learning/PracticalApps/NorthwindNUnit/PrimeService/obj/Debug/net5.0/PrimeService.AssemblyInfoInputs.cache
+/home/selenium/Desktop/Learning/PracticalApps/NorthwindNUnit/PrimeService/obj/Debug/net5.0/PrimeService.AssemblyInfo.cs
+/home/selenium/Desktop/Learning/PracticalApps/NorthwindNUnit/PrimeService/obj/Debug/net5.0/PrimeService.csproj.CoreCompileInputs.cache
+/home/selenium/Desktop/Learning/PracticalApps/NorthwindNUnit/PrimeService/obj/Debug/net5.0/PrimeService.dll
+/home/selenium/Desktop/Learning/PracticalApps/NorthwindNUnit/PrimeService/obj/Debug/net5.0/ref/PrimeService.dll
+/home/selenium/Desktop/Learning/PracticalApps/NorthwindNUnit/PrimeService/obj/Debug/net5.0/PrimeService.pdb

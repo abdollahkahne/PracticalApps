@@ -4,14 +4,135 @@
     "/home/selenium/Desktop/Learning/PracticalApps/NorthwindIntl/NorthwindIntl.csproj": {}
   },
   "projects": {
-    "/home/selenium/Desktop/Learning/PracticalApps/NorthwindIntl/NorthwindIntl.csproj": {
+    "/home/selenium/Desktop/Learning/PracticalApps/NorthwindContextLib/NorthwindContextLib.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/home/selenium/Desktop/Learning/PracticalApps/NorthwindIntl/NorthwindIntl.csproj",
-        "projectName": "NorthwindIntl",
-        "projectPath": "/home/selenium/Desktop/Learning/PracticalApps/NorthwindIntl/NorthwindIntl.csproj",
+        "projectUniqueName": "/home/selenium/Desktop/Learning/PracticalApps/NorthwindContextLib/NorthwindContextLib.csproj",
+        "projectName": "NorthwindContextLib",
+        "projectPath": "/home/selenium/Desktop/Learning/PracticalApps/NorthwindContextLib/NorthwindContextLib.csproj",
         "packagesPath": "/home/selenium/.nuget/packages/",
-        "outputPath": "/home/selenium/Desktop/Learning/PracticalApps/NorthwindIntl/obj/",
+        "outputPath": "/home/selenium/Desktop/Learning/PracticalApps/NorthwindContextLib/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/home/selenium/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net5.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net5.0": {
+            "targetAlias": "net5.0",
+            "projectReferences": {
+              "/home/selenium/Desktop/Learning/PracticalApps/NorthwindEntitiesLib/NorthwindEntitiesLib.csproj": {
+                "projectPath": "/home/selenium/Desktop/Learning/PracticalApps/NorthwindEntitiesLib/NorthwindEntitiesLib.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net5.0": {
+          "targetAlias": "net5.0",
+          "dependencies": {
+            "Microsoft.EntityFrameworkCore.SQLite": {
+              "target": "Package",
+              "version": "[5.0.9, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/5.0.402/RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "/home/selenium/Desktop/Learning/PracticalApps/NorthwindEmployee/NorthwindEmployee.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/home/selenium/Desktop/Learning/PracticalApps/NorthwindEmployee/NorthwindEmployee.csproj",
+        "projectName": "NorthwindEmployee",
+        "projectPath": "/home/selenium/Desktop/Learning/PracticalApps/NorthwindEmployee/NorthwindEmployee.csproj",
+        "packagesPath": "/home/selenium/.nuget/packages/",
+        "outputPath": "/home/selenium/Desktop/Learning/PracticalApps/NorthwindEmployee/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/home/selenium/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net5.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net5.0": {
+            "targetAlias": "net5.0",
+            "projectReferences": {
+              "/home/selenium/Desktop/Learning/PracticalApps/NorthwindContextLib/NorthwindContextLib.csproj": {
+                "projectPath": "/home/selenium/Desktop/Learning/PracticalApps/NorthwindContextLib/NorthwindContextLib.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net5.0": {
+          "targetAlias": "net5.0",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.AspNetCore.App": {
+              "privateAssets": "none"
+            },
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/5.0.402/RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "/home/selenium/Desktop/Learning/PracticalApps/NorthwindEntitiesLib/NorthwindEntitiesLib.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/home/selenium/Desktop/Learning/PracticalApps/NorthwindEntitiesLib/NorthwindEntitiesLib.csproj",
+        "projectName": "NorthwindEntitiesLib",
+        "projectPath": "/home/selenium/Desktop/Learning/PracticalApps/NorthwindEntitiesLib/NorthwindEntitiesLib.csproj",
+        "packagesPath": "/home/selenium/.nuget/packages/",
+        "outputPath": "/home/selenium/Desktop/Learning/PracticalApps/NorthwindEntitiesLib/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/home/selenium/.nuget/NuGet/NuGet.Config"
@@ -37,8 +158,100 @@
       "frameworks": {
         "net5.0": {
           "targetAlias": "net5.0",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/5.0.402/RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "/home/selenium/Desktop/Learning/PracticalApps/NorthwindIntl/NorthwindIntl.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/home/selenium/Desktop/Learning/PracticalApps/NorthwindIntl/NorthwindIntl.csproj",
+        "projectName": "NorthwindIntl",
+        "projectPath": "/home/selenium/Desktop/Learning/PracticalApps/NorthwindIntl/NorthwindIntl.csproj",
+        "packagesPath": "/home/selenium/.nuget/packages/",
+        "outputPath": "/home/selenium/Desktop/Learning/PracticalApps/NorthwindIntl/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/home/selenium/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net5.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net5.0": {
+            "targetAlias": "net5.0",
+            "projectReferences": {
+              "/home/selenium/Desktop/Learning/PracticalApps/NorthwindEmployee/NorthwindEmployee.csproj": {
+                "projectPath": "/home/selenium/Desktop/Learning/PracticalApps/NorthwindEmployee/NorthwindEmployee.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net5.0": {
+          "targetAlias": "net5.0",
           "dependencies": {
+            "Microsoft.AspNetCore.Authentication.Facebook": {
+              "target": "Package",
+              "version": "[5.0.10, )"
+            },
+            "Microsoft.AspNetCore.Authentication.OpenIdConnect": {
+              "target": "Package",
+              "version": "[5.0.10, )"
+            },
+            "Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[5.0.10, )"
+            },
+            "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[5.0.10, )"
+            },
+            "Microsoft.AspNetCore.Identity.UI": {
+              "target": "Package",
+              "version": "[5.0.10, )"
+            },
             "Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation": {
+              "target": "Package",
+              "version": "[5.0.10, )"
+            },
+            "Microsoft.EntityFrameworkCore.Design": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[5.0.10, )"
+            },
+            "Microsoft.EntityFrameworkCore.Sqlite": {
+              "target": "Package",
+              "version": "[5.0.10, )"
+            },
+            "Microsoft.EntityFrameworkCore.Tools": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
               "target": "Package",
               "version": "[5.0.10, )"
             },
@@ -49,6 +262,10 @@
             "Microsoft.Extensions.DiagnosticAdapter": {
               "target": "Package",
               "version": "[3.1.19, )"
+            },
+            "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
+              "target": "Package",
+              "version": "[5.0.2, )"
             },
             "jQuery.Validation.Unobtrusive": {
               "target": "Package",
@@ -73,7 +290,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/5.0.401/RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/5.0.402/RuntimeIdentifierGraph.json"
         }
       }
     }

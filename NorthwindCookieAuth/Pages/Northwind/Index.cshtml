@@ -1,0 +1,15 @@
+@page
+@using PracticalApp.NorthwindCookieAuth.Northwind
+@model IndexPageModel
+
+<h2>@ViewData["Title"]</h2>
+<p>
+    This is the search Term:<span class="text-success">@Model.Search</span>
+</p>
+
+<form method="post">
+    <input asp-for="Input.FullName">
+    <input asp-for="Input.PhoneNumber">
+    <input asp-for="Input.Age">
+    <button type="submit">Add Person</button>
+</form>

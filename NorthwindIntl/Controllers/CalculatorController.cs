@@ -14,6 +14,7 @@ using Microsoft.Extensions.Caching.Redis;
 using System.Text.Json;
 using Microsoft.Extensions.Caching.Distributed;
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
+using System.Net;
 
 namespace NorthwindIntl.Controllers
 {

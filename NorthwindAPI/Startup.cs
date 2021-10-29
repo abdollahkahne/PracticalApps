@@ -29,6 +29,7 @@ using Microsoft.AspNetCore.OData;
 using Microsoft.OData.Edm;
 using Microsoft.OData.ModelBuilder;
 using PracticalApp.NorthwindEntitiesLib;
+using Microsoft.AspNetCore.Cors.Infrastructure;
 
 namespace PracticalApp.NorthwindAPI
 {
@@ -50,9 +51,23 @@ namespace PracticalApp.NorthwindAPI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            
+            // var corsPolicy=new CorsPolicy {
+            //     SupportsCredentials=true,
+            // };
+            // corsPolicy.Methods.Add("*");
+            // corsPolicy.Origins.Add("http://localhost:5001");
+            // corsPolicy.Headers.Add("*");
 
-            services.AddCors();
+            // services.AddCors(options =>{
+            //     options.AddPolicy("CorsPolicy",corsPolicy);
+            //     options.AddPolicy("anotherPolicy",builder=>{
+            //         builder.AllowAnyHeader();
+            //         builder.AllowAnyMethod();
+            //         builder.AllowAnyOrigin();
+            //         builder.AllowCredentials();
+            //     });
+            // });
+            
 
             services.AddApiVersioning(options => {
                 options.ReportApiVersions=true;
@@ -181,6 +196,8 @@ namespace PracticalApp.NorthwindAPI
 
             app.Use(next => async (context) =>
             {
+                Console.WriteLine("I am running on server side");
+                Console.WriteLine(context.Request.Headers.ToString());
                 Console.WriteLine("First Custome Middleware On Request");
                 await next(context);
                 Console.WriteLine("Last Custome Middleware On Response");

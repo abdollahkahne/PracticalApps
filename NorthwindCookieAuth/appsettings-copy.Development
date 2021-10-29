@@ -1,0 +1,30 @@
+{
+  "DetailedErrors": true,
+  "Logging": {
+    "LogLevel": {
+      "Default": "Information",
+      "Microsoft": "Warning",
+      "Microsoft.Hosting.Lifetime": "Information"
+    },
+    "Debug": {
+      "LogLevel": {
+        "Default": "Debug",
+        "Microsoft.Hosting": "Trace"
+      }
+    },
+    "Console": {
+      "IncludeScopes": true,
+      "LogLevel": {
+        "Microsoft.AspNetCore.Mvc.Razor.Internal": "Warning",
+        "Microsoft.AspNetCore.Mvc.Razor.Razor": "Debug",
+        "Microsoft.AspNetCore.Mvc.Razor": "Error",
+        "Default": "Information"
+      }
+    },
+    "EventSource": {
+      "LogLevel": {
+        "Default": "Warning"
+      }
+    }
+  }
+}

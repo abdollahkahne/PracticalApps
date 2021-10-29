@@ -9,7 +9,6 @@
 /home/selenium/Desktop/Learning/PracticalApps/NorthwindContextLib/obj/Debug/net5.0/NorthwindContextLib.AssemblyInfoInputs.cache
 /home/selenium/Desktop/Learning/PracticalApps/NorthwindContextLib/obj/Debug/net5.0/NorthwindContextLib.AssemblyInfo.cs
 /home/selenium/Desktop/Learning/PracticalApps/NorthwindContextLib/obj/Debug/net5.0/NorthwindContextLib.csproj.CoreCompileInputs.cache
-/home/selenium/Desktop/Learning/PracticalApps/NorthwindContextLib/obj/Debug/net5.0/NorthwindContextLib.csproj.CopyComplete
 /home/selenium/Desktop/Learning/PracticalApps/NorthwindContextLib/obj/Debug/net5.0/NorthwindContextLib.dll
 /home/selenium/Desktop/Learning/PracticalApps/NorthwindContextLib/obj/Debug/net5.0/ref/NorthwindContextLib.dll
 /home/selenium/Desktop/Learning/PracticalApps/NorthwindContextLib/obj/Debug/net5.0/NorthwindContextLib.pdb

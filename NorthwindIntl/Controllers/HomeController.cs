@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Localization;
 using Microsoft.Extensions.Logging;
+using NorthwindIntl.ExceptionFilter;
 using NorthwindIntl.Models;
 using NorthwindIntl.ValueProviders;
 
@@ -37,13 +38,24 @@ namespace NorthwindIntl.Controllers
         }
 
 
+        [ServiceFilter(typeof(LogFilter))]
+        [AddHeader(name:"Author",value:"Ardeshir")]
+        [ServiceFilter(typeof(FilterWithDI))]
+        // [CustomAuthorizationFilter]
+        [CacheResourceFilter(duration:90)]
+        [MySampleActionFilter]
         public IActionResult Index()
         {
+            Console.WriteLine(@"action {0} is running",ControllerContext.ActionDescriptor.DisplayName);
             return View();
         }
 
+        [LogActionFilter]
+        [ShortCircuting]
         public IActionResult Privacy()
         {
+            _logger.LogDebug($"Upon {ControllerContext.ActionDescriptor.DisplayName}");
+            Console.WriteLine($"Upon {ControllerContext.ActionDescriptor.DisplayName}");
             return View();
         }
 
@@ -54,6 +66,7 @@ namespace NorthwindIntl.Controllers
         }
 
         [HttpPost]
+        [ValidateModel]
         public IActionResult Submit(IFormCollection data) {
             return View();
         }

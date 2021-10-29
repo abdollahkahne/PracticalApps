@@ -22,7 +22,6 @@
 /home/selenium/Desktop/Learning/PracticalApps/NorthwindAPI/obj/Debug/net5.0/staticwebassets/NorthwindAPI.StaticWebAssets.xml
 /home/selenium/Desktop/Learning/PracticalApps/NorthwindAPI/obj/Debug/net5.0/scopedcss/bundle/NorthwindAPI.styles.css
 /home/selenium/Desktop/Learning/PracticalApps/NorthwindAPI/obj/Debug/net5.0/NorthwindAPI.RazorTargetAssemblyInfo.cache
-/home/selenium/Desktop/Learning/PracticalApps/NorthwindAPI/obj/Debug/net5.0/NorthwindAPI.csproj.CopyComplete
 /home/selenium/Desktop/Learning/PracticalApps/NorthwindAPI/obj/Debug/net5.0/NorthwindAPI.dll
 /home/selenium/Desktop/Learning/PracticalApps/NorthwindAPI/obj/Debug/net5.0/ref/NorthwindAPI.dll
 /home/selenium/Desktop/Learning/PracticalApps/NorthwindAPI/obj/Debug/net5.0/NorthwindAPI.pdb

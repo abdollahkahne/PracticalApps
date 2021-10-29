@@ -1,0 +1,26 @@
+@page
+@using PracticalApp.NorthwindCookieAuth.Music
+@model MusicsPageModel
+
+<h2>Music List</h2>
+<table class="table">
+    <thead>
+        <tr>
+            <th>File Name</th>
+            <th>File Extension</th>
+            <th>File Path</th>
+            <th>Download Link</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var music in Model.Musics)
+        {
+            <tr>
+                <td>@(music.FileNamWOExtension)</td>
+                <td>@(music.Extension)</td>
+                <td>@(music.Path)</td>
+                <td><a href="/musics?filename=@(music.FileName)">Download</a></td>
+            </tr>
+        }
+    </tbody>
+</table>

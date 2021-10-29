@@ -70,3 +70,4 @@
 /home/selenium/Desktop/Learning/PracticalApps/NorthwindWeb/bin/Debug/net5.0/NorthwindEmployee.dll
 /home/selenium/Desktop/Learning/PracticalApps/NorthwindWeb/bin/Debug/net5.0/NorthwindEmployee.pdb
 /home/selenium/Desktop/Learning/PracticalApps/NorthwindWeb/obj/Debug/net5.0/NorthwindWeb.MvcApplicationPartsAssemblyInfo.cs
+/home/selenium/Desktop/Learning/PracticalApps/NorthwindWeb/bin/Debug/net5.0/NorthwindWeb.StaticWebAssets.xml

@@ -1,0 +1,4 @@
+Health check Example_Health_Check completed after 5.7568ms with status Degraded and description 'An unhealthy HealthCheckResult using its Constructore'
+Health check Example_health_Check_with_Args completed after 6.6151ms with status Unhealthy and description 'The Health Status read from AddHealthCheck Registeration'
+Health check Example_health_Check_with_Args completed after 1.7228ms with status Unhealthy and description 'The Health Status read from AddHealthCheck Registeration'
+Health check Northwind completed after 102.1114ms with status Unhealthy and description '(null)'
