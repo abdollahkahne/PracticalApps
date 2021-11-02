@@ -100,5 +100,131 @@ namespace Test
             Assert.Equal(expected, actual);
 
         }
+
+        // The following test does not need Message Property and strict Setup in Mock since:
+        // Database Method (AddMessageAsync) doesn't return anything
+        // Model State by Default is Valid and Message=null used in method.
+        // Even it is not necessary to use Utility. Use new IndexModel(db);
+
+        [Fact]
+        public async Task OnPostAddMessageAsync_ValidModelState_ReturnRedirectToPageResult()
+        {
+            // Arrange
+            var options = new DbContextOptionsBuilder<AppDbContext>().Options;
+            var mockAppDbContext = new Mock<AppDbContext>(options);
+            // var message = new Message { Id = 1, Text = "Add a new Message" };
+            // mockAppDbContext.Setup(db => db.AddMessageAsync(message)).Returns(Task.CompletedTask);
+            // var pageModel = Utility.TestIndexModel(db: mockAppDbContext.Object);
+            var pageModel = new IndexModel(mockAppDbContext.Object);
+            // pageModel.Message = message;
+            // Console.WriteLine(pageModel.ModelState.ValidationState.ToString()); // A new ModelStateDictionary is valid by default.
+            //Act
+            var result = await pageModel.OnPostAddMessageAsync();
+            //Assert
+            Assert.IsType<RedirectToPageResult>(result);
+        }
+
+        [Fact]
+        public async Task OnPostDeleteAllMessagesAsync__ReturnRedirectToPageResult()
+        {
+            // Arrange
+            // Since the method return void/Task we do not need special setu for stub database
+            var options = new DbContextOptionsBuilder<AppDbContext>().Options;
+            var stubDbContext = new Mock<AppDbContext>(options);
+            var pageModel = new IndexModel(stubDbContext.Object);
+
+            // Act
+            var result = await pageModel.OnPostDeleteAllMessagesAsync();
+
+            // Assert
+            Assert.IsType<RedirectToPageResult>(result);
+        }
+
+        [Fact]
+        public async Task OnPostDeleteMessageAsync__ReturnRedirectToPageResult()
+        {
+            // Arrange
+            // Since the method return void/Task we do not need special setu for stub database
+            var options = new DbContextOptionsBuilder<AppDbContext>().Options;
+            var stubDbContext = new Mock<AppDbContext>(options);
+            var pageModel = new IndexModel(stubDbContext.Object);
+            var recId = 1;
+
+            // Act
+            var result = await pageModel.OnPostDeleteMessageAsync(recId);
+
+            // Assert
+            Assert.IsType<RedirectToPageResult>(result);
+        }
+
+        [Fact]
+        public async Task OnPostAnalyzeMessagesAsync_NoneEmptyMessagesList_ReturnRedirectToPageResult()
+        {
+            // Arrange
+            var seedingMsgs = AppDbContext.GetSeedingMessages();
+            var options = new DbContextOptionsBuilder<AppDbContext>().Options;
+            var stubDb = new Mock<AppDbContext>(options);
+            stubDb.Setup(db => db.GetMessagesAsync()).Returns(Task.FromResult(seedingMsgs));
+            var pageModel = new IndexModel(stubDb.Object);
+            // Act
+            var result = await pageModel.OnPostAnalyzeMessagesAsync();
+            // Assert
+            Assert.IsType<RedirectToPageResult>(result);
+        }
+
+        [Fact]
+        public async Task OnPostAnalyzeMessagesAsync_NoneEmptyMessagesList_SameMassageAnalysisResult()
+        {
+            // Arrange
+            var seedingMsgs = AppDbContext.GetSeedingMessages();
+            // Generate MessageAnalysisResult for fake data
+            var wordCount = 0;
+            foreach (var item in seedingMsgs)
+            {
+                wordCount += item.Text.Split(' ').Length;
+            }
+            var avgWordCount = Decimal.Divide(wordCount, (seedingMsgs.Count));
+            var expected = $"The average message length is {avgWordCount:0.##} words";
+            // generate fake db
+            var options = new DbContextOptionsBuilder<AppDbContext>().Options;
+            var stubDb = new Mock<AppDbContext>(options);
+            stubDb.Setup(db => db.GetMessagesAsync()).Returns(Task.FromResult(seedingMsgs));
+            var pageModel = new IndexModel(stubDb.Object);
+            // Act
+            await pageModel.OnPostAnalyzeMessagesAsync();
+            var actual = pageModel.MessageAnalysisResult;
+            // Assert
+            Assert.Equal(expected, actual);
+        }
+
+        [Fact]
+        public async Task OnPostAnalyzeMessagesAsync_EmptyMessagesList_ReturnRedirectToPageResult()
+        {
+            // Arrange
+            var options = new DbContextOptionsBuilder<AppDbContext>().Options;
+            var stubDb = new Mock<AppDbContext>(options);
+            stubDb.Setup(db => db.GetMessagesAsync()).Returns(Task.FromResult(new List<Message>()));
+            var pageModel = new IndexModel(stubDb.Object);
+            // Act
+            var result = await pageModel.OnPostAnalyzeMessagesAsync();
+            // Assert
+            Assert.IsType<RedirectToPageResult>(result);
+        }
+        [Fact]
+        public async Task OnPostAnalyzeMessagesAsync_EmptyMessagesList_SameMassageAnalysisResult()
+        {
+            // Arrange
+            var expected = "There are no messages to analyze.";
+            // generate fake db
+            var options = new DbContextOptionsBuilder<AppDbContext>().Options;
+            var stubDb = new Mock<AppDbContext>(options);
+            stubDb.Setup(db => db.GetMessagesAsync()).Returns(Task.FromResult(new List<Message>()));
+            var pageModel = new IndexModel(stubDb.Object);
+            // Act
+            await pageModel.OnPostAnalyzeMessagesAsync();
+            var actual = pageModel.MessageAnalysisResult;
+            // Assert
+            Assert.Equal(expected, actual);
+        }
     }
 }

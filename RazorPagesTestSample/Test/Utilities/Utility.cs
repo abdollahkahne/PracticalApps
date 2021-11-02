@@ -27,6 +27,12 @@ namespace Test.Utilities
             var serviceProvider = new ServiceCollection()
             .AddEntityFrameworkInMemoryDatabase().BuildServiceProvider();
 
+            // serviceProvider can assigned to Http Context Request Services Too if we need it.
+            // Here we need it only to distinguish between different test Service Provider
+            // The process of building Service Provider in ASP.Net Host is through Progam.cs or host building.
+            // There it will create a service collection first and inject all services to it from startup class or directly using ConfigureService Method and then
+            // Build a service provider from it and give it to http context and also use it in dependency injection 
+
             // create Db Context Option which uses this Service Provider
             // This way db context option created every time that it needs by a test
             var options = new DbContextOptionsBuilder<AppDbContext>()

@@ -41,7 +41,7 @@ namespace Src.Pages
             // check Model Validity in case of POST except in APIs
             if (!ModelState.IsValid)
             {
-                // Messages = await _db.GetMessagesAsync(); // This is reuired since the Messages Property does not fill in constructor itself but in OnGetAsync. Otherwise it would be null and in case of clien-side verification failure it gave an error
+                Messages = await _db.GetMessagesAsync(); // This is reuired since the Messages Property does not fill in constructor itself but in OnGetAsync. Otherwise it would be null and in case of clien-side verification failure it gave an error
                 return Page();
             }
             await _db.AddMessageAsync(Message);
