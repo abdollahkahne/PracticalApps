@@ -62,7 +62,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/5.0.402/RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/5.0.403/RuntimeIdentifierGraph.json"
         }
       }
     },
@@ -114,7 +114,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/5.0.402/RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/5.0.403/RuntimeIdentifierGraph.json"
         }
       }
     },
@@ -176,6 +176,10 @@
               "target": "Package",
               "version": "[5.0.9, )"
             },
+            "MiniProfiler.AspNetCore.Mvc": {
+              "target": "Package",
+              "version": "[4.2.22, )"
+            },
             "Newtonsoft.Json": {
               "target": "Package",
               "version": "[13.0.1, )"
@@ -199,7 +203,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/5.0.402/RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/5.0.403/RuntimeIdentifierGraph.json"
         }
       }
     }

@@ -1,0 +1,342 @@
+2021-11-19 00:43:49.8645 ERROR LoggerService.LoggerManager.LogError Something went wrong System.NullReferenceException: Object reference not set to an instance of an object.
+   at WebAPI.ModelBinders.ArrayModelBinder.BindModelAsync(ModelBindingContext bindingContext) in /home/selenium/Desktop/Learning/PracticalApps/CompanyEmployees/WebAPI/ModelBinders/ArrayModelBinder.cs:line 37
+   at Microsoft.AspNetCore.Mvc.ModelBinding.Binders.BinderTypeModelBinder.BindModelAsync(ModelBindingContext bindingContext)
+   at Microsoft.AspNetCore.Mvc.ModelBinding.ParameterBinder.BindModelAsync(ActionContext actionContext, IModelBinder modelBinder, IValueProvider valueProvider, ParameterDescriptor parameter, ModelMetadata metadata, Object value, Object container)
+   at Microsoft.AspNetCore.Mvc.Controllers.ControllerBinderDelegateProvider.<>c__DisplayClass0_0.<<CreateBinderDelegate>g__Bind|0>d.MoveNext()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|19_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|6_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.ExceptionHandlerMiddleware.<Invoke>g__Awaited|6_0(ExceptionHandlerMiddleware middleware, HttpContext context, Task task)
+2021-11-19 05:00:17.8153 INFO LoggerService.LoggerManager.LogInfo There is not an employee with 00000000-0000-0000-0000-000000000000 in company with Id e2d78814-e6e9-471a-95ed-48e6608d5b8f
+2021-11-19 05:11:04.2820 INFO LoggerService.LoggerManager.LogInfo There is not an employee with 00000000-0000-0000-0000-000000000000 in company with Id e2d78814-e6e9-471a-95ed-48e6608d5b8f
+2021-11-19 05:15:32.4854 INFO LoggerService.LoggerManager.LogInfo There is not an employee with b299d576-468e-45c2-a061-6b468a0dfe2f in company with Id e2d78814-e6e9-471a-95ed-48e6608d5b8f
+2021-11-19 05:16:58.0806 INFO LoggerService.LoggerManager.LogInfo There is not an employee with b299d576-468e-45c2-a061-6b468a0dfe2f in company with Id e2d78814-e6e9-471a-95ed-48e6608d5b8f
+2021-11-19 05:17:41.1634 INFO LoggerService.LoggerManager.LogInfo The Company with e2d78814-e6e9-471a-95ed-48e6608d5b8f does not have an Employee with EmployeeId: b299d576-468e-45c2-a061-6b468a0dfe2f
+2021-11-19 05:33:18.8359 INFO LoggerService.LoggerManager.LogInfo The company with CompanyId:e2d78814-e6e9-471a-95ed-48e6608d5b8f does not exist 
+2021-11-19 05:33:30.8516 INFO LoggerService.LoggerManager.LogInfo Company with Id: e2d78814-e6e9-471a-95ed-48e6608d5b8f does'nt exist in database
+2021-11-19 05:34:54.6920 INFO LoggerService.LoggerManager.LogInfo The company with Id:28332f58-bbd2-420b-8dd8-cd91a88f756b does not exist in database
+2021-11-19 05:49:48.0265 INFO LoggerService.LoggerManager.LogInfo The company with Id:28332f58-bbd2-420b-8dd8-cd91a88f756b does not exist in database
+2021-11-19 06:24:26.8287 INFO LoggerService.LoggerManager.LogInfo The company with CompanyId:e2d78814-e6e9-471a-95ed-48e6608d5b8f does not exist 
+2021-11-19 06:24:41.0465 INFO LoggerService.LoggerManager.LogInfo Company with Id: e2d78814-e6e9-471a-95ed-48e6608d5b8f does'nt exist in database
+2021-11-19 06:25:18.4684 INFO LoggerService.LoggerManager.LogInfo Company with Id: e2d78814-e6e9-471a-95ed-48e6608d5b8f does'nt exist in database
+2021-11-19 08:28:50.1740 ERROR LoggerService.LoggerManager.LogError Something went wrong Microsoft.EntityFrameworkCore.DbUpdateException: An error occurred while updating the entries. See the inner exception for details.
+ ---> Microsoft.Data.Sqlite.SqliteException (0x80004005): SQLite Error 19: 'NOT NULL constraint failed: Employees.Position'.
+   at Microsoft.Data.Sqlite.SqliteException.ThrowExceptionForRC(Int32 rc, sqlite3 db)
+   at Microsoft.Data.Sqlite.SqliteDataReader.NextResult()
+   at Microsoft.Data.Sqlite.SqliteCommand.ExecuteReader(CommandBehavior behavior)
+   at Microsoft.Data.Sqlite.SqliteCommand.ExecuteDbDataReader(CommandBehavior behavior)
+   at System.Data.Common.DbCommand.ExecuteReader()
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReader(RelationalCommandParameterObject parameterObject)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.Execute(IRelationalConnection connection)
+   --- End of inner exception stack trace ---
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.Execute(IRelationalConnection connection)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.Execute(IEnumerable`1 commandBatches, IRelationalConnection connection)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalDatabase.SaveChanges(IList`1 entries)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChanges(IList`1 entriesToSave)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChanges(DbContext _, Boolean acceptAllChangesOnSuccess)
+   at Microsoft.EntityFrameworkCore.Storage.NonRetryingExecutionStrategy.Execute[TState,TResult](TState state, Func`3 operation, Func`3 verifySucceeded)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChanges(Boolean acceptAllChangesOnSuccess)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChanges(Boolean acceptAllChangesOnSuccess)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChanges()
+   at Repository.RepositoryManager.Save() in /home/selenium/Desktop/Learning/PracticalApps/CompanyEmployees/Repository/RepositoryManager.cs:line 40
+   at WebAPI.Controllers.EmployeesController.UpdateEmployee(Guid companyId, Guid employeeId, EmployeeForUpdateDto input) in /home/selenium/Desktop/Learning/PracticalApps/CompanyEmployees/WebAPI/Controllers/EmployeesController.cs:line 136
+   at lambda_method3(Closure , Object , Object[] )
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.SyncActionResultExecutor.Execute(IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeActionMethodAsync()
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeNextActionFilterAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|19_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|6_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.ExceptionHandlerMiddleware.<Invoke>g__Awaited|6_0(ExceptionHandlerMiddleware middleware, HttpContext context, Task task)
+2021-11-19 09:37:51.6616 ERROR LoggerService.LoggerManager.LogError Something went wrong AutoMapper.AutoMapperMappingException: Error mapping types.
+
+Mapping types:
+CompanyForUpdateDto -> Company
+Entities.DataTransferObjects.CompanyForUpdateDto -> Entities.Models.Company
+
+Type Map configuration:
+CompanyForUpdateDto -> Company
+Entities.DataTransferObjects.CompanyForUpdateDto -> Entities.Models.Company
+
+Destination Member:
+Employees
+
+ ---> AutoMapper.AutoMapperMappingException: Missing type map configuration or unsupported mapping.
+
+Mapping types:
+EmployeeForCreationUpdateDto -> Employee
+Entities.DataTransferObjects.EmployeeForCreationUpdateDto -> Entities.Models.Employee
+   at lambda_method47(Closure , EmployeeForCreationUpdateDto , Employee , ResolutionContext )
+   at lambda_method46(Closure , CompanyForUpdateDto , Company , ResolutionContext )
+   --- End of inner exception stack trace ---
+   at lambda_method46(Closure , CompanyForUpdateDto , Company , ResolutionContext )
+   at WebAPI.Controllers.CompaniesController.UpdateCompany(Guid id, CompanyForUpdateDto input) in /home/selenium/Desktop/Learning/PracticalApps/CompanyEmployees/WebAPI/Controllers/CompaniesController.cs:line 168
+   at lambda_method3(Closure , Object , Object[] )
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.SyncActionResultExecutor.Execute(IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeActionMethodAsync()
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeNextActionFilterAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|19_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|6_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.ExceptionHandlerMiddleware.<Invoke>g__Awaited|6_0(ExceptionHandlerMiddleware middleware, HttpContext context, Task task)
+2021-11-19 09:40:58.4751 ERROR LoggerService.LoggerManager.LogError Something went wrong AutoMapper.AutoMapperMappingException: Error mapping types.
+
+Mapping types:
+CompanyForUpdateDto -> Company
+Entities.DataTransferObjects.CompanyForUpdateDto -> Entities.Models.Company
+
+Type Map configuration:
+CompanyForUpdateDto -> Company
+Entities.DataTransferObjects.CompanyForUpdateDto -> Entities.Models.Company
+
+Destination Member:
+Employees
+
+ ---> AutoMapper.AutoMapperMappingException: Missing type map configuration or unsupported mapping.
+
+Mapping types:
+EmployeeForCreationUpdateDto -> Employee
+Entities.DataTransferObjects.EmployeeForCreationUpdateDto -> Entities.Models.Employee
+   at lambda_method47(Closure , EmployeeForCreationUpdateDto , Employee , ResolutionContext )
+   at lambda_method46(Closure , CompanyForUpdateDto , Company , ResolutionContext )
+   --- End of inner exception stack trace ---
+   at lambda_method46(Closure , CompanyForUpdateDto , Company , ResolutionContext )
+   at WebAPI.Controllers.CompaniesController.UpdateCompany(Guid id, CompanyForUpdateDto input) in /home/selenium/Desktop/Learning/PracticalApps/CompanyEmployees/WebAPI/Controllers/CompaniesController.cs:line 168
+   at lambda_method3(Closure , Object , Object[] )
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.SyncActionResultExecutor.Execute(IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeActionMethodAsync()
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeNextActionFilterAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|19_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|6_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.ExceptionHandlerMiddleware.<Invoke>g__Awaited|6_0(ExceptionHandlerMiddleware middleware, HttpContext context, Task task)
+2021-11-19 09:43:43.4727 ERROR LoggerService.LoggerManager.LogError Something went wrong AutoMapper.AutoMapperMappingException: Error mapping types.
+
+Mapping types:
+CompanyForUpdateDto -> Company
+Entities.DataTransferObjects.CompanyForUpdateDto -> Entities.Models.Company
+
+Type Map configuration:
+CompanyForUpdateDto -> Company
+Entities.DataTransferObjects.CompanyForUpdateDto -> Entities.Models.Company
+
+Destination Member:
+Employees
+
+ ---> AutoMapper.AutoMapperMappingException: Missing type map configuration or unsupported mapping.
+
+Mapping types:
+EmployeeForCreationUpdateDto -> Employee
+Entities.DataTransferObjects.EmployeeForCreationUpdateDto -> Entities.Models.Employee
+   at lambda_method47(Closure , EmployeeForCreationUpdateDto , Employee , ResolutionContext )
+   at lambda_method46(Closure , CompanyForUpdateDto , Company , ResolutionContext )
+   --- End of inner exception stack trace ---
+   at lambda_method46(Closure , CompanyForUpdateDto , Company , ResolutionContext )
+   at WebAPI.Controllers.CompaniesController.UpdateCompany(Guid id, CompanyForUpdateDto input) in /home/selenium/Desktop/Learning/PracticalApps/CompanyEmployees/WebAPI/Controllers/CompaniesController.cs:line 168
+   at lambda_method3(Closure , Object , Object[] )
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.SyncActionResultExecutor.Execute(IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeActionMethodAsync()
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeNextActionFilterAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|19_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|6_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.ExceptionHandlerMiddleware.<Invoke>g__Awaited|6_0(ExceptionHandlerMiddleware middleware, HttpContext context, Task task)
+2021-11-19 09:45:11.4923 ERROR LoggerService.LoggerManager.LogError Something went wrong AutoMapper.AutoMapperMappingException: Error mapping types.
+
+Mapping types:
+CompanyForUpdateDto -> Company
+Entities.DataTransferObjects.CompanyForUpdateDto -> Entities.Models.Company
+
+Type Map configuration:
+CompanyForUpdateDto -> Company
+Entities.DataTransferObjects.CompanyForUpdateDto -> Entities.Models.Company
+
+Destination Member:
+Employees
+
+ ---> AutoMapper.AutoMapperMappingException: Missing type map configuration or unsupported mapping.
+
+Mapping types:
+EmployeeForCreationUpdateDto -> Employee
+Entities.DataTransferObjects.EmployeeForCreationUpdateDto -> Entities.Models.Employee
+   at lambda_method47(Closure , EmployeeForCreationUpdateDto , Employee , ResolutionContext )
+   at lambda_method46(Closure , CompanyForUpdateDto , Company , ResolutionContext )
+   --- End of inner exception stack trace ---
+   at lambda_method46(Closure , CompanyForUpdateDto , Company , ResolutionContext )
+   at WebAPI.Controllers.CompaniesController.UpdateCompany(Guid id, CompanyForUpdateDto input) in /home/selenium/Desktop/Learning/PracticalApps/CompanyEmployees/WebAPI/Controllers/CompaniesController.cs:line 168
+   at lambda_method3(Closure , Object , Object[] )
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.SyncActionResultExecutor.Execute(IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeActionMethodAsync()
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeNextActionFilterAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|19_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|6_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.ExceptionHandlerMiddleware.<Invoke>g__Awaited|6_0(ExceptionHandlerMiddleware middleware, HttpContext context, Task task)
+2021-11-19 23:34:51.9720 INFO LoggerService.LoggerManager.LogInfo The company with CompanyId:e2d78814-e6e9-471a-95ed-48e6608d5b8f does not exist 
+2021-11-19 23:35:12.8435 INFO LoggerService.LoggerManager.LogInfo The company with CompanyId:e2d78814-e6e9-471a-95ed-48e6608d5b8f does not exist 
+2021-11-19 23:35:18.7263 INFO LoggerService.LoggerManager.LogInfo The company with CompanyId:e2d78814-e6e9-471a-95ed-48e6608d5b8f does not exist 
+2021-11-19 23:35:19.2565 INFO LoggerService.LoggerManager.LogInfo The company with CompanyId:e2d78814-e6e9-471a-95ed-48e6608d5b8f does not exist 
+2021-11-19 23:35:50.8047 INFO LoggerService.LoggerManager.LogInfo The company with CompanyId:e2d78814-e6e9-471a-95ed-48e6608d5b8f does not exist 
+2021-11-19 23:39:59.2481 ERROR LoggerService.LoggerManager.LogError Something went wrong AutoMapper.AutoMapperMappingException: Missing type map configuration or unsupported mapping.
+
+Mapping types:
+Object -> EmployeeForUpdateDto
+System.Object -> Entities.DataTransferObjects.EmployeeForUpdateDto
+   at lambda_method86(Closure , Object , EmployeeForUpdateDto , ResolutionContext )
+   at WebAPI.Controllers.EmployeesController.PartiallyUpdateEmployee(Guid companyId, Guid employeeId, JsonPatchDocument`1 input) in /home/selenium/Desktop/Learning/PracticalApps/CompanyEmployees/WebAPI/Controllers/EmployeesController.cs:line 171
+   at lambda_method55(Closure , Object , Object[] )
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.SyncActionResultExecutor.Execute(IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeActionMethodAsync()
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeNextActionFilterAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|19_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|6_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.ExceptionHandlerMiddleware.<Invoke>g__Awaited|6_0(ExceptionHandlerMiddleware middleware, HttpContext context, Task task)
+2021-11-19 23:40:12.7596 ERROR LoggerService.LoggerManager.LogError Something went wrong AutoMapper.AutoMapperMappingException: Missing type map configuration or unsupported mapping.
+
+Mapping types:
+Object -> EmployeeForUpdateDto
+System.Object -> Entities.DataTransferObjects.EmployeeForUpdateDto
+   at lambda_method86(Closure , Object , EmployeeForUpdateDto , ResolutionContext )
+   at WebAPI.Controllers.EmployeesController.PartiallyUpdateEmployee(Guid companyId, Guid employeeId, JsonPatchDocument`1 input) in /home/selenium/Desktop/Learning/PracticalApps/CompanyEmployees/WebAPI/Controllers/EmployeesController.cs:line 171
+   at lambda_method55(Closure , Object , Object[] )
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.SyncActionResultExecutor.Execute(IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeActionMethodAsync()
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeNextActionFilterAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|19_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|6_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.ExceptionHandlerMiddleware.<Invoke>g__Awaited|6_0(ExceptionHandlerMiddleware middleware, HttpContext context, Task task)
+2021-11-19 23:45:42.8158 ERROR LoggerService.LoggerManager.LogError Something went wrong Microsoft.AspNetCore.JsonPatch.Exceptions.JsonPatchException: The current value 'Henry Ford' at path 'name' is not equal to the test value 'Henry Blinken'.
+   at Microsoft.AspNetCore.JsonPatch.Internal.ErrorReporter.<>c.<.cctor>b__1_0(JsonPatchError error)
+   at Microsoft.AspNetCore.JsonPatch.Adapters.ObjectAdapter.Test(Operation operation, Object objectToApplyTo)
+   at Microsoft.AspNetCore.JsonPatch.Operations.Operation`1.Apply(TModel objectToApplyTo, IObjectAdapter adapter)
+   at Microsoft.AspNetCore.JsonPatch.JsonPatchDocument`1.ApplyTo(TModel objectToApplyTo, IObjectAdapter adapter)
+   at Microsoft.AspNetCore.JsonPatch.JsonPatchDocument`1.ApplyTo(TModel objectToApplyTo)
+   at WebAPI.Controllers.EmployeesController.PartiallyUpdateEmployee(Guid companyId, Guid employeeId, JsonPatchDocument`1 input) in /home/selenium/Desktop/Learning/PracticalApps/CompanyEmployees/WebAPI/Controllers/EmployeesController.cs:line 172
+   at lambda_method3(Closure , Object , Object[] )
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.SyncActionResultExecutor.Execute(IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeActionMethodAsync()
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeNextActionFilterAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|19_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|6_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.ExceptionHandlerMiddleware.<Invoke>g__Awaited|6_0(ExceptionHandlerMiddleware middleware, HttpContext context, Task task)
+2021-11-19 23:47:44.8085 ERROR LoggerService.LoggerManager.LogError Something went wrong Microsoft.AspNetCore.JsonPatch.Exceptions.JsonPatchException: The target location specified by path segment 'name;' was not found.
+   at Microsoft.AspNetCore.JsonPatch.Internal.ErrorReporter.<>c.<.cctor>b__1_0(JsonPatchError error)
+   at Microsoft.AspNetCore.JsonPatch.Adapters.ObjectAdapter.Remove(String path, Object objectToApplyTo, Operation operationToReport)
+   at Microsoft.AspNetCore.JsonPatch.Adapters.ObjectAdapter.Remove(Operation operation, Object objectToApplyTo)
+   at Microsoft.AspNetCore.JsonPatch.Operations.Operation`1.Apply(TModel objectToApplyTo, IObjectAdapter adapter)
+   at Microsoft.AspNetCore.JsonPatch.JsonPatchDocument`1.ApplyTo(TModel objectToApplyTo, IObjectAdapter adapter)
+   at Microsoft.AspNetCore.JsonPatch.JsonPatchDocument`1.ApplyTo(TModel objectToApplyTo)
+   at WebAPI.Controllers.EmployeesController.PartiallyUpdateEmployee(Guid companyId, Guid employeeId, JsonPatchDocument`1 input) in /home/selenium/Desktop/Learning/PracticalApps/CompanyEmployees/WebAPI/Controllers/EmployeesController.cs:line 172
+   at lambda_method3(Closure , Object , Object[] )
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.SyncActionResultExecutor.Execute(IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeActionMethodAsync()
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeNextActionFilterAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|19_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|6_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.ExceptionHandlerMiddleware.<Invoke>g__Awaited|6_0(ExceptionHandlerMiddleware middleware, HttpContext context, Task task)
+2021-11-19 23:53:01.7068 ERROR LoggerService.LoggerManager.LogError Something went wrong Microsoft.EntityFrameworkCore.DbUpdateException: An error occurred while updating the entries. See the inner exception for details.
+ ---> Microsoft.Data.Sqlite.SqliteException (0x80004005): SQLite Error 19: 'NOT NULL constraint failed: Employees.Name'.
+   at Microsoft.Data.Sqlite.SqliteException.ThrowExceptionForRC(Int32 rc, sqlite3 db)
+   at Microsoft.Data.Sqlite.SqliteDataReader.NextResult()
+   at Microsoft.Data.Sqlite.SqliteCommand.ExecuteReader(CommandBehavior behavior)
+   at Microsoft.Data.Sqlite.SqliteCommand.ExecuteDbDataReader(CommandBehavior behavior)
+   at System.Data.Common.DbCommand.ExecuteReader()
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReader(RelationalCommandParameterObject parameterObject)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.Execute(IRelationalConnection connection)
+   --- End of inner exception stack trace ---
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.Execute(IRelationalConnection connection)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.Execute(IEnumerable`1 commandBatches, IRelationalConnection connection)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalDatabase.SaveChanges(IList`1 entries)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChanges(IList`1 entriesToSave)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChanges(DbContext _, Boolean acceptAllChangesOnSuccess)
+   at Microsoft.EntityFrameworkCore.Storage.NonRetryingExecutionStrategy.Execute[TState,TResult](TState state, Func`3 operation, Func`3 verifySucceeded)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChanges(Boolean acceptAllChangesOnSuccess)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChanges(Boolean acceptAllChangesOnSuccess)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChanges()
+   at Repository.RepositoryManager.Save() in /home/selenium/Desktop/Learning/PracticalApps/CompanyEmployees/Repository/RepositoryManager.cs:line 40
+   at WebAPI.Controllers.EmployeesController.PartiallyUpdateEmployee(Guid companyId, Guid employeeId, JsonPatchDocument`1 input) in /home/selenium/Desktop/Learning/PracticalApps/CompanyEmployees/WebAPI/Controllers/EmployeesController.cs:line 174
+   at lambda_method3(Closure , Object , Object[] )
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.SyncActionResultExecutor.Execute(IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeActionMethodAsync()
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeNextActionFilterAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|19_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|6_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.ExceptionHandlerMiddleware.<Invoke>g__Awaited|6_0(ExceptionHandlerMiddleware middleware, HttpContext context, Task task)

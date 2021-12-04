@@ -38,6 +38,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Authentication.OpenIdConnect;
 using Microsoft.AspNetCore.Authentication.Facebook;
+using Microsoft.AspNetCore.ResponseCompression;
 
 namespace NorthwindIntl
 {
@@ -53,19 +54,28 @@ namespace NorthwindIntl
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-
+            // In App Development we should not depend on cache value and always assume that it may not be available!
+            // Limite Cache Growth since it uses memory which is scarce (// 1-Dont create key from external input values 2- Set Size Limit on Cache totoal and every file 3-Use Expiration options)
+            // we have two types of Memory Cache: Shared and Singleton. If you set size limited use the singleton since shared one used by all libraries
             // To Use In Memory/Distributed Cache We should register it
+            // Apps running on a server farm (multiple servers) should ensure sessions are sticky when using the in-memory cache. 
+            // Sticky sessions ensure that requests from a client all go to the same server.
             services.AddMemoryCache();
             // services.AddDistributedMemoryCache();
-            services.AddDistributedRedisCache(options =>{
-                options.Configuration="localhost:6379";
-                options.InstanceName="Calculator";
+            // The distributed cache interface is limited to byte[] (And not string but string can be simply converted to Byte Array using Encoding.UTF8.GetBytes(str))
+            services.AddDistributedRedisCache(options =>
+            {
+                options.Configuration = "localhost:6379";
+                options.InstanceName = "Calculator";
             });
 
-            if (System.Runtime.InteropServices.RuntimeInformation.IsOSPlatform(System.Runtime.InteropServices.OSPlatform.Windows)) {
+            if (System.Runtime.InteropServices.RuntimeInformation.IsOSPlatform(System.Runtime.InteropServices.OSPlatform.Windows))
+            {
                 // Using windows Authentication
                 services.AddAuthentication(IISDefaults.AuthenticationScheme);
-            } else {
+            }
+            else
+            {
                 // // Custom authentication using cookie
                 // services
                 // .AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
@@ -75,7 +85,7 @@ namespace NorthwindIntl
                 //     options.AccessDeniedPath="/Account/Forbidden";
                 //     options.ReturnUrlParameter="returnUrl";
                 // });
-                
+
                 // // Using OpenIdConnect Providers like Azure
                 // services.AddAuthentication(OpenIdConnectDefaults.AuthenticationScheme)
                 // .AddOpenIdConnect(OpenIdConnectDefaults.AuthenticationScheme,options => {
@@ -91,11 +101,11 @@ namespace NorthwindIntl
                 //     options.SignInScheme=CookieAuthenticationDefaults.AuthenticationScheme;
                 //     // Other options are almost same to OAuth 
                 // });
-                
+
                 // Authentication Using Identity
                 services.AddDbContext<NorthwindIntlIdentityDbContext>(options =>
                     options.UseSqlite(Configuration.GetConnectionString("NorthwindIntlIdentityDbContextConnection"))
-                ).AddDefaultIdentity<ApplicationUser>(option => {option.SignIn.RequireConfirmedAccount=false;})
+                ).AddDefaultIdentity<ApplicationUser>(option => { option.SignIn.RequireConfirmedAccount = false; })
                 .AddEntityFrameworkStores<NorthwindIntlIdentityDbContext>();
 
                 services.AddDatabaseDeveloperPageExceptionFilter();
@@ -133,17 +143,17 @@ namespace NorthwindIntl
                 // });
 
             }
-            
+
 
             //Register TagHelperComponent
-            services.AddTransient<ITagHelperComponent,HelloWorldTagHelperComponent>();
+            services.AddTransient<ITagHelperComponent, HelloWorldTagHelperComponent>();
 
             // Register Filters that use DI using ServiceFilter attribute
             services.AddSingleton<LogFilter>();
 
-            
 
-            var supportedCultures=new List<CultureInfo> {                
+
+            var supportedCultures = new List<CultureInfo> {
                 new CultureInfo("en-US"),
                 new CultureInfo("fa-IR"),
             };
@@ -154,50 +164,83 @@ namespace NorthwindIntl
             // To use a filter in ServiceFilter we should register it
             services.AddScoped<FilterWithDI>();
 
-            services.Configure<RequestLocalizationOptions>(options =>{
-                options.SupportedCultures=supportedCultures;
-                options.SupportedUICultures=supportedCultures;
-                options.DefaultRequestCulture=new RequestCulture(supportedCultures.First().Name);
-                options.RequestCultureProviders=new RequestCultureProvider[] {
+            services.Configure<RequestLocalizationOptions>(options =>
+            {
+                options.SupportedCultures = supportedCultures;
+                options.SupportedUICultures = supportedCultures;
+                options.DefaultRequestCulture = new RequestCulture(supportedCultures.First().Name);
+                options.RequestCultureProviders = new RequestCultureProvider[] {
                     new QueryStringRequestCultureProvider {QueryStringKey="culture"},
                     new AcceptLanguageHeaderRequestCultureProvider {Options=options,},
                 };
 
             });
             // Add Localization
-            services.AddLocalization(options =>{
-                options.ResourcesPath="Resources";
+            services.AddLocalization(options =>
+            {
+                options.ResourcesPath = "Resources";
             });
 
             // to Add session we should add it explicitly here and in configure method
             services.AddSession();
 
-            services.AddSingleton<ITranslator,Translator>();
+            services.AddSingleton<ITranslator, Translator>();
             services.AddSingleton<TranslateRouteValueTransformer>();
 
             //we should register the custome route constraints
-            services.AddRouting(options =>{
-                options.ConstraintMap.Add("evenint",typeof(EvenIntRouteConstraint));
+            services.AddRouting(options =>
+            {
+                options.ConstraintMap.Add("evenint", typeof(EvenIntRouteConstraint));
             });
 
-            //Resource Caching should be added to serivce collection
+            //Resource Caching should be added to serivce collection (Client side response caching with two header Cache-Control and Pragma)
+            // Add [ResponseCache] Attribute to action or controller 
+            // Add UserResponseCaching Middleware too
+            // Optionaly we can add Caching-Profile to MvcOptions if we use similar caching profile for some actions
             services.AddResponseCaching();
+
+            // To decrease the size of response we can use response compression
+            services.AddResponseCompression(options =>
+            {
+                options.EnableForHttps = false; // This is default because of security problems
+                options.Providers.Add<BrotliCompressionProvider>();
+                options.Providers.Add<GzipCompressionProvider>();
+
+                // Apparantly the Append is used to Add items to IEnumerable which is OKay and work but it need that the source IEnumerable<T> be non empty. Here since options.MimeType is empty by default we could not use append method in this way (Correct)
+                // options.MimeTypes.Append("img/svg+xml");// This is not true for IEnumerable since it may be otherthing than array or list (for example it can be output of a method with yield!)
+
+                options.MimeTypes = ResponseCompressionDefaults.MimeTypes.Concat(new[] { "img/svg+xml" }); // Here we concat to Array and create new Array and Assign it to IEnumerable Option
+                foreach (var item in options.MimeTypes)
+                {
+                    Console.WriteLine(item);
+                }
+            });
+
+            // we can change compression level here. 3 options exist: fastest, optimal, no-compressed!
+            services.Configure<GzipCompressionProviderOptions>(options =>
+            {
+                options.Level = System.IO.Compression.CompressionLevel.Fastest;
+            });
+            services.Configure<BrotliCompressionProviderOptions>(options =>
+            {
+                options.Level = System.IO.Compression.CompressionLevel.Optimal;
+            });
 
             // we should register IDeveloperPageExceptionFilter in case of Customizing that page
             // services.AddSingleton<IDeveloperPageExceptionFilter,CustomDeveloperPageExceptionFilter>();
 
+            var mvc = services.AddControllersWithViews(option =>
+            {
 
-            var mvc=services.AddControllersWithViews(option =>{
-
-                var policy=new AuthorizationPolicyBuilder()
-                .RequireAssertion(ctx =>true)
+                var policy = new AuthorizationPolicyBuilder()
+                .RequireAssertion(ctx => true)
                 .Build();
                 option.Filters.Add(new AuthorizeFilter(policy));
 
                 // When passing an instance of a filter into Add, instead of its Type,
                 // the filter is a singleton and is not thread-safe.
                 option.Filters.Add<NotFoundAttribute>();
-                
+
                 option.ValueProviderFactories.Add(new CookieValueProviderFactory());
                 // option.ModelBinderProviders.Insert(0,new HTMLEncodeModelBinderProvider());
                 option.ModelValidatorProviders.Add(new MarriedPersonModelValidatorProvider());
@@ -205,13 +248,19 @@ namespace NorthwindIntl
                 // option.Filters.Add(new ValidateModelStateAttribute("/Home/error"));
 
                 // Cache Profile is not necessary. We can set the caching setting directly too.
-                option.CacheProfiles.Add("MyCacheProfile",new CacheProfile {
-                    Duration=5*60,
-                    VaryByHeader="Accept-Language",
-                    Location=ResponseCacheLocation.Any,
+                option.CacheProfiles.Add("MyCacheProfile", new CacheProfile
+                {
+                    Duration = 5 * 60,
+                    VaryByHeader = "Accept-Language",
+                    Location = ResponseCacheLocation.Any,
                 });
 
-                
+                var cacheProfiles = this.Configuration.GetSection("CacheProfiles").Get<Dictionary<string, CacheProfile>>();
+                foreach (var item in cacheProfiles)
+                {
+                    option.CacheProfiles.Add(item.Key, item.Value);
+                }
+
             })
             // .ConfigureApplicationPartManager(options =>{
             //     // This path should be .dll
@@ -219,21 +268,24 @@ namespace NorthwindIntl
             //     var asm=Assembly.LoadFrom(path);
             //     options.ApplicationParts.Add(new CompiledRazorAssemblyPart(asm));
             // })
-            .AddRazorOptions(option =>{
+            .AddRazorOptions(option =>
+            {
                 option.ViewLocationFormats.Add("/AdditionalViews/{1}/{0}.cshtml");
                 option.ViewLocationExpanders.Add(new ThemeViewLocationExpander("Mastering"));
-            }).AddViewOptions(option =>{
-                option.HtmlHelperOptions.Html5DateRenderingMode=Html5DateRenderingMode.CurrentCulture;
+            }).AddViewOptions(option =>
+            {
+                option.HtmlHelperOptions.Html5DateRenderingMode = Html5DateRenderingMode.CurrentCulture;
             })
-            .AddViewLocalization(format:Microsoft.AspNetCore.Mvc.Razor.LanguageViewLocationExpanderFormat.Suffix,
-            setupAction:option =>{option.ResourcesPath="Resources";});
+            .AddViewLocalization(format: Microsoft.AspNetCore.Mvc.Razor.LanguageViewLocationExpanderFormat.Suffix,
+            setupAction: option => { option.ResourcesPath = "Resources"; });
 
-            # if DEBUG
+#if DEBUG
             mvc.AddRazorRuntimeCompilation(); // This enable changing view in Runtime
-            # endif
+#endif
 
-            services.AddRazorPages(options =>{
-                options.Conventions.AddPageRoute("/hellorazor","Razor/{id}");
+            services.AddRazorPages(options =>
+            {
+                options.Conventions.AddPageRoute("/hellorazor", "Razor/{id}");
             });
         }
 
@@ -244,15 +296,16 @@ namespace NorthwindIntl
             // If We want to apply the above configuration to Request Localization Option Here we should use it empty or directly config it here
             app.UseRequestLocalization();
 
-            var listener=new MyDiagnosticListener();
+            var listener = new MyDiagnosticListener();
             diagnostic.SubscribeWithAdapter(listener);
 
             app.UseResponseCaching();
+            app.UseResponseCompression();
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
                 app.UseMigrationsEndPoint();
-                 
+
             }
             else
             {
@@ -275,31 +328,36 @@ namespace NorthwindIntl
 
             // Work with windows Auth
 
-            if (System.Runtime.InteropServices.RuntimeInformation.IsOSPlatform(System.Runtime.InteropServices.OSPlatform.Windows)) {
-                app.Use((next)=>ctx =>{
+            if (System.Runtime.InteropServices.RuntimeInformation.IsOSPlatform(System.Runtime.InteropServices.OSPlatform.Windows))
+            {
+                app.Use((next) => ctx =>
+                {
 
-                // windows Identity
-                var identity=WindowsIdentity.GetCurrent();
-                Console.WriteLine($"{identity.User.Value}");
+                    // windows Identity
+                    var identity = WindowsIdentity.GetCurrent();
+                    Console.WriteLine($"{identity.User.Value}");
 
-                var principal=new WindowsPrincipal(identity);
-                Console.WriteLine($"{principal.IsInRole(WindowsBuiltInRole.Administrator)}");
-                return next(ctx);
+                    var principal = new WindowsPrincipal(identity);
+                    Console.WriteLine($"{principal.IsInRole(WindowsBuiltInRole.Administrator)}");
+                    return next(ctx);
                 });
-            } else {
+            }
+            else
+            {
                 app.UseAuthentication();
-                app.Use(next =>ctx =>{
-                    
-                    var principal=ctx.User;
-                    if (principal!=null) { return next(ctx);}
+                app.Use(next => ctx =>
+                {
+
+                    var principal = ctx.User;
+                    if (principal != null) { return next(ctx); }
                     Console.WriteLine($"Is Admin:{principal.IsInRole("admin")}");
-                    var identity=principal.Identity;
-                    Console.WriteLine($"{identity.Name} is {principal.Claims.SingleOrDefault(c=>c.Type==ClaimTypes.Role).Value}");
+                    var identity = principal.Identity;
+                    Console.WriteLine($"{identity.Name} is {principal.Claims.SingleOrDefault(c => c.Type == ClaimTypes.Role).Value}");
                     return next(ctx);
                 });
             }
 
-            
+
 
             app.UseAuthorization();
 
@@ -313,11 +371,11 @@ namespace NorthwindIntl
 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapControllerRoute(name:"calculator", 
-                pattern:"_api/{controller}/{action}",
-                defaults:new {controller="Calculator",action = "Calculate"},
-                constraints:new {controller= new StringRouteConstraint("Calculator")},
-                dataTokens:new {Foo ="Bar"}
+                endpoints.MapControllerRoute(name: "calculator",
+                pattern: "_api/{controller}/{action}",
+                defaults: new { controller = "Calculator", action = "Calculate" },
+                constraints: new { controller = new StringRouteConstraint("Calculator") },
+                dataTokens: new { Foo = "Bar" }
                 );
 
                 // endpoints.MapDynamicControllerRoute<TranslateRouteValueTransformer>(
@@ -326,10 +384,10 @@ namespace NorthwindIntl
 
                 // We can write Request delegate directly in MapGet Or Use middleware chain in 
                 // a new instance of App Builder and then build it to generate a request delegate
-                var builder=endpoints.CreateApplicationBuilder();
-                builder.Use(next=>async ctx=> {ctx.Response.StatusCode=201;await next(ctx);});
-                builder.Use(next=>async ctx=> await ctx.Response.WriteAsync("Hello From Middleware!"));
-                endpoints.MapGet("middleware",builder.Build());
+                var builder = endpoints.CreateApplicationBuilder();
+                builder.Use(next => async ctx => { ctx.Response.StatusCode = 201; await next(ctx); });
+                builder.Use(next => async ctx => await ctx.Response.WriteAsync("Hello From Middleware!"));
+                endpoints.MapGet("middleware", builder.Build());
                 endpoints.MapRazorPages();
             });
         }

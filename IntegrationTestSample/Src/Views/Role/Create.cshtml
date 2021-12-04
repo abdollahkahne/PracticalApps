@@ -1,0 +1,14 @@
+@addTagHelper *,Microsoft.AspNetCore.Mvc.TagHelpers
+
+<div class="text-danger" asp-validation-summary="All"></div>
+<form asp-action="Create" method="post">
+    <div class="form-group">
+        <label for="name">Role Name</label>
+        <input class="form-control" id="name" name="name" />
+    </div>
+    <div class="form-group">
+        <label for="description">Role Description</label>
+        <input class="form-control" id="description" name="description" />
+    </div>
+    <button type="submit" class="btn btn-primary">Create Role</button>
+</form>

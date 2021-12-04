@@ -1,0 +1,14 @@
+{
+  "version": 2,
+  "dgSpecHash": "H+ybJXD+D5HYn1uj/rDb38Izd8Lf5xjFciZmC2pUDCXqu/Ym0VV+kArBaeNQEBgjhw+BOdDUZD2dvLfxVv+LXQ==",
+  "success": true,
+  "projectFilePath": "/home/selenium/Desktop/Learning/PracticalApps/ClientSide/ClientSide.csproj",
+  "expectedPackageFiles": [
+    "/home/selenium/.nuget/packages/microsoft.aspnetcore.spaservices.extensions/5.0.0/microsoft.aspnetcore.spaservices.extensions.5.0.0.nupkg.sha512",
+    "/home/selenium/.nuget/packages/microsoft.extensions.fileproviders.abstractions/5.0.0/microsoft.extensions.fileproviders.abstractions.5.0.0.nupkg.sha512",
+    "/home/selenium/.nuget/packages/microsoft.extensions.fileproviders.physical/5.0.0/microsoft.extensions.fileproviders.physical.5.0.0.nupkg.sha512",
+    "/home/selenium/.nuget/packages/microsoft.extensions.filesystemglobbing/5.0.0/microsoft.extensions.filesystemglobbing.5.0.0.nupkg.sha512",
+    "/home/selenium/.nuget/packages/microsoft.extensions.primitives/5.0.0/microsoft.extensions.primitives.5.0.0.nupkg.sha512"
+  ],
+  "logs": []
+}

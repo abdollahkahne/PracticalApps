@@ -1,0 +1,32 @@
+@using System.Security.Claims
+@model IEnumerable<Claim>
+@addTagHelper *,Microsoft.AspNetCore.Mvc.TagHelpers
+
+<h2 class="bg-primary m-1 p-1 text-white">Claims</h2>
+<a asp-action="Create" class="btn btn-secondary">Create a Claim</a>
+
+<div asp-validation-summary="All"></div>
+<table class="table table-sm table-bordered">
+    <tr>
+        <th>Subject</th>
+        <th>Issuer</th>
+        <th>Type</th>
+        <th>Value</th>
+        <th></th>
+    </tr>
+    @foreach (var claim in Model)
+    {
+        <tr>
+            <td>@(claim.Subject)</td>
+            <td>@(claim.Issuer)</td>
+            <td>@(claim.Type)</td>
+            <td>@(claim.Value)</td>
+            <td>
+                <form asp-action="Delete" method="post">
+                    <input type="hidden" name="_claim" value="@claim.Type;@claim.Value;@claim.ValueType;@claim.Issuer">
+                    <button type="submit" class="btn btn-danger">Delete</button>
+                </form>
+            </td>
+        </tr>
+    }
+</table>

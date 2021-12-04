@@ -1,0 +1,68 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.SpaServices.Extensions" Version="5.0.0" />
+  </ItemGroup>
+
+</Project>
+
+<!-- MS Build and .CSProj Structure -->
+<!-- These files describe the items that are to be built,
+ and also how they are to be built for different operating systems and configurations.
+The logics used here defined on two file types .prop and .target which show build logic.
+The .props files define MSBuild properties, and .targets files define MSBuild targets. 
+The should imported here explicitly or using an SDK style implicitly. -->
+
+<!-- Notes 
+1- Element and Attributes are case sensitive
+2- Items can use WildCard names to create complex structures -->
+
+<!-- The following sections describe some of the basic elements of the MSBuild project file format.  -->
+<!-- Properties -->
+<!-- Properties represent key/value pairs that can be used to configure builds.
+ Properties are declared by creating an element that has the name of the property as a child of a PropertyGroup element. 
+ For example, the following code creates a property named BuildDir that has a value of Build.
+ <PropertyGroup>
+    <BuildDir>Build</BuildDir>
+</PropertyGroup> -->
+<!-- You can define a property conditionally by placing a Condition attribute in the element (Property Name).
+You can use other properties in condition using $. for example consider the following Property (Configuration is its name!):
+<Configuration  Condition=" '$(Configuration)' == '' ">Debug</Configuration> -->
+
+<!-- Items -->
+<!-- Items are inputs into the build system and typically represent files.
+Items are declared in the project file by creating an element that has the name of
+ the item type (For example PackageReference, ProjectReference in .csproj files) as a child of an ItemGroup element. 
+ For example, the following code creates an item type named Compile, which includes two files.
+
+<ItemGroup>
+    <Compile Include = "file1.cs"/>
+    <Compile Include = "file2.cs"/>
+</ItemGroup>
+
+These item types can be used as parameters for tasks, which use the individual items to perform the steps of the build process.
+They can used in .csproj file using @. For example, the item type in the example would be referenced by using @(Compile). -->
+
+<!-- Tasks  -->
+<!-- Tasks are units of executable code that MSBuild projects use to perform build operations. For example, a task might compile input files or run an external tool.
+The execution logic of a task is written in managed code and mapped to MSBuild by using the UsingTask element (Advanced Topic). 
+Fortunately, MSBuild includes common tasks that you can modify to suit your requirements. 
+Examples are Copy, which copies files, MakeDir, which creates directories, and Csc, which compiles Visual C# source code files.
+A task is executed in an MSBuild project file by creating an element that has the name of the task as a child of a Target element. 
+Tasks typically accept parameters, which are passed as attributes of the element. Both MSBuild properties and items can be used as parameters.
+
+<Target Name="MakeBuildDirectory">
+    <MakeDir  Directories="$(BuildDir)" />
+</Target> -->
+
+<!-- Target  -->
+<!-- Targets group tasks together in a particular order and expose sections of the project file as entry points into the build process. 
+Targets are declared in the project file by using the Target element. For example, the following code creates a target named Compile, 
+which then calls the Csc task that has the item list that was declared in the earlier example.
+<Target Name="Compile">
+    <Csc Sources="@(Compile)" />
+</Target> -->

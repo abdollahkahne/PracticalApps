@@ -1,0 +1,19 @@
+@page
+@using NorthwindIntl.Pages
+@using Microsoft.Extensions.Caching.Memory
+@model HelloCachePageModel
+@inject IMemoryCache _cache
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+<a asp-page-handler="CreateDependentCache">Create Dependent Cache</a>
+<a asp-page-handler="RemoveDependentCache">Remove Dependent Cache</a>
+@{
+    var parent = _cache.Get<DateTime?>("parent");
+    var child = _cache.Get<DateTime?>("child");
+    var daughter = _cache.Get<DateTime?>("daughter");
+    var son = _cache.Get<DateTime?>("son");
+}
+<p>Value from Parent is @(parent.HasValue?parent.Value:"Removed from Session")</p>
+<p>Value from Child is @(child.HasValue?parent.Value:"Removed from Session")</p>
+<p>Value from Daughter is @(daughter.HasValue?daughter.Value:"Removed from Session")</p>
+<p>Value from Son is @(son.HasValue?son.Value:"Removed from Session")</p>

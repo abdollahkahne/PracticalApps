@@ -1,0 +1,30 @@
+@using Src.Data.TagHelperModel
+@model IEnumerable<Product>
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@addTagHelper Src.TagHelpers.*,Src
+
+<div theme="primary">
+    <a asp-action="CreateProduct" asp-fragment="JustTest">Create Product</a>
+</div>
+<div wrap-text="List of Products" before>
+    <table class="table table-sm table-bordered">
+        <thead class="bg-dark text-white">
+            <tr>
+                <th>Name</th>
+                <th>Price</th>
+                <th>Quantity</th>
+            </tr>
+        </thead>
+        <product-table></product-table>
+        @* <tbody>
+            @foreach (var product in Model)
+            {
+            <tr>
+            <td>@product.Name</td>
+            <td>@product.Price</td>
+            <td>@product.Quantity</td>
+            </tr>
+            }
+            </tbody> *@
+    </table>
+</div>

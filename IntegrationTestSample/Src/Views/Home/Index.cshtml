@@ -1,0 +1,12 @@
+@using Src.Data.IdentityModels
+@model AppUser
+
+<h1 class="bg-info text-white">Index</h1>
+@if (Model == null)
+{
+    <p>Hello World</p>
+}
+else
+{
+    @Html.DisplayForModel()
+}

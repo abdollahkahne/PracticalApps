@@ -1,0 +1,56 @@
+@model Src.Data.IdentityModels.RoleEdit
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+<h1 class="bg-info text-white">Update Role</h1>
+<a asp-action="Index" class="btn btn-secondary">Back</a>
+<div asp-validation-summary="All" class="text-danger"></div>
+
+<form asp-action="Update" method="post">
+    <input type="hidden" name="roleName" value="@Model.Role.Name" />
+    <input type="hidden" name="roleId" value="@Model.Role.Id" />
+    <h2 class="bg-info p-1 text-white">Add To @Model.Role.Name</h2>
+    <table class="table table-bordered table-sm">
+        @* Here we show a list of none member user and viewer can add it to Role *@
+        @if (Model.NoneMembers.Count() == 0)
+        {
+            <tr>
+                <td colspan="2">All Users Are Members</td>
+            </tr>
+        }
+        else
+        {
+            foreach (var user in Model.NoneMembers)
+            {
+                <tr>
+                    <td>@(user.NormalizedUserName)</td>
+                    <td>
+                        <input type="checkbox" name="AddedIds" value="@user.Id" />
+                    </td>
+                </tr>
+            }
+        }
+    </table>
+    <h2 class="bg-info p-1 text-white">Remove From @Model.Role.Name</h2>
+    <table class="table table-bordered table-sm">
+        @* Here we remove user from role by selecting it *@
+        @if (Model.Members.Count() == 0)
+        {
+            <tr>
+                <td colspan="2">No Users Are Members</td>
+            </tr>
+        }
+        else
+        {
+            foreach (var user in Model.Members)
+            {
+                <tr>
+                    <td>@(user.NormalizedUserName)</td>
+                    <td>
+                        <input type="checkbox" name="DeletedIds" value="@user.Id">
+                    </td>
+                </tr>
+            }
+        }
+    </table>
+    <button type="submit" class="btn btn-primary">Save</button>
+</form>

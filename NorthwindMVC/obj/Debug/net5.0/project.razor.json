@@ -13566,6 +13566,174 @@
         }
       },
       {
+        "HashCode": 1884270774,
+        "Kind": "ITagHelper",
+        "Name": "StackExchange.Profiling.MiniProfilerScriptTagHelper",
+        "AssemblyName": "MiniProfiler.AspNetCore.Mvc",
+        "Documentation": "\n            <summary>\n            Tag helper to render MiniProfiler in ASP.NET Core views, e.g. &lt;mini-profiler position=\"Right\" /&gt;\n            </summary>\n        ",
+        "CaseSensitive": false,
+        "TagMatchingRules": [
+          {
+            "TagName": "mini-profiler",
+            "TagStructure": 2
+          }
+        ],
+        "BoundAttributes": [
+          {
+            "Kind": "ITagHelper",
+            "Name": "view-context",
+            "TypeName": "Microsoft.AspNetCore.Mvc.Rendering.ViewContext",
+            "Documentation": "\n            <summary>\n            The view context of this tag helper, for accessing HttpContext on render.\n            </summary>\n        ",
+            "Metadata": {
+              "Common.PropertyName": "ViewContext"
+            }
+          },
+          {
+            "Kind": "ITagHelper",
+            "Name": "position",
+            "TypeName": "StackExchange.Profiling.RenderPosition?",
+            "Documentation": "\n            <summary>\n            The UI position to render the profiler in (defaults to <see cref=\"P:StackExchange.Profiling.Internal.MiniProfilerBaseOptions.PopupRenderPosition\" />).\n            </summary>\n        ",
+            "Metadata": {
+              "Common.PropertyName": "Position"
+            }
+          },
+          {
+            "Kind": "ITagHelper",
+            "Name": "show-trivial",
+            "TypeName": "System.Boolean?",
+            "Documentation": "\n            <summary>\n            Whether to show trivial timings column initially or not (defaults to <see cref=\"P:StackExchange.Profiling.Internal.MiniProfilerBaseOptions.PopupShowTrivial\" />).\n            </summary>\n        ",
+            "Metadata": {
+              "Common.PropertyName": "ShowTrivial"
+            }
+          },
+          {
+            "Kind": "ITagHelper",
+            "Name": "show-time-with-children",
+            "TypeName": "System.Boolean?",
+            "Documentation": "\n            <summary>\n            Whether to show time with children column initially or not (defaults to <see cref=\"P:StackExchange.Profiling.Internal.MiniProfilerBaseOptions.PopupShowTimeWithChildren\" />).\n            </summary>\n        ",
+            "Metadata": {
+              "Common.PropertyName": "ShowTimeWithChildren"
+            }
+          },
+          {
+            "Kind": "ITagHelper",
+            "Name": "max-traces",
+            "TypeName": "System.Int32?",
+            "Documentation": "\n            <summary>\n            The maximum number of profilers to show (before the oldest is removed - defaults to <see cref=\"P:StackExchange.Profiling.Internal.MiniProfilerBaseOptions.PopupMaxTracesToShow\" />).\n            </summary>\n        ",
+            "Metadata": {
+              "Common.PropertyName": "MaxTraces"
+            }
+          },
+          {
+            "Kind": "ITagHelper",
+            "Name": "show-controls",
+            "TypeName": "System.Boolean?",
+            "Documentation": "\n            <summary>\n            Whether to show the controls (defaults to <see cref=\"P:StackExchange.Profiling.Internal.MiniProfilerBaseOptions.ShowControls\" />).\n            </summary>\n        ",
+            "Metadata": {
+              "Common.PropertyName": "ShowControls"
+            }
+          },
+          {
+            "Kind": "ITagHelper",
+            "Name": "start-hidden",
+            "TypeName": "System.Boolean?",
+            "Documentation": "\n            <summary>\n            Whether to start hidden (defaults to <see cref=\"P:StackExchange.Profiling.Internal.MiniProfilerBaseOptions.PopupStartHidden\" />).\n            </summary>\n        ",
+            "Metadata": {
+              "Common.PropertyName": "StartHidden"
+            }
+          },
+          {
+            "Kind": "ITagHelper",
+            "Name": "color-scheme",
+            "TypeName": "StackExchange.Profiling.ColorScheme?",
+            "Documentation": "\n            <summary>\n            The color scheme to start with:\n            </summary>\n        ",
+            "Metadata": {
+              "Common.PropertyName": "ColorScheme"
+            }
+          },
+          {
+            "Kind": "ITagHelper",
+            "Name": "nonce",
+            "TypeName": "System.String",
+            "Documentation": "\n            <summary>\n            The JavaScript nonce (if any) to use on this script tag render.\n            </summary>\n        ",
+            "Metadata": {
+              "Common.PropertyName": "Nonce"
+            }
+          },
+          {
+            "Kind": "ITagHelper",
+            "Name": "options",
+            "TypeName": "StackExchange.Profiling.RenderOptions",
+            "Documentation": "\n            <summary>\n            The options to use when rendering this MiniProfiler.\n            Note: overrides all other options.\n            </summary>\n        ",
+            "Metadata": {
+              "Common.PropertyName": "RenderOptions"
+            }
+          }
+        ],
+        "Metadata": {
+          "Runtime.Name": "ITagHelper",
+          "Common.TypeName": "StackExchange.Profiling.MiniProfilerScriptTagHelper"
+        }
+      },
+      {
+        "HashCode": -777394786,
+        "Kind": "ITagHelper",
+        "Name": "StackExchange.Profiling.ProfileScriptTagHelper",
+        "AssemblyName": "MiniProfiler.AspNetCore.Mvc",
+        "Documentation": "\n            <summary>\n            Tag helper to profile script execution in ASP.NET Core views, e.g. \n            &lt;profile-script name=\"My Step\" /&gt;\n            ...script blocks...\n            &lt;/profile-script&gt;\n            Include as self closing to provide initialization only.\n            </summary>\n        ",
+        "CaseSensitive": false,
+        "TagMatchingRules": [
+          {
+            "TagName": "profile-script",
+            "TagStructure": 1
+          }
+        ],
+        "BoundAttributes": [
+          {
+            "Kind": "ITagHelper",
+            "Name": "name",
+            "TypeName": "System.String",
+            "Documentation": "\n            <summary>\n            The name of this <see cref=\"T:StackExchange.Profiling.MiniProfiler\" /> step.\n            </summary>\n        ",
+            "Metadata": {
+              "Common.PropertyName": "Name"
+            }
+          }
+        ],
+        "Metadata": {
+          "Runtime.Name": "ITagHelper",
+          "Common.TypeName": "StackExchange.Profiling.ProfileScriptTagHelper"
+        }
+      },
+      {
+        "HashCode": 1963805118,
+        "Kind": "ITagHelper",
+        "Name": "StackExchange.Profiling.ProfileTagHelper",
+        "AssemblyName": "MiniProfiler.AspNetCore.Mvc",
+        "Documentation": "\n            <summary>\n            Tag helper to profile child contents in ASP.NET Core views, e.g. \n            &lt;profile name=\"My Step\" /&gt;\n            ...child content...\n            &lt;/profile&gt;\n            </summary>\n        ",
+        "CaseSensitive": false,
+        "TagMatchingRules": [
+          {
+            "TagName": "profile",
+            "TagStructure": 1
+          }
+        ],
+        "BoundAttributes": [
+          {
+            "Kind": "ITagHelper",
+            "Name": "name",
+            "TypeName": "System.String",
+            "Documentation": "\n            <summary>\n            The name of this <see cref=\"T:StackExchange.Profiling.MiniProfiler\" /> step.\n            </summary>\n        ",
+            "Metadata": {
+              "Common.PropertyName": "Name"
+            }
+          }
+        ],
+        "Metadata": {
+          "Runtime.Name": "ITagHelper",
+          "Common.TypeName": "StackExchange.Profiling.ProfileTagHelper"
+        }
+      },
+      {
         "HashCode": -582504247,
         "Kind": "MVC.ViewComponent",
         "Name": "__Generated__SupplierViewComponentTagHelper",

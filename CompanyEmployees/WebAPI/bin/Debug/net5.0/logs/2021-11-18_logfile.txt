@@ -1,0 +1,76 @@
+2021-11-18 03:48:53.0747 ERROR LoggerService.LoggerManager.LogError Something went wrong System.NullReferenceException: Object reference not set to an instance of an object.
+   at WebAPI.Controllers.EmployeesController.CreateEmployeeFor(Guid companyId, EmployeeForCreationDto data) in /home/selenium/Desktop/Learning/PracticalApps/CompanyEmployees/WebAPI/Controllers/EmployeesController.cs:line 87
+   at lambda_method3(Closure , Object , Object[] )
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.SyncActionResultExecutor.Execute(IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeActionMethodAsync()
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeNextActionFilterAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|19_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|6_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.ExceptionHandlerMiddleware.<Invoke>g__Awaited|6_0(ExceptionHandlerMiddleware middleware, HttpContext context, Task task)
+2021-11-18 05:47:32.0381 ERROR LoggerService.LoggerManager.LogError Something went wrong AutoMapper.AutoMapperMappingException: Missing type map configuration or unsupported mapping.
+
+Mapping types:
+Object -> CompanyDto
+System.Object -> Entities.DataTransferObjects.CompanyDto
+   at lambda_method63(Closure , Object , CompanyDto , ResolutionContext )
+   at WebAPI.Controllers.CompaniesController.CreateCompanies(IEnumerable`1 collection) in /home/selenium/Desktop/Learning/PracticalApps/CompanyEmployees/WebAPI/Controllers/CompaniesController.cs:line 118
+   at lambda_method9(Closure , Object , Object[] )
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.SyncActionResultExecutor.Execute(IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeActionMethodAsync()
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeNextActionFilterAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|19_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|6_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.ExceptionHandlerMiddleware.<Invoke>g__Awaited|6_0(ExceptionHandlerMiddleware middleware, HttpContext context, Task task)
+2021-11-18 06:04:45.8659 ERROR LoggerService.LoggerManager.LogError Parameter Ids is null
+2021-11-18 08:18:21.9974 ERROR LoggerService.LoggerManager.LogError Something went wrong System.InvalidOperationException: Multiple constructors accepting all given argument types have been found in type 'Microsoft.AspNetCore.Mvc.ModelBinding.Binders.ArrayModelBinder`1[System.Guid]'. There should only be one applicable constructor.
+   at Microsoft.Extensions.DependencyInjection.ActivatorUtilities.TryFindMatchingConstructor(Type instanceType, Type[] argumentTypes, ConstructorInfo& matchingConstructor, Nullable`1[]& parameterMap)
+   at Microsoft.Extensions.DependencyInjection.ActivatorUtilities.FindApplicableConstructor(Type instanceType, Type[] argumentTypes, ConstructorInfo& matchingConstructor, Nullable`1[]& matchingParameterMap)
+   at Microsoft.Extensions.DependencyInjection.ActivatorUtilities.CreateFactory(Type instanceType, Type[] argumentTypes)
+   at Microsoft.AspNetCore.Mvc.ModelBinding.Binders.BinderTypeModelBinder..ctor(Type binderType)
+   at Microsoft.AspNetCore.Mvc.ModelBinding.Binders.BinderTypeModelBinderProvider.GetBinder(ModelBinderProviderContext context)
+   at Microsoft.AspNetCore.Mvc.ModelBinding.ModelBinderFactory.CreateBinderCoreUncached(DefaultModelBinderProviderContext providerContext, Object token)
+   at Microsoft.AspNetCore.Mvc.ModelBinding.ModelBinderFactory.CreateBinder(ModelBinderFactoryContext context)
+   at Microsoft.AspNetCore.Mvc.Controllers.ControllerBinderDelegateProvider.GetParameterBindingInfo(IModelBinderFactory modelBinderFactory, IModelMetadataProvider modelMetadataProvider, ControllerActionDescriptor actionDescriptor, MvcOptions mvcOptions)
+   at Microsoft.AspNetCore.Mvc.Controllers.ControllerBinderDelegateProvider.CreateBinderDelegate(ParameterBinder parameterBinder, IModelBinderFactory modelBinderFactory, IModelMetadataProvider modelMetadataProvider, ControllerActionDescriptor actionDescriptor, MvcOptions mvcOptions)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvokerCache.GetCachedResult(ControllerContext controllerContext)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvokerProvider.OnProvidersExecuting(ActionInvokerProviderContext context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionInvokerFactory.CreateInvoker(ActionContext actionContext)
+   at Microsoft.AspNetCore.Mvc.Routing.ActionEndpointFactory.<>c__DisplayClass7_0.<CreateRequestDelegate>b__0(HttpContext context)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.Invoke(HttpContext httpContext)
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.ExceptionHandlerMiddleware.<Invoke>g__Awaited|6_0(ExceptionHandlerMiddleware middleware, HttpContext context, Task task)
+2021-11-18 08:20:43.7933 ERROR LoggerService.LoggerManager.LogError Something went wrong System.InvalidOperationException: Multiple constructors accepting all given argument types have been found in type 'Microsoft.AspNetCore.Mvc.ModelBinding.Binders.CollectionModelBinder`1[System.Guid]'. There should only be one applicable constructor.
+   at Microsoft.Extensions.DependencyInjection.ActivatorUtilities.TryFindMatchingConstructor(Type instanceType, Type[] argumentTypes, ConstructorInfo& matchingConstructor, Nullable`1[]& parameterMap)
+   at Microsoft.Extensions.DependencyInjection.ActivatorUtilities.FindApplicableConstructor(Type instanceType, Type[] argumentTypes, ConstructorInfo& matchingConstructor, Nullable`1[]& matchingParameterMap)
+   at Microsoft.Extensions.DependencyInjection.ActivatorUtilities.CreateFactory(Type instanceType, Type[] argumentTypes)
+   at Microsoft.AspNetCore.Mvc.ModelBinding.Binders.BinderTypeModelBinder..ctor(Type binderType)
+   at Microsoft.AspNetCore.Mvc.ModelBinding.Binders.BinderTypeModelBinderProvider.GetBinder(ModelBinderProviderContext context)
+   at Microsoft.AspNetCore.Mvc.ModelBinding.ModelBinderFactory.CreateBinderCoreUncached(DefaultModelBinderProviderContext providerContext, Object token)
+   at Microsoft.AspNetCore.Mvc.ModelBinding.ModelBinderFactory.CreateBinder(ModelBinderFactoryContext context)
+   at Microsoft.AspNetCore.Mvc.Controllers.ControllerBinderDelegateProvider.GetParameterBindingInfo(IModelBinderFactory modelBinderFactory, IModelMetadataProvider modelMetadataProvider, ControllerActionDescriptor actionDescriptor, MvcOptions mvcOptions)
+   at Microsoft.AspNetCore.Mvc.Controllers.ControllerBinderDelegateProvider.CreateBinderDelegate(ParameterBinder parameterBinder, IModelBinderFactory modelBinderFactory, IModelMetadataProvider modelMetadataProvider, ControllerActionDescriptor actionDescriptor, MvcOptions mvcOptions)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvokerCache.GetCachedResult(ControllerContext controllerContext)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvokerProvider.OnProvidersExecuting(ActionInvokerProviderContext context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionInvokerFactory.CreateInvoker(ActionContext actionContext)
+   at Microsoft.AspNetCore.Mvc.Routing.ActionEndpointFactory.<>c__DisplayClass7_0.<CreateRequestDelegate>b__0(HttpContext context)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.Invoke(HttpContext httpContext)
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.ExceptionHandlerMiddleware.<Invoke>g__Awaited|6_0(ExceptionHandlerMiddleware middleware, HttpContext context, Task task)

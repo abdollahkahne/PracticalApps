@@ -1,0 +1,12 @@
+{
+  "version": 2,
+  "dgSpecHash": "DJPVCLI4lUCypEbsitRstH8Ltwc1m/5sZhFdvWkRfFG3RtubXyVa0jxK2Eejl2QoB6WryAGDDoDNo3dtjo5c1A==",
+  "success": true,
+  "projectFilePath": "/home/selenium/Desktop/Learning/PracticalApps/Practices/WorkWithJSON/WorkWithJSON.csproj",
+  "expectedPackageFiles": [
+    "/home/selenium/.nuget/packages/system.runtime.compilerservices.unsafe/6.0.0/system.runtime.compilerservices.unsafe.6.0.0.nupkg.sha512",
+    "/home/selenium/.nuget/packages/system.text.encodings.web/6.0.0/system.text.encodings.web.6.0.0.nupkg.sha512",
+    "/home/selenium/.nuget/packages/system.text.json/6.0.0/system.text.json.6.0.0.nupkg.sha512"
+  ],
+  "logs": []
+}

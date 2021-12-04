@@ -1,0 +1,81 @@
+@using Src.Data.TagHelperModel
+@model Product
+@addTagHelper *,Microsoft.AspNetCore.Mvc.TagHelpers
+@addTagHelper Src.TagHelpers.*,Src
+
+@{
+    ViewData["Title"] = "Create Product";
+}
+
+
+<h2>Create</h2>
+
+@*
+    The asp-antiforgery Tag Helper Generates a hidden Request Verification Token to prevent cross-site request forgery
+    (CSRF). When you use this attribute in your Form element, then ASP.NET Core MVC does two things:
+
+    1. Adds a security token in a hidden input element to the form.
+    2. Adds a cookie to the response.
+
+    The application will process the request only if it contains both the cookie and the hidden value from the form, which
+    the malicious site cannot access, and hence CSRF is prevented.
+
+    To use this feature add the tag helper – asp-antiforgery="true" to the form element and add the attribute
+    [ValidateAntiForgeryToken] in the Action method.
+    *** asp-fragment Specifies the URL fragment (appearing after ‘#’ character)
+*@
+<div theme="dark">
+    <a asp-action="Products" asp-fragment="JustTest">Back</a>
+</div>
+<form method="post" asp-controller="Home" asp-action="CreateProduct" asp-antiforgery=true>
+    <div class="form-group">
+        @*
+            asp-for
+            1. Sets the for attribute of the label to the Model property’s name.
+            2. Sets the content of the labels to the Name of the Model Property.
+        *@
+        <label asp-for="Name"></label>
+        @*
+            asp-for : This tag helper's property sets the name, Id, type and value attributes of the Input element.
+        *@
+        <input class="form-control" asp-for="Name" />
+    </div>
+    <div class="form-group">
+        <label asp-for="Price"></label>
+        <input class="form-control" name="Price" />
+    </div>
+    <div class="form-group">
+        <label asp-for="Quantity"></label>
+        @* <input class="form-control" name="Quantity" /> *@
+        @* <select class="form-control" asp-for="Quantity">
+            <option disabled selected value="">Select Quantity</option>
+            <option value="1">1</option>
+            <option value="10">10</option>
+            <option value="100">100</option>
+            </select> *@
+        <select class="form-control" asp-for="Quantity" asp-items="@ViewBag.Quantites">
+            <option disabled selected value="">Select Quantity</option>
+        </select>
+    </div>
+    @* <button type="submit" background-color="danger">Add</button> *@
+    <mybutton type="submit" background-color="info" />
+</form>
+@* <cache vary-by-user>
+    expires-on Specify an absolute time in datetime value at which the cache expires.
+    expires-after Specifies the relative time in TimeSpan value at which the cache expires.
+    expires-sliding Sliding time is the period since the last usage.
+    So this tag helper specifies the sliding time in TimeSpan value at which cache expires.
+    vary-by-query Specifies the query string key that will be used to manage,
+    the different versions of the cache contents.
+    vary-by-cookie Specifies the cookie name that will be used to manage
+    the different versions of the cache contents.
+    vary-by Specifies a key to manage different versions of cache contents.
+    ....
+    Data Cache is an in-memory cache for caching contents to speed up view rendering. You can keep a content of a View
+    in cache element like:
+    </cache> *@
+
+@* <distributed-cache>
+    Data Cache is an in-memory cache for caching contents to speed up view rendering. You can keep a content of a View in
+    cache element like:
+    </distributed-cache> *@

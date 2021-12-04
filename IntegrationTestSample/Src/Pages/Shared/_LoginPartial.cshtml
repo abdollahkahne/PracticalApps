@@ -1,0 +1,26 @@
+@using Src.Data.IdentityModels
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<AppUser> _signInManager
+@inject UserManager<AppUser> _userManager
+
+@if (_signInManager.IsSignedIn(User))
+{
+    <form asp-controller="Authenticate" asp-action="Logout" method="post" id="logoutForm" class="navbar navbar-right">
+    <ul class="navbar-nav flex-grow-1">
+        <li class="nav-item">
+            <a class="nav-link text-dark" title="Manage" asp-action="Index" asp-controller="admin">Hello
+                @(_userManager.GetUserName(User))</a>
+        </li>
+        <li class="nav-item">
+            <button type="submit" class="btn btn-secondary">Logout</button>
+        </li>
+    </ul>
+</form>
+}
+else
+{
+    <ul class="navbar-nav flex-grow-1">
+    <li class="nav-item"><a class="nav-link text-dark" asp-controller="Admin" asp-action="Create">Register</a></li>
+    <li class="nav-item"><a class="nav-link text-dark" asp-controller="Authenticate" asp-action="Login">Login</a></li>
+</ul>
+}

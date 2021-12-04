@@ -1,0 +1,40 @@
+@using Microsoft.AspNetCore.Identity
+@using Src.Data.IdentityModels
+@model IEnumerable<AppRole>
+@addTagHelper *,Src
+@addTagHelper *,Microsoft.AspNetCore.Mvc.TagHelpers
+
+
+<h2 class="bg-info text-white">
+    Roles
+</h2>
+<a class="btn btn-secondary" asp-action="Create">Create Role</a>
+
+<div asp-validation-summary="All" class="text-danger"></div>
+<table class="table table-sm table-bordered">
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Users</th>
+        <th></th>
+        <th></th>
+    </tr>
+    @foreach (var role in Model)
+    {
+        <tr>
+            <td>@role.Id</td>
+            <td>@role.Name</td>
+            <td>@role.Description</td>
+            <td i-role="@role.Id">Users</td>
+            <td>
+                <a class="btn btn-primary" asp-action="Update" asp-route-roleId="@role.Id">Update</a>
+            </td>
+            <td>
+                <form asp-action="Delete" method="post" asp-route-roleId="@role.Id">
+                    <button type="submit" class="btn btn-warning">Delete</button>
+                </form>
+            </td>
+        </tr>
+    }
+</table>

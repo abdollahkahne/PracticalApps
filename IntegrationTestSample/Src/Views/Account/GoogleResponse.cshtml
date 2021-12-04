@@ -1,0 +1,10 @@
+@model System.Security.Claims.ClaimsPrincipal
+
+@* @Html.DisplayForModel(Model) *@
+<h1>@Model.Identity.Name</h1>
+<h2>Claims</h2>
+@foreach (var claim in Model.Claims)
+{
+    <h3>@claim.Type</h3>
+    <h4>@claim.Value</h4>
+}

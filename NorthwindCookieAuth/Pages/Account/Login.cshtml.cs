@@ -14,9 +14,11 @@ using NorthwindCookieAuth.Data;
 // [AllowAnonymous] bypasses all authorization statements
 // For example if you apply [AllowAnonymous] at the controller level, any [Authorize] attributes on any action within it is ignored.
 [AllowAnonymous]
-public class LoginModel:PageModel {
+public class LoginModel : PageModel
+{
     // define class for input model here inside the class
-    public class InputModel {
+    public class InputModel
+    {
         [Required]
         [EmailAddress]
         public string Email { get; set; }
@@ -28,12 +30,12 @@ public class LoginModel:PageModel {
     //define constructor to inject services/dependencies and their private readonly fields / getter props
     public LoginModel()
     {
-        
+
     }
 
     // Define Bind Properties, Temp Data and View/Bag Data (they should be property not field)
     [BindProperty]
-    public InputModel Input {get;set;}
+    public InputModel Input { get; set; }
     [TempData]
     public string ErrorMessage { get; set; }
 
@@ -41,52 +43,60 @@ public class LoginModel:PageModel {
     public string ReturnUrl { get; set; }
 
     // Define Private/public helper methods
-    private async Task<ApplicationUser> AuthenticateUserAsync(string username,string password) {
+    private async Task<ApplicationUser> AuthenticateUserAsync(string username, string password)
+    {
         // Do busines logic for authentication here and return the User at the end
         await Task.Delay(500);
         // if (true) {
         //     return null;
         // }
-        return new ApplicationUser {
-            Email="john@contoso.com",
-            FullName="John Snow",
-            Modified=DateTime.Now,
-            Country="USA",
-            Age=25,
+        return new ApplicationUser
+        {
+            Email = "john@contoso.com",
+            FullName = "John Snow",
+            Modified = DateTime.Now,
+            Country = "USA",
+            Age = 25,
         };
     }
 
     // Defin Page Handlers (OnGet,....)
-    public async Task<IActionResult> OnGetAsync(string returnUrl) {
-        if (!string.IsNullOrEmpty(ErrorMessage)) {
-            ModelState.AddModelError(string.Empty,ErrorMessage);
+    public async Task<IActionResult> OnGetAsync(string returnUrl)
+    {
+        if (!string.IsNullOrEmpty(ErrorMessage))
+        {
+            ModelState.AddModelError(string.Empty, ErrorMessage);
         }
 
         // Clear existing Cookies
         #region Snippet2
-            await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+        await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
         #endregion
-        ReturnUrl=returnUrl;
+        ReturnUrl = returnUrl;
         return Page();
     }
 
-    public async Task<IActionResult> OnPostAsync() {
-        ReturnUrl??="/";
+    public async Task<IActionResult> OnPostAsync()
+    {
+        ReturnUrl ??= "/";
         // Check Validity of Model
-        if (!ModelState.IsValid) {
+        if (!ModelState.IsValid)
+        {
             return Page();
         }
-        var user=await AuthenticateUserAsync(Input.Email,Input.Password);
+        var user = await AuthenticateUserAsync(Input.Email, Input.Password);
 
         // Check case of wrong user-pass
-        if (user==null) {
-            ModelState.AddModelError(string.Empty,"Invalid Username and Password");
+        if (user == null)
+        {
+            ModelState.AddModelError(string.Empty, "Invalid Username and Password");
             return Page();
         }
 
         #region snippet1
-            // define claims as a list of claim (Name and Role is mandatory)
-            var claims=new List<Claim> {
+        // define claims as a list of claim (Name and Role? is mandatory)
+        // Claims should be minimum and not sensitive since they saved in cookie
+        var claims = new List<Claim> {
                 new Claim(ClaimTypes.Name,user.Email),
                 new Claim("FullName",user.FullName),
                 new Claim(ClaimTypes.Role,"Admin"),
@@ -95,28 +105,29 @@ public class LoginModel:PageModel {
                 new Claim("Age",user.Age.ToString()),
             };
 
-            // create claim Identity using claims and Authentication Schema
-            // claim Identity has IsAuthenticated and AuthenticationType which is related to Schema
-            var claimIdentity=new ClaimsIdentity(claims,CookieAuthenticationDefaults.AuthenticationScheme);
+        // create claim Identity using claims and Authentication Schema
+        // claim Identity has IsAuthenticated and AuthenticationType which is related to Schema
+        var claimIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
 
-            // create claim principal (this is saved at HttpContext.User in UseAuthentication Middleware)
-            // It made from one or multiple claim Identities
-            // It has some helper methods like IsInRole or HasClaim
-            var claimsPrincipal=new ClaimsPrincipal(claimIdentity);
+        // create claim principal (this is saved at HttpContext.User in UseAuthentication Middleware)
+        // It made from one or multiple claim Identities
+        // It has some helper methods like IsInRole or HasClaim
+        var claimsPrincipal = new ClaimsPrincipal(claimIdentity);
 
-            //define Auth Properties
-            var authProps=new AuthenticationProperties {
-                IsPersistent=false,
-            };
+        //define Auth Properties
+        var authProps = new AuthenticationProperties
+        {
+            IsPersistent = false,
+        };
 
-            // use SignInAsync Method to create and set cookie
-            // (and UseAuthentication Middleware use this to generate User props)
-            await HttpContext.SignInAsync(
-                CookieAuthenticationDefaults.AuthenticationScheme,
-                claimsPrincipal,
-                authProps
-            );
-            return Redirect(ReturnUrl);
+        // use SignInAsync Method to create and set cookie
+        // (and UseAuthentication Middleware use this to generate User props)
+        await HttpContext.SignInAsync(
+            CookieAuthenticationDefaults.AuthenticationScheme,
+            claimsPrincipal,
+            authProps
+        );
+        return Redirect(ReturnUrl);
 
         #endregion
     }

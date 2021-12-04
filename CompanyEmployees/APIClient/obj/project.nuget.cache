@@ -1,0 +1,19 @@
+{
+  "version": 2,
+  "dgSpecHash": "YbY4oeaxUYlobCInRgQPBw4I9mseNr7hbcxCypihCb0beyY3YtKC9GTHAMnfuGo5X09PEXQGKVzIlcsCakuJGw==",
+  "success": true,
+  "projectFilePath": "/home/selenium/Desktop/Learning/PracticalApps/CompanyEmployees/APIClient/APIClient.csproj",
+  "expectedPackageFiles": [
+    "/home/selenium/.nuget/packages/microsoft.aspnetcore.jsonpatch/5.0.0/microsoft.aspnetcore.jsonpatch.5.0.0.nupkg.sha512",
+    "/home/selenium/.nuget/packages/microsoft.csharp/4.7.0/microsoft.csharp.4.7.0.nupkg.sha512",
+    "/home/selenium/.nuget/packages/microsoft.extensions.dependencyinjection/5.0.0/microsoft.extensions.dependencyinjection.5.0.0.nupkg.sha512",
+    "/home/selenium/.nuget/packages/microsoft.extensions.dependencyinjection.abstractions/5.0.0/microsoft.extensions.dependencyinjection.abstractions.5.0.0.nupkg.sha512",
+    "/home/selenium/.nuget/packages/microsoft.extensions.http/5.0.0/microsoft.extensions.http.5.0.0.nupkg.sha512",
+    "/home/selenium/.nuget/packages/microsoft.extensions.logging/5.0.0/microsoft.extensions.logging.5.0.0.nupkg.sha512",
+    "/home/selenium/.nuget/packages/microsoft.extensions.logging.abstractions/5.0.0/microsoft.extensions.logging.abstractions.5.0.0.nupkg.sha512",
+    "/home/selenium/.nuget/packages/microsoft.extensions.options/5.0.0/microsoft.extensions.options.5.0.0.nupkg.sha512",
+    "/home/selenium/.nuget/packages/microsoft.extensions.primitives/5.0.0/microsoft.extensions.primitives.5.0.0.nupkg.sha512",
+    "/home/selenium/.nuget/packages/newtonsoft.json/12.0.2/newtonsoft.json.12.0.2.nupkg.sha512"
+  ],
+  "logs": []
+}

@@ -1,0 +1,36 @@
+@using Src.Data.IdentityModels
+@model User
+@addTagHelper *,Microsoft.AspNetCore.Mvc.TagHelpers
+<h1 class="bg-info text-white">Create User</h1>
+<a class="btn btn-secondary" asp-action="Index">Back</a>
+
+<form action="" method="post">
+    <div asp-validation-summary="All" class="text-danger"></div>
+    <div class="form-group">
+        <label asp-for="Name"></label>
+        <input class="form-control" asp-for="Name" />
+    </div>
+    <div class="form-group">
+        <label asp-for="Email"></label>
+        <input class="form-control" asp-for="Email" />
+    </div>
+    <div class="form-group">
+        <label asp-for="Password"></label>
+        <input class="form-control" asp-for="Password" />
+    </div>
+    <div class="form-group">
+        <label asp-for="Country"></label>
+        <select class="form-control" asp-for="Country" asp-items="@(Html.GetEnumSelectList(typeof(Country)))">
+            <option value="" selected disabled>Select A Country:</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label asp-for="Age"></label>
+        <input class="form-control" asp-for="Age" />
+    </div>
+    <div class="form-group">
+        <label asp-for="Salary"></label>
+        <input class="form-control" asp-for="Salary" />
+    </div>
+    <button type="submit" class="btn btn-primary" asp-action="Create">Create</button>
+</form>

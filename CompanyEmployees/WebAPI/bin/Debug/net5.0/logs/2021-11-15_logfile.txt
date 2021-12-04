@@ -1,0 +1,16 @@
+2021-11-15 03:33:23.3308 INFO Here is info message from our values controller.
+2021-11-15 03:33:23.3800 DEBUG Here is debug message from our values controller.
+2021-11-15 03:33:23.3856 WARN Here is warn message from our values controller.
+2021-11-15 03:33:23.3869 ERROR Here is an error message from our values controller.
+2021-11-15 03:37:31.5014 INFO  Here is info message from our values controller.
+2021-11-15 03:37:31.5533 DEBUG  Here is debug message from our values controller.
+2021-11-15 03:37:31.5541 WARN  Here is warn message from our values controller.
+2021-11-15 03:37:31.5541 ERROR  Here is an error message from our values controller.
+2021-11-15 03:38:58.3513 INFO  Here is info message from our values controller.
+2021-11-15 03:38:58.3998 DEBUG  Here is debug message from our values controller.
+2021-11-15 03:38:58.4019 WARN  Here is warn message from our values controller.
+2021-11-15 03:38:58.4019 ERROR  Here is an error message from our values controller.
+2021-11-15 03:41:05.6912 INFO LoggerService.LoggerManager.LogInfo Here is info message from our values controller.
+2021-11-15 03:41:05.7416 DEBUG LoggerService.LoggerManager.LogDebug Here is debug message from our values controller.
+2021-11-15 03:41:05.7430 WARN LoggerService.LoggerManager.LogWarn Here is warn message from our values controller.
+2021-11-15 03:41:05.7430 ERROR LoggerService.LoggerManager.LogError Here is an error message from our values controller.

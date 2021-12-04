@@ -14,6 +14,7 @@ namespace PlaywrightDemo
                 {
                     var page = await browser.NewPageAsync();
                     await page.GotoAsync("https://playwright.dev/dotnet");
+                    var className = await page.EvalOnSelectorAsync("h1", "h1=>h1.className");
                     await page.ScreenshotAsync(new PageScreenshotOptions { Path = "sample.png" });
                 }
             }
