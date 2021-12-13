@@ -1,0 +1,181 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class="container">
+        <div class="row">&nbsp;</div>
+        <div class="row">
+            <div class="col-2">User</div>
+            <div class="col-4"><input type="text" id="userInput" /></div>
+        </div>
+        <div class="row">
+            <div class="col-2">Message</div>
+            <div class="col-4"><input type="text" id="messageInput" /></div>
+        </div>
+        <div class="row">&nbsp;</div>
+        <div class="row">
+            <div class="col-6">
+                <input type="button" id="sendButton" value="Send Message" />
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <hr />
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-6">
+            <ul id="messagesList"></ul>
+        </div>
+    </div>
+    <script src="/lib/signalr/signalr.js"></script>
+    <script>
+        //for authentication with bearer:
+        // in a few cases where browser APIs restrict the ability to apply headers (specifically, in Server-Sent Events and WebSockets requests).
+        // In these cases, the access token is provided as a query string value access_token. This done automaticly by Builder and then we can use the token
+        //  wss://localhost:5001/chathub?id=jIoPEnCr9OnBr5038papXQ&access_token=123456
+        // The client can provide an access token instead of using a cookie. The server validates the token and uses it to identify the user. This validation is done only when the connection is established.
+        // During the life of the connection, the server doesn't automatically revalidate to check for token revocation.
+        // The access token function you provide is called before every HTTP request made by SignalR.
+        // If you need to renew the token in order to keep the connection active (because it may expire during the connection), do so from within this function and return the updated token.
+        // Receiving the access token via query string is generally secure as using the standard Authorization header.
+        // Always use HTTPS to ensure a secure end-to-end connection between the client and the server.
+        // you can disable this logging entirely by configuring the Microsoft.AspNetCore.Hosting logger to the Warning level or above
+
+
+
+
+
+        // Sending headers in the browser doesn't work for WebSockets or the ServerSentEvents stream.
+        // since parameter uses json serializer the first letter convert fron capital to small and reversely in request 
+        // build connection instance
+        var connection=new signalR.HubConnectionBuilder()
+        .withUrl("/chathub",{
+            // Options related to client:
+            // skipNegotiation:true, // This make the negotiation step does not do. so we directly send request top hub url without connection Id and connection token and these are not defined in client side. In this case transport should explicitly defined as web socket 
+            transport:signalR.HttpTransportType.WebSockets | signalR.HttpTransportType.LongPolling,
+            keepAliveIntervalInMilliseconds:15000, // this is the interva which client should sent every 15 second a ping or message to servert to say it is alive, otherwise server close the connection
+            serverTimeoutInMilliseconds:30000, // This is the time that if does not receive any ping/message from server, the client close the connection
+            headers:{"Foo":"Bar"}, // only work in long polling and it is an object like {"Authorization":"Bearer"} and does not sent in Handshaking!! it only sent in negotiation
+            accessTokenFactory:()=>{
+                // Get and return the access token.
+                // This function can return a JavaScript Promise if asynchronous
+                // logic is required to retrieve the access token.
+                return new Promise((resolve,reject)=>{resolve("123456")});
+            },
+            withCredentials:true, // this is specially required in case of CORS which both side should activate it in case of using a different origin from host
+            // headers :{"Authorization":"Bearer"}// this make the Transparport layer to Long polling to be able send the header which is not what we want!
+        }) // Here we can add an action call back to do more configuration for example setup its credentials
+        .configureLogging(signalR.LogLevel.Information) // Use the configureLogging method on HubConnectionBuilder to configure the log level. Messages are logged to the browser console (using signalr.js script and console.error,console.warn,console.info)
+        // .withAutomaticReconnect() // This make automatic connect in case of disconnection four times with multiple time span an after 0+2+8+30 minute total it throw an close event which can be captured to manually handle the attempts
+        .withAutomaticReconnect({nextRetryDelayInMilliseconds:(count,elapsed,reason)=>{if (count>5 || elapsed>120000) {return null;} else {return Math.random()*10000;}}})
+        .build();
+        // withAutomaticReconnect accepts an array of numbers representing the delay in milliseconds to wait before starting each reconnect attempt 
+        //(reconnect policy which can be defined in two way: using an array presenting count and delay in second for each reconntect (reconnectDelay Array) or
+        // a function as NextRetryDelayInMillisecond which automaticly generate the next delay based on elapsed time and count). which get three argument as retryContext
+        // This values named retry policy and retry delay and have its constructor too (we can define it in dotnet too using IRetryPolicy which has one method NextRetryDelayInMilliseconds)
+        // 
+
+        // Add Cutom message event handlers
+        connection.on("message",function({username,message}) {
+            console.info(message);
+            console.log(user);
+        });
+        connection.on("notification",function({userId}) {console.log(userId+" done something!")});
+        // connection.on("sent",function() {console.log("Your Message delivered!")});
+
+        connection.on("AddToDevelopers",function({username,connectionId}) {
+            console.info("ConnectionID in Server:"+connectionId," Is equal to ConnectionId in client:"+connection.connection.connectionId);
+            console.info(username+" added to Developers Group");
+        });
+        connection.on("Alert",function({message}) {console.log(message);});
+        connection.on("sent",function() {
+            console.warn("A sent event triggered by server!");
+        })
+
+
+        //set event handler
+        // start and do something as callback
+        // As a best practice, call the start method on the HubConnection after on. Doing so ensures your handlers are registered before any messages are received.
+        // Also try to use the method invocation in its callback since it is async!
+        connection.start()
+        .then(response =>{
+            console.log(response);// the response is null since this call back has no input 
+            //raise server event by Invoking them and then handling the response
+            connection.invoke("GetUserEmail")
+                .then((result)=>{console.log(result);})// This result is what returned from invoking the method which is here a text
+                .catch(err=>console.log(err));// error sent by server but it is a generic error without more details by default
+            connection.invoke("Send",{message:"sample input"});
+            connection.invoke("SendSensored","Internal Politics Has increase Murders")
+            connection.invoke("SendToDevelopers",{message:"This is a test for authorization in groups"})
+            .catch((err)=>{console.log(err);});
+
+            // JavaScript clients can also call public methods on hubs via the send method of the HubConnection. Unlike the invoke method, the send method doesn't wait for a response from the server
+            // Using send doesn't wait until the server has received the message. Consequently, it's not possible to return data or errors from the server.
+            connection.send("Send",{message:"Using send method to trigger a method on server. consider that this only raise the event and do not wait for event handler result"});
+        })
+        .catch(err=>{
+            console.log(err);
+            setTimeout(() => {
+                start();
+            }, 1000);
+        });
+
+        // Lifecycle event handlers
+        // we have the following lifetime/state with AutoConnect method:
+        // HubConnectionState.Reconnecting=>connection.onreconnecting: (after disconnecting the connection and automatic try to connect)
+        // HubConnectionState.Connected=>connection.onreconnected : This provides an opportunity to inform users the connection has been reestablished.
+        // HubConnectionState.Disconnected =>connection.onClose : This provides an opportunity to inform users the connection has been permanently lost and recommend refreshing the page:
+        // In case of Auto-Connect, in the case of first try to Start the connection since there is not disconnection at all the Auto Connect Life Cycle does not work. So we should manually do it for example by using a delay 
+
+        async function start(totalTimeout=0) {
+            try {
+                await connection.start();
+                console.assert(connection.state === signalR.HubConnectionState.Connected);
+                console.log("SignalR Connected.");
+            } catch (err) {
+                console.assert(connection.state === signalR.HubConnectionState.Disconnected);
+                console.log(err);
+                totalTimeout+=5;
+                if (totalTimeout<=120)
+                    setTimeout(() => start(totalTimeout), 5000);
+            }
+        }; 
+        
+
+        // Since the connection looks entirely new to the server, a new connectionId will be provided to the onreconnected callback.
+        connection.onreconnected((connectionId)=>{
+            console.assert(signalR.HubConnectionState.Connected==connection.connectionState);// Asserts that the state is connected
+            console.info("Reconnected with new connection Id:"+connectionId);
+        });
+
+        connection.onclose(err=>{
+            console.assert(signalR.HubConnectionState.Disconnected==connection.connectionState);
+            console.error("SignalR disconnected!"+err.message);
+            // we can do manually reconnect cycle here too but consider the  count of retrial and time between limited
+            setTimeout(() => start(0), 5000);
+        });
+
+        // browser under some circumstances sleep the tab that is not active. To prevent that, there is methods
+        // Two of them which can be controlled by web is:
+        // Keeping a web lock
+        // keeping an IndexDb Lock
+        // then to release the resource we should release the lock too.
+        // That is advanced feature but here we added one as sample:
+        var webLock;
+        if (navigator && navigator.locks && navigator.locks.request) {
+            console.info("Lock is supported");
+            // Here add the lock and release it onclose
+        }
+        
+
+        
+    </script>
+</body>
+</html>
+

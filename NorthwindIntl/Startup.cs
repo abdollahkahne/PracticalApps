@@ -39,6 +39,8 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Authentication.OpenIdConnect;
 using Microsoft.AspNetCore.Authentication.Facebook;
 using Microsoft.AspNetCore.ResponseCompression;
+using Microsoft.AspNetCore.ResponseCaching;
+using Microsoft.Extensions.Primitives;
 
 namespace NorthwindIntl
 {
@@ -63,6 +65,7 @@ namespace NorthwindIntl
             services.AddMemoryCache();
             // services.AddDistributedMemoryCache();
             // The distributed cache interface is limited to byte[] (And not string but string can be simply converted to Byte Array using Encoding.UTF8.GetBytes(str))
+            // An app should manipulate cache values using an instance of IDistributedCache, not a SqlServerCache. So we should inject IDistribuedCache 
             services.AddDistributedRedisCache(options =>
             {
                 options.Configuration = "localhost:6379";
@@ -299,7 +302,7 @@ namespace NorthwindIntl
             var listener = new MyDiagnosticListener();
             diagnostic.SubscribeWithAdapter(listener);
 
-            app.UseResponseCaching();
+
             app.UseResponseCompression();
             if (env.IsDevelopment())
             {
@@ -360,6 +363,55 @@ namespace NorthwindIntl
 
 
             app.UseAuthorization();
+            // To handle VaryByQueryKey using the ResponseCachingFeature directly from the HttpContext.Features:
+            app.Use(async (context, next) =>
+            {
+                //get feature
+                var responseCachingFeature = context.Features.Get<IResponseCachingFeature>();
+                if (responseCachingFeature != null)
+                {
+                    // If you want to do the caching vary by all query string keys use *
+                    responseCachingFeature.VaryByQueryKeys = new String[] { "productName" };// new StringValues("productName");
+                }
+            });
+            // As Microsoft this do not save/store response in server itself but I think it use memory to save and its default size is 100MB which full with two picturs at most!
+            // The only header that explicitly handle by this is VaryByQueryKey which does not have a exist in header (Cookie exist in response headers in set-cookie)
+            app.UseResponseCaching();// This should call after UseCors and I think after authorization too but better approach is to do not use CacheResponse attribute with authorized contents. Also
+            // if Authorization header exists: The response isn't cached if the header exists.
+            // Set-Cookie: The response isn't cached if the header exists. for session and authentication or for example for flushing and temp data providing
+            // Vary: A response with a header value of * is never stored if vary existed in the request header
+            // Date: if not presented in original headers of respponse, when response is sent from cache a Date header is added
+            // A browser may set the Cache-Control header to no-cache or max-age=0 when refreshing a page. So we have respect the clients cache request. 
+            // To see that caching also done in server you can use tools like postman or fiddler.
+
+            // This midlleware defines Header value regarding to cache-control in client side which include typed headers like cache-control itself and array like or string type simple headers
+            //Here we can add Headers for response related to caching but this header overwriten by related filter if we using CacheResponse Attribute in action/page or controller level
+            // Why we added this? I think only to show that header are ovrwriten and should remove in real codes
+            app.Use(next => async context =>
+             {
+
+                 context.Response.GetTypedHeaders().CacheControl = new Microsoft.Net.Http.Headers.CacheControlHeaderValue
+                 {
+                     // The existed properties here: some of the apply to request too.
+                     // max-age
+                     // max-stale: request by client and also exist in response to show the freshness of response cached in second
+                     // min-fresh
+                     // must-revalidate
+                     // no-cache
+                     // no-store
+                     // only-if-cached
+                     // private
+                     // public
+                     // s-maxage
+                     // proxy-revalidate‡
+                     Public = true,
+                     MaxAge = TimeSpan.FromSeconds(10),
+                 }; // with this method we can get headers which is not in Header and have typing for example cach:public;max-age=10
+                    // Other way is directly from Headers itself
+                    // All Header types defined in HeadersName class
+                 context.Response.Headers[Microsoft.Net.Http.Headers.HeaderNames.Vary] = new Microsoft.Extensions.Primitives.StringValues("Accept-Encoding"); // simply we can set new string[] {"Accept-Encoding"};
+                 await next(context);
+             });
 
             // app.Use(next =>async ctx =>{
             //     foreach (var item in ctx.Features)
@@ -393,3 +445,18 @@ namespace NorthwindIntl
         }
     }
 }
+
+// Conditions for caching
+//     The request must result in a server response with a 200 (OK) status code. Other status codes does not cache
+//     The request method must be GET or HEAD. So Posting form arent cache
+//     In Startup.Configure, Response Caching Middleware must be placed before middleware that require caching. so static file does not cache by server in our example which is good since they already are static and easy to send
+//     The Authorization header must not be present. So we have not have Vary by Authorization!
+//     Cache-Control header parameters must be valid, and the response must be marked public and not marked private.
+//     The Pragma: no-cache header must not be present if the Cache-Control header isn't present, as the Cache-Control header overrides the Pragma header when present.
+//     The Set-Cookie header must not be present.
+//     Vary header parameters must be valid and not equal to *.
+//     The Content-Length header value (if set) must match the size of the response body.
+//     The IHttpSendFileFeature isn't used. for static files this is usefull if they send with send file
+//     The response must not be stale as specified by the Expires header and the max-age and s-maxage cache directives.
+//     Response buffering must be successful. The size of the response must be smaller than the configured or default SizeLimit. The body size of the response must be smaller than the configured or default MaximumBodySize.
+//     The response must be cacheable according to the RFC 7234 specifications. For example, the no-store directive must not exist in request or response header fields. See Section 3: Storing Responses in Caches of RFC 7234 for details.

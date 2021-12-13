@@ -1,0 +1,8 @@
+{
+  "runtimeOptions": {
+    "additionalProbingPaths": [
+      "/home/selenium/.dotnet/store/|arch|/|tfm|",
+      "/home/selenium/.nuget/packages"
+    ]
+  }
+}

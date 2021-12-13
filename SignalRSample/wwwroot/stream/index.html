@@ -1,0 +1,121 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class="container">
+        <div class="row">&nbsp;</div>
+        <div class="row">
+            <div class="col-2">User</div>
+            <div class="col-4"><input type="text" id="userInput" /></div>
+        </div>
+        <div class="row">
+            <div class="col-2">Message</div>
+            <div class="col-4"><input type="text" id="messageInput" /></div>
+        </div>
+        <div class="row">&nbsp;</div>
+        <div class="row">
+            <div class="col-6">
+                <input type="button" id="sendButton" value="Send Message" />
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <hr />
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-6">
+            <ul id="messagesList"></ul>
+        </div>
+    </div>
+    <script src="/lib/signalr/signalr.js"></script>
+    <script>
+        var hubConnection=new signalR.HubConnectionBuilder()
+        .withUrl("/streaming").configureLogging(signalR.LogLevel.Information).build();
+
+        function handleSubject(subject,initialCounter) {
+            var iteration=initialCounter;
+            const intervalHandle=setInterval(() => {
+                iteration++;
+                subject.next(iteration.toString());
+                if (iteration === (initialCounter+20)) {
+                    clearInterval(intervalHandle);
+                    subject.complete();
+                }
+            }, 1500);
+        }
+
+        
+        
+        hubConnection.start().then(()=> {
+            // subscribe to the streaming method with specialized parameters
+        // we can register the observer as subscribe method argument or chain them using next(nextItemCallBack).complete(completeCallback).error(errCallback)
+        hubConnection.stream("ChannelCounter",{count:20,delay:1500})
+        .subscribe({
+                next:(item)=>{
+                    console.log(item);
+                    var li=document.createElement("li");
+                    li.textContent=item;
+                    document.getElementById("messagesList").appendChild(li);
+                },
+                complete:()=>{
+                    var li=document.createElement("li");
+                    li.textContent="Stream Completed";
+                    document.getElementById("messagesList").appendChild(li);
+                },
+                error:(err)=>{
+                    console.log(err);
+                    var li=document.createElement("li");
+                    li.textContent=err;
+                    document.getElementById("messagesList").appendChild(li);
+                }
+            });
+
+        hubConnection.stream("Counter",{count:40,delay:500})
+        .subscribe({
+                next:(item)=>{
+                    console.log(item);
+                    var li=document.createElement("li");
+                    li.textContent="Second Invoke: "+item;
+                    document.getElementById("messagesList").appendChild(li);
+                },
+                complete:()=>{
+                    var li=document.createElement("li");
+                    li.textContent="Second Stream Completed";
+                    document.getElementById("messagesList").appendChild(li);
+                },
+                error:(err)=>{
+                    console.log(err);
+                    var li=document.createElement("li");
+                    li.textContent="Second Invoke: "+err;
+                    document.getElementById("messagesList").appendChild(li);
+                }
+            });
+
+
+        hubConnection.invoke("SendCounter");
+        var mySubject=new signalR.Subject();
+        mySubject.subscribe({complete:()=>{console.info("Upload Async Enumerable Completed");console.log(mySubject);},next:(item)=>console.info(item+" Sent to Upload Async Enumerable"),error:(err)=>console.error(err)}); // Add a client side subscription to mySubject
+        hubConnection.send("UploadAsyncEnumerable",mySubject)
+        .then(()=>{handleSubject(mySubject,0);})
+        .catch(err =>{console.error(err)});
+
+        var anotherSubject=new signalR.Subject();
+        hubConnection.send("UploadStream",anotherSubject)
+        .then(()=>{handleSubject(anotherSubject,50);})
+        .catch(err =>{console.error(err)});
+            
+            
+        
+    });
+        
+        
+        
+    </script>
+</body>
+</html>

@@ -15790,6 +15790,11 @@
       "FileKind": "mvc"
     },
     {
+      "FilePath": "/home/selenium/Desktop/Learning/PracticalApps/NorthwindIntl/Pages/HelloCache.cshtml",
+      "TargetPath": "Pages\\HelloCache.cshtml",
+      "FileKind": "mvc"
+    },
+    {
       "FilePath": "/home/selenium/Desktop/Learning/PracticalApps/NorthwindIntl/Areas/Identity/Pages/Account/Lockout.cshtml",
       "TargetPath": "Areas\\Identity\\Pages\\Account\\Lockout.cshtml",
       "FileKind": "mvc"

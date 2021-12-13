@@ -1,0 +1,33 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <UserSecretsId>aspnet-SignalRSample-19686C89-BCA5-4554-9A88-05C7C679A775</UserSecretsId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Update="app.db" CopyToOutputDirectory="PreserveNewest" ExcludeFromSingleFile="true" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="6.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="6.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="6.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="6.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.SignalR" Version="1.1.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="6.0.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="6.0.0" />
+  </ItemGroup>
+  <ItemGroup>
+      <SignalRFiles Include="node_modules/@microsoft/signalr/dist/browser/*.js" />
+      <SignalRMessagePackFiles Include="node_modules/@microsoft/signalr-protocol-msgpack/dist/browser/*.js" />
+      <MessagePackFiles Include="node_modules/msgpack5/dist/*.js" />
+  </ItemGroup>
+  <Target Name="CopyFiles" AfterTargets="Build">
+    <Copy SourceFiles="@(SignalRFiles)" DestinationFolder="$(MSBuildProjectDirectory)\wwwroot\lib\signalr" />
+    <Copy SourceFiles="@(SignalRMessagePackFiles)" DestinationFolder="$(MSBuildProjectDirectory)\wwwroot\lib\signalr" />
+    <Copy SourceFiles="@(MessagePackFiles)" DestinationFolder="$(MSBuildProjectDirectory)\wwwroot\lib\msgpack5" />
+  
+  </Target>
+
+</Project>
