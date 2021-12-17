@@ -7,6 +7,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClientSide", "ClientSide\Cl
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServerSide", "ServerSide\ServerSide.csproj", "{4FE825FD-B3E9-49C4-9312-385A2FC05B91}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WorkerSignalUser", "WorkerSignalUser\WorkerSignalUser.csproj", "{25C20806-CA2D-417F-BECD-556C7A6FD77A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClockHub", "ClockHub\ClockHub.csproj", "{526932F0-C861-43AB-8EA9-069080A4248E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -24,5 +28,13 @@ Global
 		{4FE825FD-B3E9-49C4-9312-385A2FC05B91}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4FE825FD-B3E9-49C4-9312-385A2FC05B91}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4FE825FD-B3E9-49C4-9312-385A2FC05B91}.Release|Any CPU.Build.0 = Release|Any CPU
+		{25C20806-CA2D-417F-BECD-556C7A6FD77A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{25C20806-CA2D-417F-BECD-556C7A6FD77A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{25C20806-CA2D-417F-BECD-556C7A6FD77A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{25C20806-CA2D-417F-BECD-556C7A6FD77A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{526932F0-C861-43AB-8EA9-069080A4248E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{526932F0-C861-43AB-8EA9-069080A4248E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{526932F0-C861-43AB-8EA9-069080A4248E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{526932F0-C861-43AB-8EA9-069080A4248E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

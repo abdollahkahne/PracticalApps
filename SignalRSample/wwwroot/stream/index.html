@@ -76,7 +76,9 @@
                 }
             });
 
-        hubConnection.stream("Counter",{count:40,delay:500})
+            // To end the stream from the client, call the dispose method on the ISubscription that's returned from the subscribe method.
+            // Calling this method causes cancellation of the CancellationToken parameter of the Hub method, if you provided one.
+        var subscription=hubConnection.stream("Counter",{count:40,delay:500})
         .subscribe({
                 next:(item)=>{
                     console.log(item);
@@ -96,12 +98,17 @@
                     document.getElementById("messagesList").appendChild(li);
                 }
             });
+        
+            // The following is just presented for learning purposes
+        setTimeout(() => {
+            subscription.dispose(); // This calls cancellation on the hub method which we subscribed to it
+        }, 5000);
 
 
         hubConnection.invoke("SendCounter");
         var mySubject=new signalR.Subject();
-        mySubject.subscribe({complete:()=>{console.info("Upload Async Enumerable Completed");console.log(mySubject);},next:(item)=>console.info(item+" Sent to Upload Async Enumerable"),error:(err)=>console.error(err)}); // Add a client side subscription to mySubject
-        hubConnection.send("UploadAsyncEnumerable",mySubject)
+        mySubject.subscribe({complete:()=>{console.info("Upload Async Enumerable Completed");console.log(mySubject);},next:(item)=>console.info(item+" Sent to Upload Async Enumerable"),error:(err)=>console.error(err)}); // Add a client side subscription to mySubject (This is multicast so it runs once for all of the subscriptions)
+        hubConnection.send("UploadAsyncEnumerable",mySubject) // To cancel this from server:
         .then(()=>{handleSubject(mySubject,0);})
         .catch(err =>{console.error(err)});
 

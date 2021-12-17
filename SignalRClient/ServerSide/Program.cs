@@ -2,6 +2,8 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.SignalR;
 using ServerSide.Hubs;
+using SignalRClient.Hubs;
+using WorkerSignalUser;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,13 +11,26 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 builder.Services.AddSignalR(options =>
 {
-    options.AddFilter<SetUserNameFilter>();
-});
-builder.Services.AddSingleton<SetUserNameFilter>();
-builder.Services.AddSingleton<HttpContextAccessor>();
+    // options.AddFilter<SetUserNameFilter>();
+}).AddHubOptions<ChatHub>(options =>
+            {
+                options.EnableDetailedErrors = true;
+            })
+.AddJsonProtocol(
+    options =>
+            {
+                // Serialization options which are similar to other components
+                options.PayloadSerializerOptions.AllowTrailingCommas = true;
+                options.PayloadSerializerOptions.PropertyNameCaseInsensitive = false;
+                options.PayloadSerializerOptions.PropertyNamingPolicy = System.Text.Json.JsonNamingPolicy.CamelCase;
+            }
+);
+builder.Services.AddHostedService<Worker>(); // we used signalR Hub in the worker background services
+// builder.Services.AddSingleton<SetUserNameFilter>();
+// builder.Services.AddSingleton<HttpContextAccessor>();
 // Just added to have the user name in ChatHub
-builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
-.AddScheme<AuthenticationSchemeOptions, TestAuthenticationHandler>("SignalR", options => { options.ClaimsIssuer = "SignalR"; });
+// builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+// .AddScheme<AuthenticationSchemeOptions, TestAuthenticationHandler>("SignalR", options => { options.ClaimsIssuer = "SignalR"; });
 
 var app = builder.Build();
 
@@ -33,14 +48,15 @@ app.UseStaticFiles();
 app.UseRouting();
 
 app.UseAuthentication();
-app.Use(async (context, next) =>
-{
-    Console.WriteLine(context.Request.Headers.Authorization);
-    // Console.WriteLine(context.User.Identity.Name);
-    await next(context);
-});
+// app.Use(async (context, next) =>
+// {
+//     Console.WriteLine(context.Request.Headers.Authorization);
+//     // Console.WriteLine(context.User.Identity.Name);
+//     await next(context);
+// });
 app.UseAuthorization();
 app.MapHub<ChatHub>("/chat");
+app.MapHub<ClockHub>("/clock");
 
 app.MapControllerRoute(
     name: "default",

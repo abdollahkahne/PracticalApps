@@ -2,12 +2,13 @@
 
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.SignalR.Client" Version="6.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.SignalR.Client" Version="6.0.1" />
   </ItemGroup>
 
 
   <ItemGroup>
     <ProjectReference Include="..\ServerSide\ServerSide.csproj" />
+    <ProjectReference Include="..\ClockHub\ClockHub.csproj" />
   </ItemGroup>
 
   <PropertyGroup>

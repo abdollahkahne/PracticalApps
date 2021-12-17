@@ -7,5 +7,11 @@
 	"settings": {
 		"editor.defaultFormatter": "ms-dotnettools.csharp",
 		"editor.formatOnSave": true
+		
+	},
+	"extensions": {
+		"recommendations": [
+			"ms-dotnettools.csharp"
+		]
 	}
 }

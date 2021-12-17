@@ -88,7 +88,7 @@ namespace SignalRSample
                 options.PayloadSerializerOptions.AllowTrailingCommas = true;
                 options.PayloadSerializerOptions.PropertyNameCaseInsensitive = false;
                 options.PayloadSerializerOptions.PropertyNamingPolicy = System.Text.Json.JsonNamingPolicy.CamelCase;
-            });
+            }).AddStackExchangeRedis(redisConnectionString: "localhost:6379"); // we only can have one signalR service in redis so it set its name. for case of using same using multiple app set ChannelPrefix in configuration to name of app
             services.AddSingleton<IHubFilter, MyHubFilter>();
             services.AddSingleton<IHubFilter, LanguageHubFilter>();
             services.AddSingleton<IUserIdProvider, NameUserIdProvider>(); // This is used to define the unique identifier of users which can be an id, an email or username
@@ -140,6 +140,7 @@ namespace SignalRSample
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
+            // app.UseWebSockets(); // An alternative to SignalR
             app.UseHttpsRedirection();
             app.UseDefaultFiles();
             app.UseStaticFiles();

@@ -1,4 +1,5 @@
 using ClientSide;
+using SignalRClient.Hubs;
 
 var builder = WebApplication.CreateBuilder(args);
 // builder.Host.ConfigureWebHost(option => option.UseUrls("https://localhost:5002"));// this do not work here but we can change the launch setting
@@ -6,6 +7,7 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddRazorPages();
 builder.Services.AddScoped<HubClient>();
+builder.Services.AddSingleton<ClockHubClient>();
 
 var app = builder.Build();
 
