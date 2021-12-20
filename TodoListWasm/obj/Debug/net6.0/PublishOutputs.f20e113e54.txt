@@ -1,0 +1,1 @@
+/home/selenium/Desktop/Learning/PracticalApps/TodoListWasm/bin/Debug/net6.0/publish/web.config

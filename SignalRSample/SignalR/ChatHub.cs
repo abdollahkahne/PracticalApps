@@ -2,11 +2,13 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
+using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.SignalR;
 using SignalRSample.SignalR.Filters;
+using Microsoft.AspNetCore.Http.Features;
 
 namespace SignalRSample.SignalR
 {
@@ -16,27 +18,39 @@ namespace SignalRSample.SignalR
     {
         public async Task Send(ChatHubData input)// Methods on server can be called directly from client using connection.invoke("send"); if we want a simpler name we can use [HubMethodName] attribute to use your choice.
         {
-            Console.WriteLine("In a Hub method:");
-            Console.WriteLine(Context.GetHttpContext().Request.Headers[Microsoft.Net.Http.Headers.HeaderNames.Cookie].FirstOrDefault());
+            TimerCallbackLearn();
+            // // Does this work in case of web socket which is not an http connection? No it is null. Same is true for getHttpContext
+            // if (Context.Features?.Get<IRequestCookiesFeature>()?.Cookies == null)
+            // {
+            //     Console.WriteLine("Feature is not reachable in case of web sockets!");
+            // }
+            // // foreach (var item in Context.Features?.Get<IRequestCookiesFeature>()?.Cookies)
+            // // {
+            // //     Console.WriteLine("From Cookie Feature: " + item.Key + ":" + item.Value);
+            // // }
+
+            // Console.WriteLine("In a Hub method:");
+            // // Does GetHttpContext() is reachable in case of websocket? Yes it is managed possibly by session (May be only cookie and query string be available. test it!)
+            // Console.WriteLine(Context.GetHttpContext()?.Request?.Headers[Microsoft.Net.Http.Headers.HeaderNames.Cookie].FirstOrDefault());
 
 
 
 
-            await Clients.Others.SendAsync("message", new { Username = Context.User.Identity.Name, Message = input.Message });// raise an event name "message" on other clients. To handle this we should add a callback to this custom event
-            // . Objects sent as method parameters are deserialized using the configured protocol.
-            await Clients.Caller.SendAsync("sent"); // send a notification to caller that his/her msg sent to all other clients
-            await Clients.All.SendAsync("notification", new { UserId = Context.UserIdentifier });// Make a notification to all clients in hub that some one had an action
-            // By default, SignalR uses the ClaimTypes.NameIdentifier from the ClaimsPrincipal associated with the connection as the user identifier.
-            // Caller is a user or connection? connection. but we can send to special user even he/she has multiple connection on Mobile/PC/Tablet simulatenousely.
-            await Clients.User(Context.UserIdentifier).SendAsync("sent");// The user identifier is case-sensitive.
-            // Altough user id is the Name Identifier Claim, it can change to something else. we introduce a method for this later
+            // await Clients.Others.SendAsync("message", new { Username = Context.User?.Identity?.Name, Message = input?.Message });// raise an event name "message" on other clients. To handle this we should add a callback to this custom event
+            // // . Objects sent as method parameters are deserialized using the configured protocol.
+            // await Clients.Caller.SendAsync("sent"); // send a notification to caller that his/her msg sent to all other clients
+            // await Clients.All.SendAsync("notification", new { UserId = Context.UserIdentifier });// Make a notification to all clients in hub that some one had an action
+            // // By default, SignalR uses the ClaimTypes.NameIdentifier from the ClaimsPrincipal associated with the connection as the user identifier.
+            // // Caller is a user or connection? connection. but we can send to special user even he/she has multiple connection on Mobile/PC/Tablet simulatenousely.
+            // await Clients.User(Context.UserIdentifier).SendAsync("sent");// The user identifier is case-sensitive.
+            // // Altough user id is the Name Identifier Claim, it can change to something else. we introduce a method for this later
 
         }
 
         [Authorize(Policy = "DevelopersAdmin")]
         public async Task SendToDevelopers(ChatHubData input)
         {
-            await Clients.Group("Developers").SendAsync("message", new { Title = "AnynomousTest", Message = input.Message });
+            await Clients.Group("Developers").SendAsync("message", new { Title = "AnynomousTest", Message = input?.Message });
         }
 
         public Task<ChatHubData> GetUserEmail()
@@ -49,13 +63,20 @@ namespace SignalRSample.SignalR
         [LanguageHubFilterAttribute(ArgumentOrder = 0)]
         public async Task SendSensored(string message)
         {
+            var httpContext = Context.GetHttpContext();
+            var accessToken = httpContext?.Request?.Query["access_token"];
+            Console.WriteLine(accessToken);
+            foreach (var item in httpContext?.Request?.Query)
+            {
+                Console.WriteLine(item.Key + item.Value);
+            }
             await Clients.All.SendAsync("message", new { Message = message });
         }
 
         public async override Task OnConnectedAsync()
         {
             Console.WriteLine("After Connected To Hub:");
-            Console.WriteLine(Context.GetHttpContext().Request.Headers[Microsoft.Net.Http.Headers.HeaderNames.Cookie].FirstOrDefault());
+            // Console.WriteLine(Context.GetHttpContext().Request.Headers[Microsoft.Net.Http.Headers.HeaderNames.Cookie].FirstOrDefault());
             // Groups is a Group Manager and not the client.Groups
             await Groups.AddToGroupAsync(connectionId: Context.ConnectionId, groupName: "Developers");
             await Clients.Group("Developers").SendAsync("AddToDevelopers", new { Username = Context.User.Identity.Name, ConnectionId = Context.ConnectionId });
@@ -69,6 +90,19 @@ namespace SignalRSample.SignalR
                 Console.WriteLine(exception.Message);
             }
             return base.OnDisconnectedAsync(exception);
+        }
+
+
+        public void TimerCallbackLearn()
+        {
+            TimerCallback timerCallback = (state) =>
+            {
+                Console.WriteLine($"Runned as a callback by timer. This should run every 5 secondd: {DateTime.UtcNow}");
+            };
+            // Generates an event after a set interval, with an option to generate recurring events.
+            var timer = new Timer(timerCallback);
+            timer.Change(dueTime: 2000, period: 5000);
+            Console.WriteLine($"Start of Timer: {DateTime.UtcNow}");
         }
 
     }

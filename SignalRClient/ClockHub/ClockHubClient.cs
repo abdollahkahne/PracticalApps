@@ -10,6 +10,10 @@ namespace SignalRClient.Hubs
         {
             _hubConnection = new HubConnectionBuilder()
             .WithUrl("http://localhost:5163/clock")
+            .ConfigureLogging(options =>
+            {
+
+            })
             .WithAutomaticReconnect().Build();
 
             if (_hubConnection.State == HubConnectionState.Disconnected)

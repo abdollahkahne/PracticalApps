@@ -1,0 +1,63 @@
+﻿@page "/todos"
+
+<PageTitle>To Do List</PageTitle>
+<h3>To Do List</h3>
+<h6>There is @todos.Count(td =>!td.IsDone) to do!</h6>
+
+<ul style="list-style: none;">
+    @foreach (var item in todos)
+    {
+        <li>
+            <input type="checkbox" @bind="item.IsDone" />
+            <input @bind="item.Title" />
+        </li>
+    }
+</ul>
+
+<input type="text" @bind="newTodo">
+<button @onclick="onAdd">Add To do</button>
+
+@code {
+    private string newTodo { get; set; }
+    private List<TodoItem> todos = new();
+    private void onAdd()
+    {
+        if (!string.IsNullOrEmpty(newTodo))
+        {
+            Console.WriteLine("Does we can use console there?!");
+            @* // Yes we can use it in case of WASM (log in browser console) *@
+            todos.Add(new TodoItem
+            {
+                Title = newTodo,
+            });
+            newTodo = string.Empty;
+        }
+    }
+
+}
+
+@* Some not about Blazor Web Assembly:
+    1- Blazor WebAssembly is a single-page app (SPA) framework
+    2- It uses open web standard which is implemented by modern browser and do not use any plugin or recompiling.
+    WebAssembly is a compact bytecode format optimized for fast download and maximum execution speed since it is native c#
+    code.
+    3- The first time web site open need to download all dotnet run time dll which in dev mode is almost 9 meg and in none
+    dev mode it should be smaller!
+    4- for server side rerender user should refresh page or insert address from address-bar
+    5- WebAssembly code can access the full functionality of the browser via JavaScript, called JavaScript interoperability
+    6- .NET code executed via WebAssembly in the browser runs in the browser's JavaScript sandbox with the protections that
+    the sandbox provides (For example only user can upload file in browser and it is not possible to programmaticly do it.
+    Altough there is some arguments about its security since it is really powerful!)
+
+    The steps a blazor wasm required to work:
+
+    1- C# code files and Razor files are compiled into .NET assemblies in Server Side (What happen to secure things like db
+    name?).
+    2- The assemblies and the .NET runtime are downloaded to the browser. (Client side)
+    3- Blazor WebAssembly bootstraps the .NET runtime and configures the runtime to load the assemblies for the app. The
+    Blazor
+    WebAssembly runtime uses JavaScript interop to handle DOM manipulation and browser API calls.
+
+
+
+*@

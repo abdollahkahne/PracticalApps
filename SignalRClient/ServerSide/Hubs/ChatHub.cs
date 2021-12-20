@@ -4,7 +4,6 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Threading.Channels;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http.Features;
 using Microsoft.AspNetCore.SignalR;
 
 #nullable disable
@@ -16,6 +15,9 @@ namespace ServerSide.Hubs
         {
             //  Use await syntax to wait for the server method to complete and try...catch syntax to handle errors.
             await Clients.All.SendAsync(ChatEvents.Message, new { Message = input.Messsage, Username = "Context.GetHttpContext().User.Identity.Name " });
+            // Context.GetHttpContext(); // Consider that this return null in case of none-http connection (web socket )
+            // Context.Features.Get<IRequestCookiesFeature>(); // This also only return http features
+
         }
         // metods for sending streams using ChannelReader<T> or IAsyncEnumerable<T>
         public async IAsyncEnumerable<int> CounterStream(CounterInput counter, [EnumeratorCancellation] CancellationToken cancellationToken)
@@ -77,7 +79,6 @@ namespace ServerSide.Hubs
 
             // Here the stream should closed by sender which is client
         }
-
     }
 
 }

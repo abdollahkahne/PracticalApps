@@ -1,0 +1,102 @@
+﻿@page "/chat"
+@using Microsoft.AspNetCore.SignalR.Client
+@inject NavigationManager _navigationManager
+@implements IAsyncDisposable
+
+<PageTitle>Chat</PageTitle>
+<h3>chat</h3>
+<div class="form">
+    <div class="form-group">
+        <label for="username">User</label>
+        <input type="text" class="form-control" name="username" id="username" @bind="username">
+    </div>
+    <div class="form-group">
+        <label for="message">Message</label>
+        <textarea class="form-control" name="message" id="message" cols="18" rows="3" @bind="message"></textarea>
+    </div>
+    <button class="btn btn-primary" disabled="@(sendButtonEnabled==false)" @onclick="sendMessage">Send</button>
+</div>
+
+<div id="messages-list">
+    <ul style="list-style: none;">
+        @foreach (var item in _messages)
+        {
+            <li>@item</li>
+        }
+    </ul>
+</div>
+
+
+
+@code {
+    private string? message { get; set; }
+    private string? username { get; set; }
+    private HubConnection? hubConnection { get; set; }
+    private readonly List<string> _messages = new();
+    private bool sendButtonEnabled = false;
+    protected async override Task OnInitializedAsync()
+    {
+        hubConnection = new HubConnectionBuilder()
+        .WithUrl(_navigationManager.ToAbsoluteUri("/chathub")).Build(); // _navigation manager is a service which provide work
+        @* with links(like Url in MVC and Razor almost) *@
+        // since this is component and it may be use anywhere we should use its url in absolute form
+        hubConnection.On<string, string>("ReceiveMessage", (msg, user) =>
+        {
+
+            @* since here in this callbacl this is captured by callback we can use it to change or call methods at the component
+                itself *@
+            var encodedMsg = $"{user}: {msg}";
+            _messages.Add(encodedMsg);
+            @* this.username = string.Empty; *@
+            @* Does this is necessary? Yes, to call the field and properties from outside scope we
+                should use this keyword.And without that they are not set to empty value. But they should get empty in sending method
+                not in callbak logically:|*@
+            @* this.message = string.Empty; *@
+            StateHasChanged();
+            @* Components ReRendered! This is required since the callback does not call directly using Blazor event trigger
+                for example @bind or @onclick. Even altough we change this component properties here in callback,
+                we should call it *@
+        });
+        hubConnection.Reconnecting += (error) => { this.sendButtonEnabled = false; return Task.CompletedTask; };
+        hubConnection.Reconnected += (connectionId) => { this.sendButtonEnabled = true; return Task.CompletedTask; };
+        hubConnection.Closed += async (error) =>
+        {
+            this.sendButtonEnabled = false;
+            await Task.Delay(5000);
+            await this.hubConnection.StartAsync();
+        };
+        if (hubConnection.State == HubConnectionState.Disconnected)
+        {
+            await hubConnection.StartAsync();
+        }
+        if (hubConnection.State == HubConnectionState.Connected)
+        {
+            sendButtonEnabled = true;
+        }
+        await base.OnInitializedAsync();
+
+    }
+
+    private async Task sendMessage()
+    {
+        if (hubConnection != null)
+        {
+            sendButtonEnabled = false;
+            await hubConnection.SendAsync("SendMessage", username, message);
+            username = string.Empty;
+            message = string.Empty;
+            sendButtonEnabled = true;
+        }
+    }
+
+    public async ValueTask DisposeAsync()
+    @* we should dispose if we have any disposable item. implement IDisposable and
+        IAsyncDisposable in this component using @implements IDisposable for example *@
+    {
+        if (hubConnection != null)
+        {
+            await hubConnection.DisposeAsync();
+        }
+    }
+
+}

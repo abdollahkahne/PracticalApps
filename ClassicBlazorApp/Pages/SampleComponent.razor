@@ -1,0 +1,53 @@
+<h1>Sample Component (Counter)</h1>
+
+<p>Current count: @CurrentCount</p>
+
+<button class="btn btn-primary" @onclick="IncrementCount">Click me</button>
+
+@code {
+    [Parameter]
+    public int CurrentCount { get; set; }
+
+    private void IncrementCount()
+    {
+        CurrentCount++;
+        Console.WriteLine("This is write by dotnet in Console.");
+        Console.WriteLine($"Current Count:{CurrentCount}");
+    }
+}
+
+@*
+    Blazor Server Mechanism of Rendering A Page and Notes:
+    1- Blazor Server is not SPA and on Navigating to a new url, the created component disposed.
+    2- a binary representation of the markup is sent to the client for rendering.
+    3- Pre-rendering is done on server and the prerendered markup sent to client in step 2.
+    4- After the connection is made between client and server, the component's static prerendered elements are replaced with
+    interactive elements (On Client? After Applying the markup or before it???) (Consider that since there is no received
+    html here we do not get the warning regarding difference between received html and hydrated html)
+    I think this happen in the in-memory dom (Render Tree) and then html updates before applying to page dom,
+    5- State saved by server and keeped until the component disposal
+
+    According to Microsoft Documents:
+    Blazor Server produces a graph of components to display similar to an HTML or XML Document Object Model (DOM).
+    The component graph includes state held in properties and fields.
+    Blazor evaluates the component graph to produce a binary representation of the markup, which is sent to the client for
+    rendering.
+    After the connection is made between the client and the server, the component's static prerendered elements are replaced
+    with interactive elements.
+
+    What is difference with Razor Page:
+    When a Razor Page or view is rendered, every line of Razor code emits HTML in text form.
+    After rendering, the server disposes of the page or view instance, including any state that was produced.
+    When another request for the page occurs, the entire page is rerendered to HTML again and sent to the client.
+
+    How we handle interaction in Blazor?
+    After the components are interactive on the client, UI updates are triggered by user interaction and app events.
+    When an update occurs, the component graph is rerendered, and a UI diff (difference) is calculated (In Server).
+    This diff is the smallest set of DOM edits required to update the UI on the client.
+    The diff is sent to the client in a binary format and applied by the browser.
+
+    Some Notes:
+    1- Razor component file names require a capitalized first letter. for example Todo.razor
+
+
+*@

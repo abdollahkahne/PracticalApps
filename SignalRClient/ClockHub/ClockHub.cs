@@ -6,6 +6,7 @@ namespace SignalRClient.Hubs
     {
         public async Task SendTimeToClients(DateTime dateTime)
         {
+
             await Clients.All.SendAsync("ShowTime", dateTime);
         }
 
