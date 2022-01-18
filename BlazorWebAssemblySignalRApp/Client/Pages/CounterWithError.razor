@@ -1,0 +1,40 @@
+<Dialog>
+    <h1>Counter</h1>
+
+    <p role="status">Current count: @currentCount</p>
+
+    <button class="btn btn-primary" @onclick="TryIncrementCount">Click me</button>
+    <div class="alert alert-danger ">
+        @(ErrorContext?.ErrorMessage)
+    </div>
+</Dialog>
+
+
+@code {
+    [CascadingParameter]
+    public CascadingErrorComponent? ErrorContext { get; set; }
+    private int currentCount = 0;
+    @* Here current Count is local state so it resets on every client side navigation too *@
+
+    private void IncrementCount()
+    {
+        if (currentCount > 3)
+        {
+            throw new InvalidOperationException("This is a sample error for seeing usage of Cascading Value Component for error handling!");
+        }
+        currentCount++;
+    }
+
+    private void TryIncrementCount()
+    {
+        try
+        {
+            IncrementCount();
+        }
+        catch (System.Exception ex)
+        {
+            ErrorContext?.ProcessError(ex);
+
+        }
+    }
+}

@@ -1,0 +1,45 @@
+@page "/search"
+@inject NavigationManager _navManager
+@using System.Collections.Generic
+
+<h1>Search Result</h1>
+<p> You searched for term @Term</p>
+<p> Term should only specified in Parameters and not in route template</p>
+<pre>Today is @CurrentDate</pre>
+<button @onclick="addQueryString" class="btn btn-secondary">Add Query String </button>
+<button @onclick="addMultipleQueryParameters">First Page</button>
+
+@code {
+    [SupplyParameterFromQuery]
+    [Parameter]
+    public string? Term { get; set; }
+    [SupplyParameterFromQuery(Name = "current")]
+    [Parameter]
+    public DateTime? CurrentDate { get; set; }
+
+    private void addQueryString()
+    {
+        var url = _navManager.GetUriWithQueryParameter("current", DateTime.Now);
+        _navManager.NavigateTo(url);
+    }
+
+    private void addMultipleQueryParameters()
+    {
+        @* Pass a URI string to GetUriWithQueryParameters to generate a new URI from a provided URI with multiple parameters
+            added, updated, or removed. *@
+        var targetUrl = _navManager.GetUriWithQueryParameters("/", new Dictionary<string, Object?>() {
+{"page",1},{"filter",true},{"today",DateTime.Today},{"id",Guid.NewGuid()}});
+        @* in this two function related to Query String if a query string is already exist but has suggested value here are
+            replaced completely even in case of enumerable values, the old value are deleted first and then the new value added
+        *@
+
+        @* Another way to define dictionary:
+        new Dictionary<string, object>
+        {
+        ["name"] = null,
+        ["age"] = (int?)25,
+        ["eye color"] = "green"
+        }) *@
+        _navManager.NavigateTo(targetUrl);
+    }
+}

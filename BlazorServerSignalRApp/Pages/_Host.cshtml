@@ -6,3 +6,25 @@
 }
 
 <component type="typeof(App)" render-mode="ServerPrerendered" />
+
+@* in Blazor Server when Circuit disconnect it notify user with a modal. we can customize it as follow *@
+<div id="components-reconnect-modal">
+    <p>
+        This is the customized version of Reconnect Modal
+    </p>
+    <p>
+        in Blazor Server when Circuit disconnect it notify user with a modal. we can customize it here
+
+    </p>
+    <p>To add style to this modal use the following classes</p>
+    <pre>
+            #components-reconnect-modal {
+    display: none;
+}
+
+#components-reconnect-modal.components-reconnect-show {
+    display: block;
+}
+        </pre>
+
+</div>

@@ -6,8 +6,7 @@
 	],
 	"settings": {
 		"editor.defaultFormatter": "ms-dotnettools.csharp",
-		"editor.formatOnSave": true,
-		"omnisharp.defaultLaunchSolution": "BlazorWebAssemblySignalRApp.sln",
+		"editor.formatOnSave": true
 		
 	},
 	"extensions": {

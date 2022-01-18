@@ -1,0 +1,31 @@
+@page "/markup-string-example"
+<div>
+    @(markup)
+</div>
+<div>
+    @((MarkupString)markup)
+</div>
+<div>
+    @renderFragment
+</div>
+@renderTemplate(new Animal {Name="Dog",Voice="Ruf Ruf!"})
+@renderTemplate(new Animal {Name="Cat", Voice="Mu Mu!"})
+
+@code {
+    private string markup = "<p class=\"text-danger\">This is a dangerous <em>markup string</em>.</p>";
+    private RenderFragment renderFragment =
+    @<p class="text-danger">This is a dangerous <em>render fragment</em>.</p>
+    ;
+    private RenderFragment<Animal> renderTemplate = (animal) =>
+    @<div>
+        <p class="text-danger">This is a <em>render template</em> for animals.</p>
+        <h4>Name:@animal.Name</h4>
+        <h5>Voice:@animal.Voice</h5>
+    </div>
+    ;
+    public class Animal
+    {
+        public string? Name { get; set; }
+        public string? Voice { get; set; }
+    }
+}

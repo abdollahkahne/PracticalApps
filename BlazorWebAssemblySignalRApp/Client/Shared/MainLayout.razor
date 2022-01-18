@@ -11,7 +11,13 @@
         </div>
 
         <article class="content px-4">
-            @Body
+            <ErrorBoundary>
+                <ChildContent>@Body</ChildContent>
+                <ErrorContent>
+                    <p>Error can be shown here!</p>
+                </ErrorContent>
+            </ErrorBoundary>
+
         </article>
     </main>
 </div>

@@ -1,10 +1,15 @@
 ﻿@page "/chat"
 @using Microsoft.AspNetCore.SignalR.Client
+@using Utilities
 @inject NavigationManager _navigationManager
+@inject ILoggerProvider _loggerProvider
 @implements IAsyncDisposable
 
 <PageTitle>Chat</PageTitle>
 <h3>chat</h3>
+<Dialog Title="This is a component sample" @ref="_dialog">
+    <p>we can add the children as many as we can <i>have more than one html tag in parallel here</i></p>
+</Dialog>
 <div class="form">
     <div class="form-group">
         <label for="username">User</label>
@@ -27,17 +32,35 @@
 </div>
 
 
-
 @code {
+    private Dialog? _dialog; //ref
     private string? message { get; set; }
     private string? username { get; set; }
     private HubConnection? hubConnection { get; set; }
     private readonly List<string> _messages = new();
     private bool sendButtonEnabled = false;
+
+    protected override void OnParametersSet()
+    {
+        // log Dialog Component just to see a component
+        Console.WriteLine(_dialog?.ChildContent);
+    }
+
     protected async override Task OnInitializedAsync()
     {
+        // In SignalR and wasm prerendering occurs before the client connection to the server is established.
+
         hubConnection = new HubConnectionBuilder()
-        .WithUrl(_navigationManager.ToAbsoluteUri("/chathub")).Build(); // _navigation manager is a service which provide work
+        .WithUrl(_navigationManager.ToAbsoluteUri("/chathub"), options =>
+        {
+            // we added a wrapper around the default http handler
+            options.HttpMessageHandlerFactory = innerHandler => new IncludeRequestCredentialsMessageHandler
+            { InnerHandler = innerHandler };
+            @* // The above option config only runs for http request and not web sockets *@
+            @* options.Transports = Microsoft.AspNetCore.Http.Connections.HttpTransportType.LongPolling; *@
+        })
+.ConfigureLogging(logging => logging.AddProvider(_loggerProvider))
+.Build(); // _navigation manager is a service which provide work
         @* with links(like Url in MVC and Razor almost) *@
         // since this is component and it may be use anywhere we should use its url in absolute form
         hubConnection.On<string, string>("ReceiveMessage", (msg, user) =>
@@ -61,9 +84,13 @@
         hubConnection.Reconnected += (connectionId) => { this.sendButtonEnabled = true; return Task.CompletedTask; };
         hubConnection.Closed += async (error) =>
         {
-            this.sendButtonEnabled = false;
-            await Task.Delay(5000);
-            await this.hubConnection.StartAsync();
+            if (error != null)
+            {
+                this.sendButtonEnabled = false;
+                await Task.Delay(5000);
+                await this.hubConnection.StartAsync();
+            }
+
         };
         if (hubConnection.State == HubConnectionState.Disconnected)
         {
@@ -93,10 +120,635 @@
     @* we should dispose if we have any disposable item. implement IDisposable and
         IAsyncDisposable in this component using @implements IDisposable for example *@
     {
-        if (hubConnection != null)
+        try
         {
+            #region
+#nullable disable
             await hubConnection.DisposeAsync();
+            #endregion
+        }
+        catch (System.Exception ex)
+        {
+
+            Console.WriteLine(ex.Message);
         }
     }
 
 }
+
+
+@*
+
+    Unlike Razor Pages and MVC, which are built around a request/response model, components are used specifically for
+    client-side UI logic and composition. So I think, they only instantiated once in bootstrap phase?? (May be initiallized
+    completely when required! for example in case of conditional rendering) and reused multiple
+    time everywhere they used in pages which specified by Url and handled by index.html or as a component in another page
+    which handled by index.html. it has no pipeline and no access to request/response pipeline (index has access in the
+    refreshing a page or link)
+    Components render into an in-memory representation of the browser's Document Object Model (DOM) called a render tree,
+    which is used to update the UI in a flexible and efficient way.
+    hosting Razor components on the server or Client? The response make two Framework:
+    1- Host Razor Component in Server => Blazor Server
+    2- Host Razor Component in Client => Blazor Web Assembly
+
+    Blazor WebAssembly is single thread since it runs in browser and Blazor Server try to emulate that behaviour using a
+    synchronization context (SynchronizationContext). A component's lifecycle methods and event callbacks raised by Blazor
+    are executed on the synchronization context. At any given point in time, work is performed on exactly one thread, which
+    yields the impression of a single logical thread. No two operations execute concurrently. So we should consider
+    followings:
+    1- Avoid thread-blocking calls: Do not use Wait, WaitAny, WaitAll, Sleep, Result, GetResut in components.
+    2- Where an event external to a component wants to update the state of component (For example consider case of timer or
+    notification services), use InvokeAsync method of ComponentBase class. This method dispatches code execution to Blazor's
+    synchronization context (See Notifications example)
+
+    Blazor Server:
+    Razor Component hosted in Server so UI updates, event handling and JavaScript Calls are handled over a SignalR
+    connection. in this case signalR work in both side as following:
+    1- From Server to client: Sending UI for first time (Apparantly this prerendered using html and _Host.cshtml razor page
+    in the first opening page from addressbar)
+    2- From Client to Server: Sending UI Events. Clicking a new url in the app is event if we use Router Component in our
+    App here and no new connection opens here
+    3- From Server to Client: Applying the Updates to Rendered Component
+
+    The state on the server associated with each connected client is called a circuit. A circuit can tolerate temporary
+    network interruptions and attempts by the client to reconnect to the server when the connection is lost.
+    In a Blazor Server app, each browser screen requires a separate circuit and separate instances of server-managed
+    component state (While in mvc all Tabs in the browser and even iframes consider on connection an can use for example the
+    cookie and auth sessions). Gracefull
+    Blazor considers closing a browser tab or navigating to an external URL a graceful termination. In the event of a
+    graceful termination, the circuit and associated resources are immediately released. A client may also disconnect
+    non-gracefully, for instance due to a network interruption. Blazor Server stores disconnected circuits for a
+    configurable interval to allow the client to reconnect.
+    On the client, the Blazor script (blazor.server.js) establishes the SignalR connection with the server. The script is
+    served to the client-side app from an embedded resource in the ASP.NET Core shared framework (Not the wwwroot folder).
+    The client-side app is responsible for persisting and restoring app state as required.
+    In this case we have a router system that sets up client-side routing using the Router component. The
+    Router component intercepts browser navigation and renders the page that matches the requested address. This uses
+    signalR.
+
+    Blazor Web Assembly:
+    * APIs that aren't applicable inside of a web browser (for example, accessing the file system, opening a socket, and
+    threading) throw a PlatformNotSupportedException.
+    * For apps that require third-party JavaScript libraries and access to browser APIs, components interoperate with
+    JavaScript. Components are capable of using any library or API that JavaScript is able to use.
+    * The Blazor WebAssembly runtime uses JavaScript interop to handle DOM manipulation and browser API calls
+
+    Blazor WebAssembly apps run client-side in the browser on a WebAssembly-based .NET runtime. The Blazor app, its
+    dependencies, and the .NET runtime are downloaded to the browser. The app is executed directly on the browser UI thread.
+    UI updates and event handling occur within the same process. The app's assets are deployed as static files to a web
+    server or service capable of serving static content to clients (So it does not need necessarily a .Net Backend! and can
+    be serve from CDN and cloud services like AWS,Azure and Firebases).
+    When the Blazor WebAssembly app is created for deployment without a backend ASP.NET Core app to serve its files, the app
+    is called a standalone Blazor WebAssembly app. When the app is created for deployment with a backend app to serve its
+    files, the app is called a hosted Blazor WebAssembly app.
+    Using hosted Blazor WebAssembly, you get a full-stack web development experience with .NET, including the ability to
+    share code between the client and server apps, support for prerendering, and integration with MVC and Razor Pages. A
+    hosted client app can interact with its backend server app over the network using a variety of messaging frameworks and
+    protocols, such as web API, gRPC-web, and SignalR.
+    The blazor.webassembly.js script is provided by the framework and handles:
+    * Downloading the .NET runtime, the app, and the app's dependencies.
+    * Initialization of the runtime to run the app.
+
+
+    Razor Components and App:
+    Regardless of the hosting model, the app and component models are the same.
+    App.razor is the razor app and other .razor exist in Pages Or Shared Folders are razor components.
+
+    How Routing Happens?
+    When a Razor component (.razor) with an @page directive is compiled, the generated component class is provided a
+    RouteAttribute specifying the component's route template. (So every Razor Component Convert to a class).
+    Handling of them happens in runtime by App.razor using Router component :
+
+    1- When the app starts, the assembly specified as the Router's AppAssembly is scanned to gather route information for
+    the app's components that have a RouteAttribute. A component can have zero to multiple @page directive for this purpose
+    and even like API Controller we can add a base url to index.html/_Host.cshtml header as <base href="/" />. We can add
+    more than one Assembly to scanned here using AdditionalAssemblies="new[] { typeof(Component1).Assembly }">. We can pass
+    route parameter similar ro mvc in route templates. for example see RouteParameter.razor. We can pass parameter from
+    query string too. to see them see QuerystringSample.razor component
+
+    2- When a route requested by user in the context of blazor (for example by Clicking in NavLink in a component and not
+    through address bar), RouteView Component Used to Receives the RouteData from the Router along with any route parameters
+    and Renders the specified component with its layout, including any further nested layouts.
+
+    we can alternatively use LayoutView arround the components or RouteView to apply it and we should feed route view in
+    some way to its content. Optional layout can be feed to component
+    directly using @layout directive too. Layout is a component which inherit from
+    LayoutComponentBase and receive the content through body property @body (LayoutComponentBase.body)
+
+    Using dot in Route Parameter:
+    For hosted Blazor WebAssembly and Blazor Server apps, the server-side default route template assumes that if the last
+    segment of a request URL contains a dot (.) that a file is requested. if we may have route paramter with dot we should
+    add them explicitly using fallback. For example:
+    app.MapFallbackToFile("/example1/{param?}","index.html"); //for wasm
+    app.MapFallbackToPage("/example/{param?}","/_Host"); //for blazor server
+    since routing data calculate in fallback time so we can use them as route parameter
+
+    Catch All route
+    We may have positions when route parameter may have slash (/) in some cases like /blogs/products/a/b/c/d
+    to catch this type of url we can use catch all template which has an star in route parameter definition in template and
+    always cast as string and only at the end of url. for example consider this:
+    /blogs/{*productRoute};
+    /blog/this/is/a/sample is an acceptable url which have productRoute=this/is/a/sample
+
+    NavigationManager
+    This is a service which is similar to URL Helpers in MVC and the pattern is to use them as injected service instances.
+    it has multiple application which is useful for client side scenarios:
+    1- Push to another page in client side using history API of browser
+    2- Handle leaving the page in client side
+    3- Has properties to get absolute and relative uri/urls regarding base defined as meta in index.html
+    You can see an example in RouteParameter.razor component for that
+
+    Query String Parameter
+    They are Parameters which have [SupplyParameterFromQuery] attribute and [Parameter] too and they do not insert in route
+    templates. We can also have different query string name than Parameter name (for example for keywords in c# like var) as
+    [SupplyParameterFromQuery(Name="var")],
+    We can get add/remove query string using NavigationManager instance as below:
+    _navigationManager.GetUriWithQueryParameter("{NAME}", {VALUE})
+    Component parameters can only receive query parameter values in routable components with an @page directive.
+
+    Configuration:
+    Blazor WebAssembly loads configuration from the following app settings files by default:
+    * wwwroot/appsettings.json.
+    * wwwroot/appsettings.{ENVIRONMENT}.json, where the {ENVIRONMENT} placeholder is the app's runtime environment.
+    (As it see they are placed in wwwroot since they should be available in client so Configuration and settings files in a
+    Blazor WebAssembly app are visible to users. Don't store app secrets, credentials, or any other sensitive data in the
+    configuration or files of a Blazor WebAssembly app. Some provider like Azure and Azure Key vault configuration provider
+    needs this so avoid using them!)
+
+    Configuration in app settings files are loaded by default. Inject an IConfiguration instance into a component to access
+    the configuration data.
+    WebAssemblyHostConfiguration is saved in builder.Configuration and can be added by following methods like
+    Add, AddJsonFile,... and can be read using [] and GetSection and can be availabe to component from IConfiguration
+    service injection
+    Configuration are cached so in case of PWA they are not update until the next build and deploy of app by rebuilding
+    PWA's service-worker.js and service-worker-assets.js files
+
+    Dependency Injection in Blazor
+    It is similar to rest of ASP.NET. They are availabe as:
+    * Framework-registered services can be injected directly into components of Blazor apps (For example NavigationManager).
+    * Blazor apps define and register custom services and make them available throughout the app via DI.
+
+    some useful services in blazor are:
+    1- HttpClient: Provides methods for sending HTTP requests and receiving HTTP responses from a resource identified by a
+    URI.
+    * Scoped and not singleton: in MVC the pattern is to inject the HttpClient Factory singleton and then generate
+    HttpClient in every usage but here since it is runned in browser it registered as Scoped here.
+    * The instance of HttpClient in a Blazor WebAssembly app uses the browser for handling the HTTP traffic in the
+    background
+    * Blazor Server apps don't include an HttpClient configured as a service by default. Provide an HttpClient to a Blazor
+    Server app.
+    2- NavigationManager: Contains helpers for working with URIs and navigation state. This is injected as Singleton in wasm
+    blazor and Scoped in blazor server
+    3- IJSRuntime: this is used for calling JS function from .NET (It is a js runtime where js function dispatched). It is
+    register as Singleton in blazor wasm and register as scoped in Blazor server.
+
+    We can register other custom service and inject them too and similar to Rest of ASP for use of the above services we
+    should inject them through Constructor.
+    Blazor WebAssembly apps don't currently have a concept of DI scopes. Scoped-registered services behave like Singleton
+    services. Has it the concept of lifetime? since it has not classical concept of requests and response pipeline.
+    The case are true for some of Blazor App but not for all of it where we have Asp.Net MVC, Web API or Razor Pages.
+    Scoped services aren't reconstructed when navigating among components on the client, where the communication to the
+    server takes place over the SignalR connection of the user's circuit, not via HTTP requests. But in cases where request
+    should pass the pipeline from server to reach the blazor server, it reconstruct the Scoped Services too. For example:
+    * The user closes the browser's window. The user opens a new window and navigates back to the app.
+    * The user closes the last tab of the app in a browser window. The user opens a new tab and navigates back to the app.
+    * The user selects the browser's reload/refresh button
+    In all of these cases, the user state does not preserve unless you persist it.
+
+    After services are added to the service collection, inject the services into the components using the @inject Razor
+    directive, which has two parameters:
+    1- Type: The type of the service to inject.
+    2- Property: The name of the property receiving the injected app service. The property doesn't require manual creation.
+    The compiler creates the property.
+
+    Internally this razor component convert to a class which has a property with an [Inject] attribute. To use similar
+    pattern first create a base class and then use the injected service as property using [Inject] property on that base
+    class. Altough from best practice view, in the classes it is good to inject services from Constructor. Then to inherit
+    base class use @inherits directive in razor component. [Inject] is only availabe in classes which implements from
+    IComponent interface.
+    In Blazor Server, scope is from start of socket request till the end of it, so scoped last longer.
+    In Blazor WebAssembly, Scope is not have meaning since it handled in client side and there, there is not no request or
+    response in classic form, so scoped service are singleton.
+    Consider we have the following requirement for a service (Singleton in Component):
+    1- Should be reused within a component, as the transient lifetime is inappropriate.
+    2- Shouldn't be shared across components, as the singleton lifetime is inappropriate.
+
+    In this situation we can use a OwningComponentBase component which can create a singleton service in for just that
+    component. OwningComponentBase is an abstract type derived from ComponentBase that creates a DI scope corresponding to
+    the lifetime of the component. When the component is destroyed, services from the component's scoped service provider
+    are disposed as well.
+
+    Transient Services in Blazor
+    Classes implementing IDisposable should not be registered as Transient unless using components that own their own Scope,
+    and you know exactly what you are doing. Only register classes as Transient dependencies if they DO NOT implement
+    IDisposable, otherwise, your application will leak memory. In this cases we should use the OwningComponentBase to
+    dispose them when the component destroyed.
+
+    JS Initializer
+    Consider the following situation in client side:
+    * We want to initialize some libraries before blazor app Startup
+    * We want to add configuration to blazor
+    * We want to customize how blazor app loads
+
+    In this cases JS Initializer are useful which execute logic before and after a Blazor app loads.
+    JS initializers are detected as part of the build process and imported automatically in Blazor apps.
+
+    Manually Trigger Scripts
+    To do this, first we should add autostart="false" to related client side js file and then start it manually some where
+    later in the body after our scripts using:
+    Blazor.start()
+
+    Another way to Start it manually is settings autostart=false and then adding an event handler for event:DoMContentLoaded
+    as:
+    document.addEventListener("DoMContentLoaded",function() {Blazor.start();});
+
+    Since Start() return a promise we can use a then block to do the same thing we do in afterStarted hook.
+
+    To define a JS initializer, add a JS module to the project named {NAME}.lib.module.js, where the {NAME} placeholder is
+    the assembly name (Here BlazorWebAssemblySignalRApp.Client), library name (Razor Class libraries-RCL), or package
+    identifier (For external Package). Place the file in the project's web root, which is typically the
+    wwwroot folder.
+    The module exports either or both of the following conventional functions:
+    1- beforeStart(options,extensions): this runs before Blazor Start
+    2- afterStarted(blazorInstance): this runs after Blazor Started
+
+    Boot resources
+    When a Blazor WebAssembly app loads in the browser, the app downloads boot resources from the server:
+    * JavaScript code to bootstrap the app
+    * .NET runtime and assemblies
+    * Locale specific data
+
+    there is a setting which is used in manual start of blazor webassembly which customize boot resources loading.
+    this setting is loadBootResource:function(type,name,defaultUri,integrity) {}.
+    for example we have:
+    Blazor.start({
+    loadBootResource: function (type, name, defaultUri, integrity) {
+    console.log(`Loading: '${type}', '${name}', '${defaultUri}', '${integrity}'`);
+    switch (type) {
+    case 'dotnetjs':
+    case 'dotnetwasm':
+    case 'timezonedata':
+    return `https://cdn.example.com/blazorwebassembly/5.0.0/${name}`;
+    }
+    }
+    });
+
+    Environment in Web Assembly Blazor
+    Blazor Server is like a normal ASP.NET App and we can set the environment similarly. But in case of Blazor web assembly
+    we use every server we want for backend (It does not need any thing in back just a server to host the files related to
+    wasm). In case of Hosted wasm we have backend server as ASP.NET Core and in case of
+    standalone we have a Dev Server which do similar role in development but in case of production we can use every web
+    server. So on that case, to define the environment we can use a header named
+    Blazor-Environment to set the environment. For example in case of hosted we have a middleware UseWebAssemblyDebugging
+    which sets thise header to Development and in production it is default to Production.
+    To specify the environment for other hosting environments, add the Blazor-Environment header. for example on case of IIS
+    we can add it to web.config as header. To see web.config publish the project and see the publish folder in bin folder
+
+    In case of standalone, if we use Dev Server package it sets the environment to development. to override this we can set
+    the environment in StartUp of Blazor wasm (Which is in client side) using the following script:
+    Blazor.start({
+    environment:"Staging"
+    });
+    Using the environment property overrides the environment set by the Blazor-Environment header.
+
+    Apps built and deployed with continuous integration (CI) in Azure?
+    See the link:
+    https://docs.microsoft.com/en-us/aspnet/core/blazor/fundamentals/environments?view=aspnetcore-6.0#set-the-environment-for-azure-app-service
+
+    How to Get Environment in Startup or Components:
+    * Obtain the app's environment in a component by injecting IWebAssemblyHostEnvironment
+    * During startup, the WebAssemblyHostBuilder (app) exposes the IWebAssemblyHostEnvironment through the HostEnvironment
+    property, which enables environment-specific logic in host builder code. Other usage is the
+    IWebAssemblyHostEnvironment.BaseAddress property that can be used during startup when the NavigationManager service
+    isn't available.
+
+    What we can do with web assembly host builder?
+    This is also uses generic host builder. The typical .NET Core App features like configuration, logging and dependency
+    injection are configured on the level of
+    the IHostBuilder.
+    WebAssemblyHostBuilder has following properties:
+    1- Services: Like other Host Builder it is the service container which is used for registering services
+    2- Logging: This is used for Logging
+    3- Configuration: used for configuration
+    4- HostEnvironment: Shows Environment
+    5- RootComponents: This is what make this host distinct from other host and is used for mapping between root components
+    and root locations.
+
+    Web Assembly Loging:
+    This can do using the logging property of Host Builder as following:
+    builder.Logging.SetMinimumLevel(LogLevel.Debug);
+    builder.Logging.AddProvider(new CustomLoggingProvider());
+    builder.Logging.AddConfiguration(builder.Configuration.GetSection("Logging"));
+    - logging in Components: We can inject ILoggerProvider (Or ILoggerFactory in similar manner) or ILogger<T> (non generic
+    ILogger throw error ) and use it like below in signalR connection builder:
+    ConfigureLogging(logging => logging.AddProvider(_loggerProvider))
+
+    This uses WebAssemblyConsoleLogger to log in browser using Mono inside browser. Unlike a traditional ConsoleLogger,
+    WebAssemblyConsoleLogger is a wrapper around browser-specific logging APIs (for example, console.log).
+    WebAssemblyConsoleLogger is internal and not available for direct use in developer code (Through browser?!).
+
+    Persistent Log Provider
+    Since web assembly runs on browser we need an API to persist the logs if we need. Here we need a Logging Provider which
+    is also manages log size and log rotation. Alternatively, the app can use an Application Performance Management (APM)
+    service, such as Azure Application Insights (Azure Monitor).
+
+
+    PreRendering in Blazor Hosted Web Assembly
+    A hosted Blazor WebAssembly app that prerenders its content executes component initialization code twice. Logging takes
+    place server-side on the first execution of initialization code and client-side on the second execution of
+    initialization code. (Pre Rendering Only happen if we explicitly add it. in this project it does not happen so every
+    thing has happen once!)
+
+    Error Handling for Unhandled Errors
+    For an app to continue after an error, the app must have error handling logic. We also may need the exception details in
+    case of development. In case of ASP.Net Core we have a middleware for this, but in case of Blazor web assembly this is
+    different. In production, don't render framework exception messages or stack traces in the UI.
+    For Blazor Server, logging is same as enabling SignalR Detail Error which can be using one of the following ways:
+    1- Enabling it in Circuit Options (CircuitOptions.DetailedErrors in setting Hub/SignalR Services)
+    2- Enable the above option through "DetailedErrors": true, in Configuration (for example appsettings.Development.json)
+    3- Add SignalR server side logging through "Microsoft.AspNetCore.SignalR": "Debug"
+    4- In way 2 we can set the configuration using environment variable ASPNETCORE_DETAILEDERRORS
+
+    Blazor Server is a stateful framework. While users interact with an app, they maintain a connection to the server known
+    as a circuit. The circuit holds active component instances, plus many other aspects of state, such as:
+    1- The most recent rendered output of components.
+    2- The current set of event-handling delegates that could be triggered by client-side events.
+
+    Here, If a user opens the app in multiple browser tabs, the user creates multiple independent circuits.
+    In Blazor server most of Unhandled exception considered fatal to Circuit. So user should reload the page to create a new
+    circuite and continue. Of course other circuites in other Tabs do not closed!
+
+    For Blazor WebAssembly we have not middleware pipeline, there is no middleware pipeline that processes requests for
+    Razor components. The browser serves as the app's host and thus acts as the processing pipeline for individual Razor
+    components based on URI requests for navigation and static assets. However, an app can use an error processing component
+    as a cascading value to process errors in a centralized way (Error Boundries). The ErrorBoundary component:
+    * Renders its child content when an error hasn't occurred.
+    * Renders error UI when an unhandled exception is thrown.
+
+    For example, an error boundary can be added around the body content of the app's main layout as following:
+    <div class="main">
+    <div class="content px-4">
+    <ErrorBoundary>
+    @Body
+    </ErrorBoundary>
+    </div>
+    </div>
+    By default, In case of Unhandled exception, the ErrorBoundary component renders an empty <div> element with the
+    blazor-error-boundary CSS class for its error content. Yo can change this default behaviour using the following
+    properties:
+    <ErrorBoundary>
+    <ChildContent>
+    @Body
+    </ChildContent>
+    <ErrorContent>
+    <p class="errorUI">Nothing to see here right now. Sorry!</p>
+    </ErrorContent>
+    </ErrorBoundary>
+    One Problem with the above broad scope error boundary is that it shows the errors after happing in all the pages an you
+    need to reload page. To prevent that, you can use narrow-scope error boundary or use the following approach in the
+    relative component for example (Recover() method):
+    ...
+
+    <ErrorBoundary @ref="errorBoundary">
+    @Body
+    </ErrorBoundary>
+
+    ...
+
+    @code {
+    private ErrorBoundary? errorBoundary;
+
+    protected override void OnParametersSet()
+    {
+    errorBoundary?.Recover();
+    }
+    }
+    *** In the above example see the usage of ref which bind a razor component/html element to a Property.
+
+    Another approach for handling exception is using Cascading Component (This is something similar to React Context which
+    is used to Share data (even component!) in all the hierarchy). Here we define a top cascading value error component
+    having methods and properties for processing errors and then pass itself to use in every level of hierarchy for
+    processing errors.
+    An advantage of using a (Cascading) component over using an injected service or a custom logger implementation is that a
+    cascaded component can render content and apply CSS styles when an error occurs. StateHasChanged base method of
+    components may be required to apply changes in UI rendering.
+    The value of Cascading Component can received using a Property with a CascadingParameter attribute.
+
+    Places Where Error may happen:
+    1- Component Instantiation: In this step the constructor of Component and all injected services are invoked.
+    2- Component Life Cycle methods: (Review them later)
+    3- Rendering: In this step the method of BuildRenderTree(RenderTreeBuilder builder) executes and builds up a data
+    structure describing the elements, text, and child components of the rendered component.
+    4- Event Handler: They are created to triggers invocations of C# code from Client-side code. Some of them are
+    @bind,@onchange,@onclick and other events which starts with on.
+    5- Component Disposal: A component may be removed from the UI, for example, because the user has navigated to another
+    page. When a component that implements System.IDisposable (not all component implement that. you should add @implements
+    IAsyncDisposable/IDisposable directive) is removed from the UI, the framework calls the component's Dispose
+    method.
+    6- JS interop: IJSRuntime.InvokeAsync allows .NET code to make asynchronous calls to the JavaScript runtime in the
+    user's browser. But this method may throw exception in three case:
+    * It fails synchronously: This is may happen if it could not serialize its parameters.
+    * It fails asynchronously: This can be due to exception in JS or due to rejection of the promise that it should return.
+    * It fails due to timeout: If the promise that it should return does not resolve in 1 minute it return an exception
+    (OperationCanceledException).(This is not fatal)
+    Similarly JavaScript code may initiate calls to .NET methods indicated by the [JSInvokable] attribute. If an exception
+    happen in dotnet method it is not a fatal error and only reject the promise it returned.
+
+    7- PreRendering: PreRendering happens only in case of using Component Tag Helper in razor pages (.cshtml). That can be
+    the case in Blazor Server but only happen if backend is .Net for Blazor WebAssembly and we use index.cshtml instead of
+    index.html. To handle exceptions here, instead of wrapping the ComponentTagHelper in a try-catch statement, place error
+    handling logic in the component rendered by the ComponentTagHelper.
+    https://docs.microsoft.com/en-us/aspnet/core/mvc/views/tag-helpers/built-in/component-tag-helper?view=aspnetcore-6.0
+
+    SignalR and Blazor Server (Circuit)
+    Blazor Server allows code to define a circuit handler, which allows running code on changes to the state of a user's
+    circuit.
+    A circuit handler is implemented by deriving from CircuitHandler and registering the class in the app's service
+    container.
+    If a custom circuit handler's methods throw an unhandled exception, the exception is fatal to the Blazor Server circuit.
+    Use Try-Catch to handle these exceptions.
+    When a circuit ends because a user has disconnected and the framework is cleaning up the circuit state, the framework
+    disposes of the circuit's DI scope. Disposing the scope disposes any circuit-scoped DI services that implement
+    System.IDisposable (I think it dispose every scoped services). If any DI service throws an unhandled exception during
+    disposal, the framework logs the exception.
+
+    Static Files in Blazor (wwwroot)
+    By default, publishing a Blazor WebAssembly app places the app's static assets, including Blazor framework files
+    (_framework folder assets), at the root path (/) in published output.
+    The <StaticWebAssetBasePath> property specified in the project file (.csproj) sets the base path to a non-root path (In
+    published app). This scenario is useful in case of hosting multiple Blazor Project using one host.
+    <PropertyGroup>
+    <StaticWebAssetBasePath>app1</StaticWebAssetBasePath>
+    </PropertyGroup>
+    The above Property changes:
+    In published output:
+    * Path to the client app in the Server project of a hosted Blazor WebAssembly solution:
+    /BlazorHostedSample/Server/bin/Release/{TFM}/publish/wwwroot/app1/
+    * Path to a standalone Blazor WebAssembly app: /BlazorStandaloneSample/bin/Release/{TFM}/publish/wwwroot/app1/
+
+
+    Razor Component
+    A component is a self-contained portion of user interface (UI) with processing logic to enable dynamic behavior.
+    Components can be nested, reused, shared among projects, and used in MVC and Razor Pages apps.
+    * A component's name must start with an uppercase character
+    * Blazor follows the convention of ASP.NET Core apps for static assets. Static assets are located in the project's web
+    root (wwwroot) folder or folders under the wwwroot folder. Components do not support tilde-slash notation (~/).
+    * Routing in Blazor is achieved by providing a route template to each accessible component in the app with an @page
+    directive. When a Razor file with an @page directive is compiled, the generated class is given a RouteAttribute
+    specifying the route template. At runtime, the router searches for component classes with a RouteAttribute and renders
+    whichever component has a route template that matches the requested URL.
+    * Components that produce webpages usually reside in the Pages folder, but you can use any folder to hold components,
+    including within nested folders. Components are ordinary C# classes and can be placed anywhere within a project.
+    Components that produce webpages usually reside in the Pages folder. Non-page components are frequently placed in the
+    Shared folder or a custom folder added to the project.
+    * When an app is compiled, the HTML markup and C# rendering logic are converted into a component class. The name of the
+    generated class matches the name of the file. Members of the component class are defined in one or more @code blocks
+    * Components can include other components by declaring them using HTML syntax
+    * Components doesn't have an @page directive isn't directly accessible to a user via a direct request in
+    the browser. However, any component with an @page directive can be nested in another component.
+    * WE can also create using code-behind files (.razor.cs) using Partial class. Actually generated component class are
+    partial.
+    * A component stylesheet that defines component-specific styles can be a separate file (.razor.css) ().
+    * We can use a base class for components by inheriting (@inherits) from a class that inherits ComponentBase class (for
+    example BlazorRocksBase : ComponentBase).
+    * Unlike in Razor pages (.cshtml), Blazor can't perform asynchronous work in a Razor expression while rendering a
+    component. Instead, asynchronous work is performed during one of the asynchronous lifecycle events, After each
+    asynchronous lifecycle event, the component may render again. So the await Keyword
+    is not support in razor markup (This has a logic behind). If we have a UI value that needs async work, it should be done
+    in one of async lifecycle events and then set the result in a property and use that property instead.
+    * Component attributes do not support complex content (mixed C# and markup). As a result concatinating of a text and a
+    property does not support. We can do that in field/property/method and then use it instead.
+    * Tag Helpers aren't supported in components. To provide Tag Helper-like functionality in Blazor, create a component
+    with the same functionality as the Tag Helper and use the component instead.
+    * Unless the @preservewhitespace directive is used with a value of true, extra whitespace is removed by default
+    * We can add Razor components dynamicly using JavaScript using Blazor.rootComponents.add() function. It needs
+    registering element for using from js in program/startup using builder.RootComponents.RegisterForJavaScript
+
+    Component State
+    In @code blocks, component state is specified and processed with C#:
+    1- Property and field initializers.
+    2- Parameter values from arguments passed by parent components and route parameters (Also CascadingParameter).
+    3- Methods for user event handling, lifecycle events, and custom component logic.
+
+    Component Parameters
+    Component parameters pass data to components and are defined using public C# properties on the component class with the
+    [Parameter] attribute. Type of Parameter can be built-in types and complex class types (User-defined Reference Types)
+    and also Unnamed Tuples.
+    The user defined types can be passed using explicit C# expression like new ... .
+    Altough Providing initial values for component parameters is supported, but don't create a component that writes to its
+    own parameters after the component is rendered for the first time.
+    Parameter values are set by arguments in the HTML tag that renders the instance of the component (Or from route
+    parameter and cascading values).
+    Don't place custom logic in the get or set accessor because component parameters are purely intended for use as a
+    channel for a parent component to flow information to a child component. If a set accessor of a child component property
+    contains logic that causes rerendering of the parent component, an infinite rendering loop results.
+    You can use parameters value in other properties to create/set transformed values (Work only once!). Override
+    OnParametersSetAsync to transform a received parameter each time new data is received.
+    If you want to make a Parameter mandatory at built time, you can Apply the [EditorRequired] attribute to specify a
+    required component parameter (Of course it need [Parameter] attribute too). This does not have a runtime effect and does
+    not gurantee a non-null value. We can use them as [Parameter, EditorRequired] too.
+    Components can specify route parameters in the route template of the @page directive. The Blazor router uses route
+    parameters to populate corresponding component parameters.
+    We can also have catch-all route parameters ({*pageRoute}), which capture paths across multiple folder boundaries.
+    We have an implicit type of Parameter which fed by Parents as child content. Its name is ChildContent and should be
+    defined as property (RenderFragment?) in Child component too.
+    Anoter way to define Parameter is using @attributes directive. Components can capture and render additional attributes
+    in addition to the component's declared parameters. Additional attributes can be captured in a dictionary and then
+    splatted onto an element when the component is rendered using the @attributes Razor directive attribute. Here we should
+    define the Parameters in case of Child Razor components using the [Parameter] attribute to have access to them.
+    otherwise we should use a CaptureUnmatchedValues parameter to catch others.
+    In this case, The position of @attributes relative to the position of element attributes is important. for example if we
+    have an element attribute that also defined in the component and has a key equal to element attribute, the last one
+    overwrites here.
+
+    Component Reference
+    Component references provide a way to reference a component instance for issuing commands. To capture a component
+    reference:
+    1- Add an @ref attribute to the child component/html element.
+    2- Define a field with the same type as the child component.
+    When the component is rendered, the field is populated with the component instance. You can then invoke .NET methods on
+    the instance.
+
+    A component reference is only populated after the component is rendered and its output includes ReferenceChild's
+    element. Until the component is rendered, there's nothing to reference.
+    To manipulate component references after the component has finished rendering, use the OnAfterRender or
+    OnAfterRenderAsync methods.
+
+    To use a reference variable with an event handler (for example @onclick), use a lambda expression (evaluates in runtime)
+    or assign the event handler delegate in the OnAfterRender or OnAfterRenderAsync methods. This ensures that the reference
+    variable is assigned before the event handler is assigned.
+    A good example of Refrence Component is using a component as a method and fields provider without any real html
+    rendering. We add the component to get a refrence to it and then use the ref to reterieve fields and methods!
+    Use a collection to reference components in a loop. You should manage adding reference to end of collection yourself by
+    changing setter for @ref property. for example:
+    private List<ReferenceChild> components = new();
+    private ReferenceChild childComponent
+    {
+    set => components.Add(value);
+    }
+
+    To use this ref collection, you can invoke a delegate which get index of the exact ref component.
+    Capturing component references isn't a JavaScript interop feature. Component references aren't passed to JavaScript
+    code. Component references are only used in .NET code.
+    Do not use component references to mutate the state of child components. Use of component parameters result in child
+    components that rerender at the correct times automatically. The ref using may not garantee this.
+
+    @key directive (similar to React key in list items)
+    When we have a dynamic list of elements or components, Blazor must decide which of the previous elements or components
+    can be retained and how model objects should map to them. Use of @key guarantees the preservation of elements or
+    components based on the key's value. Keys are local to each container element or component. Keys aren't compared
+    globally across the document. Altough main usage of Key is list items, You can also use @key to preserve an element or
+    component subtree when an object doesn't change. The @key attribute directive is scoped to its own siblings within its
+    parent.
+    There's a performance cost when rendering with @key. The performance cost isn't large, but only specify @key if
+    preserving the element or component benefits the app. Even if @key isn't used, Blazor preserves child element and
+    component instances as much as possible. The only advantage to using @key is control over how model instances are mapped
+    to the preserved component instances, instead of Blazor selecting the mapping.
+    Generally, it makes sense to supply one of the following values for @key:
+    1- Model object instances. This ensures preservation based on object reference equality.
+    2- Unique identifiers. For example, unique identifiers can be based on primary key values of type int, string, or Guid.
+
+    @attribute directive
+    Add attributes like Authorize to Components using this directive.
+
+    Raw HTML
+    Strings are normally rendered using DOM text nodes, which means that any markup they may contain is ignored and treated
+    as literal text. To render raw HTML, wrap the HTML content in a MarkupString value. The value is parsed as HTML or SVG
+    and inserted into the DOM. We should use the MarkupString type (instead of string) to add a block of static HTML content
+    to the rendered output of a component. Of course we can use RenderFragment but it should be defined using razor syntax!
+    (needs @ and can get other c# expressions)
+
+
+    Rendering tree
+    The Blazor framework processes a component internally as a render tree, which is the combination of a component's
+    Document Object Model (DOM) and Cascading Style Sheet Object Model (CSSOM). After the component is initially rendered,
+    the component's render tree is regenerated in response to events. Blazor compares the new render tree against the
+    previous render tree and applies any modifications to the browser's DOM for display.
+
+    Render Fragment and Render Templates
+    * Event callbacks aren't supported for RenderFragment. What about lifecycle Events?
+    * RenderFragment is a Delegate which takes RenderTreeBuilder and write to it.
+    * Render fragments can be defined using Razor template syntax to define a UI snippet (A complete alternative to
+    MarkupString).
+    * We have RenderFragment<T> which is a delegate receive an argument T and return a razor syntax template using that.
+
+    Blazor Layout
+    A Blazor layout is a Razor component that shares markup with components that reference it. Layouts can use data binding,
+    dependency injection, and other features of components.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+*@

@@ -1,5 +1,6 @@
 using BlazorWebAssemblySignalRApp.Server.Hubs;
 using Microsoft.AspNetCore.ResponseCompression;
+using Microsoft.AspNetCore.StaticFiles;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -30,14 +31,39 @@ else
 // app.UseHttpsRedirection();
 
 app.UseBlazorFrameworkFiles();
-app.UseStaticFiles();
+
+// A Content Type is how the server tells the browser what type of file the resource being served is.  
+// That way the browser knows how to render whether it’s HTML, CSS, JSON, PDF, etc.  
+// The way the server does this is by passing a Content-Type HTTP Header. And it is important to set this content-type (even some times changing it to correct type in browser does not work as expected) 
+// A Content Type can also be called a MIME type, but the header is called Content-Type, and ASP.NET Core calls it the Content Type 
+// for a vast majority of the static files you’re going to serve, the Static Files Middleware will set the Content Type for you.  
+// For scenarios where you need to set the Content Type yourself:
+// 1- In Controller and Page Handler we can use File helper method for FileResult as return File(fileContent, "application/pdf");
+// 2- In Static File Middleware use following pattern (We need to use this middleware two times!)
+var provider = new FileExtensionContentTypeProvider();
+provider.Mappings.Add("srt", "text/plain");
+
+var staticFilesOptions = new StaticFileOptions
+{
+    ContentTypeProvider = provider,
+};// We can use static file options to add file extensions related to content-type for example
+app.UseStaticFiles(staticFilesOptions);
+app.UseStaticFiles(); // For other File types
 
 app.UseRouting();
 
-app.MapHub<ChatHub>("/chathub"); ;
+app.MapHub<ChatHub>("/chathub");
 app.MapRazorPages();
 app.MapControllers();
-app.MapFallbackToFile("index.html");
+
+// In hosted Blazor WebAssembly apps that aren't prerendered, pass StaticFileOptions to MapFallbackToFile that specifies response headers at the OnPrepareResponse stage.
+var staticFileOptions = new StaticFileOptions()
+{
+    OnPrepareResponse = (ctx) => ctx.Context.Response.Headers.Add("sampleHeader", "my sample header"),
+};
+
+
+app.MapFallbackToFile("index.html", staticFileOptions); // This is necessary for blazor to work. And it should has an id #App which connected to blazor wasm
 
 app.Run();
 

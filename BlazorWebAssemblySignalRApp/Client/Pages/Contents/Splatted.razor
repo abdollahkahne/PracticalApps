@@ -1,0 +1,23 @@
+<div>
+    The Parammeter can be passed as a dictionary using attributes directive!
+    for example we have
+    <pre>
+        @(placeholder??"It is null")
+    </pre>
+    <input id="splatted-input" maxlength="20" @attributes="OtherParameters" size="80">
+
+</div>
+
+@code {
+    @* public Dictionary<string, object>? attributes { get; set; } *@
+    [Parameter]
+    public object? placeholder { get; set; }
+    @* [Parameter]
+        public object? maxlength { get; set; }
+        [Parameter]
+        public object? required { get; set; }
+        [Parameter]
+        public object? size { get; set; } *@
+    [Parameter(CaptureUnmatchedValues = true)]
+    public Dictionary<string, Object>? OtherParameters { get; set; }
+}

@@ -1,0 +1,40 @@
+@page "/routeparameter/{id:int?}"
+@layout MainLayout
+@inject NavigationManager _navigationMgr
+@implements IDisposable
+
+<h1>Route Parameter</h1>
+<p>You selected Parameter id equal to @Id</p>
+<NavLink href="/routeparameter/10">10</NavLink>
+<NavLink href="/routeparameter">Empty</NavLink>
+
+<button class="btn btn-primary" @onclick="navigateToHome">Navigation using button</button>
+
+
+@code {
+    [Parameter]
+    public int Id { get; set; }
+    private void navigateToHome()
+    {
+        _navigationMgr.NavigateTo("/");
+
+    }
+
+    protected override void OnInitialized()
+    {
+        _navigationMgr.LocationChanged += handleLocationChanged; // this method is good for handling when we leave the component
+        @* client side by wasm *@
+        base.OnInitialized();
+    }
+
+    private void handleLocationChanged(object? sender, LocationChangedEventArgs eventArgs) // this event like most of event
+    @* takes two argument while the second argument is children of EventArgs class/object *@
+    {
+        Console.WriteLine(@"Url:{0} requested by browser:{1}", eventArgs.Location, eventArgs.IsNavigationIntercepted);
+        // if 1 is false means requested by navigationManager
+    }
+    public void Dispose()
+    {
+        _navigationMgr.LocationChanged -= handleLocationChanged; // dispose it to prevent executing it for other components
+    }
+}

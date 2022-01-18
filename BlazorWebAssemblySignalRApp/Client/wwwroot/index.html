@@ -12,6 +12,10 @@
 </head>
 
 <body>
+    <div>
+        <div id="dialog">Here we add Dialog component using click</div>
+        <button onclick="addDialog()">Add Dialog</button>
+    </div>
     <div id="app">Loading...</div>
 
     <div id="blazor-error-ui">
@@ -19,7 +23,42 @@
         <a href="" class="reload">Reload</a>
         <a class="dismiss">🗙</a>
     </div>
-    <script src="_framework/blazor.webassembly.js"></script>
+    <!-- <script type="module" src="BlazorWebAssemblySignalRApp.Client.lib.module.js"></script> -->
+    <script autostart="false" src="_framework/blazor.webassembly.js"></script>
+    <!-- <script type="module" src="BlazorWebAssemblySignalRApp.Client.lib.module.js"></script> -->
+    
+    <script>
+        
+        console.log("Before Blazor Start from index.html");
+        // Blazor.start().then(result=>{
+        //     console.log("Inside start Promise succeed!");
+        //     console.log(result); // result is undefined
+        // });
+        Blazor.start({
+            environment:"Production",
+            loadBootResource:function(type,name,defaultUri,integrity) {
+                console.log("Type:",type);
+                console.log("Name:",name);
+                console.log("default Url:",defaultUri);
+                console.log("Integrity:",integrity);
+                console.log("End of item");
+                // For example load some of them from cdn
+                // switch (type) {
+                //     case "dotnetjs":
+                //     case "dotnetwasm":
+                //     case "timezonedata":
+                //         return `https://cdn.example.com/blazorwebassembly/5.0.0/${name}`;
+                // }
+            }
+        });
+    </script>
+    <script>
+        function addDialog() {
+            var dialogElem=document.getElementById("dialog");
+            var textNode=document.createTextNode("This is a sample node");
+            Blazor.rootComponents.add(dialogElem,"dialog",{title:"Title of Dialog",childContent:textNode});
+        }
+    </script>
 </body>
 
 </html>

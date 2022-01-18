@@ -4,6 +4,7 @@
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -13,6 +14,7 @@
     <link href="BlazorServerSignalRApp.styles.css" rel="stylesheet" />
     <component type="typeof(HeadOutlet)" render-mode="ServerPrerendered" />
 </head>
+
 <body>
     @RenderBody()
 
@@ -27,6 +29,29 @@
         <a class="dismiss">🗙</a>
     </div>
 
-    <script src="_framework/blazor.server.js"></script>
+    <script autostart="false" src="_framework/blazor.server.js"></script>
+    <script>
+        addEventListener("pagehide", () => { Blazor.disconnect(); });
+        Blazor.start(
+            {
+                configureSignalR: builder => builder.configureLogging("information"),
+                reconnectionHandler: {
+                    onConnectionUp: () => {
+                        console.log("The connection is Up and OKay! (From client side)")
+                    },
+                    onConnectionDown: (option, err) => {
+                        console.log(option);
+                        console.log(err);
+                    }
+                },
+                reconnectionOptions: {
+                    maxRetries: 3,
+                    retryIntervalMilliseconds: 2000,
+                    dialogId: "components-reconnect-modal"
+                }
+            }
+        );
+    </script>
 </body>
+
 </html>

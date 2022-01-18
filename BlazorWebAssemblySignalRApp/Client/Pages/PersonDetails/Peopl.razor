@@ -1,0 +1,50 @@
+@page "/people"
+@implements IDisposable
+@using System.Timers
+
+@foreach (var item in people)
+{
+    <Details @key="item" Data="@(item.Data)"></Details>
+}
+
+@code {
+    private Timer _timer = new(3000);
+    public List<Person> people =
+    new()
+    {
+        { new Person { Data = "Person 1" } },
+        { new Person { Data = "Person 2" } },
+        { new Person { Data = "Person 3" } }
+    };
+
+    protected override void OnInitialized()
+    {
+        _timer.Elapsed += (sender, e) => { OnTimerElapsed(); };
+        _timer.Start();
+    }
+
+    private void OnTimerElapsed()
+    {
+        _ = InvokeAsync(() =>
+          {
+              people.Insert(0,
+    new Person
+              {
+    Data = $"INSERTED {DateTime.Now.ToString("hh:mm:ss tt")}"
+              });
+              StateHasChanged();
+          });
+    }
+
+
+
+    public void Dispose()
+    {
+        _timer.Dispose();
+    }
+
+    public class Person
+    {
+        public string? Data { get; set; }
+    }
+}

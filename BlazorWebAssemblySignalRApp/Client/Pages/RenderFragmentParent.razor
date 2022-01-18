@@ -1,0 +1,49 @@
+@page "/render-fragment-parent"
+@using BlazorWebAssemblySignalRApp.Client.Pages.Contents
+
+<h1>Render child content</h1>
+
+<RenderFragmentChild>
+    Content of the child component is supplied
+    by the parent component.
+</RenderFragmentChild>
+
+<h1>Three children with an index variable</h1>
+
+@for (int c = 0; c < 3; c++)
+{
+    var current = c;
+
+    <RenderFragmentChild>
+    Count: @current
+</RenderFragmentChild>
+}
+
+<h1>Three children without an index variable</h1>
+<h2> Here all the content are same since c is not a local index variable. Why??</h2>
+
+@for (int c = 0; c < 3; c++)
+{
+    @* var current = c; *@
+
+    <RenderFragmentChild>
+        Count: @c
+    </RenderFragmentChild>
+}
+
+<h1>Second example of three children with an index variable</h1>
+<h2>Here we implemented the for loop with foreach so it works as expected</h2>
+
+@foreach (var c in Enumerable.Range(0, 3))
+{
+    <RenderFragmentChild>
+    Count: @c
+</RenderFragmentChild>
+}
+
+<h1>Current Time: @(DateTime.UtcNow.Ticks)</h1>
+<RenderFragmentChild>
+    This value at rendering of child, so it takes time to render
+    Current Time: @(DateTime.UtcNow.Ticks)
+</RenderFragmentChild>
+<h2>Current Time: @(DateTime.UtcNow.Ticks)</h2>

@@ -24,3 +24,7 @@
 # SignalRClient
 # ObjectPoolSample
 # HostedServices
+BlazorWebAssemblySignalRApp/Client/bin
+BlazorWebAssemblySignalRApp/Client/obj
+BlazorServerSignalRApp/bin
+BlazorServerSignalRApp/obj

@@ -1,0 +1,24 @@
+@page "/scopedservice"
+@using BlazorWebAssemblySignalRApp.Shared
+@using Microsoft.AspNetCore.Authorization
+@inherits OwningComponentBase<ISettingService>
+@* @attribute [Authorize] *@
+@* To add an attribute we can use attribute directive *@
+
+@* OwningComponentBase<TService> derives from OwningComponentBase and adds a Service property that returns an instance
+    of T from the scoped DI provider. *@
+
+<ul>
+    @if (Service is not null)
+    {
+        foreach (var item in Service.GetSettings())
+        {
+            <li>@item.SettingName ":" @item.SettingValue)</li>
+        }
+    }
+</ul>
+
+@code {
+    @* // Here we can use directly the Service Property instead of ScopedServices Property but that is available too *@
+
+}

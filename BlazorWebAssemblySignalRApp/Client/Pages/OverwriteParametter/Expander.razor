@@ -1,0 +1,31 @@
+<div @onclick="Toggle" class="card bg-light mb-3" style="width:30rem">
+    <div class="card-body">
+        <h2 class="card-title">Toggle (<code>expanded</code> = @expanded) and (<code>Expanded</code> = @Expanded)</h2>
+
+        @if (expanded)
+        {
+            <p class="card-text">@ChildContent</p>
+        }
+    </div>
+</div>
+
+@code {
+    [Parameter]
+    public bool Expanded { get; set; }
+    [Parameter]
+    public RenderFragment? ChildContent { get; set; }
+
+    protected override void OnInitialized()
+    {
+        expanded = Expanded;
+        base.OnInitialized();
+    }
+
+
+
+    private bool expanded { get; set; }
+    private void Toggle()
+    {
+        expanded = !expanded;
+    }
+}

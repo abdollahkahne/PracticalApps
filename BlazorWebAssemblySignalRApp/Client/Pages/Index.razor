@@ -1,9 +1,23 @@
 ﻿@page "/"
+@using Microsoft.AspNetCore.Components.WebAssembly.Hosting
+@inject IWebAssemblyHostEnvironment env
+@* @inject IWebHostEnvironment env
+    // this works for Server side app
+    // In case of blazor wasm/server we should get environment from the above namespace
+*@
 
 <PageTitle>Index</PageTitle>
 
 <h1>Hello, world!</h1>
 
 Welcome to your new app.
+This App runs in Environment: @(env.IsProduction() ? "Production" : "Not Production")
 
 <SurveyPrompt Title="How is Blazor working for you?" />
+
+<CascadingErrorComponent>
+    <h2> Usage of Cascading Value Component</h2>
+    <p> This component almost has same usage as React Context which shares data between different Components in
+        Hierarchy</p>
+    <CounterWithError></CounterWithError>
+</CascadingErrorComponent>

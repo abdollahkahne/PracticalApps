@@ -12,6 +12,39 @@
   "ProjectWorkspaceState": {
     "TagHelpers": [
       {
+        "HashCode": -1227012741,
+        "Kind": "Components.Component",
+        "Name": "BlazorServerSignalRApp.Pages.Chat",
+        "AssemblyName": "BlazorServerSignalRApp",
+        "CaseSensitive": true,
+        "TagMatchingRules": [
+          {
+            "TagName": "Chat"
+          }
+        ],
+        "Metadata": {
+          "Runtime.Name": "Components.IComponent",
+          "Common.TypeName": "BlazorServerSignalRApp.Pages.Chat"
+        }
+      },
+      {
+        "HashCode": 1192509868,
+        "Kind": "Components.Component",
+        "Name": "BlazorServerSignalRApp.Pages.Chat",
+        "AssemblyName": "BlazorServerSignalRApp",
+        "CaseSensitive": true,
+        "TagMatchingRules": [
+          {
+            "TagName": "BlazorServerSignalRApp.Pages.Chat"
+          }
+        ],
+        "Metadata": {
+          "Runtime.Name": "Components.IComponent",
+          "Common.TypeName": "BlazorServerSignalRApp.Pages.Chat",
+          "Components.NameMatch": "Components.FullyQualifiedNameMatch"
+        }
+      },
+      {
         "HashCode": 1774314242,
         "Kind": "Components.Component",
         "Name": "BlazorServerSignalRApp.Pages.Counter",
@@ -107,39 +140,6 @@
         "Metadata": {
           "Runtime.Name": "Components.IComponent",
           "Common.TypeName": "BlazorServerSignalRApp.Pages.Index",
-          "Components.NameMatch": "Components.FullyQualifiedNameMatch"
-        }
-      },
-      {
-        "HashCode": -1227012741,
-        "Kind": "Components.Component",
-        "Name": "BlazorServerSignalRApp.Pages.Chat",
-        "AssemblyName": "BlazorServerSignalRApp",
-        "CaseSensitive": true,
-        "TagMatchingRules": [
-          {
-            "TagName": "Chat"
-          }
-        ],
-        "Metadata": {
-          "Runtime.Name": "Components.IComponent",
-          "Common.TypeName": "BlazorServerSignalRApp.Pages.Chat"
-        }
-      },
-      {
-        "HashCode": 1192509868,
-        "Kind": "Components.Component",
-        "Name": "BlazorServerSignalRApp.Pages.Chat",
-        "AssemblyName": "BlazorServerSignalRApp",
-        "CaseSensitive": true,
-        "TagMatchingRules": [
-          {
-            "TagName": "BlazorServerSignalRApp.Pages.Chat"
-          }
-        ],
-        "Metadata": {
-          "Runtime.Name": "Components.IComponent",
-          "Common.TypeName": "BlazorServerSignalRApp.Pages.Chat",
           "Components.NameMatch": "Components.FullyQualifiedNameMatch"
         }
       },
