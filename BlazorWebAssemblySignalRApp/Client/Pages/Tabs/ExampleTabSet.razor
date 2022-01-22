@@ -1,0 +1,26 @@
+@page "/example-tab-set"
+
+<TabSet>
+    <Tab Title="First Tab">
+        <h4>Greetings from the first tab!</h4>
+        <label>
+            <input type="checkbox" @bind="showThirdTab">
+            Toggle Third Tab
+        </label>
+    </Tab>
+    <Tab Title="Second Tab">
+        <h4>Hello from the second tab!</h4>
+    </Tab>
+    @if (showThirdTab)
+    {
+        <Tab Title="Third Tab">
+            <h4>Welcome to the disappearing third tab!</h4>
+            <p>Toggle this tab from the first tab.</p>
+        </Tab>
+    }
+
+</TabSet>
+
+@code {
+    private bool showThirdTab { get; set; }
+}

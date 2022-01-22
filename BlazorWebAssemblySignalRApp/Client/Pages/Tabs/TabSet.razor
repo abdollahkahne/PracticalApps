@@ -1,0 +1,34 @@
+@* Display Tab Headers: To elevate state use this *@
+<CascadingValue Value="this">
+    <ul class="nav nav-tabs">
+        @ChildContent
+    </ul>
+</CascadingValue>
+@* Display Content of Active Tab *@
+<div class="nav-tabs-body p-4">
+    @ActiveTab?.ChildContent
+</div>
+
+@code {
+    [Parameter]
+    public RenderFragment? ChildContent { get; set; }
+    public ITab? ActiveTab { get; private set; }
+
+    public void AddTab(ITab tab)
+    {
+        if (ActiveTab is null)
+        {
+            ActiveTab = tab; // we should use SetActiveTab here or call StateHasChanged to Rerender in case of first render!
+            StateHasChanged();
+        }
+    }
+
+    public void SetActiveTab(ITab tab)
+    {
+        if (ActiveTab != tab)
+        {
+            ActiveTab = tab;
+            StateHasChanged();
+        }
+    }
+}

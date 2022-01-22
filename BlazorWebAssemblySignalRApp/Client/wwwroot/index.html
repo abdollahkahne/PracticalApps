@@ -56,7 +56,9 @@
         function addDialog() {
             var dialogElem=document.getElementById("dialog");
             var textNode=document.createTextNode("This is a sample node");
-            Blazor.rootComponents.add(dialogElem,"dialog",{title:"Title of Dialog",childContent:textNode});
+            var x= document.createElement("p");
+            x.innerText="Sample Element";
+            Blazor.rootComponents.add(dialogElem,"dialog",{title:"Title of Dialog",childContent:null});
         }
     </script>
 </body>

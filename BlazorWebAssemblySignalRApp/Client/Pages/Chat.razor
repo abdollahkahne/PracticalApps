@@ -735,6 +735,101 @@
     Blazor Layout
     A Blazor layout is a Razor component that shares markup with components that reference it. Layouts can use data binding,
     dependency injection, and other features of components.
+    To create a layout, we can create a component using cs class or razor component and inherit from LayoutComponentBase.
+    Then use Body Property from LayoutComponentBase in the Layout. Body is a RenderFragment and Use the Razor syntax @Body
+    to specify the location in the layout markup where the content is rendered.
+    In an app created from a Blazor project template, the MainLayout component is the app's default layout. Blazor's CSS
+    isolation feature applies isolated CSS styles to the MainLayout component. By convention, the styles are provided by the
+    accompanying stylesheet of the same name, Shared/MainLayout.razor.css.
+    To apply a layout we can do one of the followings:
+    1- Use the @layout Razor directive to apply a layout to a routable Razor component that has an @page directive. The
+    compiler converts @layout into a LayoutAttribute and applies the attribute to the component class. Specifying the layout
+    directly in a component overrides a default layout which can be defined in following ways (in App.razor or Folder
+    _imports.razor using @layout directive).
+    2- Every folder of an app can optionally contain a template file named _Imports.razor. The compiler includes the
+    directives specified in the imports file in all of the Razor templates in the same folder and recursively in all of its
+    subfolders. Add @layout directive to apply a layout to them (only routable components). Do not add a Razor @layout
+    directive to the root _Imports.razor file, which results in an infinite loop of layouts. Specifying a layout in
+    _Imports.razor overrides a layout specified as the router's default app layout, which is described in the following.
+    3- Specify the default app layout in the App component's Router component.We recommend using the Router component to set
+    the app's default layout because it's the most general and flexible approach for using layouts.
+
+    4- To apply a layout to an arbitary content we can use LayoutView Component which have a Layout property equal to typeof
+    the Layout component. It can be used for nested layout too.
+    5- A component can reference a layout that in turn references another layout. For example, nested
+    layouts are used to create a multi-level menu structures
+
+    HeaderOutlet Component
+    This built-in component used for setting Page Headers like title and meta tags. The following components uses the
+    HeaderOutlet:
+    1- PageTitle: which adds Title to page.
+    2- HeadContent: add contents to head element like meta elements
+
+    When Razor components are prerendered, the use of a layout page (_Layout.cshtml) is required. It should Prerender the
+    head content using the HeaderOutlet component as follows (BlazorServer vs blazorwebassembly):
+    <component type="typeof(HeadOutlet)" render-mode="ServerPrerendered" />
+    <component type="typeof(HeadOutlet)" render-mode="WebAssemblyPrerendered" />
+
+    CascadingParameter and CascadingValue (Context in React)
+    They provide a convenient way to flow data down a component hierarchy from an ancestor component to any number of
+    descendent components and allow components to coordinate with each other across a component hierarchy. Unlike Component
+    parameters, cascading values and parameters don't require an attribute assignment (It require Parameter Property!).
+    Blazor framework provides CascadingValue component, which wraps a subtree of a component hierarchy and supplies a single
+    value to all of the components within its subtree.
+    To make use of cascading values, descendent components declare cascading parameters using the [CascadingParameter]
+    attribute. Cascading values are bound to cascading parameters by type (Type is key for binding!).
+    Similar to a regular component parameter, components accepting a cascading parameter are rerendered when the cascading
+    value is changed. You can add IsFixed=true parameter to it to indicate it should not change after initialization.
+    To have multiple cascading values of same type you should use Name property for CascadingValue component to
+    differentiate them (<CascadingValue Value="@parentCascadeParameter1" Name="CascadeParam1">) and to use one of them in
+    child component you should use Name in CascadingParameter Attribute as [CascadingParameter(Name = "CascadeParam1")].
+    We can also elevate state using CascadingValue between component hierarchy. for this purpose one approach is to set this
+    as instance of component as Value. Then you can call it and have access to its StateHasChanged method to rerender
+    children. Another approach is to pass the StateHasChanged method as a property in the Value Type.
+
+    Data binding (Input Controls)
+    Razor components provide data binding features with the @bind Razor directive attribute with a field, property, or Razor
+    expression value.
+    By default, When an <input> element loses focus, its bound field or property is updated. The text box is updated in the
+    UI only when the component is rendered, not in response to changing the field's or property's value. But Since
+    components render themselves after event handler code executes, field and property updates are usually reflected in the
+    UI immediately after an event handler is triggered. It is like Controlled Inputs in React but onchange event triggered
+    OnBlur!! (See BindingTheory.razor). In general, @bind associates the current value of an expression with a value
+    attribute and handles changes using the registered handler. Bind a property or field on other Document Object Model
+    (DOM) events by including an @bind:event="{EVENT}" attribute with a DOM event for the {EVENT} placeholder.
+    for example we have onchange and oninput events. Unlike the onchange event, which fires when the element loses focus,
+    oninput fires when the value of the text box changes.
+    In binding process, When a user provides an unparsable value to a databound element, the unparsable value is
+    automatically reverted to its previous value when the bind event is triggered.
+    There is custom Form validation components provide built-in support to manage invalid inputs. We can study them in
+    related section.
+    Also we can define format for date fields in case where we use input type as text. If you use input type as date then
+    you possibly always get error. This feature only availabe for date and not for currency or numbers! What about Regular
+    Expressions?! for them C# get and set accessors can be used to create custom binding format behavior.
+
+    Child Binding (Chain Binding)
+    There is situation that you want to set a parameter of child component such that child component can change the
+    parameter property in a safe way directly from Parent component. There is a way that use the CascadingValue. but a
+    better way is to bind the parameter in child to an expression (or Property or field) in parent and as a result you have
+    access to a delegate which can invoke to change the expression in Parent and then rerender it to change the Parameter of
+    child.
+    if we have a {Property} in Parent which we want bind to a property in child we should use two Component parameters in
+    child which permit binding properties of a parent component with @bind-{PROPERTY} syntax, where the {PROPERTY}
+    placeholder is the parent property to bind. By convention, the EventCallback<TValue> for the parameter must be named as
+    the component parameter name with a "Changed" suffix. The naming syntax is {PARAMETER NAME}Changed, where the {PARAMETER
+    NAME} placeholder is the parameter name. It also need the type matches. If you want to specify other name, By
+    convention, you should specify it in Parent by including an @bind-{PROPERTY}:event attribute assigned to the handler,
+    where the {PROPERTY} placeholder is the property. The following are equaled by convention:
+    <Child @bind-Year="year" @bind-Year:event="YearChanged" />
+    <Child @bind-Year="year"/>
+
+    Nested Binding (this is chaind binding)
+    We can have binding between multiple levels of component hierarchy. You can bind parameters through any number of nested
+    components, but you must respect the one-way flow of data:
+    1- Change notifications flow up the hierarchy.
+    2- New parameter values flow down the hierarchy.
+    As you can see in the example, the middle components chaind to do 1 and 2 between parent and lowest level component
+    using a property which has a setter that uses the immidate parent call back and do not short circuit the follow.
 
 
 

@@ -1,0 +1,19 @@
+@page "/elevate-state"
+<CascadingValue Value="testContext">
+    <FirstCascadingChildComponent></FirstCascadingChildComponent>
+    <SecondCascadingChildComponent></SecondCascadingChildComponent>
+
+</CascadingValue>
+@code {
+    public TestContext testContext = new()
+    {
+        MyProperty = "This is original Value",
+    };
+
+    protected override void OnInitialized()
+    {
+        testContext.UpdateState = StateHasChanged;
+        base.OnInitialized();
+    }
+
+}

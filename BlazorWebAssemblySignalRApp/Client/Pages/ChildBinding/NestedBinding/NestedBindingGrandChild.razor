@@ -1,0 +1,18 @@
+<h2>Grand Child Component</h2>
+<div>
+    <p>Current parent message:@GrandChildMessage</p>
+    <button @onclick="changeMessage">Change Message from Grand Child</button>
+</div>
+
+@code {
+    [Parameter]
+    public string? GrandChildMessage { get; set; }
+
+    [Parameter]
+    public EventCallback<string> GrandChildMessageChanged { get; set; }
+
+    void changeMessage()
+    {
+        GrandChildMessageChanged.InvokeAsync($"Set By {this.GetType()} at {DateTime.UtcNow}");
+    }
+}

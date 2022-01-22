@@ -1,0 +1,152 @@
+@page "/bind-theory"
+
+@using System.Globalization
+
+<p>
+    <label>
+        Normal Blazor binding:
+        <input @bind="InputValue" />
+    </label>
+</p>
+
+<p>
+    <label>
+        Demonstration of equivalent HTML binding:
+        <input value="@InputValue" @onchange="@((ChangeEventArgs __e) => InputValue = __e?.Value?.ToString())" />
+    </label>
+</p>
+
+<p>
+    <label>
+        Demonstration of oninput HTML binding:
+        <input @bind="InputValue" @bind:event="oninput" />
+    </label>
+</p>
+
+<p>
+    <code>InputValue</code>: @InputValue
+</p>
+
+<div>
+    <select @bind="SelectValue">
+        <option value="" disabled>Select Country</option>
+        <option value="UK">United Kingdom</option>
+        <option value="USA">United Stated of America</option>
+        <option value="UAE">United Arab Emirates</option>
+    </select>
+</div>
+<p>
+    Selected Country is: @SelectValue
+</p>
+
+<h1>Bind Multiple <code>input</code>Example using bind</h1>
+<div>
+    <select multiple @bind="SelectedCars">
+        <option value="" disabled>Select A Car</option>
+        <option value="audi">Audi</option>
+        <option value="jeep">Jeep</option>
+        <option value="opel">Opel</option>
+        <option value="saab">Saab</option>
+        <option value="volvo">Volvo</option>
+    </select>
+</div>
+<p>
+    Selected Cars are: @String.Join(", ",SelectedCars)
+</p>
+
+<h1>Bind Multiple <code>input</code>Example using onchange</h1>
+
+<div>
+    <select @onchange="SelectedColoursChanged" multiple>
+        <option value="" disabled>Select a colour</option>
+        <option value="Blue">Blue</option>
+        <option value="Green">Green</option>
+        <option value="Red">Red</option>
+        <option value="Pink">Pink</option>
+        <option value="Purple">Purple</option>
+        <option value="Orange">Orange</option>
+        <option value="Yellow">Yellow</option>
+    </select>
+</div>
+<p>Selected Colours: @string.Join(", ",SelectedColours)</p>
+
+<h2> Input Integer using On Change Event</h2>
+<label>Select an Integer
+    <input @bind="InputInteger" />
+</label>
+<p> Selected integer is @InputInteger</p>
+
+<h2> Input Integer Using On Input event</h2>
+<label>Select an Integer
+    <input @bind="InputInteger" @bind:event="oninput" />
+</label>
+<p> Selected integer is @InputInteger</p>
+
+<h2> Select float number with only one digit</h2>
+<label>
+    Select a number with one digit (Format is available with Date only)
+    <input @bind="InputDouble">
+</label>
+<p>Selected double is @InputDouble</p>
+
+<h2>Input as Date</h2>
+<label>
+    Choose a date:
+    <input id="selected-date" type="date" @bind="SelectedDate">
+    <input id="selected-date" type="text" @bind="SelectedDate" @bind:format="yy-MMM-dd">
+</label>
+
+<p>
+    Selected Date is: @SelectedDate.ToString()
+</p>
+
+<h2>Format Other Types than date using accessors</h2>
+<p>
+    <label>
+        Decimal value (&plusmn;0.000 format):
+        <input @bind="DecimalValue" />
+    </label>
+</p>
+
+<p>
+    <code>decimalValue</code>: @decimalValue
+</p>
+
+
+
+@code {
+    private string? InputValue { get; set; }
+    private string? SelectValue { get; set; }
+    private string[] SelectedCars { get; set; } = new string[] { "audi" };
+    private string[] SelectedColours { get; set; } = new String[] { }; // Here we should define empty array
+    @* // Null value is not available in html and it convert to empty string in single select and in case of multiple it
+        throw error *@
+    private void SelectedColoursChanged(ChangeEventArgs e)
+    {
+        if (e.Value is not null)
+        {
+            SelectedColours = (string[])e.Value;
+        }
+    }
+
+    private int InputInteger { get; set; }
+    private double InputDouble { get; set; }
+    private DateTime? SelectedDate { get; set; }
+
+    // following is used for decimal only
+    private CultureInfo culture = new CultureInfo("en-us");
+    private NumberStyles styles = NumberStyles.AllowDecimalPoint | NumberStyles.AllowLeadingSign;
+    private Decimal decimalValue = 1.1M;
+    private String? DecimalValue
+    {
+        get => decimalValue.ToString("0.000", culture);
+        set
+        {
+            if (Decimal.TryParse(value, styles, culture, out decimal number))
+            {
+                decimalValue = Math.Round(number, 3);
+            }
+        }
+    }
+
+}

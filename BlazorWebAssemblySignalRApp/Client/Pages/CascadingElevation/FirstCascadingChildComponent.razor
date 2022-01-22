@@ -1,0 +1,9 @@
+<h1>Display State Value</h1>
+<p>
+    @Context?.MyProperty
+</p>
+
+@code {
+    [CascadingParameter]
+    public TestContext? Context { get; set; }
+}

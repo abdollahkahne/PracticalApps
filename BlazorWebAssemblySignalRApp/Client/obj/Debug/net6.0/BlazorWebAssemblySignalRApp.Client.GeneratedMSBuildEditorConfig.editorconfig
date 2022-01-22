@@ -22,6 +22,22 @@ build_property._RazorSourceGeneratorDebug =
 build_metadata.AdditionalFiles.TargetPath = QXBwLnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
+[/home/selenium/Desktop/Learning/PracticalApps/BlazorWebAssemblySignalRApp/Client/Pages/BindingTheory.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvQmluZGluZ1RoZW9yeS5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/selenium/Desktop/Learning/PracticalApps/BlazorWebAssemblySignalRApp/Client/Pages/CascadingElevation/FirstCascadingChildComponent.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvQ2FzY2FkaW5nRWxldmF0aW9uL0ZpcnN0Q2FzY2FkaW5nQ2hpbGRDb21wb25lbnQucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/selenium/Desktop/Learning/PracticalApps/BlazorWebAssemblySignalRApp/Client/Pages/CascadingElevation/MainContext.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvQ2FzY2FkaW5nRWxldmF0aW9uL01haW5Db250ZXh0LnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/selenium/Desktop/Learning/PracticalApps/BlazorWebAssemblySignalRApp/Client/Pages/CascadingElevation/SecondCascadingChildComponent.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvQ2FzY2FkaW5nRWxldmF0aW9uL1NlY29uZENhc2NhZGluZ0NoaWxkQ29tcG9uZW50LnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
 [/home/selenium/Desktop/Learning/PracticalApps/BlazorWebAssemblySignalRApp/Client/Pages/CascadingErrorComponent.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXMvQ2FzY2FkaW5nRXJyb3JDb21wb25lbnQucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
@@ -32,6 +48,34 @@ build_metadata.AdditionalFiles.CssScope =
 
 [/home/selenium/Desktop/Learning/PracticalApps/BlazorWebAssemblySignalRApp/Client/Pages/Check.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXMvQ2hlY2sucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/selenium/Desktop/Learning/PracticalApps/BlazorWebAssemblySignalRApp/Client/Pages/ChildBinding/ChildBindingChild.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvQ2hpbGRCaW5kaW5nL0NoaWxkQmluZGluZ0NoaWxkLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/selenium/Desktop/Learning/PracticalApps/BlazorWebAssemblySignalRApp/Client/Pages/ChildBinding/ChildBindingParent.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvQ2hpbGRCaW5kaW5nL0NoaWxkQmluZGluZ1BhcmVudC5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/selenium/Desktop/Learning/PracticalApps/BlazorWebAssemblySignalRApp/Client/Pages/ChildBinding/NestedBinding/NestedBindingChild.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvQ2hpbGRCaW5kaW5nL05lc3RlZEJpbmRpbmcvTmVzdGVkQmluZGluZ0NoaWxkLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/selenium/Desktop/Learning/PracticalApps/BlazorWebAssemblySignalRApp/Client/Pages/ChildBinding/NestedBinding/NestedBindingGrandChild.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvQ2hpbGRCaW5kaW5nL05lc3RlZEJpbmRpbmcvTmVzdGVkQmluZGluZ0dyYW5kQ2hpbGQucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/selenium/Desktop/Learning/PracticalApps/BlazorWebAssemblySignalRApp/Client/Pages/ChildBinding/NestedBinding/NestedBindingParent.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvQ2hpbGRCaW5kaW5nL05lc3RlZEJpbmRpbmcvTmVzdGVkQmluZGluZ1BhcmVudC5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/selenium/Desktop/Learning/PracticalApps/BlazorWebAssemblySignalRApp/Client/Pages/ChildBinding/PasswordBinding.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvQ2hpbGRCaW5kaW5nL1Bhc3N3b3JkQmluZGluZy5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/selenium/Desktop/Learning/PracticalApps/BlazorWebAssemblySignalRApp/Client/Pages/ChildBinding/PasswordEntry.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvQ2hpbGRCaW5kaW5nL1Bhc3N3b3JkRW50cnkucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
 [/home/selenium/Desktop/Learning/PracticalApps/BlazorWebAssemblySignalRApp/Client/Pages/ConfigurationSample.razor]
@@ -56,6 +100,18 @@ build_metadata.AdditionalFiles.CssScope =
 
 [/home/selenium/Desktop/Learning/PracticalApps/BlazorWebAssemblySignalRApp/Client/Pages/Dialog.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXMvRGlhbG9nLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/selenium/Desktop/Learning/PracticalApps/BlazorWebAssemblySignalRApp/Client/Pages/DoctorWhoSample/DoctorWhoLayout.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvRG9jdG9yV2hvU2FtcGxlL0RvY3Rvcldob0xheW91dC5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/selenium/Desktop/Learning/PracticalApps/BlazorWebAssemblySignalRApp/Client/Pages/DoctorWhoSample/Episods.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvRG9jdG9yV2hvU2FtcGxlL0VwaXNvZHMucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/selenium/Desktop/Learning/PracticalApps/BlazorWebAssemblySignalRApp/Client/Pages/DoctorWhoSample/ProductionsLayout.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvRG9jdG9yV2hvU2FtcGxlL1Byb2R1Y3Rpb25zTGF5b3V0LnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
 [/home/selenium/Desktop/Learning/PracticalApps/BlazorWebAssemblySignalRApp/Client/Pages/ExternalEvents/ReceiveNotifications.razor]
@@ -120,6 +176,18 @@ build_metadata.AdditionalFiles.CssScope =
 
 [/home/selenium/Desktop/Learning/PracticalApps/BlazorWebAssemblySignalRApp/Client/Pages/Splat.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXMvU3BsYXQucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/selenium/Desktop/Learning/PracticalApps/BlazorWebAssemblySignalRApp/Client/Pages/Tabs/ExampleTabSet.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvVGFicy9FeGFtcGxlVGFiU2V0LnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/selenium/Desktop/Learning/PracticalApps/BlazorWebAssemblySignalRApp/Client/Pages/Tabs/Tab.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvVGFicy9UYWIucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/selenium/Desktop/Learning/PracticalApps/BlazorWebAssemblySignalRApp/Client/Pages/Tabs/TabSet.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvVGFicy9UYWJTZXQucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
 [/home/selenium/Desktop/Learning/PracticalApps/BlazorWebAssemblySignalRApp/Client/Pages/UseCheckbox.razor]
