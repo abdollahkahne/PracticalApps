@@ -114,6 +114,18 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = UGFnZXMvRG9jdG9yV2hvU2FtcGxlL1Byb2R1Y3Rpb25zTGF5b3V0LnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
+[/home/selenium/Desktop/Learning/PracticalApps/BlazorWebAssemblySignalRApp/Client/Pages/EventCallback/EventCallbackChild.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvRXZlbnRDYWxsYmFjay9FdmVudENhbGxiYWNrQ2hpbGQucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/selenium/Desktop/Learning/PracticalApps/BlazorWebAssemblySignalRApp/Client/Pages/EventCallback/EventCallbackParent.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvRXZlbnRDYWxsYmFjay9FdmVudENhbGxiYWNrUGFyZW50LnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/selenium/Desktop/Learning/PracticalApps/BlazorWebAssemblySignalRApp/Client/Pages/EventHandling/EventHandlingExample.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvRXZlbnRIYW5kbGluZy9FdmVudEhhbmRsaW5nRXhhbXBsZS5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
 [/home/selenium/Desktop/Learning/PracticalApps/BlazorWebAssemblySignalRApp/Client/Pages/ExternalEvents/ReceiveNotifications.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXMvRXh0ZXJuYWxFdmVudHMvUmVjZWl2ZU5vdGlmaWNhdGlvbnMucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 

@@ -1,0 +1,166 @@
+@page "/event-handler-example"
+
+<h1>@currentHeading</h1>
+<div id="catdog" @onmycustomcatdog="catdogEventHandler">
+    @catdogDetails
+</div>
+<div>
+    CustomEvent: mycustomevent
+    <button @onmycustomclick="myCustomEventHandler">
+        My Custom Event
+    </button>
+    @CustomEventNotifier
+</div>
+
+<div @oncontextmenu="rightClick">
+    <p>
+    <label>
+        New title
+        <input @bind="newHeading" />
+    </label>
+    <button @onclick="UpdateHeading">
+        Update heading
+    </button>
+</p>
+
+<p>
+    <label>
+        <input value="checkBoxValue" type="checkbox" @onchange="CheckChanged" />
+        @checkedMessage
+    </label>
+</p>
+
+
+<p>
+    Mouse Pointer Coordinate is @mouseCoordinate
+    <button @onclick="updateMouseCoordinate">
+        Update Mouse Coordinate
+    </button>
+</p>
+
+<label>
+    Try pasting into the following text box:
+    <input @ref="inputRef" @oncustompaste="handleCustomPaste" />
+</label>
+<p>
+    @pastedText
+</p>
+
+<button @onclick="@(e=>{pastedText='('+e.ClientX.ToString()+':'+e.ClientY.ToString()+')';})">Change Above Text using Delegate</button>
+
+
+</div>
+<div>
+    @for (int i = 0; i < 3; i++)
+    {
+        int ii=i;
+        <button @onclick="@(e=>handleEventWithAdditionalData(e,ii))">Button @i</button>
+    }
+    <p>Here since lambda expression execute in run time use a local variable</p>
+</div>
+<div>
+    Prevent default event execution is done using the onclick:preventdefault directive.
+    <input value="@counter" @onkeydown="handleCounter" @onkeydown:preventDefault />
+</div>
+
+<div>
+    <h2>Event Propagation</h2>
+
+<label>
+    <input @bind="stopPropagation" type="checkbox" />
+    Stop Propagation
+</label>
+
+<div class="m-1 p-1 border border-primary" @onclick="OnSelectParentDiv">
+    <h3>Parent div</h3>
+
+    <div class="m-1 p-1 border" @onclick="OnSelectChildDiv">
+        Child div that doesn't stop propagation when selected.
+    </div>
+
+    <div class="m-1 p-1 border" @onclick="OnSelectChildDiv" 
+            @onclick:stopPropagation="stopPropagation">
+        Child div that stops propagation when selected.
+    </div>
+</div>
+
+<p>
+    @message
+</p>
+
+</div>
+@code {
+    private ElementReference inputRef {get;set;}
+    private string? mouseCoordinate {get;set;}
+    private string currentHeading = "Initial heading";
+    private string? newHeading;
+    private bool checkBoxValue { get; set; }
+    private string checkedMessage = "Not changed yet";
+    private int counter {get;set;}=0;
+    private void handleCounter(KeyboardEventArgs e) {
+        if (e.Key=="+") {
+            counter++;
+        } else if (e.Key=="-") {
+            counter--;
+        }
+    }
+
+    private void UpdateHeading()
+    @* There is only one thread in web assembly??! *@
+    {
+        @* await Task.Delay(5000);
+            // In lambda expression this captured at run time and the outer scope an variables are accessible! and here it is
+            necessary to speify it if we want to use its fields and properties!
+            await Task.Run(()=>{
+            Console.WriteLine(this.GetType());
+            currentHeading = $"{newHeading}!!! and Thread Id is {Thread.CurrentThread.ManagedThreadId}";
+            // StateHasChanged(); //this is required if we call it without await! 
+        }); 
+        *@
+        currentHeading = $"{newHeading}!!! and Thread Id is {Thread.CurrentThread.ManagedThreadId}";
+        inputRef.FocusAsync();
+    }
+    private void CheckChanged()
+    {
+        @* await Task.Delay(2000); *@
+        checkBoxValue = !checkBoxValue;
+        checkedMessage = $"Last changed at {DateTime.Now} to {checkBoxValue} and Thread Id is {Thread.CurrentThread.ManagedThreadId}";
+    }
+
+    private void updateMouseCoordinate(MouseEventArgs e) {
+        mouseCoordinate=$"({e.ScreenX},{e.ScreenY})";
+    }
+    private void rightClick(MouseEventArgs e) {
+        Console.WriteLine($"Right Click on: ({e.ClientX},{e.ClientY})");
+    }
+    private void myCustomEventHandler(MyCustomEventArgs e) {
+        CustomEventNotifier="I triggered to run!";
+
+        Console.WriteLine(e.Src);
+        Console.WriteLine(e.Value);
+    }
+    private string CustomEventNotifier {get;set;}="Not Runned Yet!";
+    private string catdogDetails {get;set;}="This is not set yet!";
+    private void catdogEventHandler(CatDogEventArgs e) {
+        catdogDetails=$"{e.Name} has {e.Age} years old and {e.Weight} weight in {e.Stamp}";
+    }
+
+    private string pastedText {get;set;}="Not Pasted Yet!";
+    private void handleCustomPaste(CustomPasteEventArgs e) {
+        pastedText=$"{e.PastedData} at {e.EventTimeStamp.ToShortTimeString()}";
+    }
+    private void handleEventWithAdditionalData(MouseEventArgs e,int i) {
+        pastedText=$"button {i} clicked at ({e.ClientY},{e.ClientY})";
+    }
+
+
+    private bool stopPropagation = false;
+    private string? message; 
+
+    private void OnSelectParentDiv() =>
+        message = $"The parent div was selected. {DateTime.Now}";
+
+    private void OnSelectChildDiv() =>
+        message = $"A child div was selected. {DateTime.Now}";
+    
+}

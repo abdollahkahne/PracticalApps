@@ -1,0 +1,13 @@
+@page "/event-callback"
+
+<EventCallbackChild Title="Event Callback" ChangeBody="changeMessage">@message</EventCallbackChild>
+<EventCallbackChild Title="Async Event Callback"
+    ChangeBody="@(async e=>{await Task.Yield();message="Blaze it asynchronously!!";})">@message</EventCallbackChild>
+
+@code {
+    private string message { get; set; } = "This message managed by my parent!";
+    private void changeMessage(MouseEventArgs e)
+    {
+        message = "The message changed by parent method which triggered by child!";
+    }
+}

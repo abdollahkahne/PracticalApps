@@ -26,6 +26,7 @@
     <!-- <script type="module" src="BlazorWebAssemblySignalRApp.Client.lib.module.js"></script> -->
     <script autostart="false" src="_framework/blazor.webassembly.js"></script>
     <!-- <script type="module" src="BlazorWebAssemblySignalRApp.Client.lib.module.js"></script> -->
+
     
     <script>
         
@@ -52,6 +53,37 @@
             }
         });
     </script>
+    
+    <script>
+        // this function can be write as lambda expression too
+        function myCustomEventArgs(event) {
+            return {
+                value:"Custom Event Value",
+                src:"Custom Event Name"
+            }
+        }
+        Blazor.registerCustomEventType("mycustomclick",{
+            browserEventName:"click",
+            createEventArgs:myCustomEventArgs,
+        });
+        Blazor.registerCustomEventType("mycustomcatdog",{
+            browserEventName:"catdog",
+            createEventArgs:e => ({
+                name:e.detail.name,
+                weight:e.detail.weight,
+                age:e.detail.age,
+                stamp: new Date()
+            })
+
+        });
+        Blazor.registerCustomEventType("custompaste",{
+            browserEventName:"paste",
+            createEventArgs:e =>({
+                eventTimeStamp:new Date(),
+                pastedData:e.clipboardData.getData("text"),
+            }),
+        });
+    </script>
     <script>
         function addDialog() {
             var dialogElem=document.getElementById("dialog");
@@ -60,6 +92,26 @@
             x.innerText="Sample Element";
             Blazor.rootComponents.add(dialogElem,"dialog",{title:"Title of Dialog",childContent:null});
         }
+    </script>
+    
+    <script>
+        // Here we create a custom event in JS for dom (this is feature of js)
+        const mycustomJSEvent=new CustomEvent("catdog",{
+            detail:{
+                name:"Rita",
+                weight:"10",
+                age:"3"
+            },
+            bubbles:true,
+        });
+        addEventListener("catdog",e=>{console.log(e)});
+        setInterval(()=>{
+            if (document.getElementById("catdog")) {
+                document.getElementById("catdog").dispatchEvent(mycustomJSEvent);
+            }
+        },30000);// dispatch event every 30 seconds with src equal to window
+        // To dispatch the event with another object use obj.dispatchEvent and obj.EventListener to handle it)
+
     </script>
 </body>
 

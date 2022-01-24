@@ -831,6 +831,72 @@
     As you can see in the example, the middle components chaind to do 1 and 2 between parent and lowest level component
     using a property which has a setter that uses the immidate parent call back and do not short circuit the follow.
 
+    Event Handling in Blazor (Razor Component)
+    Event handling in Blazor component to DOM Events do through defining a delegate and specify it as:
+    @on{Event}="DelegateName"
+    For event handling:
+    * Asynchronous delegate event handlers that return a Task are supported.
+    * Delegate event handlers automatically trigger a UI render, so there's no need to manually call StateHasChanged.
+    * Exceptions are logged.
+
+    For events that support an event argument type, specifying an event parameter in the event method definition is only
+    necessary if the event type is used in the method. There is lots of events but there is small EventArgs Types. for
+    mapping between them see the following link:
+    https://docs.microsoft.com/en-us/aspnet/core/blazor/components/event-handling?view=aspnetcore-6.0
+    We also can use lambda expression delegate as event handler delegate. This is specially useful when we want to pass more
+    than event arguments to the event handler.
+
+    Create Custom Event in Blazor
+    We can catch event currently exist in the dom with our custom argument and then handle them in blazor. If bubbling is
+    enabled for event we can handle event in parent component too (It is nature of event and readonly). Blazor supports
+    custom event arguments, which enable you to pass arbitrary data to .NET event handlers with custom events.
+    To define and use a custom event we should do something in JavaScript and in .Net as below:
+    1- In JavaScript, define a function for building the custom event argument object from the source event (It can define
+    in step 2 as lambda expression too).
+    2- Register Custom Event: Here we define mapping between custom event and its arguments to an existing DOM Event in JS.
+    To Register an event, we should use:
+    Blazor.registerCustomEventType("customevent",{browserEventName:"nativeevent",createEventArgs:e => ({here we return the
+    arguments from e (This function can be defined in step 1 too!)})});
+    3- Define a class for custom event arguments in .NET inheriting from EventArgs. The name of arguments here is PascalCase
+    equal to camelCase in step 1,2.
+    4- Wireup between .Net class for event argument and the event using an empty class named EventHandlers which have an
+    EventHandlerAttribute
+    (this attribute has 4 arguments including event name as oneventname, event arg type as class defined in step 3,
+    EnablePropagateEvent, EnablePreventDefault)
+    5- use event like built-in events (always use event name in .NET with an on as oncustomevent vs customevent in JS).
+    Here we can use built in event as source or define custom event in js and use them. The event should dispatch in a
+    script and should have bubbles:true to catch by Blazor components.
+
+
+    Event callback
+    A common scenario with nested components is executing a parent component's method when a child component event occurs.
+    We already have an special case of it when using two-way parameter binding in childs. but here we want to extend it in a
+    way that we can execute an arbitary method of parent as an event handler in child components.
+    Event Callback is a not a delegate altough it seems but it works like a delegate which it seems implemented by Blazor in
+    a way that call its constructor(event,delegate) and it has an InvokeAsync method which called when it triggered.
+    StateHasChanged is called automatically to rerender the Parent component, just as child events trigger component
+    rerendering in event handlers that execute within the child.
+    EventCallback and EventCallback<TValue> permit asynchronous delegates. EventCallback is weakly typed and allows passing
+    any type argument in InvokeAsync(Object). EventCallback<TValue> is strongly typed and requires passing a T argument in
+    InvokeAsync(T) that's assignable to TValue. Use EventCallback when there's no value passed to the callback.
+    You can also Invoke an EventCallback or EventCallback<TValue> with InvokeAsync and await the Task directly in child.
+    This also make parent component rerender.
+    Use the @on{DOM EVENT}:preventDefault directive attribute to prevent the default action for an event. for example when
+    the focus is on an input, when pressing a button (onkeydown) after executing the assigned handler (if any exists!),
+    browser by default show the pressed key on input. we can prevent this by enableing preventDefault as
+    onkeydown:preventdefault on the input onkeydown event.
+    Use the @on{DOM EVENT}:stopPropagation directive attribute to stop event propagation within the Blazor scope.
+    The stopPropagation directive attribute's effect is limited to the Blazor scope and doesn't extend to the HTML DOM.
+    Events must propagate to the HTML DOM root before Blazor can act upon them. For a mechanism to prevent HTML DOM event
+    propagation, consider the following approach:
+    * Obtain the event's path by calling Event.composedPath() (This method returns An array of EventTarget objects
+    representing the objects on which an event listener will be invoked).
+    * Filter events based on the composed event targets (EventTarget): Element, and its children, as well as Document and
+    Window, are the most common event targets, but other objects can be event targets, too. For example XMLHttpRequest,
+    AudioNode, and AudioContext are also event targets.Many event targets (including elements, documents, and windows) also
+    support setting event handlers via onevent properties and attributes but you can also use addEventListener,
+    removeEventListener and dispatchEvent methods on them.
+    Call FocusAsync on an element reference to focus an element in code (@ref).
 
 
 
