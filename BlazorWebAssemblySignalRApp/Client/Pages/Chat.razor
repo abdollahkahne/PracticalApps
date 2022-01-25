@@ -898,6 +898,44 @@
     removeEventListener and dispatchEvent methods on them.
     Call FocusAsync on an element reference to focus an element in code (@ref).
 
+    Blazor Razor Components lifecycle
+    The Razor component processes Razor component lifecycle events in a set of synchronous and asynchronous lifecycle
+    methods. The lifecycle methods can be overridden to perform additional operations in components during component
+    initialization and rendering. Rendering Cycle as a part of component lifecycle may happen after one of the following:
+    1- Child Component Rendering By Parent Component
+    2- Event Processing Fired by DOM: In this case, Rendering cycle happens at the end of completing all async Tasks.
+
+    Child Component Rendering By Parent Component:
+    * First time: 1- Create Component Instance and running SetParametersAsync (This can be overridden too) 2-
+    OnInitializedAsync Hook (may have an
+    additional rendering cycle here) 3- OnParametersSetAsync Hook 4- Rendering cycle
+    * Re-rendering: 1-OnParametersSetAsync 2- Rendering cycle
+
+    Here, we may have an additional component rendering cycle in case of Uncompleted Async Task after completing the
+    OnInitializedAsync hook. So it may be possible
+    that we have one rendering cycles after each hook completion.
+
+    Rendering lifecycle
+    After initial rendering or if ShouldRender method returns true this lifecycle continues otherwise it ends. in this case
+    the following step happens:
+    1- Build Render Tree difference and send render batch to DOM
+    2- Call OnAfterRenderAsync Hook: By Default, this does not trigger Rendering lifecycle again.
+
+    To trigger Rendering Lifecycle manually, we can call StateHasChanged().
+
+    SetParametersAsync
+    This method calls in initialization of component and can be overridden. Parameter can come from different source
+    including route parameters, Parent component or CascadingValue components. This method has an argument named
+    ParameterView which has parameter values from sources.
+    The default implementation of SetParametersAsync sets the value of each property with the [Parameter] or
+    [CascadingParameter] attribute that has a corresponding value in the ParameterView. Parameters that don't have a
+    corresponding value in ParameterView are left unchanged.
+    In case of overriding it, If base.SetParametersAsync isn't invoked, developer code can interpret the incoming
+    parameters' values in any way required. We can use ParameterView.TryGetValue (key) to get the parameter value but it is
+    case sensitive!!! (This is different than insensitive case in Route Parameter matching which only applicable to route
+    template)
+
+
 
 
 

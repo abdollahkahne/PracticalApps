@@ -1,0 +1,29 @@
+@page "/lifecycle-parent/{id:int?}"
+
+<h2>Parameters From Route</h2>
+<p>@receivedParams</p>
+
+<h2>Route Parameter by default:</h2>
+<p>Id: @Id</p>
+
+@code {
+    private string receivedParams { get; set; } = "";
+    [Parameter]
+    public int Id { get; set; }
+    @* Id set altough it is not case matched with route template *@
+    public override Task SetParametersAsync(ParameterView parameters)
+    {
+        foreach (var item in parameters)
+        {
+            receivedParams += $"{item.Name}:{item.Value} and it is cascading {item.Cascading}\n";
+        }
+
+        if (parameters.TryGetValue<int?>("id", out int? id))
+        {
+            @* ParameterView is case-sensitive dictionarywise *@
+            Id = 9;
+        }
+        @* return Task.CompletedTask; *@
+        return base.SetParametersAsync(ParameterView.Empty);
+    }
+}
