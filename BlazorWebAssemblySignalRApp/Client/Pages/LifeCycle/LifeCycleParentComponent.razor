@@ -1,4 +1,5 @@
 @page "/lifecycle-parent/{id:int?}"
+@inject ILogger<LifeCycleParentComponent> _logger
 
 <h2>Parameters From Route</h2>
 <p>@receivedParams</p>
@@ -6,7 +7,17 @@
 <h2>Route Parameter by default:</h2>
 <p>Id: @Id</p>
 
+<h2>Initialized in OnInit Hook (A Render cycle auto called happen at the end too!)</h2>
+<p>@initializedMessage</p>
+
+<h2>On After Render Trigger</h2>
+<p>@onAfterMessage</p>
+<button @onclick="@(()=>_logger.LogInformation("Log Information clicked!"))">Log information (and trigger a
+    render)</button>
+
 @code {
+    private string onAfterMessage { get; set; } = "Initial assigned message.";
+    private string initializedMessage { get; set; } = "No Set In Init";
     private string receivedParams { get; set; } = "";
     [Parameter]
     public int Id { get; set; }
@@ -24,6 +35,35 @@
             Id = 9;
         }
         @* return Task.CompletedTask; *@
-        return base.SetParametersAsync(ParameterView.Empty);
+        return base.SetParametersAsync(ParameterView.Empty); // This is necessary here
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        @* await Task.Delay(1000); *@
+        initializedMessage = "InitializedAsync should be called as async-await other wise it behave abnormally";
+        await base.OnInitializedAsync();
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        _logger.LogInformation("OnAfterRender(1): First Render:{firstRender}, Message:{message}", firstRender, onAfterMessage);
+        if (firstRender)
+        {
+            onAfterMessage = "On After Render Message for first render";
+        }
+        else
+        {
+            onAfterMessage = "On After Render Message for non first render";
+        }
+        _logger.LogInformation("OnAfterRender(2): First Render:{firstRender}, Message:{message}", firstRender, onAfterMessage);
+        await Task.Delay(10000).ContinueWith((T1) =>
+        {
+            this.onAfterMessage = "On After Render after async Task Completion";
+            _logger.LogInformation("OnAfterRender(3): First Render:{firstRender}, Message:{message}", firstRender,
+    this.onAfterMessage);
+        });
+
+        await base.OnAfterRenderAsync(firstRender);
     }
 }

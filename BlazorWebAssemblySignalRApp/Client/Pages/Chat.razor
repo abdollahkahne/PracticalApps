@@ -935,6 +935,111 @@
     case sensitive!!! (This is different than insensitive case in Route Parameter matching which only applicable to route
     template)
 
+    OnInitializedAsync (Component Initialization Hook)
+    OnInitialized and OnInitializedAsync are invoked when the component is initialized after having received its initial
+    parameters in SetParametersAsync (Calling base.SetParametersAsync is required in case of customization of
+    initialization). There is a synchronized version of this too (OnInitialized).
+    OnInitializedAsync called twice in case of PreRendering:
+    1- When component rendered staticly as a part of the Page (.cshtml)
+    2- When the browser render the component as second time
+    So we should do some measures to prevent running the code twice in case of destructive behaviour for example adding a
+    counter or calling a costly API (This can be prevent in Blazor Server using Cache). Also consider that in case of
+    PreRendering calling into JavaScript (JS interop), aren't possible.
+
+    OnParametersSetAsync (On Parameters Set Hook)
+    This is useful for dynamic UI since it calls in case of rerendering too. It calls in two situations:
+    1- it called at the end of OnInitialized (or synchronized OnInitializedAsync)
+    2- It called in case of rerendering by parent if one of the followings happen:
+    * at least one primitive type parameter changed.
+    * at least one of the parameter is complex type (It can not detect change so the framework always treats the parameter
+    set as changed when one or more complex-typed parameters are present.)
+
+    OnAfterRenderAsync Hook (After Rendering the component at the end of Rendering Cycle)
+    This Hook happens after updating DOM at the end of rendering cycle. OnAfterRender and OnAfterRenderAsync are called
+    after a component has finished rendering. Element and component references are populated at this point. Use this stage
+    to perform additional initialization steps with the rendered content, such as JS interop calls that interact with the
+    rendered DOM elements. Does StateHasChanged called by this automatically? No. It make an infinite loop!
+    It has an argument which it specify it is first render or not set by framework! This is usually used for exception
+    handling in case of Asynchronous task in OnInitializedAsync and OnParametersSetAsync or JS Interop calls.
+    There are some point which we should consider about OnAfterRender Or OnAfterRenderAsync:
+    1- Rendering cycle does not call after it so the change are not show in the page. Dont call the StateHasChanged since it
+    cause infinite loop.
+    2- OnAfterRender and OnAfterRenderAsync aren't called during the prerendering process on the server. The methods are
+    called when the component is rendered interactively after prerendering.
+    3- To delay JavaScript interop calls until a point where such calls are guaranteed to work, override the
+    OnAfterRender{Async} lifecycle event. This event is only called after the app is fully rendered.
+
+    StateHasChanged (Trigger rerendering by developer)
+    StateHasChanged notifies the component that its state has changed. When applicable, calling StateHasChanged causes the
+    component to be rerendered. StateHasChanged is called automatically for EventCallback methods.
+
+    Dispose() (Component Disposal)
+    If a component implements IDisposable, IAsyncDisposable, or both, the framework calls for unmanaged resource disposal
+    when the component is removed from the UI.
+    In this method we should dispose object with unmanaged resources which implemented IDisposable and also Unsubscribe
+    event handlers from .NET events that subscribed on lifecycle methods. Event Handler can defined as private method or a
+    private field with typ EventHandler<ArgType> and lambda expression and subscribed to events at lifecycle methods.
+    If the object is created in a lifecycle method, such as OnInitialized/OnInitializedAsync, check for null before calling
+    Dispose. In case of lambda expression and anynomouse function event handlers it is not required to Unsubscribe theme on
+    dispose. but only use the those approaches when you know that the event delegate disposes quickly and do not outlive the
+    component. Calling StateHasChanged in Dispose isn't supported. We can use also Dispose method to cancel background task
+    on navigating page to other pages.
+
+    Re-Rendering Component (After the first rendering)
+    The following trigger event rerendering:
+    1- Updating Parameters in Parent or Component Value (In this case it does'nt always rerender)
+    2- After invoking an event handler of component itself (If event handler is a Task it rerenders at two points: 1- at
+    first return of handler (synchronously re-render) and at the Task Completion (asynchronously re-render))
+    3- After calling StateHasChanged method of component.
+
+    Case 1 does not rerender if either:
+    * Component ShouldRender() method return false Or
+    * Component have only primitive type parameters and they are not changed after update!
+
+    Case 2: In case of Asynchronous event handlers we have two re-render (Asynchronous render and synchronous render)
+    Case 3: Some common case of calling StateHasChanged:
+    * When we want to have a rerendering in multiple points in a async event (more than 2 default rerender).
+    * External Events (All events which not trigged by Blazor like a Timer Or Notifications service): In this cas
+    StateHasChanged can only be called from the renderer's synchronization context and throws an exception otherwise
+    (Marshalling to UI thread). Use ComponentBase.InvokeAsync to move a work item onto the renderer's synchronization
+    context. the execution call stack typically remains on the renderer's synchronization context, calling InvokeAsync isn't
+    normally required. Calling InvokeAsync is only required if the logic escapes the synchronization context, such as
+    calling ContinueWith on a Task or awaiting a Task with ConfigureAwait(false).
+    * When using an state manager: consider we want To render a component outside the subtree that's rerendered by a
+    particular event. In this case we create a State Manager class and add it to DI container. When one component calls a
+    method on the state manager, the state manager raises a C# event that's then received by an independent component.
+
+    The overall effect of the framework's conventions is that the component receiving an event rerenders itself, which
+    recursively triggers rerendering of descendant components whose parameter values may have changed. we have two special
+    case:
+    1- we want to prevent rerendering due to above triggers: override ShouldRender() method to return false in desired
+    cases.
+    2- Calling StateHasChanged allows you to trigger a render at any time.
+
+    Consider that in case of @bind it update dom even in case of ShouldRender return false altough it does not rerender the
+    Blazor component. In case of child binding to a parameter since it needs rerender (due to its nature of event callback)
+    to update the dom, DOM does not
+    change.
+
+
+
+    Cancelling Background Work
+    There is situation that background work needs to cancel manually, for example background asynchronous operations don't
+    automatically stop when a user navigates away from a component. As an example of Background Task we can see long-running
+    background work, such as making network calls (HttpClient) and interacting with databases. Other examples includes:
+    * Starting a task with wrong parameters and data.
+    * There is task with more priority.
+    * In case of Server, we want to shut down it or due to load we want to reschedule the tasks.
+    To implement Cancellable Task we should do followings:
+    1- Have a CancellationTokenSource (cts) and so a CancellationToken (cts.Token)
+    2- Use ThrowIfCancellationRequested on async background task and CancellationToken
+    3- To signal the async background task to cancel call cts.Cancel method (for example in component
+    disposal and do not forget to dispose the cts too)
+
+    PreRendering
+    While an app is prerendering, certain actions, such as calling into JavaScript, aren't possible. Components may need to
+    render differently when prerendered.
+
 
 
 

@@ -13,6 +13,10 @@
     <link href="css/site.css" rel="stylesheet" />
     <link href="BlazorServerSignalRApp.styles.css" rel="stylesheet" />
     <component type="typeof(HeadOutlet)" render-mode="ServerPrerendered" />
+    <script>
+        window.setElementInnerText_ = (element, text) => element.innerText = text;
+        window.setElementInnerText__ = (element, text) => { element.innerText = text; return text; }
+    </script>
 </head>
 
 <body>

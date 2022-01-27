@@ -1,0 +1,43 @@
+@page "/prerendering-interop"
+@inject IJSRuntime JS
+
+<div @ref="divElement">Text during Rendering</div>
+
+<p>In the following div innerText get as a result of JSInterop call</p>
+<div>
+    @(data??"Not Set Yet")
+</div>
+
+<p>In the following div innerText set by JSInterop call</p>
+<div id="divElementPreRendering" @ref="divElementPreRendering"></div>
+
+@code {
+    private string? data { get; set; }
+    private ElementReference divElement { get; set; }
+    private ElementReference divElementPreRendering { get; set; }
+    protected override void OnInitialized() {
+        Console.WriteLine("Logged: "+divElementPreRendering.Id); 
+        // refrence element is not available befor OnAfterRender
+        base.OnInitialized();
+    }
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            await JS.InvokeVoidAsync("setElementInnerText_", divElement, "Text After Rendering");
+
+            @* Directly modifying the DOM with JavaScript isn't recommended in most scenarios because JavaScript can interfere with
+                Blazor's change tracking.
+                the ElementReference is only used in OnAfterRenderAsync and not in any earlier lifecycle method because there's no
+                JavaScript element until after the component is rendered.
+            *@
+        }
+        if (firstRender && data is null)
+        {
+            Console.WriteLine("Logged On After Render: "+divElementPreRendering.Id);
+            data=await JS.InvokeAsync<string>("setElementInnerText__", divElementPreRendering, "Text After Rendering and considering Prerendering");
+                StateHasChanged(); // This should call here carefully other wise we fall in infinite loop
+        }
+        await base.OnAfterRenderAsync(firstRender);
+    }
+}
