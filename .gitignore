@@ -4,22 +4,22 @@
 # HostedServices
 # ControllersTestSample
 # IntegrationTestSample
-# NorthwindIntl
+NorthwindIntl/
 # Practices
-# NorthwindWeb
-# NorthwindSPA
-# NorthwindMVC
+NorthwindWeb
+NorthwindSPA
+NorthwindMVC
 # RazorPageTestSample
-# NorthwindXUnit
-# NorthwindTest
-# NorthwindSolution
-# NorthwindNUnit
-# NorthwindIdentity
-# NorthwindEntitiesLib
-# NorthwindEmployee
-# NorthwindCookieAuth
-# NorthwindContextLib
-# NorthwindAPI
+NorthwindXUnit
+NorthwindTest
+NorthwindSolution
+NorthwindNUnit
+NorthwindIdentity
+NorthwindEntitiesLib
+NorthwindEmployee
+NorthwindCookieAuth
+NorthwindContextLib
+NorthwindAPI
 # SignalRSample
 # SignalRClient
 # ObjectPoolSample
@@ -28,3 +28,4 @@ BlazorWebAssemblySignalRApp/Client/bin
 BlazorWebAssemblySignalRApp/Client/obj
 BlazorServerSignalRApp/bin
 BlazorServerSignalRApp/obj
+Northwind.db
