@@ -1,0 +1,75 @@
+@implements IDisposable
+
+@code {
+    [CascadingParameter]
+    public EditContext? editContext { get; set; }
+    private ValidationMessageStore? _store { get; set; }
+    protected override void OnInitialized()
+    {
+        if (editContext is null)
+        {
+            throw new InvalidOperationException($"{nameof(CustomeValidator)} require a cascading parameter of type" +
+            $"type {nameof(editContext)}. For example you can use {nameof(CustomeValidator)} inside an {nameof(EditForm)} ");
+        }
+        _store = new ValidationMessageStore(editContext!);
+        editContext.OnFieldChanged += onFieldChanged;
+        editContext.OnValidationRequested += onValidationRequested;
+        base.OnInitialized();
+    }
+    // handle to OnValidationRequested (Clear All fields)
+    private void onValidationRequested(Object? sender, ValidationRequestedEventArgs e)
+    {
+        _store!.Clear();
+    }
+    // handle to OnFieldChanged (Clear the field errors)
+    private void onFieldChanged(Object? sender, FieldChangedEventArgs e)
+    {
+        _store!.Clear(e.FieldIdentifier);
+    }
+    // This method used to add a list of errors to store
+    public void DisplayErrors(Dictionary<string, List<string>> errors)
+    {
+        foreach (var err in errors)
+        {
+            // editContext!.Field(err.Key) returns a FieldIdentifier
+            _store!.Add(editContext!.Field(err.Key), err.Value);
+        }
+        editContext!.NotifyValidationStateChanged();
+    }
+
+    // This method used to clear all validation errors
+    public void ClearAll()
+    {
+        _store!.Clear();
+        editContext!.NotifyValidationStateChanged(); // this makes Validation Summary and Validation Message component rerender
+    }
+    public void Dispose()
+    {
+        _store!.Clear(); //clear the store
+                         //Unsubscribe events
+        editContext!.OnFieldChanged -= onFieldChanged;
+        editContext!.OnValidationRequested -= onValidationRequested;
+        // raise ValidationStateChanged!
+        editContext.NotifyValidationStateChanged();
+    }
+}
+
+@*
+    * You can create this component as a class instead of .razor file but on that case you should:
+    1- Have a namespace explicitly:Specifying a namespace is required when deriving from ComponentBase and usually specify
+    the name of main assembly
+    namespace BlazorWebAssemblySignalRApp.Client {}
+    2- You should add some using explicitly since it do not use _import.razor
+    using System;
+    using System.Collections.Generic;
+    using Microsoft.AspNetCore.Components;
+    using Microsoft.AspNetCore.Components.Forms;
+    3- Inherit from ComponentBase too
+
+
+    * If you can use lambda expression in case of event subscription, It isn't necessary to implement IDisposable and
+    unsubscribe the event delegates.
+
+    * To use this component, you should add it and reference it and then use its api. In case our CustomeValidator component
+    is completely event-based like DataAnnotationsValidator it does not need no reference of course!
+*@

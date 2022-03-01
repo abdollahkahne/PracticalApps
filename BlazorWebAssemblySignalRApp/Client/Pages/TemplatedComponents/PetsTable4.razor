@@ -1,0 +1,24 @@
+@page "/pets-table-4"
+<TableTemplate RowTemplate="rowTemplate" Header="_header" Items="pets" Context="pet" TType="Pet">
+    Table Using Templated Content
+</TableTemplate>
+
+@code {
+    private List<Pet> pets = new()
+    {
+        new Pet { PetId = 2, Name = "Mr. Bigglesworth" },
+        new Pet { PetId = 4, Name = "Salem Saberhagen" },
+        new Pet { PetId = 7, Name = "K-9" }
+    };
+    private class Pet
+    {
+        public int PetId { get; set; }
+        public string? Name { get; set; }
+    }
+    private RenderFragment<Pet> rowTemplate = (pet) =>
+    @<td>@pet.Name</td>
+    ;
+    private RenderFragment _header =
+    @<th> Pet Name</th>
+    ;
+}

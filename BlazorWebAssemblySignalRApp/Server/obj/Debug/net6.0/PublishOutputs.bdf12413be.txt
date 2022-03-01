@@ -1,6 +1,7 @@
 /home/selenium/Desktop/Learning/PracticalApps/BlazorWebAssemblySignalRApp/Server/bin/Debug/net6.0/publish/BlazorWebAssemblySignalRApp.Server
 /home/selenium/Desktop/Learning/PracticalApps/BlazorWebAssemblySignalRApp/Server/bin/Debug/net6.0/publish/appsettings.Development.json
 /home/selenium/Desktop/Learning/PracticalApps/BlazorWebAssemblySignalRApp/Server/bin/Debug/net6.0/publish/appsettings.json
+/home/selenium/Desktop/Learning/PracticalApps/BlazorWebAssemblySignalRApp/Server/bin/Debug/net6.0/publish/mono_crash.21acb2c5e9.0.json
 /home/selenium/Desktop/Learning/PracticalApps/BlazorWebAssemblySignalRApp/Server/bin/Debug/net6.0/publish/BlazorDebugProxy/BrowserDebugHost.dll
 /home/selenium/Desktop/Learning/PracticalApps/BlazorWebAssemblySignalRApp/Server/bin/Debug/net6.0/publish/BlazorDebugProxy/BrowserDebugHost.runtimeconfig.json
 /home/selenium/Desktop/Learning/PracticalApps/BlazorWebAssemblySignalRApp/Server/bin/Debug/net6.0/publish/BlazorDebugProxy/BrowserDebugProxy.dll
@@ -33,5 +34,7 @@
 /home/selenium/Desktop/Learning/PracticalApps/BlazorWebAssemblySignalRApp/Server/bin/Debug/net6.0/publish/System.IO.Pipelines.dll
 /home/selenium/Desktop/Learning/PracticalApps/BlazorWebAssemblySignalRApp/Server/bin/Debug/net6.0/publish/BlazorWebAssemblySignalRApp.Client.dll
 /home/selenium/Desktop/Learning/PracticalApps/BlazorWebAssemblySignalRApp/Server/bin/Debug/net6.0/publish/BlazorWebAssemblySignalRApp.Shared.dll
+/home/selenium/Desktop/Learning/PracticalApps/BlazorWebAssemblySignalRApp/Server/bin/Debug/net6.0/publish/ComponentLibrary.dll
 /home/selenium/Desktop/Learning/PracticalApps/BlazorWebAssemblySignalRApp/Server/bin/Debug/net6.0/publish/BlazorWebAssemblySignalRApp.Client.pdb
 /home/selenium/Desktop/Learning/PracticalApps/BlazorWebAssemblySignalRApp/Server/bin/Debug/net6.0/publish/BlazorWebAssemblySignalRApp.Shared.pdb
+/home/selenium/Desktop/Learning/PracticalApps/BlazorWebAssemblySignalRApp/Server/bin/Debug/net6.0/publish/ComponentLibrary.pdb

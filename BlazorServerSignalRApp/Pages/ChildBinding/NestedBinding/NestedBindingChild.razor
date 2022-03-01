@@ -1,0 +1,31 @@
+<h2>Child Component</h2>
+<div>
+    <p>Current parent message:@boundMessage</p>
+    <button @onclick="changeMessage">Change Message from Child</button>
+</div>
+<NestedBindingGrandChild @bind-GrandChildMessage="boundMessage"></NestedBindingGrandChild>
+
+@code {
+    [Parameter]
+    public string? ChildMessage { get; set; }
+    [Parameter]
+    public EventCallback<string> ChildMessageChanged { get; set; }
+
+    string boundMessage
+    {
+        get => ChildMessage ?? "";
+        set
+        {
+            ChildMessageChanged.InvokeAsync(value);
+            @* Here we do not set Child Message ourselves. We use the method to update the parent bound property!
+                The set method called when invoking related callback
+            *@
+
+        }
+    }
+
+    void changeMessage()
+    {
+        boundMessage = $"Set By {this.GetType()} at {DateTime.UtcNow}";
+    }
+}

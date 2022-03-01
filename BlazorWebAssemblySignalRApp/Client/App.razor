@@ -1,9 +1,6 @@
 ﻿@using Microsoft.AspNetCore.Components.Routing
 
-<Router AppAssembly="@typeof(App).Assembly" OnNavigateAsync="@onNavigation">
-    <Navigating>
-        <p>Spining &hellip; </p>
-    </Navigating>
+<Router AppAssembly="@typeof(App).Assembly">
     <Found Context="routeData">
         <RouteView RouteData="@routeData" DefaultLayout="@typeof(MainLayout)" />
         <FocusOnNavigate RouteData="@routeData" Selector="h1" />

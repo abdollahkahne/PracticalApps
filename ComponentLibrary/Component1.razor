@@ -1,0 +1,32 @@
+﻿@using Microsoft.JSInterop
+@inject ExampleJsInterop _js
+@inject IJSRuntime JS
+
+<ExtraStyles />
+<div class="my-component">
+    This component is defined in the <strong>ComponentLibrary</strong> library.
+</div>
+<div>@ChildContent</div>
+<input @bind="message">
+<button @onclick="showPrompt">Prompt</button>
+
+@code {
+    [Parameter]
+    public RenderFragment? ChildContent { get; set; }
+    private IJSObjectReference? module { get; set; }
+    private string? message { get; set; }
+    private async Task showPrompt()
+    {
+        if (message is null)
+        {
+            message = "This field filled automaticly";
+        }
+        message = await _js.Prompt(message);
+    }
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        module = await JS.InvokeAsync<IJSObjectReference>("import", "./_content/ComponentLibrary/Component1.razor.js");
+        await module.InvokeVoidAsync("alertInfo", "Works As expected");
+        await base.OnAfterRenderAsync(firstRender);
+    }
+}

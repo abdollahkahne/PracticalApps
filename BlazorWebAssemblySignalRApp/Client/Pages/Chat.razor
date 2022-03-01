@@ -209,6 +209,26 @@
     * Downloading the .NET runtime, the app, and the app's dependencies.
     * Initialization of the runtime to run the app.
 
+    Browser compatibility analyzer for Blazor WebAssembly
+    Blazor WebAssembly apps target the full .NET API surface area, but not all .NET APIs are supported on WebAssembly due to
+    browser sandbox constraints. Unsupported APIs throw PlatformNotSupportedException when running on WebAssembly. A
+    platform compatibility analyzer warns the developer when the app uses APIs that aren't supported by the app's target
+    platforms. For Blazor WebAssembly apps, this means checking that APIs are supported in browsers.
+    Blazor WebAssembly and RCL projects automatically enable browser compatibility checks by adding browser as a supported
+    platform with the SupportedPlatform MSBuild item. Library developers can manually add the SupportedPlatform item to a
+    library's project file to enable the feature:
+    <ItemGroup>
+    <SupportedPlatform Include="browser" />
+    </ItemGroup>
+    You can also make a an api Unsupported in our APIs using the UnsupportedOSPlattformAttribute. for example:
+    using System.Runtime.Versioning;
+    [UnsupportedOSPlatform("browser")]
+    private static string GetLoggingDirectory()
+    {
+    ...
+    }
+
+
 
     Razor Components and App:
     Regardless of the hosting model, the app and component models are the same.
@@ -823,6 +843,10 @@
     <Child @bind-Year="year" @bind-Year:event="YearChanged" />
     <Child @bind-Year="year"/>
 
+    Using the child Binding there is another binding for inputs which used as below:
+    <input @bind-value="myProp" />
+    This binds value property of input to myProp property and there is a ValueChanged Callback which trigged after OnBlur native (Blazor) event for input box.
+
     Nested Binding (this is chaind binding)
     We can have binding between multiple levels of component hierarchy. You can bind parameters through any number of nested
     components, but you must respect the one-way flow of data:
@@ -1036,18 +1060,312 @@
     3- To signal the async background task to cancel call cts.Cancel method (for example in component
     disposal and do not forget to dispose the cts too)
 
+    Templated Components
+    Templated components are components that accept one or more UI templates (RenderFragment or RenderFragment<T>) as
+    parameters, which can then be used as part of the component's rendering logic. Templated components allow you to author
+    higher-level components that are more reusable than regular components (Consider Table or List Component for example).
+    RenderFragment Represents a segment of UI content, implemented as a delegate that writes the content to a
+    RenderTreeBuilder (public delegate void RenderFragment(RenderTreeBuilder builder);).
+    RenderFragment<T> Represents a segment of UI content for an object of type TValue, implemented as a function that
+    returns a RenderFragment (A Razor template of that object).
+    To set a RenderFragment or RenderFragment<T> Paramter in a Component you can set them as a child component with name of
+    Parameter (The
+    ChildContent Parameter which can be specified directly as child in normal component should be defined similarly here!).
+    To specify RenderFragment<T> input you can specify it
+    as context parameter in the Rekated Component or in Templated Component itself or use @context directly. Could we
+    specify them directly as Razor Template or Delegates which Return Razor templates? Yes it is possible!
+    Often, templated components are generically typed, and we specify its Generic Type using @typeparam directive. in Using
+    Templated Component we should set it as a parameter with similar name (Sometimes it infered from other paramter).
+    Also there is situation that you may want that type specified in an ancestor Templated Component pass to Type uses in
+    child Templated Component. One way is to define a parameter in ancestor as Type and use it in children in development
+    time. Other approach which is more restericted is to use CascadingTypeParameter attribute in ancestor and then use the
+    name specified automatically in templated component with same Type Parameter name (Here Childs used as child content
+    specially and are parts of main components. for example consider a chart component with multiple similar parts like
+    lines, axes, bars!).
+    In case of Generic Templated Components we can also resteric defined type using where as @typeparam TEntity where
+    TEntity : IEntity.
+
+    CSS isolation
+    Isolate CSS styles to individual pages, views, and components to reduce or avoid:
+    * Dependencies on global styles that can be challenging to maintain.
+    * Style conflicts in nested content.
+
+    There is similar thing in Nod.js named CSS module.
+    To define component-specific styles, create a .razor.css file matching the name of the .razor file (not case sensitive)
+    for the component in the same folder. The .razor.css file is a scoped CSS file.
+    CSS isolation occurs at build time. Blazor rewrites CSS selectors to match markup rendered by the component (adding a
+    unique property for each component an assigne it to both css and html). The rewritten CSS styles are bundled and
+    produced as a static asset. The stylesheet is referenced inside the <head> tag of wwwroot/index.html (Blazor
+    WebAssembly) or Pages/_Layout.cshtml (Blazor Server). The following <link> element is added
+    by default to an app created from the Blazor project templates, where the placeholder {ASSEMBLY NAME} is the project's
+    assembly name (Should be added by developer if does not exist in template):
+    <link href="{ASSEMBLY NAME}.styles.css" rel="stylesheet">
+    <link href="BlazorWebAssemblySignalRApp.Client.styles.css" rel="stylesheet" />
+
+    As said above, Within the bundled file, each component is associated with a scope identifier. For each styled component,
+    an HTML attribute is appended with the format b-{STRING}, where the {STRING} placeholder is a ten-character string
+    generated by the framework.
+    By default, CSS isolation only applies to the component you associate with the format {COMPONENT NAME}.razor.css, where
+    the placeholder {COMPONENT NAME} is usually the component name. To apply changes to a child component, use the ::deep
+    combinator to any descendant elements in the parent component's .razor.css file. The ::deep combinator selects elements
+    that are descendants of an element's generated scope identifier.
+    In the above syntax, for example (::deep .card-body) the css apply to all .card-body elements which is descendent to
+    current element! It apply as [b-3lle12or23] .card-body. Also consider that specified styled in child overwrites this
+    styles.
+
+    Collocation of JS Files (Only for organization and do not do nothing by itself)
+    Collocation of JavaScript (JS) files for pages, views, and Razor components is a convenient way to organize js scripts
+    in
+    an app. Collocate JS files using the following filename extension conventions:
+    * Pages of Razor Pages apps and views of MVC apps: .cshtml.js
+    * Razor components of Blazor apps: .razor.js
+    This Collocated JS files are publicly addressable/accessible through browser using the path to the file in the project
+    (for example it starts with "/Pages" in case of Razor Pages and "/Views" for MVC App and "/RCLName" in case of Razor
+    class Library).
+    As already it said, these files are to organize JS and page/view/component and do not do any thing by itself. When the
+    app is published, the framework automatically moves the script to the web root (But address remain as before and No
+    change is required to the script's relative URL!(Actually it create folder structure inside wwwroot in a way that its
+    URL works correctly)).
+    To call a js file in a component we can import it on OnAfterRenderAsync as a module using js import function as below:
+    module = await JS.InvokeAsync<IJSObjectReference>(
+    "import", "./Pages/Index.razor.js");
+    Here JS injected using @inject IJSRuntime JS and the script file should be as js module with exports to be used after
+    import (Have export). for example:
+    export function showPrompt(message) {
+    return prompt(message, 'Type anything here');
+    }
+
+
+    DynamicComponent Component
+    This built-in component used to render other component specifying their types. it has two properties including Type
+    which specify type of component to render and Parameters which specify parameters of the specified component as a
+    dictionary.
+    A DynamicComponent is useful for rendering components without iterating through possible types or using conditional
+    logic.
+    How this approach is different than using the component directly? It seems that there is no difference when all
+    parameters are objects but in case of event call back parameters it can not work since delegate does not inherited from
+    object. The Type and Parameters property are in following types:
+    <DynamicComponent Type="@componentType" Parameters="@parameters" />
+    @code {
+    private Type componentType = ...;
+    private IDictionary<string, object> parameters = ...;
+    }
+    It also has a readonly property named Instance which save the Component instance create of type Object. To get we can
+    use @ref to get the dynamic component instance and then to get its Instance property simply get.
+
     PreRendering
-    While an app is prerendering, certain actions, such as calling into JavaScript, aren't possible. Components may need to
-    render differently when prerendered.
+    Razor components can be integrated into Razor Pages and MVC apps. When the page or view is rendered, components can be
+    prerendered at the same time. While an app is prerendering, certain actions, such as calling into JavaScript, aren't
+    possible. Components may need to render differently when prerendered.
+    In case of Prerendering, Components can be render in 2 ways (Child component does not considered here since they render
+    in their parents):
+    1- Directly as Routable components (Have @page directive)
+    2- Components that used in Razor Page or MVC Views using Component tag helper (They can have or have not @page
+    directive)
+
+    Configuration for PreRendering (Blazor Server):
+    1- add HeadOutlet component to Layout.cshtml (since PageTitle and HeadContent component need it to works). This also
+    need to specify the base url that app is going to work (in case of WebAssembly render-mode changes):
+    <base href="~/" /> (the framework recognise a tilde ('~') as a shortcut to the root of the application's virtual
+    directory)
+    <component type="typeof(HeadOutlet)" render-mode="ServerPrerendered" /> (This is not required in Blazor wasm index.html
+    altough it is required for prerendering!)
+    2- Add a <script> tag for the blazor.server.js Or blazor.webassembly.js script immediately before the Scripts render
+    section. The framework adds the blazor.server.js script to the app. There's no need to manually add a blazor.server.js
+    script file to the app (_Layout.cshtml).
+    3- Use components using Component Tag Helper in Index.cshtml:
+    <component type="typeof(Counter)" render-mode="ServerPrerendered" />
+
+    To support routable Razor components in Razor Pages apps we should add App.razor component to the project root (It is
+    necessary to add it in root since Blazor adds the route templates to route table!) and then
+    add it to _Host.cshtml using Component tag helper (This is need for prerendering and bootstraping Blazor in browser
+    side!).In this scenario, components use the shared _Layout.cshtml file for
+    their layout (Of course we have an special Blazor Layout too which works for Razor components and it has not head
+    section since it only works inside the element specified in _Host.cshtml!). render-mode can be
+    ServerPrerendered,Server or Static which only the first is prerendered. Parameters can be set using param-* fields in
+    Component tag helper.
+
+    interactive vs stateful interactive vs none-interactive
+    In case of using component tag helper in razor Page or view, the component can have one of the following state:
+    1- none-interactive: In tag helper we use render-mode=Static and we set initial parameters of component specified in
+    component tag helper. For example:
+    <form>
+    <input type="number" asp-for="InitialValue" />
+    <button type="submit">Set initial value</button>
+    </form>
+
+    <component type="typeof(Counter)" render-mode="Static"
+    param-InitialValue="InitialValue" />
+
+    @functions {
+    [BindProperty(SupportsGet=true)]
+    public int InitialValue { get; set; }
+    }
+
+    2- interactive-stateful: We specify initial value for parameter in server (This is only used for SEO since it lost by
+    initing the component. To compare use a precise date time parameter) and also open a signalR connection to do live
+    interaction on component. We need to set render-mode=ServerPrerendered. In this case a blink happen since Blazor in
+    browser start to init component without parameters but signalR send the values to it afterward!
+    3- interactive-stateless: We do not specify initial value for component in the server. It sets in browser for example
+    using web apis.
+
+    Where we should place Blazor Razor components?
+    We can add them every where in project but they should have .razor extension.
+
+    Persist prerendered state
+
+    Without persisting prerendered state, state used during prerendering is lost and must be recreated when the app is fully
+    loaded (in Browser side). If any state is setup asynchronously (For example calling web apis on component init), the UI
+    may flicker as the prerendered UI is replaced with temporary placeholders and then fully rendered again.
+    To solve these problems, Blazor supports persisting state in a prerendered page using the Persist Component State Tag
+    Helper. To use this tag helper: 1- Add the Tag Helper's tag, <persist-component-state />, inside the closing </body>
+    tag and 2- Do some on component itself.
+    Using this component adds a service PersistentComponentState which give use three method:
+    1- PersistAsJson<TValue>(String, TValue):Serialize what we want to persist and persist it on its given key.
+    2- RegisterOnPersisting(Func<Task>): we can register a callback to save some data that we want as state.
+    3- TryTakeFromJson<TValue>(String, TValue): Using this we can take a persisted json data and get it deserialized. After
+    getting the item, it is removed.
+    Actually the service pause after prerendering and do the callback and we can use the method 1,2 in callback and our
+    component to take the state back in client side in component init (See WeatherForecastPreserveState component).
+    By initializing components with the same state used during prerendering, any expensive initialization steps are only
+    executed once. The rendered UI also matches the prerendered UI, so no flicker occurs in the browser.
+
+    for Blazor WebAssembly the following config should be done:
+    1- Use the hosted model of WebAssembly
+    2- Delete index.html and related builder.RootComponents.Add lines in Program.cs in client
+    3-Add _Host.cshtml and _Layout.cshtml files to the Server project's Pages folder. The use of a layout page
+    (_Layout.cshtml) with a Component Tag Helper for a HeadOutlet component is required:
+    <Base href="~/" />
+    <component type="typeof(HeadOutlet)" render-mode="WebAssemblyPrerendered" />
+    4- add css address from wwwroot in client and the auto created css as below in Layout:
+    <link href="css/app.css" rel="stylesheet" />
+    <link href="BlazorWebAssemblySignalRApp.client.styles.css" rel="stylesheet" />
+    5- add JavaScript at the end of body in Layout:
+    <script src="_framework/blazor.webassembly.js"></script>
+    6- Add Component tag helper for app to _Host.cshtml as below (Prerendering isn't supported for authentication endpoints
+    (/authentication/ path segment)):
+    <component type="typeof(App)" render-mode="WebAssemblyPrerendered" />
+    7- In Server routing, change the fallback from the index.html file to the _Host.cshtml page
+    app.MapFallbackToPage("/_Host");
+    8-Register services required in Server too. For example HttpClient
+
+    note: Avoid placing the same file (for example, favicon.ico) into both the Client and Server wwwroot folders. If the
+    same file is present in both folders an exception is thrown because the static asset in each folder shares the same web
+    root path.
+    note: If you want to add a component to a MVC or Razor Page project and there is only one page which needs Blazor
+    framework, you can add style and js file to that page/view and not necessary to add it to Layout altough you should add
+    HeadOutlet component to related Layout if exist any. Typically, scripts are added to a page or view's Scripts render
+    section and stylesheets are added to the layout's <head> element content.
+    note: As an alternative to Component Tag Helper we can use RootComponents and css selectors to add a Blazor component to
+    a razor page or view.
+
+    Razor class Library
+    Components can be shared in a Razor class library (RCL) across projects. An RCL can include static assets too.
+    In addition to this RCL can be used for separating an app functionality and rendering into another assembly for example
+    using area. To create an RCL we should use the following command:
+    dotnet new razorclasslib (-s)
+    -s specify Whether to support adding traditional Razor pages and Views in addition to components to this library.
+    In this case (-s) you may add an _Imports.razor file to root of the generated RCL project:
+    @using Microsoft.AspNetCore.Components.Web
+    and Add the following SupportedPlatform item to the project file (.csproj):
+    <ItemGroup>
+    <SupportedPlatform Include="browser" />
+    </ItemGroup>
+    But if use the dotnet new razorclasslib without any option (-s) it has _import.razor and SupportedPlatform by default.
+
+    To consume components from an RCL in another project, After adding reference to the component library (RCL), use either
+    of the following approaches:
+    1- Use the full component type name, which includes the RCL's namespace (For example <ComponentLibrary.Component1>).
+    2- Individual components can be added by name without the RCL's namespace if Razor's @using directive declares the RCL's
+    namespace. @using can be added in component level or _Imports.razor.
+
+    You can use Css isolation stylesheet (.razor.css) without any further attempts in Components in RCL. But to use static
+    stylesheets there you should use link inside HeadContent Component as described below. For Collocated JavaScript files
+    you can import them from _content folder (Since it runs in client side ). Actually every thing that done in built time
+    (like isolated style sheet which bundled and import in built time) can be used without any further attempts but things
+    that do in runtime like static assets in wwwroot (Additional stylesheets and image and fonts and Collocated) should be
+    get from _content folder. In case of Collocated js scripts it moved to wwwroot folder of RCL in first step (builting RCL
+    itself) and then all static items of RCL move to a folder with name of RCL package id inside _content folder inside
+    wwwroot of App. other things do in runtime.
+
+    For library components that use CSS isolation, the component styles are automatically made available to the consuming
+    app. There's no need to manually link or import the library's individual component stylesheets or its bundled CSS file
+    in the app that consumes the library. The app uses CSS imports to reference the RCL's bundled styles. The bundled styles
+    aren't published as a static web asset of the app that consumes the library and the RCL's stylesheet is imported at the
+    top of the app's stylesheet automatically at build time. It create One bundle for total library and import it in
+    generated style sheet for app assembly.
+    The static assets like The background image is also included from the RCL project template and resides in the wwwroot
+    folder of the RCL. The url to include them is something as follow:
+    http://localhost:5104/_content/ComponentLibrary/background.png
+    Actually reference the static assets with the following path in the app: _content/{PACKAGE ID}/{PATH AND FILE NAME}. The
+    {PACKAGE ID} placeholder is the library's package ID. The package ID defaults to the project's assembly name if
+    <PackageId> isn't specified in the project file. The {PATH AND FILE NAME} placeholder is path and file name under
+    wwwroot.
+    To include in the RCL's wwwroot folder the static asset directly in other part of the app, refrence the asset as below.
+    <img alt="Image from Component Library" src="_content/ComponentLibrary/background.png" />
+
+    In case of static stylesheet, To provide additional library component styles from stylesheets in the library's wwwroot
+    folder, link the stylesheets using the framework's HeadContent component in component itself inside RCL (Of course as an
+    alternative you can use html link directly in head of App too).
+    <HeadContent>
+    <link href="_content/ComponentLibrary/additionalStyles.css" rel="stylesheet" />
+    </HeadContent>
+
+    In case of Collocated JS we should import them using address as below:
+    var module = await JS.InvokeAsync<IJSObjectReference>("import", "./_content/ComponentLibrary/Index.razor.js");
 
 
+    In RCL you may have services too. But since they are not started or registered any where to use them or to use some
+    components, you should register them in services first. (See ExampleJsInterop and Component1.razor in ComponentLibrary
+    RCL)
+To be continue at Index.razor
 
 
+    // View Component From Andrew Connel (Only Documentation and not related to Blazor)
+    In Razor Page or View we can add partials which handle custom rendering logic. But what if we have some custom business
+    logic here too? The response is to use view component here. View components operate independently of the main Razor Page
+    and can be used to encapsulate complex business logic. for example in case of Stack overflow web site, we have other
+    sections where Each section contains business logic (deciding which posts or ads to show), database access (loading the
+    details of the posts), and rendering logic for how to display the data. We can use layouts and partial views to split up
+    the rendering of a view template into similar sections, but partial views aren’t a good fit for this example. Partial
+    views let you encapsulate view rendering logic, but not business logic that’s independent of the main page content.
+    Instead, view components provide this functionality, encapsulating both the business logic and rendering logic for
+    displaying a small section of the page. You can use DI to provide access to a database context, and you can test them
+    independently of the view they generate, much like MVC and API controllers. Think of them a bit like mini-MVC
+    controllers, or mini-Razor Pages, but you invoke them directly from a Razor view, instead of in response to an HTTP
+    request. So you can’t use filters with view components.
+    To use them, you have two Options:
+    1-Invoke view components directly from Razor views and layouts using a Tag Helper-style syntax, using a vc: prefix:
+    <vc:my-recipes number-of-recipes="3"></vc:my-recipes>
+    To use a view component as a Tag Helper, register the assembly containing the view component using the @addTagHelper
+    directive.
+    2- There is a property in Razor View/Pages named Component which implements IViewComponentHelper. We can use its
+    InvokeAsync method for example as below:
+    @await Component.InvokeAsync("MyRecipes", new { numberOfRecipes = 3 })
+    3- Return it as result of an action in controllers
+    return ViewComponent("MyRecipes", new { numberOfRecipes = 3 });
 
+    To create them we should inherit from ViewComponent (Something similar to ControllerBase which have some helper methods
+    and properties) and implement its InvokeAsync method. The other difference with Controller here is that the parameters
+    of this method could not bind to request and should be passed when calling it. Similar to them the class name should end
+    to ViewComponent or we should use [ViewComponent] attribute for class.
+    view components must render some sort of content, so you can’t return status codes or redirects. You’ll typically use
+    the View() helper method to render a partial view template (as in the previous listing) though you can also return a
+    string directly using the Content() helper method, which will HTML-encode the content and render it to the page.
+    You can pass any number of parameters to the InvokeAsync method. The name of the parameters (in this example,
+    numberOfRecipes) is converted to kebab-case and exposed as a property in the view component’s Tag Helper
+    (<number-of-recipes>). You can provide these parameters when you invoke the view component from a view. All view
+    component parameters are required
+    View components have access to the current request and HttpContext and the view() should use a partial view that exists
+    in a Pages/Shared/Components/ComponentName/Default.cshtml.
 
-
-
-
+    Packing and publishing a library to Nugget
+    // Pack it using following command
+    dotnet pack
+    //Use dotnet-push-nuget tool to publish it (It needs some setup like user account)
+    dotnet nuget push
+    // The dotnet nuget push command pushes a package to the server and publishes it. The push command uses server and
+    credential details found in the system's NuGet config file or chain of config files.
 
 
 

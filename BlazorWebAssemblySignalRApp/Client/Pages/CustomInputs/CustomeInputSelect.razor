@@ -1,0 +1,15 @@
+@using System.ComponentModel.DataAnnotations
+@using System.Reflection
+@typeparam TValue where TValue : struct, Enum
+@inherits InputSelect<TValue>
+
+<select @attributes="AdditionalAttributes" @bind="CurrentValue" class="@CssClass" multiple="@typeof(TValue).IsArray"
+    @ref="Element">
+    <option value="" disabled>Select an option</option>
+    @foreach (var item in Enum.GetValues<TValue>())
+    {
+        <option value="@item">
+            @(item.GetType().GetField(item.ToString())!.GetCustomAttribute<DisplayAttribute>()!.Name)
+        </option>
+    }
+</select>

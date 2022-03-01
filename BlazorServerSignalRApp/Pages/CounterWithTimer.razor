@@ -1,0 +1,33 @@
+@page "/counter-timer"
+@using System.Timers
+@implements IDisposable
+
+<h1>Counter with <code>Timer</code> disposal</h1>
+<div>
+    <p>Current count: @currentCount</p>
+</div>
+
+@code {
+    private Timer _timer = new(1000);
+    private int currentCount { get; set; } = 0;
+
+    protected override async Task OnInitializedAsync()
+    {
+        _timer.Elapsed += onElapsedCallback;
+        _timer.Start();
+        await base.OnInitializedAsync();
+    }
+
+    private void onElapsedCallback(Object? sender, ElapsedEventArgs e)
+    @* This callback runs in context of timer so we should use InvokeAsync to have same SynchronizationContext *@
+    {
+        _ = InvokeAsync(async () =>
+        {
+            await Task.Delay(2000);
+            currentCount++;
+            StateHasChanged();
+        });
+    }
+
+    public void Dispose() => _timer.Dispose();
+}

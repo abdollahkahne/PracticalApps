@@ -1,0 +1,20 @@
+@page "/form-example-1"
+@inject ILogger<FormExampl1> _logger;
+
+<EditForm Model="modelInstance" OnValidSubmit="submitValidForm">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+    <InputText @bind-Value="modelInstance.Name" />
+    <button type="submit">Submit Form</button>
+</EditForm>
+
+@code {
+    private FormModelExample modelInstance = new();
+    private void submitValidForm(EditContext context)
+    {
+        _logger.LogInformation($"Name:{(context.Model as FormModelExample)!.Name}");
+
+        _logger.LogInformation("Valid Model Submitted and model Type is {type}!", context.Model.GetType());
+        _logger.LogInformation("Very Informative component design!");
+    }
+}

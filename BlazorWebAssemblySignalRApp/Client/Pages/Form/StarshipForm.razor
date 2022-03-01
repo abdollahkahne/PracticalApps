@@ -1,0 +1,102 @@
+@page "/startship-form"
+
+<h1>Starfleet Starship Database</h1>
+
+<h2>New Ship Entry Form</h2>
+
+<form @onsubmit="SubmitEventHandler">
+    <input type="text" @bind="starship.Identifier">
+    <textarea @bind="starship.Description" cols="30" rows="10"></textarea>
+    <button type="submit">Submit Normal Form</button>
+</form>
+
+<EditForm Model="@starship" OnValidSubmit="@HandleValidSubmit">
+    <DataAnnotationsValidator />
+    <BlazorWebAssemblySignalRApp.Client.Pages.CustomeValidationComponent.CustomeValidator @ref="customeValidator" />
+    <ValidationSummary />
+
+    <p>
+        <label>
+            Identifier:
+            <InputText @bind-Value="starship.Identifier" />
+        </label>
+    </p>
+    <p>
+        <label>
+            Description (optional):
+            <InputTextArea @bind-Value="starship.Description" />
+        </label>
+    </p>
+    <p>
+        <label>
+            Primary Classification:
+            <InputSelect @bind-Value="starship.Classification">
+                <option value="" disabled>Select classification ...</option>
+                <option value="Exploration">Exploration</option>
+                <option value="Diplomacy">Diplomacy</option>
+                <option value="Defense">Defense</option>
+            </InputSelect>
+        </label>
+    </p>
+    <p>
+        <label>
+            Maximum Accommodation:
+            <InputNumber @bind-Value="starship.MaximumAccommodation" />
+        </label>
+    </p>
+    <p>
+        <label>
+            Engineering Approval:
+            <InputCheckbox @bind-Value="starship.IsValidatedDesign" />
+        </label>
+    </p>
+    <p>
+        <label>
+            Production Date:
+            <InputDate @bind-Value="starship.ProductionDate" />
+        </label>
+    </p>
+
+    <button type="submit">Submit</button>
+
+    <p>
+        <a href="http://www.startrek.com/">Star Trek</a>,
+        &copy;1966-2019 CBS Studios, Inc. and
+        <a href="https://www.paramount.com">Paramount Pictures</a>
+    </p>
+</EditForm>
+
+@code {
+    private Starship starship = new() { ProductionDate = DateTime.UtcNow };
+    private CustomeValidationComponent.CustomeValidator? customeValidator { get; set; }
+
+    private void HandleValidSubmit()
+    {
+        @* consider that in this method even if forn got invalid, th method continue to run. The same is true for OnValidSubmit. 
+        one way is to use an if here to prevent continution of the method (Only in case of validity of description it continue)!
+        Also consider that using Validate() from EditContent does not prevent here because we used the OnValidationRequested callback to clear the storeage in CustomeValidationComponent
+         *@
+        if (checkDescription(starship.Classification!))
+            Console.WriteLine("HandleValidSubmit called");
+
+        // Process the valid form
+    }
+    private void SubmitEventHandler()
+    {
+            Console.WriteLine($"{starship.Identifier} and {starship.Description}");
+
+    }
+
+    private bool checkDescription(string classification)
+    {
+        if (classification == "Defense" && string.IsNullOrEmpty(starship.Description))
+        {
+            var errors = new Dictionary<string, List<string>>();
+            errors.Add(string.Empty, new List<string>() { "ModelError: When classification is Defense the Description Field is mandatory" });
+            errors.Add(nameof(starship.Description), new List<string>() { "DescriptionField Error: When classification is Defense the Description Field is mandatory" });
+            customeValidator?.DisplayErrors(errors);
+            return false;
+        }
+        return true;
+    }
+}

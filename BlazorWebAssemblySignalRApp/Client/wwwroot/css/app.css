@@ -34,6 +34,17 @@ a, .btn-link {
     color: red;
 }
 
+/* .validField {
+    border-color: lawngreen;
+}
+
+.invalidField {
+    background-color: tomato;
+}
+.modifiedField {
+    border: yellow dashed 2px;
+} */
+
 #blazor-error-ui {
     background: lightyellow;
     bottom: 0;

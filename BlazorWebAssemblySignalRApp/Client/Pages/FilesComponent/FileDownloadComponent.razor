@@ -1,0 +1,96 @@
+@page "/download-file"
+@inject IJSRuntime JS
+@inject HttpClient Http
+<div>
+    <button @onclick="DownloadFileFromStream">
+        Download File From Stream
+    </button>
+    <button @onclick="DownloadFromUrl">
+        Download File From Url
+    </button>
+    <button @onclick="downloadFromServer">
+        Download File From Stream (Response content as stream!) From Server
+    </button>
+    <hr>
+    <h3>Test API Explotiation Attack!</h3>
+    <a href="/episodes" target="_blank">Test</a>
+    <hr>
+    <form action="/api/Files/1v3jyus2.1ru" method="post">
+        <button type="submit">Download From Controller</button>
+    </form>
+    <hr>
+    <form action="/api/Files/1v3jyus2" method="post">
+        <button type="submit">Download From Controller Without Extension</button>
+    </form>
+    <hr>
+    <form action="/api/Files/1v3jyus3333" method="post">
+        <button type="submit">Download From Controller Does not Exist</button>
+    </form>
+
+</div>
+@code {
+    private IJSObjectReference? _module;
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        // This should be done after rendering to be sure that the JS and DOM Already existed
+        if (firstRender)
+        {
+            _module = await JS.InvokeAsync<IJSObjectReference?>("import", "./Pages/FilesComponent/FileDownloadComponent.razor.js");
+        }
+        await base.OnAfterRenderAsync(firstRender);
+    }
+
+    private async Task DownloadFileFromStream()
+    {
+        var downloadedStream = getFileStream();
+        var filename = "log.bin";
+
+        // To send an stream from dotnet to JS Client we can create a reference as follows:
+        using (var streamRef = new DotNetStreamReference(downloadedStream))
+        {
+            @*
+                The JavaScript downloadFileFromStream function accepts the file name with the data stream and triggers the client-side
+                download.
+            *@
+            await _module!.InvokeVoidAsync("downloadFileFromStream", streamRef, filename);
+        }
+    }
+    private Stream getFileStream()
+    {
+        // Here we simulate file download by using Memory String and a random generated file as Byte[]
+        var randomBinaryDate = new Byte[50 * 1024];
+        var stream = new MemoryStream(randomBinaryDate);
+        return stream;
+    }
+    @*
+        In the preceding example, the call to contentStreamReference.arrayBuffer loads the entire file into client memory.
+        for cases you have the url your self use url directly.
+    *@
+
+    // To download a file from server using js!
+    private async Task downloadFromServer()
+    {
+        var downloadedStream = await (await Http.PostAsync("/api/Files/1v3jyus2.1ru", null)).Content.ReadAsStreamAsync();
+        var filename = "log";
+
+        // To send an stream from dotnet to JS Client we can create a reference as follows:
+        using (var streamRef = new DotNetStreamReference(downloadedStream))
+        {
+            @*
+                The JavaScript downloadFileFromStream function accepts the file name with the data stream and triggers the client-side
+                download.
+            *@
+            await _module!.InvokeVoidAsync("downloadFileFromStream", streamRef, filename);
+        }
+    }
+
+    private async Task DownloadFromUrl()
+    {
+        // This create an anchor with url as href which clicked and removed after that
+        var url = "/api/files/smwjjznp.vgf";
+        var filename = "DownloadFromUrl.bin";
+        await _module!.InvokeVoidAsync("downloadFileFromUrl", url, filename);
+    }
+
+
+}

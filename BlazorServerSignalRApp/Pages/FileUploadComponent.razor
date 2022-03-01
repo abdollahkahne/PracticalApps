@@ -1,0 +1,26 @@
+@page "/upload-file"
+
+<InputFile OnChange="loadFile" multiple accept="image/*,.pdf" capture="environment" />
+
+@code {
+    private async Task loadFile(InputFileChangeEventArgs e)
+    {
+        Console.WriteLine(e.File.Name);
+        var stream = e.File.OpenReadStream();
+        var path = Path.Combine(Environment.CurrentDirectory, "Uploaded", e.File.Name);
+        Console.WriteLine(path);
+        using (var fs = new FileStream(path, FileMode.Create))
+        {
+            await stream.CopyToAsync(fs);
+        }
+        @* byte[]? arr;
+            using (var ms = new MemoryStream())
+            {
+            await stream.CopyToAsync(ms);
+            arr = ms.ToArray();
+            }
+            Console.WriteLine(@"Length of Array is:{0}", arr.Length); *@
+        @* var reader = await new StreamReader(stream).ReadToEndAsync();
+        Console.WriteLine(reader.Substring(0, 500)); *@
+    }
+}

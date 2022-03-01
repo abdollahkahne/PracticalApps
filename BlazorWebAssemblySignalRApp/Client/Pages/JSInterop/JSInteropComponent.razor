@@ -1,0 +1,134 @@
+@page "/js-interop-component"
+@inject IJSRuntime JS
+
+<div>
+    <h1>Call JS <code>getStudent</code>function </h1>
+    <div>
+        Name: @student?.Name
+        <br>
+        Age:@student?.Age
+        <br>
+        Married:@student?.IsMarried
+        <br>
+        Created At: @student?.Created
+        <br>
+        Random Symbol Generated: @student?.getSymbol()
+        <p class="text-danger">Here the random Symbol render twice (Which may done aggregated too!). since in call backs
+            if it is async, it render first
+            time after callback non async end and second time after callback asyn end!</p>
+        <p class="text-warning">To remind again: In case of OnParameterAsync and OnInitializedAsyn, the above 2 render
+            exists too. Also consider that in case of rendering from parent, the OnInitialized only run if it is first
+            render but set parameter run on every rerendering from parent but not rerendering through event callbacks!
+        </p>
+    </div>
+    <div>
+        <CheckRenderChildComponent StudentName="@student?.Name" />
+    </div>
+    <button @onclick="getStudent">JS Interop!</button>
+</div>
+<hr>
+<div>
+    <h2>Use JS Interop in CSharp Classes</h2>
+    <button onclick="@(async()=>await _module!.showPrompt("This is a test for JS Interop in Classes"))">Call a js
+        function through Classes</button>
+</div>
+<hr>
+<div>
+
+    <h1>Call JS <code>convertArray</code> Function</h1>
+
+    <p>
+        <button @onclick="ConvertArray">Convert Array</button>
+    </p>
+
+    <p>
+        @decodedText
+    </p>
+    <p>
+        Quote &copy;2005 <a href="https://www.uphe.com">Universal Pictures</a>:
+        <a href="https://www.uphe.com/movies/serenity-2005">Serenity</a><br>
+        <a href="https://www.imdb.com/name/nm0472710/">David Krumholtz on IMDB</a>
+    </p>
+</div>
+
+@code {
+    private uint[] quoteArray = new uint[] {
+60, 101, 109, 62, 67, 97, 110, 39, 116, 32, 115, 116, 111, 112, 32,
+116, 104, 101, 32, 115, 105, 103, 110, 97, 108, 44, 32, 77, 97,
+108, 46, 60, 47, 101, 109, 62, 32, 45, 32, 77, 114, 46, 32, 85, 110,
+105, 118, 101, 114, 115, 101, 10, 10,
+};
+    // we should use markup string non-nullable to work
+    private MarkupString decodedText { get; set; }
+    private Student? student { get; set; }
+    private IJSObjectReference? module { get; set; }
+    private JSInteropClass? _module { get; set; }
+    private async Task ConvertArray()
+    {
+        decodedText = new MarkupString(await module!.InvokeAsync<string>("convertArray", quoteArray));
+    }
+    private async Task getStudent(EventArgs e)
+    {
+        Console.WriteLine(@"current Created:{0}", student?.Created);
+        string cjson = System.Text.Json.JsonSerializer.Serialize(student);
+        Console.WriteLine(@"current json: {0}", cjson);
+        Student? cs = System.Text.Json.JsonSerializer.Deserialize<Student>(cjson);
+        Console.WriteLine(@"current cs Created:{0}", cs?.Created);
+        // It can return every json serializable object for example Student Here
+        // It can get every input which is JSON Serializable and do not throw error in JS function even anynomous types
+        @* student = await module!.InvokeAsync<Student>("getStudent", new { Name = "Shahrzad", Age = 22, Married = false }); *@
+        student = await module!.InvokeAsync<Student>("getPromise", student);
+        Console.WriteLine(@"Created:{0}", student.Created);
+        string json = System.Text.Json.JsonSerializer.Serialize(student);
+        Console.WriteLine(@"json: {0}", json);
+        Student? s = System.Text.Json.JsonSerializer.Deserialize<Student>(json);
+        Console.WriteLine(@"s Created:{0}", s?.Created);
+        // As the result shows here, serialization in case of DateTime works in a defined behaviour and we should consider that
+    }
+    protected override void OnInitialized()
+    {
+        Console.WriteLine("Rendering Or Rerendering: I called to run (OnInit)");
+        student = new()
+        {
+            Name = "Ali",
+            Age = 22,
+            IsMarried = true,
+            Created = DateTime.Now,
+        };
+        _module = new(JS);
+
+        base.OnInitialized();
+    }
+    protected override void OnParametersSet()
+    {
+        Console.WriteLine("Rendering Or Rerendering: I called to run (OnParameterSet)");
+        Console.WriteLine("Did I run on event callbacks too?? Answer:No!");
+        base.OnParametersSet();
+    }
+
+
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            module = await JS.InvokeAsync<IJSObjectReference>("import", "./Pages/JSInterop/JSInteropComponent.razor.js");
+        }
+        await base.OnAfterRenderAsync(firstRender);
+    }
+
+    public class Student
+    {
+        public string? Name { get; set; }
+        public int Age { get; set; }
+        public bool IsMarried { get; set; }
+        public DateTimeOffset Created { get; set; }
+        private readonly Random rng = new Random();
+        public string getSymbol()
+        {
+            string str = $"{(char)('A' + rng.Next(0, 26))}{(char)('A' + rng.Next(0, 26))}";
+            return str;
+        }
+        // this show offset too
+    }
+}

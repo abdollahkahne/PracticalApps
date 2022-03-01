@@ -1,0 +1,29 @@
+@page "/collocated-js"
+@inject IJSRuntime JS
+
+<div>
+    <span>@input</span>
+    <button @onclick="showPrompt">Run JS</button>
+</div>
+
+@code {
+    private string? input { get; set; }
+    private IJSObjectReference? module { get; set; }
+
+    protected override async void OnAfterRender(bool firstRender)
+    {
+        module = await JS.InvokeAsync<IJSObjectReference>("import", "./Pages/CollacatedJS.razor.js"); ;
+        base.OnAfterRender(firstRender);
+    }
+    private async Task<string> showPrompt()
+    {
+        if (module is not null)
+        {
+            return input = await module.InvokeAsync<string>("showPrompt", "Please insert an input here");
+        }
+        else
+        {
+            return await Task.FromResult("Module not loaded!");
+        }
+    }
+}

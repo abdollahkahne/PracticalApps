@@ -1,0 +1,28 @@
+<div class="card" style="width:22rem">
+    <div class="card-body">
+        <h3 class="card-title">@Title</h3>
+        <p class="card-text">@ChildContent?.Invoke(true)</p>
+        <button @onclick="OnYes">Yes!</button>
+    </div>
+    <div>
+        @Frag?.Invoke(Title)
+    </div>
+</div>
+@code {
+    [Parameter]
+    public string Title { get; set; } = "Initial Value";
+    [Parameter]
+    public RenderFragment<bool>? ChildContent { get; set; }
+
+    public RenderFragment<string>? Frag { get; set; } = val =>
+    @<p>
+        This is a sample of Generic Render Fragment which used val input as:@val and it completely handled inside children
+        and it is not a Parameter
+    </p>
+    ;
+    private void OnYes()
+    {
+        Console.WriteLine("Write to the console in C#! 'Yes' button selected.");
+        @* This is added to wasm console which is equal to browser console! *@
+    }
+}

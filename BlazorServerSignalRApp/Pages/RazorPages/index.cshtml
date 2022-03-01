@@ -1,0 +1,54 @@
+@page
+@using BlazorServerSignalRApp.Pages
+@using BlazorServerSignalRApp.ViewComponents
+@addTagHelper *,Microsoft.AspNetCore.Mvc.TagHelpers
+@addTagHelper *,BlazorServerSignalRApp
+@{
+    Layout = "_Layout";
+}
+@functions {
+    @* We use Bind Property to Bind a property to a control in page and use SupportsGet=true since by default the binding do
+        not do for Get Requests which means that if the request method is get, It binds for example from query string to
+        values*@
+    [BindProperty(SupportsGet = true)]
+    public bool IsChecked { get; set; }
+    [BindProperty(SupportsGet = true)]
+    public bool IsCompleted { get; set; }
+    @* private Dictionary<string, Object> _parameters = new Dictionary<string, Object>() {
+        {"IsChecked",false },{"IsCompleted",true}
+        }; *@
+}
+<div>
+    <h2>This page loaded by Razor engine</h2>
+    <p>It has also a Blazor component which is used for testing different types of Rendering</p>
+    <component type="@typeof(Counter)" render-mode="ServerPrerendered" />
+    <hr>
+    <h2>
+        Component using param-prop and Render Static (Not interactive)
+    </h2>
+    <component type="typeof(Check)" render-mode="Static" param-IsCompleted=true param-IsChecked=false />
+    <hr>
+    <h2>
+        Component using param-prop and Render in Server (Only Triggered By Browser)
+    </h2>
+    <component type="typeof(Check)" render-mode="Server" param-IsCompleted=true param-IsChecked=false />
+
+    <hr>
+    <h2>Component Using Params and Prerendered mode</h2>
+    <component type="typeof(Check)" render-mode="ServerPrerendered" param-IsCompleted=true param-IsChecked=false />
+    <hr>
+    <h2>We can also set Initial value of a component's Parameter from Form/User inputs</h2>
+    <div class="border-1">
+        <form method="get">
+            <input type="checkbox" asp-for="IsCompleted" /> Is Completed?
+            <input type="checkbox" asp-for="IsChecked" /> Is Checked?
+            <button type="submit">Apply Parameters Staticly</button>
+        </form>
+    </div>
+    <component type="typeof(Check)" render-mode="Static" param-IsCompleted="@IsCompleted" param-IsChecked="IsChecked" />
+    <hr>
+    <h2>Using View Component</h2>
+    @await Component.InvokeAsync("WeatherForecast",new {start=DateTime.Now})
+    <h2>Using View Component (Declarative)</h2>
+    <vc:weather-forecast start="@DateTime.Now"></vc:weather-forecast>
+</div>

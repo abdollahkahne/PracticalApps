@@ -31,6 +31,7 @@ namespace BlazorServerSignalRApp.CircuitHandlers
         public override Task OnConnectionUpAsync(Circuit circuit, CancellationToken cancellationToken)
         {
             _circuits.Add(circuit);
+            Console.WriteLine(DateTime.Now.ToLongTimeString());
             Console.WriteLine(circuit.Id);
             Console.WriteLine($"Number of Connected Cirecuits After Connect: {_circuits.Count}");
             return base.OnConnectionUpAsync(circuit, cancellationToken);

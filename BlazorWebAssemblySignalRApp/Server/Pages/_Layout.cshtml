@@ -1,0 +1,122 @@
+﻿@using Microsoft.AspNetCore.Components.Web
+@namespace BlazorWebAssemblySignalRApp.Server.Pages
+@using BlazorWebAssemblySignalRApp.Client
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <base href="~/" />
+    <link rel="stylesheet" href="css/bootstrap/bootstrap.min.css" />
+    <link href="css/app.css" rel="stylesheet" />
+    <link href="BlazorWebAssemblySignalRApp.Client.styles.css" rel="stylesheet" />
+    <component type="typeof(HeadOutlet)" render-mode="WebAssemblyPrerendered" />
+    <script>
+        window.setElementInnerText_ = (element, text) => element.innerText = text;
+        window.setElementInnerText__ = (element, text) => { element.innerText = text; return text; }
+    </script>
+</head>
+
+<body>
+    @RenderBody()
+
+    <div id="blazor-error-ui">
+        <environment include="Staging,Production">
+            An error has occurred. This application may no longer respond until reloaded.
+        </environment>
+        <environment include="Development">
+            An unhandled exception has occurred. See browser dev tools for details.
+        </environment>
+        <a href="" class="reload">Reload</a>
+        <a class="dismiss">🗙</a>
+    </div>
+
+    <script autostart="false" src="_framework/blazor.webassembly.js"></script>
+    <script>
+        addEventListener("pagehide", () => { Blazor.disconnect(); });
+        Blazor.start(
+            {
+                configureSignalR: builder => builder.configureLogging("information"),
+                reconnectionHandler: {
+                    onConnectionUp: () => {
+                        console.log("The connection is Up and OKay! (From client side)")
+                    },
+                    onConnectionDown: (option, err) => {
+                        console.log(option);
+                        console.log(err);
+                    }
+                },
+                @* reconnectionOptions: {
+                maxRetries: 3,
+                retryIntervalMilliseconds: 2000,
+                dialogId: "components-reconnect-modal"
+                } *@
+            }
+        );
+    </script>
+    <script>
+        // this function can be write as lambda expression too
+        function myCustomEventArgs(event) {
+            return {
+                value: "Custom Event Value",
+                src: "Custom Event Name"
+            }
+        }
+        Blazor.registerCustomEventType("mycustomclick", {
+            browserEventName: "click",
+            createEventArgs: myCustomEventArgs,
+        });
+        Blazor.registerCustomEventType("mycustomcatdog", {
+            browserEventName: "catdog",
+            createEventArgs: e => ({
+                name: e.detail.name,
+                weight: e.detail.weight,
+                age: e.detail.age,
+                stamp: new Date()
+            })
+
+        });
+        Blazor.registerCustomEventType("custompaste", {
+            browserEventName: "paste",
+            createEventArgs: e => ({
+                eventTimeStamp: new Date(),
+                pastedData: e.clipboardData.getData("text"),
+            }),
+        });
+    </script>
+    <script>
+        function addDialog() {
+            var dialogElem = document.getElementById("dialog");
+            var textNode = document.createTextNode("This is a sample node");
+            var x = document.createElement("p");
+            x.innerText = "Sample Element";
+            Blazor.rootComponents.add(dialogElem, "dialog", { title: "Title of Dialog", childContent: null });
+        }
+    </script>
+
+    <script>
+        // Here we create a custom event in JS for dom (this is feature of js)
+        const mycustomJSEvent = new CustomEvent("catdog", {
+            detail: {
+                name: "Rita",
+                weight: "10",
+                age: "3"
+            },
+            bubbles: true,
+        });
+        addEventListener("catdog", e => { console.log(e) });
+        setInterval(() => {
+            if (document.getElementById("catdog")) {
+                document.getElementById("catdog").dispatchEvent(mycustomJSEvent);
+            }
+        }, 30000);// dispatch event every 30 seconds with src equal to window
+        // To dispatch the event with another object use obj.dispatchEvent and obj.EventListener to handle it)
+
+    </script>
+
+</body>
+
+</html>

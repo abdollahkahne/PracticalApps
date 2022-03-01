@@ -1,0 +1,69 @@
+@page "/localized"
+<div>
+    <h1>Globalize and localize .NET applications</h1>
+    <p>
+        Developing a world-ready application, including an application that can be localized into one or more languages,
+        involves three steps: globalization, localizability review, and localization.
+    </p>
+    <h2>
+        Globalization
+    </h2>
+    <p>
+        This step involves designing and coding an application that is culture-neutral and language-neutral, and that
+        supports localized user interfaces and regional data for all users. It involves making design and programming
+        decisions that are not based on culture-specific assumptions. While a globalized application is not localized,
+        it nevertheless is designed and written so that it can be subsequently localized into one or more languages with
+        relative ease
+    </p>
+    <p>This article discusses some of the major issues you should consider and the best practices you can follow when
+        handling strings, date and time values, and numeric values in a globalized app:</p>
+    <h3>
+        Strings
+    </h3>
+    <p>
+        The handling of characters and strings is a central focus of globalization, because each culture or region may
+        use different characters and character sets and sort them differently. This section provides recommendations for
+        using strings in globalized apps.
+        1- By default, .NET uses Unicode strings (UTF-16)
+        2- Use resource files:Even if you are developing an app that targets a single culture or region, you should use
+        resource files to store strings and other resources that are displayed in the user interface. You should never
+        add them directly to your code.
+        3- Search and compare strings: For Searching string use static String.IndexOf method instead of instance
+        str.IndexOf method. In string searches and comparisons, a common mistake is to treat the string as a collection
+        of characters, each of which is represented by a Char object. String.IndexOf() performs a culture-sensitive
+        comparison instead of ordinal comparison.
+        4- Test String Equality: In general, you should call the instance str.Equals(str1, StringComparison) method
+        or the static String.Equals(str1, str2, StringComparison) method with a value of StringComparison.Ordinal
+        for strings such as passwords, and a value of StringComparison.OrdinalIgnoreCase for strings such as file names
+        or URIs. For example, you might perform a comparison for equality to verify a password or to confirm that a file
+        exists. Such non-linguistic comparisons should always be ordinal rather than culture-sensitive.
+        5- Order and Sort Strings: Typically, ordered strings that are to be displayed in the user interface should be
+        sorted based on culture. For the most part, such string comparisons are handled implicitly by .NET when you call
+        a method that sorts strings, such as Array.Sort or List(GenericT).Sort. By default, strings are sorted by using the
+            sorting conventions of the current culture
+            6- Avoid Concatenation: If at all possible, avoid using composite strings that are built at run time from
+            concatenated phrases. Composite strings are difficult to localize, because they often assume a grammatical
+            order in the app's original language that does not apply to other localized languages.
+    </p>
+    <h3>Handle dates and times</h3>
+    <p>
+        <a href="https://docs.microsoft.com/en-us/aspnet/core/blazor/globalization-localization?view=aspnetcore-6.0">Should
+            return here and navigate its linked content</a>
+    </p>
+    <h2>
+        Localizability review
+    </h2>
+    <p>
+        This step involves reviewing an application's code and design to ensure that it can be localized easily and to
+        identify potential roadblocks for localization, and verifying that the application's executable code is
+        separated from its resources. If the globalization stage was effective, the localizability review will confirm
+        the design and coding choices made during globalization. The localizability stage may also identify any
+        remaining issues so that an application's source code doesn't have to be modified during the localization stage.
+    </p>
+    <h2>Localization</h2>
+    <p>
+        This step involves customizing an application for specific cultures or regions. If the globalization and
+        localizability steps have been performed correctly, localization consists primarily of translating the user
+        interface.
+    </p>
+</div>

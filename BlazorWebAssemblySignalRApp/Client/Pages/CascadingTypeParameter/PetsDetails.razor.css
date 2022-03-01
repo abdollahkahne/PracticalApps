@@ -1,0 +1,13 @@
+::deep div.card {
+    background-color:blueviolet;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    box-shadow: black 2px 4px 10px;
+    border: 1px solid blue;
+}
+/* In the above syntax (::deep) the css apply to all .card-body elements which is descendent to current element and does not have any specified element in child level! It apply as [b-3lle12or23] .card */
+
+div.card {
+    background-color:blueviolet;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    box-shadow: black 2px 4px 10px;
+}

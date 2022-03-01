@@ -1,0 +1,5 @@
+div.card {
+    background-color: aqua;
+    font-family: 'Courier New', Courier, monospace;
+    box-shadow: black 2px 4px 10px;
+}

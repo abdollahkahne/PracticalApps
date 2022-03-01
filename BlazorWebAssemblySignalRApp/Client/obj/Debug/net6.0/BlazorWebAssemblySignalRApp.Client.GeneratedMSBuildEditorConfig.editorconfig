@@ -42,12 +42,24 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = UGFnZXMvQ2FzY2FkaW5nRXJyb3JDb21wb25lbnQucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
+[/home/selenium/Desktop/Learning/PracticalApps/BlazorWebAssemblySignalRApp/Client/Pages/CascadingTypeParameter/CasadingTypeValue1.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvQ2FzY2FkaW5nVHlwZVBhcmFtZXRlci9DYXNhZGluZ1R5cGVWYWx1ZTEucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/selenium/Desktop/Learning/PracticalApps/BlazorWebAssemblySignalRApp/Client/Pages/CascadingTypeParameter/CascadingTemplate1.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvQ2FzY2FkaW5nVHlwZVBhcmFtZXRlci9DYXNjYWRpbmdUZW1wbGF0ZTEucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
 [/home/selenium/Desktop/Learning/PracticalApps/BlazorWebAssemblySignalRApp/Client/Pages/Chat.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXMvQ2hhdC5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
 [/home/selenium/Desktop/Learning/PracticalApps/BlazorWebAssemblySignalRApp/Client/Pages/Check.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXMvQ2hlY2sucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/selenium/Desktop/Learning/PracticalApps/BlazorWebAssemblySignalRApp/Client/Pages/ChildBinding/BindValueInputs.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvQ2hpbGRCaW5kaW5nL0JpbmRWYWx1ZUlucHV0cy5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
 [/home/selenium/Desktop/Learning/PracticalApps/BlazorWebAssemblySignalRApp/Client/Pages/ChildBinding/ChildBindingChild.razor]
@@ -78,8 +90,20 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = UGFnZXMvQ2hpbGRCaW5kaW5nL1Bhc3N3b3JkRW50cnkucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
+[/home/selenium/Desktop/Learning/PracticalApps/BlazorWebAssemblySignalRApp/Client/Pages/CollacatedJS.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvQ29sbGFjYXRlZEpTLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
 [/home/selenium/Desktop/Learning/PracticalApps/BlazorWebAssemblySignalRApp/Client/Pages/ConfigurationSample.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXMvQ29uZmlndXJhdGlvblNhbXBsZS5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/selenium/Desktop/Learning/PracticalApps/BlazorWebAssemblySignalRApp/Client/Pages/Contents/GenericRenderFragment.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvQ29udGVudHMvR2VuZXJpY1JlbmRlckZyYWdtZW50LnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/selenium/Desktop/Learning/PracticalApps/BlazorWebAssemblySignalRApp/Client/Pages/Contents/GenerticRenderFragmentParent.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvQ29udGVudHMvR2VuZXJ0aWNSZW5kZXJGcmFnbWVudFBhcmVudC5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
 [/home/selenium/Desktop/Learning/PracticalApps/BlazorWebAssemblySignalRApp/Client/Pages/Contents/RenderFragmentChild.razor]
@@ -102,8 +126,20 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = UGFnZXMvQ291bnRlcldpdGhUaW1lci5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
-[/home/selenium/Desktop/Learning/PracticalApps/BlazorWebAssemblySignalRApp/Client/Pages/Dialog.razor]
-build_metadata.AdditionalFiles.TargetPath = UGFnZXMvRGlhbG9nLnJhem9y
+[/home/selenium/Desktop/Learning/PracticalApps/BlazorWebAssemblySignalRApp/Client/Pages/CustomeValidationComponent/CustomeValidator.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvQ3VzdG9tZVZhbGlkYXRpb25Db21wb25lbnQvQ3VzdG9tZVZhbGlkYXRvci5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/selenium/Desktop/Learning/PracticalApps/BlazorWebAssemblySignalRApp/Client/Pages/CustomInputs/CustomeInputNumber.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvQ3VzdG9tSW5wdXRzL0N1c3RvbWVJbnB1dE51bWJlci5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/selenium/Desktop/Learning/PracticalApps/BlazorWebAssemblySignalRApp/Client/Pages/CustomInputs/CustomeInputSelect.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvQ3VzdG9tSW5wdXRzL0N1c3RvbWVJbnB1dFNlbGVjdC5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/selenium/Desktop/Learning/PracticalApps/BlazorWebAssemblySignalRApp/Client/Pages/CustomInputs/CustomeInputText.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvQ3VzdG9tSW5wdXRzL0N1c3RvbWVJbnB1dFRleHQucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
 [/home/selenium/Desktop/Learning/PracticalApps/BlazorWebAssemblySignalRApp/Client/Pages/DoctorWhoSample/DoctorWhoLayout.razor]
@@ -116,6 +152,18 @@ build_metadata.AdditionalFiles.CssScope =
 
 [/home/selenium/Desktop/Learning/PracticalApps/BlazorWebAssemblySignalRApp/Client/Pages/DoctorWhoSample/ProductionsLayout.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXMvRG9jdG9yV2hvU2FtcGxlL1Byb2R1Y3Rpb25zTGF5b3V0LnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/selenium/Desktop/Learning/PracticalApps/BlazorWebAssemblySignalRApp/Client/Pages/DynamicComp/DynamicComponentExample.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvRHluYW1pY0NvbXAvRHluYW1pY0NvbXBvbmVudEV4YW1wbGUucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/selenium/Desktop/Learning/PracticalApps/BlazorWebAssemblySignalRApp/Client/Pages/DynamicComp/UnitedLaunchAlliance.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvRHluYW1pY0NvbXAvVW5pdGVkTGF1bmNoQWxsaWFuY2UucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/selenium/Desktop/Learning/PracticalApps/BlazorWebAssemblySignalRApp/Client/Pages/DynamicComp/VirginGalactic.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvRHluYW1pY0NvbXAvVmlyZ2luR2FsYWN0aWMucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
 [/home/selenium/Desktop/Learning/PracticalApps/BlazorWebAssemblySignalRApp/Client/Pages/EventCallback/EventCallbackChild.razor]
@@ -142,8 +190,40 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = UGFnZXMvRmV0Y2hEYXRhLnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
+[/home/selenium/Desktop/Learning/PracticalApps/BlazorWebAssemblySignalRApp/Client/Pages/FilesComponent/FileDownloadComponent.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvRmlsZXNDb21wb25lbnQvRmlsZURvd25sb2FkQ29tcG9uZW50LnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/selenium/Desktop/Learning/PracticalApps/BlazorWebAssemblySignalRApp/Client/Pages/FilesComponent/FileUpload2.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvRmlsZXNDb21wb25lbnQvRmlsZVVwbG9hZDIucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/selenium/Desktop/Learning/PracticalApps/BlazorWebAssemblySignalRApp/Client/Pages/FilesComponent/MultipleFileUpload.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvRmlsZXNDb21wb25lbnQvTXVsdGlwbGVGaWxlVXBsb2FkLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/selenium/Desktop/Learning/PracticalApps/BlazorWebAssemblySignalRApp/Client/Pages/FilesComponent/UploadFileToServer.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvRmlsZXNDb21wb25lbnQvVXBsb2FkRmlsZVRvU2VydmVyLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
 [/home/selenium/Desktop/Learning/PracticalApps/BlazorWebAssemblySignalRApp/Client/Pages/ForeignObjectInSVG.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXMvRm9yZWlnbk9iamVjdEluU1ZHLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/selenium/Desktop/Learning/PracticalApps/BlazorWebAssemblySignalRApp/Client/Pages/Form/BasicValidation.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvRm9ybS9CYXNpY1ZhbGlkYXRpb24ucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/selenium/Desktop/Learning/PracticalApps/BlazorWebAssemblySignalRApp/Client/Pages/Form/FormExampl1.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvRm9ybS9Gb3JtRXhhbXBsMS5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/selenium/Desktop/Learning/PracticalApps/BlazorWebAssemblySignalRApp/Client/Pages/Form/FormExample2.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvRm9ybS9Gb3JtRXhhbXBsZTIucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/selenium/Desktop/Learning/PracticalApps/BlazorWebAssemblySignalRApp/Client/Pages/Form/StarshipForm.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvRm9ybS9TdGFyc2hpcEZvcm0ucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
 [/home/selenium/Desktop/Learning/PracticalApps/BlazorWebAssemblySignalRApp/Client/Pages/Index.razor]
@@ -152,6 +232,14 @@ build_metadata.AdditionalFiles.CssScope =
 
 [/home/selenium/Desktop/Learning/PracticalApps/BlazorWebAssemblySignalRApp/Client/Pages/JS/PrerenderingInterop.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXMvSlMvUHJlcmVuZGVyaW5nSW50ZXJvcC5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/selenium/Desktop/Learning/PracticalApps/BlazorWebAssemblySignalRApp/Client/Pages/JSInterop/CheckRenderChildComponent.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvSlNJbnRlcm9wL0NoZWNrUmVuZGVyQ2hpbGRDb21wb25lbnQucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/selenium/Desktop/Learning/PracticalApps/BlazorWebAssemblySignalRApp/Client/Pages/JSInterop/JSInteropComponent.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvSlNJbnRlcm9wL0pTSW50ZXJvcENvbXBvbmVudC5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
 [/home/selenium/Desktop/Learning/PracticalApps/BlazorWebAssemblySignalRApp/Client/Pages/LifeCycle/BackgroundWork.razor]
@@ -168,6 +256,10 @@ build_metadata.AdditionalFiles.CssScope =
 
 [/home/selenium/Desktop/Learning/PracticalApps/BlazorWebAssemblySignalRApp/Client/Pages/LifeCycle/LifeCycleParentComponent.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXMvTGlmZUN5Y2xlL0xpZmVDeWNsZVBhcmVudENvbXBvbmVudC5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/selenium/Desktop/Learning/PracticalApps/BlazorWebAssemblySignalRApp/Client/Pages/Localization.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvTG9jYWxpemF0aW9uLnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
 [/home/selenium/Desktop/Learning/PracticalApps/BlazorWebAssemblySignalRApp/Client/Pages/LogSample.razor]
@@ -196,6 +288,10 @@ build_metadata.AdditionalFiles.CssScope =
 
 [/home/selenium/Desktop/Learning/PracticalApps/BlazorWebAssemblySignalRApp/Client/Pages/QueryStringSample.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXMvUXVlcnlTdHJpbmdTYW1wbGUucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/selenium/Desktop/Learning/PracticalApps/BlazorWebAssemblySignalRApp/Client/Pages/RCL/RCLComponent.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvUkNML1JDTENvbXBvbmVudC5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
 [/home/selenium/Desktop/Learning/PracticalApps/BlazorWebAssemblySignalRApp/Client/Pages/RenderFragmentParent.razor]
@@ -230,17 +326,53 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = UGFnZXMvVGFicy9UYWJTZXQucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
+[/home/selenium/Desktop/Learning/PracticalApps/BlazorWebAssemblySignalRApp/Client/Pages/TemplatedComponents/PetsTable.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvVGVtcGxhdGVkQ29tcG9uZW50cy9QZXRzVGFibGUucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/selenium/Desktop/Learning/PracticalApps/BlazorWebAssemblySignalRApp/Client/Pages/TemplatedComponents/PetsTable2.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvVGVtcGxhdGVkQ29tcG9uZW50cy9QZXRzVGFibGUyLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/selenium/Desktop/Learning/PracticalApps/BlazorWebAssemblySignalRApp/Client/Pages/TemplatedComponents/PetsTable3.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvVGVtcGxhdGVkQ29tcG9uZW50cy9QZXRzVGFibGUzLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/selenium/Desktop/Learning/PracticalApps/BlazorWebAssemblySignalRApp/Client/Pages/TemplatedComponents/PetsTable4.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvVGVtcGxhdGVkQ29tcG9uZW50cy9QZXRzVGFibGU0LnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
 [/home/selenium/Desktop/Learning/PracticalApps/BlazorWebAssemblySignalRApp/Client/Pages/UseCheckbox.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXMvVXNlQ2hlY2tib3gucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/selenium/Desktop/Learning/PracticalApps/BlazorWebAssemblySignalRApp/Client/Pages/WeatherForecastPreserveState.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvV2VhdGhlckZvcmVjYXN0UHJlc2VydmVTdGF0ZS5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
 [/home/selenium/Desktop/Learning/PracticalApps/BlazorWebAssemblySignalRApp/Client/Shared/SurveyPrompt.razor]
 build_metadata.AdditionalFiles.TargetPath = U2hhcmVkL1N1cnZleVByb21wdC5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
+[/home/selenium/Desktop/Learning/PracticalApps/BlazorWebAssemblySignalRApp/Client/Shared/TableTemplate.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkL1RhYmxlVGVtcGxhdGUucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
 [/home/selenium/Desktop/Learning/PracticalApps/BlazorWebAssemblySignalRApp/Client/_Imports.razor]
 build_metadata.AdditionalFiles.TargetPath = X0ltcG9ydHMucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
+
+[/home/selenium/Desktop/Learning/PracticalApps/BlazorWebAssemblySignalRApp/Client/Pages/CascadingTypeParameter/PetsDetails.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvQ2FzY2FkaW5nVHlwZVBhcmFtZXRlci9QZXRzRGV0YWlscy5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = b-3lle12or23
+
+[/home/selenium/Desktop/Learning/PracticalApps/BlazorWebAssemblySignalRApp/Client/Pages/Dialog.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvRGlhbG9nLnJhem9y
+build_metadata.AdditionalFiles.CssScope = b-zy517tel3t
+
+[/home/selenium/Desktop/Learning/PracticalApps/BlazorWebAssemblySignalRApp/Client/Pages/Form/InsertStudent.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvRm9ybS9JbnNlcnRTdHVkZW50LnJhem9y
+build_metadata.AdditionalFiles.CssScope = b-lt7lmnoofw
 
 [/home/selenium/Desktop/Learning/PracticalApps/BlazorWebAssemblySignalRApp/Client/Shared/MainLayout.razor]
 build_metadata.AdditionalFiles.TargetPath = U2hhcmVkL01haW5MYXlvdXQucmF6b3I=

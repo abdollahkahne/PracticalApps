@@ -6,6 +6,7 @@ export function beforeStart(options,extensions) {
 }
 
 export function afterStarted(blazor) {
+    console.log(blazor);
     console.log("After Blazor Started");
     // Here we can making JS interop calls and registering custom elements
 }

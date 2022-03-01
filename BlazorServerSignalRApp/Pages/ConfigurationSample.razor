@@ -1,0 +1,18 @@
+@page "/configuration"
+@using Microsoft.Extensions.Configuration
+@inject IConfiguration _configuration
+
+<h1 style="font-size: @_configuration["UI:h1FontSize"];">Configuration in Blazor Web Assembly</h1>
+<p>Type: @_configuration["type"]</p>
+<p>Size: @_configuration["size"]</p>
+<p>Color: @_configuration["color"]</p>
+<h4>Wheels</h4>
+<p>Count: @_configuration["wheels:count"]</p>
+<p>Brand: @_configuration["wheels:brand"]</p>
+<p>Year: @_configuration["wheels:count"]</p>
+<p>Type of Brand: @_configuration["wheels:brand:type"]</p>
+@*
+    Client security restrictions prevent direct access to files, including settings files for app configuration. To read
+    configuration files in addition to appsettings.json/appsettings.{ENVIRONMENT}.json from the wwwroot folder into
+    configuration, use an HttpClient. But these two files are exception and sent to client as configuration service instance
+*@

@@ -1,0 +1,117 @@
+@page "/upload-file-to-api"
+@using BlazorWebAssemblySignalRApp.Shared.Models
+@inject ILogger<UploadFileToServer> _logger
+@inject HttpClient Http
+@using System.Text.Json
+@using System.Linq
+@using System.Net.Http.Headers
+
+@* In case of Blazor WASM we inject Http Client instead of Http Client Factory since it is used in client side *@
+
+<h1>File Upload To An API</h1>
+<div>
+    <p>
+        Select at most 3 files with Maximum size 15 MB:
+        <InputFile multiple OnChange="onFilesSelection" />
+    </p>
+</div>
+
+@if (files.Count > 0)
+{
+    <div class="card">
+    <div class="card-body">
+        <ol>
+            @foreach (var item in files)
+                {
+                    <li>
+                        File:@item.Name
+                        <br>
+                        @if (FileAlreadyUploaded(uploadResultSummary, item.Name, _logger, out var uploadResult))
+                        {
+                            <span>Stored File Name: @uploadResult.StoredFileName</span>
+                        }
+                        else
+                        {
+                            <span> There is an error uploading the file (Error: @uploadResult.ErrorCode)</span>
+                        }
+                    </li>
+                }
+            </ol>
+        </div>
+    </div>
+}
+
+@code {
+    private int maxFileCount = 3;
+    private long maxFileSize = 1024 * 1024 * 15;
+    private List<IBrowserFile> files = new List<IBrowserFile>();
+    private List<UploadResult> uploadResultSummary = new();
+    private bool updateIsRequired = false;
+    private bool shouldRender { get; set; }
+    protected override bool ShouldRender() => shouldRender;
+    private async Task onFilesSelection(InputFileChangeEventArgs e)
+    {
+        // reset lists and flags to new page
+        updateIsRequired = false;
+        shouldRender = false;
+        files = new List<IBrowserFile>();
+        uploadResultSummary = new();
+        using var requestBody = new MultipartFormDataContent();
+
+        // Include actions that may thrown error in try-catch always (the GetMultipleFiles does not throw exception in case of
+        // exceeded file count)
+        foreach (var item in e.GetMultipleFiles(maxFileCount))
+        {
+            // To Prevent already considered files from re-upload (security matter), do a check before starting upload
+            if (uploadResultSummary.SingleOrDefault(s => s.FileName == item.Name) is null)
+            {
+                try
+                {
+                    var stream = item.OpenReadStream(maxFileSize);
+                    var fileContent = new StreamContent(stream);
+                    fileContent.Headers.ContentType = new MediaTypeHeaderValue(item.ContentType);
+                    requestBody.Add(content: fileContent, name: "\"files\"", fileName: item.Name);
+                    updateIsRequired = true;
+                }
+                catch (System.Exception ex)
+                {
+                    // only add upload result for files that it is state is determined!
+                    var uploadResult = new UploadResult() { FileName = item.Name, ErrorCode = 6, Uploaded = false };
+                    uploadResultSummary.Add(uploadResult);
+                    _logger.LogInformation("File:{filename} Not uploaded with Error Code 6= {message}", item.Name, ex.Message);
+                    shouldRender = true;
+                }
+                files.Add(item); // This is used for showing in UI
+            }
+
+        }
+
+        if (updateIsRequired)
+        {
+            var response = await Http.PostAsync("http://localhost:5104/api/files", requestBody);
+            response.EnsureSuccessStatusCode();
+            // var responseContent = await response.Content.ReadAsStreamAsync();
+            var options = new System.Text.Json.JsonSerializerOptions() { PropertyNameCaseInsensitive = true };
+            // var uploadResults = System.Text.Json.JsonSerializer.Deserialize<List<UploadResult>>(responseContent, options);
+            var uploadResults = await response.Content.ReadFromJsonAsync<List<UploadResult>>(options);
+            if (uploadResults is not null)
+            {
+                uploadResultSummary = uploadResultSummary.Concat(uploadResults).ToList();
+                shouldRender = true;
+            }
+        }
+
+    }
+    private static bool FileAlreadyUploaded(List<UploadResult> uploadResults, string? filename, ILogger logger,
+    out UploadResult uploadResult)
+    {
+        uploadResult = uploadResults.SingleOrDefault(r => r.FileName == filename) ?? new();
+        if (!uploadResult.Uploaded && (uploadResult.ErrorCode is null))
+        {
+            uploadResult.ErrorCode = 5;
+            uploadResult.FileName = filename;
+            logger.LogInformation("{filename} Not Uploaded with Error Code: 5", filename);
+        }
+        return uploadResult.Uploaded;
+    }
+}

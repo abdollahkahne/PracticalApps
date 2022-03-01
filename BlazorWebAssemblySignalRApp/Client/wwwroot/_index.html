@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>BlazorWebAssemblySignalRApp</title>
+    <base href="/" />
+    <link href="css/bootstrap/bootstrap.min.css" rel="stylesheet" />
+    <link href="css/app.css" rel="stylesheet" />
+    <link href="BlazorWebAssemblySignalRApp.Client.styles.css" rel="stylesheet" />
+    <script>
+        window.setElementInnerText_=(element, text)=>element.innerText=text;
+        window.setElementInnerText__=(element, text)=>{element.innerText=text;return text;}
+    </script>
+</head>
+
+<body>
+    <div>
+        <div id="dialog">Here we add Dialog component using click</div>
+        <button onclick="addDialog()">Add Dialog</button>
+    </div>
+    <div id="app">Loading...</div>
+
+    <div id="blazor-error-ui">
+        An unhandled error has occurred.
+        <a href="" class="reload">Reload</a>
+        <a class="dismiss">🗙</a>
+    </div>
+    <!-- <script type="module" src="BlazorWebAssemblySignalRApp.Client.lib.module.js"></script> -->
+    <script autostart="false" src="_framework/blazor.webassembly.js"></script>
+    <!-- <script type="module" src="BlazorWebAssemblySignalRApp.Client.lib.module.js"></script> -->
+
+    
+    <script>
+        
+        console.log("Before Blazor Start from index.html");
+        // Blazor.start().then(result=>{
+        //     console.log("Inside start Promise succeed!");
+        //     console.log(result); // result is undefined
+        // });
+        Blazor.start({
+            environment:"Production",
+            loadBootResource:function(type,name,defaultUri,integrity) {
+                console.log("Type:",type);
+                console.log("Name:",name);
+                console.log("default Url:",defaultUri);
+                console.log("Integrity:",integrity);
+                console.log("End of item");
+                // For example load some of them from cdn
+                // switch (type) {
+                //     case "dotnetjs":
+                //     case "dotnetwasm":
+                //     case "timezonedata":
+                //         return `https://cdn.example.com/blazorwebassembly/5.0.0/${name}`;
+                // }
+            }
+        });
+    </script>
+    
+    <script>
+        // this function can be write as lambda expression too
+        function myCustomEventArgs(event) {
+            return {
+                value:"Custom Event Value",
+                src:"Custom Event Name"
+            }
+        }
+        Blazor.registerCustomEventType("mycustomclick",{
+            browserEventName:"click",
+            createEventArgs:myCustomEventArgs,
+        });
+        Blazor.registerCustomEventType("mycustomcatdog",{
+            browserEventName:"catdog",
+            createEventArgs:e => ({
+                name:e.detail.name,
+                weight:e.detail.weight,
+                age:e.detail.age,
+                stamp: new Date()
+            })
+
+        });
+        Blazor.registerCustomEventType("custompaste",{
+            browserEventName:"paste",
+            createEventArgs:e =>({
+                eventTimeStamp:new Date(),
+                pastedData:e.clipboardData.getData("text"),
+            }),
+        });
+    </script>
+    <script>
+        function addDialog() {
+            var dialogElem=document.getElementById("dialog");
+            var textNode=document.createTextNode("This is a sample node");
+            var x= document.createElement("p");
+            x.innerText="Sample Element";
+            Blazor.rootComponents.add(dialogElem,"dialog",{title:"Title of Dialog",childContent:null});
+        }
+    </script>
+    
+    <script>
+        // Here we create a custom event in JS for dom (this is feature of js)
+        const mycustomJSEvent=new CustomEvent("catdog",{
+            detail:{
+                name:"Rita",
+                weight:"10",
+                age:"3"
+            },
+            bubbles:true,
+        });
+        addEventListener("catdog",e=>{console.log(e)});
+        setInterval(()=>{
+            if (document.getElementById("catdog")) {
+                document.getElementById("catdog").dispatchEvent(mycustomJSEvent);
+            }
+        },30000);// dispatch event every 30 seconds with src equal to window
+        // To dispatch the event with another object use obj.dispatchEvent and obj.EventListener to handle it)
+
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,117 @@
+@page "/form-example-2"
+@inject IJSRuntime JS
+@using System.Reflection
+@using System.ComponentModel.DataAnnotations
+
+<EditForm class="form" EditContext="context" OnSubmit="submitForm">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+    <InputText @bind-Value="model.Name" Element="inp" @ref="input" name="name" id="name" class="form-control" />
+    <InputNumber @bind-Value="model.Age" />
+    <InputNumber @bind-Value="model.TotalAverage" ParsingErrorMessage="Parsing Error: {0} should be a number" />
+    <InputCheckbox @bind-Value="model.Married" />Married?
+    <InputSelect TValue="Countries[]" @bind-Value="model.Country">
+        <option value="" disabled>Select a country</option>
+        @foreach (var item in Enum.GetValues<Countries>())
+        {
+            // Both works here
+            @* <option value="@item">
+                @(typeof(Countries).GetMember(item.ToString()).First().GetCustomAttribute<DisplayAttribute>()?.GetName())
+                </option> *@
+            <option value="@item">
+                @(item.GetType().GetField(item.ToString())?.GetCustomAttribute<DisplayAttribute>()?.GetName())</option>
+        }
+
+    </InputSelect>
+    <InputDate @bind-Value="model.BirthDay" DisplayName="Birth Date" placeholder="Select Birthdate"
+        ParsingErrorMessage="Parsing Error: :{0} should be a valid Date" />
+    <InputTextArea @bind-Value="model.Address"></InputTextArea>
+    <InputRadioGroup TValue="Accessories" Name="Accessories" @bind-Value="model.Accessories" multiple>
+        @foreach (var item in Enum.GetValues<Accessories>())
+        {
+            <InputRadio Value="@item" Name="Accessories" multiple />@item.ToString()
+        }
+    </InputRadioGroup>
+    <InputCheckbox @bind-Value="model.IAgree" /> I agree all the fields?
+    <InputFile OnChange="ResizeAndDisplayImageUsingStreaming" />
+    <button type="submit">Submit Form</button>
+</EditForm>
+<div>
+    <img class="net">
+</div>
+
+@* <InputText @bind-Value="testMsg" />
+    <p>@testMsg</p> *@
+
+@code {
+    public string? testMsg { get; set; }
+    private InputText? input { get; set; }
+    @*// InputText has interesting properties like CssClass, ... altough some of them are gettable and some of them can be
+        set inside code. They are not Parameter and can not set declaratively *@
+    private ElementReference? inp { get; set; }
+    private FormModelExample model = new() { Name = "Ali", Married = true };
+    // Can not be static since it may be refrenced in context
+    private EditContext? context { get; set; }
+    protected override void OnInitialized()
+    {
+        context = new EditContext(model);
+        base.OnInitialized();
+    }
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            inp = input?.Element;
+
+
+        }
+        var module = await JS.InvokeAsync<IJSObjectReference>("import", "./Pages/Form/FormExample2.razor.js");
+        await module.InvokeVoidAsync("logValue", inp);
+        await base.OnAfterRenderAsync(firstRender);
+    }
+
+    private async Task ResizeAndDisplayImageUsingStreaming(InputFileChangeEventArgs e)
+    {
+        Console.WriteLine("File Selected? or Changed?");
+        var imgFile = e.File; // IBrowserFile interface which is a fileinfo somehow!
+        var resizedImageFile = await imgFile.RequestImageFileAsync("image/jpg", 250, 250);
+        var imageStream = resizedImageFile.OpenReadStream();
+        var stream = new DotNetStreamReference(imageStream);
+        // The above object has only one purpose: make .Net Stream/Object usable in JS
+        var module = await JS.InvokeAsync<IJSObjectReference>("import", "./Pages/Form/FormExample2.razor.js");
+        await module.InvokeVoidAsync("setImageSrc", stream);
+
+    }
+
+    private void submitForm()
+    {
+        @*
+            Null Forgiving Operator(!): This has two type of effect:
+            1- Saying compiler that trust me, it can not be null when executed
+            2- To Assign nullable type to usuall type without error which is an extension to 1
+            It can come at the end of assignment or before member usage, for example:
+            static string? y=default!;
+            private string x=y!;
+            x!.get();
+            x!.Name;
+        *@
+        bool valid = context!.Validate(); // Is validation done here?
+        @* Response: No, validation done by child components on data entry time or any time OnValidationRequested event raised.
+            this only check context.GetValidationMessages()
+        *@
+        if (valid)
+        {
+            Console.WriteLine(@"{0} is Married: {1} and his ages is {2} and his TotalAvg is
+{3} from {4}", model.Name, model.Married, model.Age, model.TotalAverage, model.Country.ToString());
+            Console.WriteLine("Successfully submited");
+        }
+        else
+        {
+            var messages = context.GetValidationMessages();
+            foreach (var err in messages)
+            {
+                Console.WriteLine(err);
+            }
+        }
+    }
+}

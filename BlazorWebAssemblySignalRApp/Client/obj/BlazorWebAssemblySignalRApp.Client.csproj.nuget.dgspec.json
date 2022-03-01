@@ -28,6 +28,9 @@
             "projectReferences": {
               "/home/selenium/Desktop/Learning/PracticalApps/BlazorWebAssemblySignalRApp/Shared/BlazorWebAssemblySignalRApp.Shared.csproj": {
                 "projectPath": "/home/selenium/Desktop/Learning/PracticalApps/BlazorWebAssemblySignalRApp/Shared/BlazorWebAssemblySignalRApp.Shared.csproj"
+              },
+              "/home/selenium/Desktop/Learning/PracticalApps/ComponentLibrary/ComponentLibrary.csproj": {
+                "projectPath": "/home/selenium/Desktop/Learning/PracticalApps/ComponentLibrary/ComponentLibrary.csproj"
               }
             }
           }
@@ -55,6 +58,10 @@
               "target": "Package",
               "version": "[6.0.1, )"
             },
+            "Microsoft.AspNetCore.Hosting": {
+              "target": "Package",
+              "version": "[2.2.7, )"
+            },
             "Microsoft.AspNetCore.SignalR.Client": {
               "target": "Package",
               "version": "[6.0.1, )"
@@ -77,7 +84,7 @@
           "downloadDependencies": [
             {
               "name": "Microsoft.NETCore.App.Runtime.Mono.browser-wasm",
-              "version": "[6.0.1, 6.0.1]"
+              "version": "[6.0.2, 6.0.2]"
             }
           ],
           "frameworkReferences": {
@@ -85,7 +92,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/6.0.101/RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/6.0.200/RuntimeIdentifierGraph.json"
         }
       },
       "runtimes": {
@@ -142,7 +149,65 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/6.0.101/RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/6.0.200/RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "/home/selenium/Desktop/Learning/PracticalApps/ComponentLibrary/ComponentLibrary.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/home/selenium/Desktop/Learning/PracticalApps/ComponentLibrary/ComponentLibrary.csproj",
+        "projectName": "ComponentLibrary",
+        "projectPath": "/home/selenium/Desktop/Learning/PracticalApps/ComponentLibrary/ComponentLibrary.csproj",
+        "packagesPath": "/home/selenium/.nuget/packages/",
+        "outputPath": "/home/selenium/Desktop/Learning/PracticalApps/ComponentLibrary/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/home/selenium/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net6.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net6.0": {
+            "targetAlias": "net6.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net6.0": {
+          "targetAlias": "net6.0",
+          "dependencies": {
+            "Microsoft.AspNetCore.Components.Web": {
+              "target": "Package",
+              "version": "[6.0.1, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/6.0.200/RuntimeIdentifierGraph.json"
         }
       }
     }

@@ -23,6 +23,12 @@ builder.Services.AddResponseCompression(options =>
 // Register a Circuit Handler
 builder.Services.AddSingleton<CircuitHandler, TrackingCircuitHandler>();
 
+// Add HttpClient Factory (To inject we should inject HttpClientFactory and then create a new http client)
+builder.Services.AddHttpClient();
+
+builder.Services.AddControllers(); // enable api
+
+
 var app = builder.Build();
 
 //Add response compression first of all
@@ -42,8 +48,11 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
+app.MapRazorPages();
+app.MapControllers();
 app.MapBlazorHub(); // This is what used by SignalR to handle event handling from client side to server and also connection at the first place to blazor hub to create a live connection for that and apply updates to UI
 app.MapHub<ChatHub>("/chathub"); // The fallback route should be at the end always
 app.MapFallbackToPage("/_Host"); // This is what handle the first calling of the pages
+// This route named: low-priority route  or fallback route
 
 app.Run();

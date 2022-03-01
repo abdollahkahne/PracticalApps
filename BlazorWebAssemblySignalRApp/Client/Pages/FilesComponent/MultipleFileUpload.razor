@@ -1,0 +1,92 @@
+@page "/multiple-files-upload"
+
+<h3>Multiple File Upload</h3>
+<p class="text-danger">It is not possible to upload files to File System in case of Web Assembly Blazor. Here we only
+    add this to show that it gets error!</p>
+<p>
+    <label>Maximum File Count:
+        <input id="fileCountMax" @bind="MaximumFileNumber" />
+    </label>
+</p>
+<p>
+    <label>
+        Maximum File Size in KB:
+        <input id="fileSizeMax" @bind="MaximumFileSize" />
+    </label>
+</p>
+<p>
+    <label>
+        Select At most @MaximumFileNumber files with each file have size less than @MaximumFileSize:
+        <InputFile multiple OnChange="OnFilesSelect" />
+        <div class="text-danger">
+            @exception
+        </div>
+    </label>
+</p>
+<div>
+    @if (FilesUploading)
+    {
+        <p>Uploading...</p>
+
+    }
+    else
+    {
+        <ol>
+            @foreach (var item in files)
+            {
+                <li>
+                    <ul>
+                        <li>Name: @(item.Name)</li>
+                        <li>Last Modified: @(item.LastModified)</li>
+                        <li>Size in Bytes: @item.Size</li>
+                        <li>Content Type: @item.ContentType</li>
+                    </ul>
+                </li>
+            }
+        </ol>
+    }
+</div>
+
+@code {
+    private string? exception { get; set; }
+    private int MaximumFileNumber { get; set; } = 10;
+    private int MaximumFileSize { get; set; } = 512;
+    private bool FilesUploading { get; set; }
+    private IReadOnlyList<IBrowserFile> files { get; set; } = new List<IBrowserFile>();
+    private async Task OnFilesSelect(InputFileChangeEventArgs e)
+    {
+        FilesUploading = true;
+        try
+        {
+            files = e.GetMultipleFiles(MaximumFileNumber);
+            // The above throw an exception if number of file selected by user is larger than maximum file number
+            // Upload files to server
+            foreach (var file in files)
+            {
+                var fileExt = Path.GetExtension(file.Name);
+                var fileTrustedName = Path.GetRandomFileName() + fileExt;
+                // The following is not very useful in case of web assembly since it saves files in a folder in Web Assembly!!
+                var path = Path.Combine("css", fileTrustedName);
+                Console.WriteLine(path);
+                var stream = file.OpenReadStream(MaximumFileSize * 1000);
+                using (var fs = new FileStream(path, FileMode.Create))
+                {
+                    await stream.CopyToAsync(fs);
+                }
+
+            }
+
+        }
+        catch (System.Exception ex)
+        {
+
+            exception = ex.Message;
+            StateHasChanged();
+        }
+        finally
+        {
+            FilesUploading = false;
+        }
+
+    }
+}

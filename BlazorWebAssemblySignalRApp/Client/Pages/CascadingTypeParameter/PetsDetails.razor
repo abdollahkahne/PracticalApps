@@ -1,0 +1,60 @@
+@page "/pets-details"
+<div class="card">
+    This is a sample card for checking CSS Scopes!
+</div>
+<div class="deep-cards">
+    <CascadingTemplate1 Items="pets">
+        <ItemView Context="pet">
+            <Dialog Title="@pet.Name">
+                <CasadingTypeValue1>Here we used cascading type parameter for Id: @pet.PetId</CasadingTypeValue1>
+            </Dialog>
+        </ItemView>
+        <ChildContent>
+            <CasadingTypeValue1>Here we used cascading type parameter</CasadingTypeValue1>
+        </ChildContent>
+    </CascadingTemplate1>
+</div>
+
+
+@code {
+    private List<Pet> pets = new()
+    {
+        new Pet { PetId = 2, Name = "Mr. Bigglesworth" },
+        new Pet { PetId = 4, Name = "Salem Saberhagen" },
+        new Pet { PetId = 7, Name = "K-9" }
+    };
+    private class Pet
+    {
+        public int PetId { get; set; }
+        public string? Name { get; set; }
+    }
+    // Lifecycl logging
+    public override Task SetParametersAsync(ParameterView parameters)
+    {
+        Console.WriteLine("SetParameterAsync Runned");
+        foreach (var item in parameters)
+        {
+            Console.WriteLine($"{item.Name}:{item.Value} and Cascading:{item.Cascading}");
+        }
+        return base.SetParametersAsync(parameters);
+    }
+    protected override void OnInitialized()
+    {
+        Console.WriteLine("OnInitialized Runned");
+        base.OnInitialized();
+    }
+    protected override void OnParametersSet()
+    {
+        Console.WriteLine("OnParametersSet Runned");
+        base.OnParametersSet();
+    }
+    protected override void OnAfterRender(bool firstRender)
+    {
+        Console.WriteLine("OnAfterRender Runned");
+        base.OnAfterRender(firstRender);
+    }
+    [Parameter]
+    public string? Id { get; set; }
+    [Parameter]
+    public EventCallback<MouseEventArgs> ChangeBody { get; set; }
+}

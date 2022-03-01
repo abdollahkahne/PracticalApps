@@ -1,0 +1,16 @@
+@page "/nested-binding"
+
+<h2>Parent Component</h2>
+<div>
+    <p>Current parent message:@parentMsg</p>
+    <button @onclick="changeMsg">Change Message from Parent</button>
+</div>
+<NestedBindingChild @bind-ChildMessage="parentMsg"></NestedBindingChild>
+
+@code {
+    string parentMsg { get; set; } = "This is a message which set by Parent";
+    void changeMsg()
+    {
+        parentMsg = $"Set By {this.GetType()} at {DateTime.UtcNow}";
+    }
+}

@@ -1,0 +1,27 @@
+@using System.Diagnostics.CodeAnalysis
+@attribute [CascadingTypeParameter(name: nameof(CascadingT))]
+@typeparam CascadingT
+
+<div>Reports</div>
+<h3>Data presented for Report with Type: @typeof(CascadingT)</h3>
+<hr>
+@ChildContent
+<hr>
+
+@if (ItemView is not null)
+{
+    @foreach (var item in Items)
+    {
+        @ItemView(item)
+    }
+}
+
+@code {
+    [Parameter]
+    public RenderFragment? ChildContent { get; set; }
+
+    [Parameter]
+    public RenderFragment<CascadingT>? ItemView { get; set; }
+    [Parameter, AllowNull]
+    public IReadOnlyList<CascadingT> Items { get; set; }
+}

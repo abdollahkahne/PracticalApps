@@ -1,0 +1,20 @@
+<div>
+    I am child component
+</div>
+
+@code {
+    [Parameter]
+    public string? StudentName { get; set; }
+    protected override void OnInitialized()
+    {
+        Console.WriteLine("Rendering Or Rerendering: I called to run (OnInit-Child Component)");
+        base.OnInitialized();
+    }
+    // OnParameterSet run on every re-rendering too
+    protected override void OnParametersSet()
+    {
+        Console.WriteLine("Rendering Or Rerendering: I called to run (OnParameterSet-ChildComponent)");
+        base.OnParametersSet();
+    }
+
+}

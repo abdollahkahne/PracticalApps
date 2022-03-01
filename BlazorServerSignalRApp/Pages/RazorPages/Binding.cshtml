@@ -1,0 +1,36 @@
+@page
+@using BlazorServerSignalRApp.Pages
+@addTagHelper *,Microsoft.AspNetCore.Mvc.TagHelpers
+@{
+    Layout = "_Layout";
+}
+@functions {
+    [BindProperty(SupportsGet = true)]
+    public bool IsChecked { get; set; }
+    [BindProperty(SupportsGet = true)]
+    public bool IsCompleted { get; set; }
+    [BindProperty(SupportsGet = true)]
+    public string? Message { get; set; }
+}
+<div>
+    <h2>Bind Boolean Values</h2>
+
+    <div>
+        <form method="get">
+            <input type="checkbox" asp-for="IsCompleted" />
+            <input type="checkbox" asp-for="IsChecked" />
+            <input asp-for="Message" />
+            <button type="submit">Apply Parameters Staticly</button>
+            @* Here generated some hidden input with false valuse for boolean dues to html5 changes. Do not worry!!
+                https://docs.microsoft.com/en-us/aspnet/core/mvc/views/working-with-forms?view=aspnetcore-6.0#the-input-tag-helper
+            *@
+        </form>
+    </div>
+    <div>
+        IsCompleted: @IsCompleted
+        <br>
+        IsChecked: @IsChecked
+        <br>
+        Message:@Message
+    </div>
+</div>

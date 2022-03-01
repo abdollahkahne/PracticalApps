@@ -1,7 +1,25 @@
 ﻿@page "/"
 @using Microsoft.AspNetCore.Components.WebAssembly.Hosting
-@inject IWebAssemblyHostEnvironment env
-@* @inject IWebHostEnvironment env
+@using Microsoft.AspNetCore.Hosting
+@inject IServiceProvider sp
+@{
+    bool isProduction;
+}
+@if (sp.GetService<IWebAssemblyHostEnvironment>() is not null)
+{
+    var env = sp.GetRequiredService<IWebAssemblyHostEnvironment>();
+    isProduction = env.IsProduction();
+}
+else
+{
+    var env = sp.GetRequiredService<IHostingEnvironment>();
+    isProduction = env.IsProduction();
+}
+@* @inject IHostingEnvironment env *@
+
+@*
+    @inject IWebAssemblyHostEnvironment env
+    @inject IWebHostEnvironment env
     // this works for Server side app
     // In case of blazor wasm/server we should get environment from the above namespace
 *@
@@ -11,7 +29,7 @@
 <h1>Hello, world!</h1>
 
 Welcome to your new app.
-This App runs in Environment: @(env.IsProduction() ? "Production" : "Not Production")
+This App runs in Environment: @(isProduction ? "Production" : "Not Production")
 
 <SurveyPrompt Title="How is Blazor working for you?" />
 
@@ -21,3 +39,329 @@ This App runs in Environment: @(env.IsProduction() ? "Production" : "Not Product
         Hierarchy</p>
     <CounterWithError></CounterWithError>
 </CascadingErrorComponent>
+
+@*
+    Form and Validation
+    The Blazor framework supports webforms with validation using the EditForm component bound to a model that uses data
+    annotations. This component has following Properties and method (The ComponentBase inherited Methods does not showed
+    here) which is related to each other. It can take an Object as Model Parameter and the EditContext Built from it. Then
+    you can define ChildContent as a RenderFragment<EditContext> Based on it and also if required you can supply
+    EventCallback<EditContent> for three related events (Submit, ValidSubmit, InvalidSubmit). It also add an
+    AdditionalAttributes which is a dictionary which applied to form element directly. We can also Directly pass EditContext
+    without defining Model which is more advanced.
+    1- EditContext:Supplies the edit context explicitly. If using this parameter, do not also supply Model, since the model
+    value will be taken from the Model property. It is an object from class EditContext which has lots of
+    fields/Properties/Events and methods including Model.
+    2- Model:Specifies the top-level model object for the form. An edit context will be constructed for this model. If using
+    this parameter, do not also supply a value for EditContext.
+    3- OnSubmit: A callback that will be invoked when the form is submitted (Used for manuall validation?).
+    4- OnValidSubmit: A callback that will be invoked when the form is submitted and the EditContext is determined to be
+    valid.
+    5- OnInvalidSubmit: A callback that will be invoked when the form is submitted and the EditContext is determined to be
+    invalid.
+    6- ChildContent: Specifies the content to be rendered inside this EditForm.
+    7- AdditionalAttributes: Gets or sets a collection of additional attributes that will be applied to the created form
+    element. All of the input components, including EditForm, support arbitrary attributes. Any attribute that doesn't match
+    a component parameter is added to the rendered HTML element.
+
+    For example consider simple form as below:
+    <EditForm Model="@exampleModel" OnValidSubmit="@HandleValidSubmit">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+    <InputText id="name" @bind-Value="exampleModel.Name" />
+    <button type="submit">Submit</button>
+    </EditForm>
+    * It takes am instance of a class() with data anotation for validation) and then create in the back the editcontext
+    based on the model and validations. It has a HandleValidSubmit as its OnValidSubmit which is a delegate which can get
+    EditContext as argument (Or simply get nothing as argument). Its child content is a RenderFragment<EditContext> which:
+    1- Do the Validation exist in constructed editcontext using DataAnnotationValidator
+    2- Show the result of validation done in 1 in ValidationSummary (It saved in EditContext After step1)
+    3- an Input box which bound to model (Get from EditContext.Model which is equal to Model itself) property. Here we used
+    an InputText instead of Normal input with Bind since it should get the model from EditContext and it has some css styles
+    and other attributes too.
+    4- A button for sumbitting the form which calls every callback that exists (Can be three of them asynchronously!)
+
+    note: In case of using OnSubmit EventCallback you can not use OnValidSubmit or OnInvalidSubmit. but you can use
+    OnValidSubmit and OnInvalidSubmit mutually.
+    Binding Form To Data
+    The EditContext tracks metadata about the edit process, including which fields have been modified and the current
+    validation messages. Assigning to either an EditForm.Model or an EditForm.EditContext can bind a form to data.
+    To create an EditContext we can use its constructor which takes the model as argument (FormExample2).
+    Assign either an EditContext or a Model to an EditForm. Assignment of both isn't supported and generates a runtime
+    error.
+
+    note: to trak every thing in EditContext there is an private readonly field which has a sparse structure:
+    private readonly Dictionary<FieldIdentifier, FieldState> _fieldStates = new Dictionary<FieldIdentifier, FieldState>();
+    If you give us an unrecognized FieldIdentifier, that just means we didn't yet track any state for it, so we behave as if
+    it's in the default state (valid and unmodified).
+    FieldIdentifier here is a type which can create from accessor expression of field name. For example if we have model
+    which have a property named "Birthday", the field identifier can create from
+    FieldIdentifier.Create(model=>model.Birthday) or new FieldIdentifier(model,"Birthday") or EditContext.Field["Birthday"].
+    FieldState is an sparse store which track Modifed (Centeralized) and Valid (Decentralized) State for a FieldIdentifier.
+    The relation between FieldIdentifier and FieldState is One-By-One which kept by fieldIdentifier fregin key in Field
+    State
+    and _fieldstate field in EditContext. It has a field which saves all associated ValidationMessageStores as HashSet (Only
+    a set/list of reference hash).To Get Validatation state of a FieldState/FieldIdentifiy it search all associated
+    Validation Message Stores for messages as below:
+    public IEnumerable<string> GetValidationMessages()
+    {
+    ....if (_validationMessageStores != null)
+    ....{
+    ........foreach (var store in _validationMessageStores)
+    ........{
+    ............foreach (var message in store[_fieldIdentifier])
+    ............{
+    ................yield return message;
+    ............}
+    ........}
+    ....}
+    }
+
+
+    Handle Form Submission
+    As already said you can define the event callback and assign them to On (InvalidSubmit-Subit-ValidSubmit). if form is
+    valid submit and validsubmit run asynchronousely and otherwise InvalidSubmit and Submit run. To check validation status
+    in OnSubmit you can call editContext.Validate().
+
+    Built-in Form Inputs
+    The Blazor framework provides built-in form components to receive and validate user input. Inputs are validated when
+    they're changed (OnBlure) and when a form is submitted ONLY if the validation components like DataAnnotationsValidator
+    are there, altough editcontext save on OnBlure to consider inputs always. Available input components are:
+    1- InputText (render as <input type="text" /> )
+    2- InputNumber which used for all number types including decimal and double (<input type="number" />)
+    3- InputCheckbox (Render as <input type="checkbox" /> )
+    4- InputSelect (it renders a select but we should feed its options as child content)
+    5- InputDate (<input type="date" />)
+    6- InputTextArea (<textarea></textarea>)
+    7- InputRadioGroup which has InputRadio childs
+    8-InputFile (Go To File Upload Section)
+
+    Question: Does we need to pass EditContext value as Cascading Parameter here?
+    Answer: In first view the answer is No, since it already exist in EditForm as Parameter and also all child component get
+    its initial value through the RenderFragment<EditContext> ChildContent parameter (It is enough to use
+    @ChildContent(EditContext) in EditForm Component Code (which already done by Microsoft!)). This is the edit form code:
+    <form @onsubmit="" ...adtionalattributes>
+    <CascadingValue IsFixed=true TValue="EditContext" value="editcontext">
+    @ChildContent.Invoke(editContext)
+    </CascadingValue>
+    </form>
+
+    As you can see There is a CascadingValue Component there but IsFixed is true so it does not do rerendering on changes.
+    Change notification done through an event/notification system in EditContext and CascadingValue is there to Share this
+    notification system with all childrens including Inputs, Validators and Validation Messages/Summary. in
+    RenderFragment<EditContext> only we use the Generic Value for UI and not Logic.
+
+    note: As in the next see, there is three property regarding to value of inputs in InputBase<T> Component which all has
+    almost same value.
+    1- Value:T=> this is what is set by Parameter from parent and it should be used as @bind-Value. It has an event callback
+    ValueChanged to make binding 2-way.
+    2- CurrentValue:T=> this used for saving the Value of component in T. It gets from Value and Sets Value=value and invoke
+    ValueChanged.
+    3- CurrentValueAsString:string => this is for saving the value of component in string and this is what binded in two-way
+    through onchange (equal to @bind="CurrentValueAsString"). geting this return FormatAsString(CurrentValue) and setting
+    this set CurrentValue equal using TryParseValueFromString. if result of FormatAsString and ParseValueFromString is same
+    as its inputs (for example for string!) we can use 2-way binding with CurrentValue using @bind="CurrentValue"/
+
+    Note: The above components only usable inside EditForm component. bind-value binds the input value to a model property
+    through pair of (Value and ValueChanged callback parameters). But how this ValueChange callback event invoke? Actually
+    it invokes using Blazor Framework through it @bind directive. see the razor version of InputCheckbox in following:
+    @inherits InputBase<bool>
+    <input type="checkbox" @bind="CurrentValue" id="@Id" class="@CssClass" />
+
+    as you can see it bind its CurrentValue property to checkbox. Setting the CurrentValue do following:
+    Value = value;
+    _ = ValueChanged.InvokeAsync(Value);
+    EditContext?.NotifyFieldChanged(FieldIdentifier);
+
+    In InputDate and InputNumber since they have ParsingError mechansim they bind value (One-Way through @onchange) to
+    CurrentValueAsString. And in setting it we raise event 1 through EditContext.NotifyFieldChanged(FieldIdentifier) and
+    also in case of invalid value we raise related event 3 by EditContext?.NotifyValidationStateChanged();
+
+
+    Here we have an event in edit context which raised through NotifyFieldChanged. So we can add other event listener to
+    editcontext by adding event handler to the following event:
+    1- public event EventHandler<FieldChangedEventArgs>? OnFieldChanged; (raised through NotifyFieldChanged)
+    Also we have the following event on edit context:
+    2- public event EventHandler<ValidationRequestedEventArgs>? OnValidationRequested; (Raised by Validate())
+    3- public event EventHandler<ValidationStateChangedEventArgs>? OnValidationStateChanged; (Raised by
+    NotifyValidationStateChanged())
+
+    The Event 2 OnValidationRequested is useful for adding basic validation to model. We describe it on Validations. The
+    event 3 also as stated raise for example in case of Parsing Validation in InputDate or InputNumber. We can also use it
+    on implementing a custome validator component for example to rerender in case of changing validation state and we can
+    use event one in same manner but for custom input components (For example consider case of developing a phone/mobile
+    input) to re-render the component.
+
+    note: editContext.Validate() called automatically in case of using either of OnValidSubmit or OnInvalidSubmit but in
+    case of OnSubmit we should use it explicitly if we require to validate the form.
+
+    Upload File
+    InputFile Control has an event-callback parameter named OnChange which trigged by selecting files.
+    As already you know EventCallback is almost same as native event handler in js but:
+    1- native and custom event handler raised by DOM Events but event callback raised by blazor itself altough it can setup
+    in a way that its main source be a dom event like the case of InputFile OnChange. So we should not manually change
+    @onchange event for InputFile???? (Not sure since it give error for uniqueness of name ).
+    2- native and custom event handler set using @ for example @onclick but EventCallback set as OnChange without @.
+
+    So after Selecting a File or changing them the native @onchange event trigged which itself code in a way that trigged
+    the OnChange EventCallback<InputFileChangeEventArgs>. The InputFileChangeEventArgs has following interesting values:
+    1- FileCount: shows number of selected files
+    2- File: This is implement IBrowserFile interface which we described after but this is what we work with in case of
+    single file input.
+    3- GetMultipleFiles(i): Gets the file entries list. This method should be used for inputs that accept multiple files. If
+    the input accepts only a single file, then use the File property instead. This get maximum number of files to accept and
+    return a list of IBrowserFile items.
+
+    IBrowserFile: This interface is in a way that simulatenousely implement FileStream and FileInfo. Since in the browser
+    after selecting a file it does not really create the stream unless we do it by for example FileReader or Form Submit. In
+    blazor we have some api to do the streaming/buffering the file.
+    1- File meta data related info including Size, ContentType,Name and LastModified
+    2- a method OpenReadStream (long maxAllowedSize = 512000, CancellationToken cancellationToken = default)
+    3- an extension API based on this method which used for images which return an IBroswerFile:
+    RequestImageFileAsync (string format, int maxWidth, int maxHeight);
+
+    note: To Link stream and object created in .Net to JS we can use a .Net class DotNetStreamReference or
+    DotNetObjectReference which make it usable in JS (see FormExample2 component and its collocated js file).
+
+
+    Making InputSelect Multiple
+    to make them multiple we should define its assigned type as array using [].
+
+    DisplayName Parameter
+    To show errors more informative use DisplayName parameter to set better name than the field name in model and
+    unfortunately do not read from model attribute!
+
+    Validation Errors is Form
+    There is following type of error:
+    1- The most basic error type is related to input type. For example you can not assign an string to InputNumber (For type
+    that defined in its description, for example it not work for int? but work for int and Double!!) or
+    InputDate. This called Parsing Error and it is do using native html inputs and handle by component itself. You can set
+    the DisplayName and ParsingErrorMessage to customize this type of error. in ParsingErrorMessage you can use {0} as field
+    name and {1} is NOT field value here.
+    2- Basic Validation Handling: Here we add Validation manually to EditContext using a ValidationMessageStore. We can
+    create an instance of it using new ValidationMessageStore(EditContext). EditContext can have more than one store and it
+    has following apis:
+    * Item[FieldIdentifier]=> this gives validation message as IEnumrable<string> for a field
+    * Item[accessor]=> same a above but the field give to it as an expression<func<object>>
+    * Add(fieldIdentifier,message) => add a validation message to it for a field. The messages can add as string or string[]
+    and Identifier can give as expression too.
+    * clear(accessor),clear(field),clear()=> this clear all validation message or messages for a specific field.
+    Also there is a method on EditContext which get validation messages on all stores and it is GetValidationMessages(). It
+    can be specific to a field or accessor too.
+    To show the validation message you should add a ValidationMessage which show the error in case of calling
+    editcontext.validate() directly or indirectly which happens in case of EditForm.OnValidSubmit method for example (See
+    BasicValidation.razor example for more details). One component that can be used here is <ValidationMessage
+    For="()=>model.field" adittionalAttributes /> to show messages.
+    3- Data Annotation Validation: To Do this we should first add Annotation to Model definition through
+    System.ComponentModel.Annotation Validation Attributes. Then we should add DataAnnotationsValidator component to
+    EditForm Child Content. There is lots of attribute and also method to add validations to each field and model itself.
+    Field Validation do in Inputs OnBlur event and the model validation does in Model submit. Every validation message that
+    does not related to an special field is for model. The DataAnnotationsValidator component attaches data annotations
+    validation to a cascaded EditContext. Enabling data annotations validation requires the DataAnnotationsValidator
+    component. For case of complex Objects and collection type properties you can use [ValidateComplexType] for validation
+    of them. In that case internal validation annotation for complex types applies using DataAnnotationValidator. To use
+    this attribute you should add Microsoft.AspNetCore.Components.DataAnnotations.Validation nuget package.
+    4- Custome Validation: Validator components support form validation by managing a ValidationMessageStore for a form's
+    EditContext. You can create custom validator components to process validation messages for different forms on the same
+    page or the same form at different steps of form processing (for example, client-side validation followed by server-side
+    validation). Also Custom data annotation validation attributes can be used instead of custom validator components in
+    many cases. Custom attributes applied to the form's model activate with the use of the DataAnnotationsValidator
+    component. When used with server-side validation, any custom attributes applied to the model must be executable on the
+    server. We can implement the Custom Validation in 3 Way:
+    * Define a component and add it to EditForm childs and reference it using @ref and then use its method.
+    * Define a component and use the event system of EditContext (Same as DataAnnotationsValidator) to handle validations.
+    * Develop a service which uses event system of EditContext and use it in OnInitialized of our main method (Is it work?).
+
+    DataAnnotatiobsValidator (What happen behind the scene)
+    Adding the DataAnnotatiobsValidator enable data annotation validation for edit context for example on OnInitialized
+    using the following method: editContext.EnableDataAnnotationsValidation(serviceProvider);.This method subscribe with two
+    method to OnFieldChanged and OnValidationRequested events and also raise OnValidationStateChanged event when it is
+    required. The following section describe what happen behind the scene in this component but they are just for reviewing!
+
+    DataAnnotationsEventSubscriptions Class
+    It is a disposable type which used when we want to do/enable Validation of Model and its properies value of an
+    editcontext using annotations. In Basic Validation we create an store and do all with it but for more complex models we
+    create an instance of DataAnnotationsEventSubscription. This instance have a message validation store which is managed
+    by itself. An instance of this disposable Type used when we add DataAnnotationsValidator. It has following readonly
+    field:
+    1- _messages: It is a ValidationMessageStore used for saving validation messages for each field identifier.
+    2- _serviceProvider: It has service provider through injection. this is used for custome validation attributes used for
+    properties and model.
+    3- _editContext: The component and this system belongs to an Edit Form and EditContext and actually its constructor is
+    new DataAnnotationsEventSubscriptions(EditContext,ServiceProvider); which uses editcontext and service provider
+    4- _propertyInfoCache: It is a dictionary which cached propertyinfos for each field and model type as
+    ConcurrentDictionary<(Type ModelType, string FieldName), PropertyInfo?>. This is used for caching and performance only.
+
+    The internal work is very simple if we consider the work of validation as some external service to the Edit form and
+    editcontext. When we create an instance of this type it do followings:
+    1- create a new instance of Validation message store for edit conext (_messages)
+    2- Add an event handler to OnFieldChanged event: this call back do the validation of fields on every field change which
+    speak about
+    3- Add an event handle to OnValidationRequested event: this call back do model validation when form sumbited and
+    validate() called.
+    The event handler 2,3 at the end of validation raise ValidationStateChanged through NotifyValidationStatedChanged which
+    used to add event handlers for rerendering of validation message and validation summary for example.
+
+    OnFieldChanged event handler:
+    1- It get propertyinfo from cache for fieldIdentifier (field name and model) which has
+    metadata and attributes of that property and its value. (see Basic Validation Reflecte() method)
+    2- Validate Property Value based on Property Info (To do that you can use API provided by .Net framework. see Validator
+    and ValidationContext and ValidationResult) and add results to store created for this purpose.
+    3- raise OnValidationStateChanged event by NotifyValidationStateChange to have UI updated according to validation state.
+
+    OnValidationRequested event handler
+    You should do same as OnFieldChanged event handler but here we should do it to all model and not the field changed. Here
+    you should check model as whole and also fields. add errors for model to string.Empty field identifier and show the
+    messages on UI relatively. use editContext?.NotifyValidationStateChanged() at the end.
+
+    note: Why we inject service provider here?
+    You can create custome validation attribute using service provider and then Use them as Data Annotation over model. in
+    validation we need to inject service provider to have these attributes worked.
+
+    note: we have two key types (FieldIdentifier vs FieldAccessor) for geting values or validation messages for a field.
+    Field Accessor is an expression which we can use to get field property of model for example ()=>model.Birthday. The
+    field Identifier for that field can get from different way including following:
+    1- editContext.Field("Birthday")
+    2- new FieldIdentifier(model,"Birthday")
+    3- FieldIdentifier.Create(()=>model.Birthday)
+    Here to Get html input you should use Element property of components and which is gettable through @ref!. @ref of
+    ElementReference? is only usable for html elements and in the case of Custom/Built in component we should define its
+    type as component type and then get it through Element Property! (See example 2)
+
+    note: To show validation errors we should use one of the component ValidationSummary or ValidationMessage. Validation
+    Summary convert to ul and it can have an arbitary Model Attribute which is equal to model in EditForm. ValidationMessage
+    should have a For property which is a lambda expression showing field which its errors should show. It shows as div in
+    html. You can set up the style for errors using validation-message css class.
+
+    Extend Input Component to Have more functionality
+    All Input component except the InputFile inherit from InputBase and it save and tracks CurrentValue and
+    CurrentValueAsString to save the value of Inputs. The creation of Input Components are some time a simple Razor syntax
+    and somtime a simple BuildRenderTree(RenderTreeBuilder builder) method (in library they use .cs format since they do not
+    have razor engine to compile). So if we need more functionality in addition to
+    current functionality we simply can extend the basic elements and change the part we need.
+    For example consider we want a text input which update the value on enter (Keystroke) than on change (On Blur). we can
+    do it by extending InputText as below:
+    in InputText the razor syntax is:
+    <input @attributes="additionalAttributes" id="Id" class="@cssClass" @ref="Element" @bind="CurrentValue" />
+    So we change binding event to onenter as below:
+    <input @attributes="additionalAttributes" id="Id" class="@cssClass" @ref="Element" @bind="CurrentValue"
+    @bind:event="onenter" />
+
+    Custom Validation Attribute
+    As you see we can add Validation Annotations to fields and models as attributes. But what if we need other requirement?
+    we can create custom attribute by implementing ValidationAttribute. It has a method IsValid that should be override to
+    implement our logic. It uses ValidationContext and ValidationResult class and object (See Student.cs). Unfortunately
+    ValidationContext.GetService is null. Injecting services for validation in the IsValid method isn't supported.
+
+    Apply Custom Styles Based on Field State (Validation State and Modification State)
+    To apply custom styles, you should define 4 custom class regarding this states. then apply them by
+    1- Define a class which inherit from FieldCssClassProvider and override its GetFieldCssClass method. This method should
+    return some string as classname from editcontext and fieldIdentifier object.
+    2- Set CssClassProvider for edit context using extension method: _context.SetFieldCssClassProvider(new
+    MyCustomeCSSProvider());
+
+    Consider that this class should added to global css or added using ::deep keyword
+
+
+
+*@

@@ -206,6 +206,171 @@
         }
       },
       {
+        "HashCode": -614108724,
+        "Kind": "Components.Component",
+        "Name": "BlazorWebAssemblySignalRApp.Client.Pages.Form.BasicValidation",
+        "AssemblyName": "BlazorWebAssemblySignalRApp.Client",
+        "CaseSensitive": true,
+        "TagMatchingRules": [
+          {
+            "TagName": "BasicValidation"
+          }
+        ],
+        "Metadata": {
+          "Runtime.Name": "Components.IComponent",
+          "Common.TypeName": "BlazorWebAssemblySignalRApp.Client.Pages.Form.BasicValidation"
+        }
+      },
+      {
+        "HashCode": -1724193106,
+        "Kind": "Components.Component",
+        "Name": "BlazorWebAssemblySignalRApp.Client.Pages.Form.BasicValidation",
+        "AssemblyName": "BlazorWebAssemblySignalRApp.Client",
+        "CaseSensitive": true,
+        "TagMatchingRules": [
+          {
+            "TagName": "BlazorWebAssemblySignalRApp.Client.Pages.Form.BasicValidation"
+          }
+        ],
+        "Metadata": {
+          "Runtime.Name": "Components.IComponent",
+          "Common.TypeName": "BlazorWebAssemblySignalRApp.Client.Pages.Form.BasicValidation",
+          "Components.NameMatch": "Components.FullyQualifiedNameMatch"
+        }
+      },
+      {
+        "HashCode": 1963923617,
+        "Kind": "Components.Component",
+        "Name": "BlazorWebAssemblySignalRApp.Client.Pages.Form.FormExampl1",
+        "AssemblyName": "BlazorWebAssemblySignalRApp.Client",
+        "CaseSensitive": true,
+        "TagMatchingRules": [
+          {
+            "TagName": "FormExampl1"
+          }
+        ],
+        "Metadata": {
+          "Runtime.Name": "Components.IComponent",
+          "Common.TypeName": "BlazorWebAssemblySignalRApp.Client.Pages.Form.FormExampl1"
+        }
+      },
+      {
+        "HashCode": -1234612346,
+        "Kind": "Components.Component",
+        "Name": "BlazorWebAssemblySignalRApp.Client.Pages.Form.FormExampl1",
+        "AssemblyName": "BlazorWebAssemblySignalRApp.Client",
+        "CaseSensitive": true,
+        "TagMatchingRules": [
+          {
+            "TagName": "BlazorWebAssemblySignalRApp.Client.Pages.Form.FormExampl1"
+          }
+        ],
+        "Metadata": {
+          "Runtime.Name": "Components.IComponent",
+          "Common.TypeName": "BlazorWebAssemblySignalRApp.Client.Pages.Form.FormExampl1",
+          "Components.NameMatch": "Components.FullyQualifiedNameMatch"
+        }
+      },
+      {
+        "HashCode": 431664269,
+        "Kind": "Components.Component",
+        "Name": "BlazorWebAssemblySignalRApp.Client.Pages.Form.FormExample2",
+        "AssemblyName": "BlazorWebAssemblySignalRApp.Client",
+        "CaseSensitive": true,
+        "TagMatchingRules": [
+          {
+            "TagName": "FormExample2"
+          }
+        ],
+        "Metadata": {
+          "Runtime.Name": "Components.IComponent",
+          "Common.TypeName": "BlazorWebAssemblySignalRApp.Client.Pages.Form.FormExample2"
+        }
+      },
+      {
+        "HashCode": -1704029413,
+        "Kind": "Components.Component",
+        "Name": "BlazorWebAssemblySignalRApp.Client.Pages.Form.FormExample2",
+        "AssemblyName": "BlazorWebAssemblySignalRApp.Client",
+        "CaseSensitive": true,
+        "TagMatchingRules": [
+          {
+            "TagName": "BlazorWebAssemblySignalRApp.Client.Pages.Form.FormExample2"
+          }
+        ],
+        "Metadata": {
+          "Runtime.Name": "Components.IComponent",
+          "Common.TypeName": "BlazorWebAssemblySignalRApp.Client.Pages.Form.FormExample2",
+          "Components.NameMatch": "Components.FullyQualifiedNameMatch"
+        }
+      },
+      {
+        "HashCode": 1430907107,
+        "Kind": "Components.Component",
+        "Name": "BlazorWebAssemblySignalRApp.Client.Pages.Form.StarshipForm",
+        "AssemblyName": "BlazorWebAssemblySignalRApp.Client",
+        "CaseSensitive": true,
+        "TagMatchingRules": [
+          {
+            "TagName": "StarshipForm"
+          }
+        ],
+        "Metadata": {
+          "Runtime.Name": "Components.IComponent",
+          "Common.TypeName": "BlazorWebAssemblySignalRApp.Client.Pages.Form.StarshipForm"
+        }
+      },
+      {
+        "HashCode": -2023881845,
+        "Kind": "Components.Component",
+        "Name": "BlazorWebAssemblySignalRApp.Client.Pages.Form.StarshipForm",
+        "AssemblyName": "BlazorWebAssemblySignalRApp.Client",
+        "CaseSensitive": true,
+        "TagMatchingRules": [
+          {
+            "TagName": "BlazorWebAssemblySignalRApp.Client.Pages.Form.StarshipForm"
+          }
+        ],
+        "Metadata": {
+          "Runtime.Name": "Components.IComponent",
+          "Common.TypeName": "BlazorWebAssemblySignalRApp.Client.Pages.Form.StarshipForm",
+          "Components.NameMatch": "Components.FullyQualifiedNameMatch"
+        }
+      },
+      {
+        "HashCode": 519382158,
+        "Kind": "Components.Component",
+        "Name": "BlazorWebAssemblySignalRApp.Client.Pages.Form.InsertStudent",
+        "AssemblyName": "BlazorWebAssemblySignalRApp.Client",
+        "CaseSensitive": true,
+        "TagMatchingRules": [
+          {
+            "TagName": "InsertStudent"
+          }
+        ],
+        "Metadata": {
+          "Runtime.Name": "Components.IComponent",
+          "Common.TypeName": "BlazorWebAssemblySignalRApp.Client.Pages.Form.InsertStudent"
+        }
+      },
+      {
+        "HashCode": -2096303629,
+        "Kind": "Components.Component",
+        "Name": "BlazorWebAssemblySignalRApp.Client.Pages.Form.InsertStudent",
+        "AssemblyName": "BlazorWebAssemblySignalRApp.Client",
+        "CaseSensitive": true,
+        "TagMatchingRules": [
+          {
+            "TagName": "BlazorWebAssemblySignalRApp.Client.Pages.Form.InsertStudent"
+          }
+        ],
+        "Metadata": {
+          "Runtime.Name": "Components.IComponent",
+          "Common.TypeName": "BlazorWebAssemblySignalRApp.Client.Pages.Form.InsertStudent",
+          "Components.NameMatch": "Components.FullyQualifiedNameMatch"
+        }
+      },
+      {
         "HashCode": 1509911188,
         "Kind": "Components.Component",
         "Name": "BlazorWebAssemblySignalRApp.Client.Pages.Tabs.ExampleTabSet",
@@ -564,6 +729,461 @@
         }
       },
       {
+        "HashCode": 1712117491,
+        "Kind": "Components.Component",
+        "Name": "BlazorWebAssemblySignalRApp.Client.Pages.CascadingTypeParameter.CasadingTypeValue1<CascadingT>",
+        "AssemblyName": "BlazorWebAssemblySignalRApp.Client",
+        "CaseSensitive": true,
+        "TagMatchingRules": [
+          {
+            "TagName": "CasadingTypeValue1"
+          }
+        ],
+        "BoundAttributes": [
+          {
+            "Kind": "Components.Component",
+            "Name": "CascadingT",
+            "TypeName": "System.Type",
+            "Documentation": "Specifies the type of the type parameter CascadingT for the BlazorWebAssemblySignalRApp.Client.Pages.CascadingTypeParameter.CasadingTypeValue1<CascadingT> component.",
+            "Metadata": {
+              "Common.PropertyName": "CascadingT",
+              "Components.TypeParameter": "True",
+              "Components.TypeParameterIsCascading": "False"
+            }
+          },
+          {
+            "Kind": "Components.Component",
+            "Name": "ChildContent",
+            "TypeName": "Microsoft.AspNetCore.Components.RenderFragment",
+            "Metadata": {
+              "Common.PropertyName": "ChildContent",
+              "Components.ChildContent": "True"
+            }
+          }
+        ],
+        "Metadata": {
+          "Runtime.Name": "Components.IComponent",
+          "Common.TypeName": "BlazorWebAssemblySignalRApp.Client.Pages.CascadingTypeParameter.CasadingTypeValue1<CascadingT>",
+          "Components.GenericTyped": "True"
+        }
+      },
+      {
+        "HashCode": -314086098,
+        "Kind": "Components.Component",
+        "Name": "BlazorWebAssemblySignalRApp.Client.Pages.CascadingTypeParameter.CasadingTypeValue1<CascadingT>",
+        "AssemblyName": "BlazorWebAssemblySignalRApp.Client",
+        "CaseSensitive": true,
+        "TagMatchingRules": [
+          {
+            "TagName": "BlazorWebAssemblySignalRApp.Client.Pages.CascadingTypeParameter.CasadingTypeValue1"
+          }
+        ],
+        "BoundAttributes": [
+          {
+            "Kind": "Components.Component",
+            "Name": "CascadingT",
+            "TypeName": "System.Type",
+            "Documentation": "Specifies the type of the type parameter CascadingT for the BlazorWebAssemblySignalRApp.Client.Pages.CascadingTypeParameter.CasadingTypeValue1<CascadingT> component.",
+            "Metadata": {
+              "Common.PropertyName": "CascadingT",
+              "Components.TypeParameter": "True",
+              "Components.TypeParameterIsCascading": "False"
+            }
+          },
+          {
+            "Kind": "Components.Component",
+            "Name": "ChildContent",
+            "TypeName": "Microsoft.AspNetCore.Components.RenderFragment",
+            "Metadata": {
+              "Common.PropertyName": "ChildContent",
+              "Components.ChildContent": "True"
+            }
+          }
+        ],
+        "Metadata": {
+          "Runtime.Name": "Components.IComponent",
+          "Common.TypeName": "BlazorWebAssemblySignalRApp.Client.Pages.CascadingTypeParameter.CasadingTypeValue1<CascadingT>",
+          "Components.GenericTyped": "True",
+          "Components.NameMatch": "Components.FullyQualifiedNameMatch"
+        }
+      },
+      {
+        "HashCode": -786897984,
+        "Kind": "Components.ChildContent",
+        "Name": "BlazorWebAssemblySignalRApp.Client.Pages.CascadingTypeParameter.CasadingTypeValue1<CascadingT>.ChildContent",
+        "AssemblyName": "BlazorWebAssemblySignalRApp.Client",
+        "CaseSensitive": true,
+        "TagMatchingRules": [
+          {
+            "TagName": "ChildContent",
+            "ParentTag": "CasadingTypeValue1"
+          }
+        ],
+        "Metadata": {
+          "Runtime.Name": "Components.None",
+          "Common.TypeName": "BlazorWebAssemblySignalRApp.Client.Pages.CascadingTypeParameter.CasadingTypeValue1<CascadingT>.ChildContent",
+          "Components.IsSpecialKind": "Components.ChildContent"
+        }
+      },
+      {
+        "HashCode": -1957031809,
+        "Kind": "Components.ChildContent",
+        "Name": "BlazorWebAssemblySignalRApp.Client.Pages.CascadingTypeParameter.CasadingTypeValue1<CascadingT>.ChildContent",
+        "AssemblyName": "BlazorWebAssemblySignalRApp.Client",
+        "CaseSensitive": true,
+        "TagMatchingRules": [
+          {
+            "TagName": "ChildContent",
+            "ParentTag": "BlazorWebAssemblySignalRApp.Client.Pages.CascadingTypeParameter.CasadingTypeValue1"
+          }
+        ],
+        "Metadata": {
+          "Runtime.Name": "Components.None",
+          "Common.TypeName": "BlazorWebAssemblySignalRApp.Client.Pages.CascadingTypeParameter.CasadingTypeValue1<CascadingT>.ChildContent",
+          "Components.IsSpecialKind": "Components.ChildContent",
+          "Components.NameMatch": "Components.FullyQualifiedNameMatch"
+        }
+      },
+      {
+        "HashCode": 1631207117,
+        "Kind": "Components.Component",
+        "Name": "BlazorWebAssemblySignalRApp.Client.Pages.CascadingTypeParameter.CascadingTemplate1<CascadingT>",
+        "AssemblyName": "BlazorWebAssemblySignalRApp.Client",
+        "CaseSensitive": true,
+        "TagMatchingRules": [
+          {
+            "TagName": "CascadingTemplate1"
+          }
+        ],
+        "BoundAttributes": [
+          {
+            "Kind": "Components.Component",
+            "Name": "CascadingT",
+            "TypeName": "System.Type",
+            "Documentation": "Specifies the type of the type parameter CascadingT for the BlazorWebAssemblySignalRApp.Client.Pages.CascadingTypeParameter.CascadingTemplate1<CascadingT> component.",
+            "Metadata": {
+              "Common.PropertyName": "CascadingT",
+              "Components.TypeParameter": "True",
+              "Components.TypeParameterIsCascading": "True"
+            }
+          },
+          {
+            "Kind": "Components.Component",
+            "Name": "ChildContent",
+            "TypeName": "Microsoft.AspNetCore.Components.RenderFragment",
+            "Metadata": {
+              "Common.PropertyName": "ChildContent",
+              "Components.ChildContent": "True"
+            }
+          },
+          {
+            "Kind": "Components.Component",
+            "Name": "ItemView",
+            "TypeName": "Microsoft.AspNetCore.Components.RenderFragment<CascadingT>",
+            "Metadata": {
+              "Common.PropertyName": "ItemView",
+              "Components.ChildContent": "True",
+              "Components.GenericTyped": "True"
+            }
+          },
+          {
+            "Kind": "Components.Component",
+            "Name": "Items",
+            "TypeName": "System.Collections.Generic.IReadOnlyList<CascadingT>",
+            "Metadata": {
+              "Common.PropertyName": "Items",
+              "Components.GenericTyped": "True"
+            }
+          },
+          {
+            "Kind": "Components.Component",
+            "Name": "Context",
+            "TypeName": "System.String",
+            "Documentation": "Specifies the parameter name for all child content expressions.",
+            "Metadata": {
+              "Components.ChildContentParameterName": "True",
+              "Common.PropertyName": "Context"
+            }
+          }
+        ],
+        "Metadata": {
+          "Runtime.Name": "Components.IComponent",
+          "Common.TypeName": "BlazorWebAssemblySignalRApp.Client.Pages.CascadingTypeParameter.CascadingTemplate1<CascadingT>",
+          "Components.GenericTyped": "True"
+        }
+      },
+      {
+        "HashCode": -1367550636,
+        "Kind": "Components.Component",
+        "Name": "BlazorWebAssemblySignalRApp.Client.Pages.CascadingTypeParameter.CascadingTemplate1<CascadingT>",
+        "AssemblyName": "BlazorWebAssemblySignalRApp.Client",
+        "CaseSensitive": true,
+        "TagMatchingRules": [
+          {
+            "TagName": "BlazorWebAssemblySignalRApp.Client.Pages.CascadingTypeParameter.CascadingTemplate1"
+          }
+        ],
+        "BoundAttributes": [
+          {
+            "Kind": "Components.Component",
+            "Name": "CascadingT",
+            "TypeName": "System.Type",
+            "Documentation": "Specifies the type of the type parameter CascadingT for the BlazorWebAssemblySignalRApp.Client.Pages.CascadingTypeParameter.CascadingTemplate1<CascadingT> component.",
+            "Metadata": {
+              "Common.PropertyName": "CascadingT",
+              "Components.TypeParameter": "True",
+              "Components.TypeParameterIsCascading": "True"
+            }
+          },
+          {
+            "Kind": "Components.Component",
+            "Name": "ChildContent",
+            "TypeName": "Microsoft.AspNetCore.Components.RenderFragment",
+            "Metadata": {
+              "Common.PropertyName": "ChildContent",
+              "Components.ChildContent": "True"
+            }
+          },
+          {
+            "Kind": "Components.Component",
+            "Name": "ItemView",
+            "TypeName": "Microsoft.AspNetCore.Components.RenderFragment<CascadingT>",
+            "Metadata": {
+              "Common.PropertyName": "ItemView",
+              "Components.ChildContent": "True",
+              "Components.GenericTyped": "True"
+            }
+          },
+          {
+            "Kind": "Components.Component",
+            "Name": "Items",
+            "TypeName": "System.Collections.Generic.IReadOnlyList<CascadingT>",
+            "Metadata": {
+              "Common.PropertyName": "Items",
+              "Components.GenericTyped": "True"
+            }
+          },
+          {
+            "Kind": "Components.Component",
+            "Name": "Context",
+            "TypeName": "System.String",
+            "Documentation": "Specifies the parameter name for all child content expressions.",
+            "Metadata": {
+              "Components.ChildContentParameterName": "True",
+              "Common.PropertyName": "Context"
+            }
+          }
+        ],
+        "Metadata": {
+          "Runtime.Name": "Components.IComponent",
+          "Common.TypeName": "BlazorWebAssemblySignalRApp.Client.Pages.CascadingTypeParameter.CascadingTemplate1<CascadingT>",
+          "Components.GenericTyped": "True",
+          "Components.NameMatch": "Components.FullyQualifiedNameMatch"
+        }
+      },
+      {
+        "HashCode": 376796689,
+        "Kind": "Components.ChildContent",
+        "Name": "BlazorWebAssemblySignalRApp.Client.Pages.CascadingTypeParameter.CascadingTemplate1<CascadingT>.ChildContent",
+        "AssemblyName": "BlazorWebAssemblySignalRApp.Client",
+        "CaseSensitive": true,
+        "TagMatchingRules": [
+          {
+            "TagName": "ChildContent",
+            "ParentTag": "CascadingTemplate1"
+          }
+        ],
+        "Metadata": {
+          "Runtime.Name": "Components.None",
+          "Common.TypeName": "BlazorWebAssemblySignalRApp.Client.Pages.CascadingTypeParameter.CascadingTemplate1<CascadingT>.ChildContent",
+          "Components.IsSpecialKind": "Components.ChildContent"
+        }
+      },
+      {
+        "HashCode": 1234342870,
+        "Kind": "Components.ChildContent",
+        "Name": "BlazorWebAssemblySignalRApp.Client.Pages.CascadingTypeParameter.CascadingTemplate1<CascadingT>.ChildContent",
+        "AssemblyName": "BlazorWebAssemblySignalRApp.Client",
+        "CaseSensitive": true,
+        "TagMatchingRules": [
+          {
+            "TagName": "ChildContent",
+            "ParentTag": "BlazorWebAssemblySignalRApp.Client.Pages.CascadingTypeParameter.CascadingTemplate1"
+          }
+        ],
+        "Metadata": {
+          "Runtime.Name": "Components.None",
+          "Common.TypeName": "BlazorWebAssemblySignalRApp.Client.Pages.CascadingTypeParameter.CascadingTemplate1<CascadingT>.ChildContent",
+          "Components.IsSpecialKind": "Components.ChildContent",
+          "Components.NameMatch": "Components.FullyQualifiedNameMatch"
+        }
+      },
+      {
+        "HashCode": -513616197,
+        "Kind": "Components.ChildContent",
+        "Name": "BlazorWebAssemblySignalRApp.Client.Pages.CascadingTypeParameter.CascadingTemplate1<CascadingT>.ItemView",
+        "AssemblyName": "BlazorWebAssemblySignalRApp.Client",
+        "CaseSensitive": true,
+        "TagMatchingRules": [
+          {
+            "TagName": "ItemView",
+            "ParentTag": "CascadingTemplate1"
+          }
+        ],
+        "BoundAttributes": [
+          {
+            "Kind": "Components.ChildContent",
+            "Name": "Context",
+            "TypeName": "System.String",
+            "Documentation": "Specifies the parameter name for the 'ItemView' child content expression.",
+            "Metadata": {
+              "Components.ChildContentParameterName": "True",
+              "Common.PropertyName": "Context"
+            }
+          }
+        ],
+        "Metadata": {
+          "Runtime.Name": "Components.None",
+          "Common.TypeName": "BlazorWebAssemblySignalRApp.Client.Pages.CascadingTypeParameter.CascadingTemplate1<CascadingT>.ItemView",
+          "Components.IsSpecialKind": "Components.ChildContent"
+        }
+      },
+      {
+        "HashCode": 330486289,
+        "Kind": "Components.ChildContent",
+        "Name": "BlazorWebAssemblySignalRApp.Client.Pages.CascadingTypeParameter.CascadingTemplate1<CascadingT>.ItemView",
+        "AssemblyName": "BlazorWebAssemblySignalRApp.Client",
+        "CaseSensitive": true,
+        "TagMatchingRules": [
+          {
+            "TagName": "ItemView",
+            "ParentTag": "BlazorWebAssemblySignalRApp.Client.Pages.CascadingTypeParameter.CascadingTemplate1"
+          }
+        ],
+        "BoundAttributes": [
+          {
+            "Kind": "Components.ChildContent",
+            "Name": "Context",
+            "TypeName": "System.String",
+            "Documentation": "Specifies the parameter name for the 'ItemView' child content expression.",
+            "Metadata": {
+              "Components.ChildContentParameterName": "True",
+              "Common.PropertyName": "Context"
+            }
+          }
+        ],
+        "Metadata": {
+          "Runtime.Name": "Components.None",
+          "Common.TypeName": "BlazorWebAssemblySignalRApp.Client.Pages.CascadingTypeParameter.CascadingTemplate1<CascadingT>.ItemView",
+          "Components.IsSpecialKind": "Components.ChildContent",
+          "Components.NameMatch": "Components.FullyQualifiedNameMatch"
+        }
+      },
+      {
+        "HashCode": 607328089,
+        "Kind": "Components.Component",
+        "Name": "BlazorWebAssemblySignalRApp.Client.Pages.CascadingTypeParameter.PetsDetails",
+        "AssemblyName": "BlazorWebAssemblySignalRApp.Client",
+        "CaseSensitive": true,
+        "TagMatchingRules": [
+          {
+            "TagName": "PetsDetails"
+          }
+        ],
+        "BoundAttributes": [
+          {
+            "Kind": "Components.Component",
+            "Name": "Id",
+            "TypeName": "System.String",
+            "Metadata": {
+              "Common.PropertyName": "Id"
+            }
+          },
+          {
+            "Kind": "Components.Component",
+            "Name": "ChangeBody",
+            "TypeName": "Microsoft.AspNetCore.Components.EventCallback<Microsoft.AspNetCore.Components.Web.MouseEventArgs>",
+            "Metadata": {
+              "Common.PropertyName": "ChangeBody",
+              "Components.EventCallback": "True"
+            }
+          }
+        ],
+        "Metadata": {
+          "Runtime.Name": "Components.IComponent",
+          "Common.TypeName": "BlazorWebAssemblySignalRApp.Client.Pages.CascadingTypeParameter.PetsDetails"
+        }
+      },
+      {
+        "HashCode": 296489685,
+        "Kind": "Components.Component",
+        "Name": "BlazorWebAssemblySignalRApp.Client.Pages.CascadingTypeParameter.PetsDetails",
+        "AssemblyName": "BlazorWebAssemblySignalRApp.Client",
+        "CaseSensitive": true,
+        "TagMatchingRules": [
+          {
+            "TagName": "BlazorWebAssemblySignalRApp.Client.Pages.CascadingTypeParameter.PetsDetails"
+          }
+        ],
+        "BoundAttributes": [
+          {
+            "Kind": "Components.Component",
+            "Name": "Id",
+            "TypeName": "System.String",
+            "Metadata": {
+              "Common.PropertyName": "Id"
+            }
+          },
+          {
+            "Kind": "Components.Component",
+            "Name": "ChangeBody",
+            "TypeName": "Microsoft.AspNetCore.Components.EventCallback<Microsoft.AspNetCore.Components.Web.MouseEventArgs>",
+            "Metadata": {
+              "Common.PropertyName": "ChangeBody",
+              "Components.EventCallback": "True"
+            }
+          }
+        ],
+        "Metadata": {
+          "Runtime.Name": "Components.IComponent",
+          "Common.TypeName": "BlazorWebAssemblySignalRApp.Client.Pages.CascadingTypeParameter.PetsDetails",
+          "Components.NameMatch": "Components.FullyQualifiedNameMatch"
+        }
+      },
+      {
+        "HashCode": 2137682839,
+        "Kind": "Components.Component",
+        "Name": "BlazorWebAssemblySignalRApp.Client.Pages.Chat",
+        "AssemblyName": "BlazorWebAssemblySignalRApp.Client",
+        "CaseSensitive": true,
+        "TagMatchingRules": [
+          {
+            "TagName": "Chat"
+          }
+        ],
+        "Metadata": {
+          "Runtime.Name": "Components.IComponent",
+          "Common.TypeName": "BlazorWebAssemblySignalRApp.Client.Pages.Chat"
+        }
+      },
+      {
+        "HashCode": -765211893,
+        "Kind": "Components.Component",
+        "Name": "BlazorWebAssemblySignalRApp.Client.Pages.Chat",
+        "AssemblyName": "BlazorWebAssemblySignalRApp.Client",
+        "CaseSensitive": true,
+        "TagMatchingRules": [
+          {
+            "TagName": "BlazorWebAssemblySignalRApp.Client.Pages.Chat"
+          }
+        ],
+        "Metadata": {
+          "Runtime.Name": "Components.IComponent",
+          "Common.TypeName": "BlazorWebAssemblySignalRApp.Client.Pages.Chat",
+          "Components.NameMatch": "Components.FullyQualifiedNameMatch"
+        }
+      },
+      {
         "HashCode": -397545166,
         "Kind": "Components.Component",
         "Name": "BlazorWebAssemblySignalRApp.Client.Pages.Check",
@@ -613,6 +1233,143 @@
         "Metadata": {
           "Runtime.Name": "Components.IComponent",
           "Common.TypeName": "BlazorWebAssemblySignalRApp.Client.Pages.Check",
+          "Components.NameMatch": "Components.FullyQualifiedNameMatch"
+        }
+      },
+      {
+        "HashCode": 1063861488,
+        "Kind": "Components.Component",
+        "Name": "BlazorWebAssemblySignalRApp.Client.Pages.ChildBinding.BindValueInputs",
+        "AssemblyName": "BlazorWebAssemblySignalRApp.Client",
+        "CaseSensitive": true,
+        "TagMatchingRules": [
+          {
+            "TagName": "BindValueInputs"
+          }
+        ],
+        "Metadata": {
+          "Runtime.Name": "Components.IComponent",
+          "Common.TypeName": "BlazorWebAssemblySignalRApp.Client.Pages.ChildBinding.BindValueInputs"
+        }
+      },
+      {
+        "HashCode": 583050750,
+        "Kind": "Components.Component",
+        "Name": "BlazorWebAssemblySignalRApp.Client.Pages.ChildBinding.BindValueInputs",
+        "AssemblyName": "BlazorWebAssemblySignalRApp.Client",
+        "CaseSensitive": true,
+        "TagMatchingRules": [
+          {
+            "TagName": "BlazorWebAssemblySignalRApp.Client.Pages.ChildBinding.BindValueInputs"
+          }
+        ],
+        "Metadata": {
+          "Runtime.Name": "Components.IComponent",
+          "Common.TypeName": "BlazorWebAssemblySignalRApp.Client.Pages.ChildBinding.BindValueInputs",
+          "Components.NameMatch": "Components.FullyQualifiedNameMatch"
+        }
+      },
+      {
+        "HashCode": 838406803,
+        "Kind": "Components.Component",
+        "Name": "BlazorWebAssemblySignalRApp.Client.Pages.ChildBinding.ChildBindingChild",
+        "AssemblyName": "BlazorWebAssemblySignalRApp.Client",
+        "CaseSensitive": true,
+        "TagMatchingRules": [
+          {
+            "TagName": "ChildBindingChild"
+          }
+        ],
+        "BoundAttributes": [
+          {
+            "Kind": "Components.Component",
+            "Name": "Year",
+            "TypeName": "System.Int32",
+            "Metadata": {
+              "Common.PropertyName": "Year"
+            }
+          },
+          {
+            "Kind": "Components.Component",
+            "Name": "YearChanged",
+            "TypeName": "Microsoft.AspNetCore.Components.EventCallback<System.Int32>",
+            "Metadata": {
+              "Common.PropertyName": "YearChanged",
+              "Components.EventCallback": "True"
+            }
+          }
+        ],
+        "Metadata": {
+          "Runtime.Name": "Components.IComponent",
+          "Common.TypeName": "BlazorWebAssemblySignalRApp.Client.Pages.ChildBinding.ChildBindingChild"
+        }
+      },
+      {
+        "HashCode": 1905499207,
+        "Kind": "Components.Component",
+        "Name": "BlazorWebAssemblySignalRApp.Client.Pages.ChildBinding.ChildBindingChild",
+        "AssemblyName": "BlazorWebAssemblySignalRApp.Client",
+        "CaseSensitive": true,
+        "TagMatchingRules": [
+          {
+            "TagName": "BlazorWebAssemblySignalRApp.Client.Pages.ChildBinding.ChildBindingChild"
+          }
+        ],
+        "BoundAttributes": [
+          {
+            "Kind": "Components.Component",
+            "Name": "Year",
+            "TypeName": "System.Int32",
+            "Metadata": {
+              "Common.PropertyName": "Year"
+            }
+          },
+          {
+            "Kind": "Components.Component",
+            "Name": "YearChanged",
+            "TypeName": "Microsoft.AspNetCore.Components.EventCallback<System.Int32>",
+            "Metadata": {
+              "Common.PropertyName": "YearChanged",
+              "Components.EventCallback": "True"
+            }
+          }
+        ],
+        "Metadata": {
+          "Runtime.Name": "Components.IComponent",
+          "Common.TypeName": "BlazorWebAssemblySignalRApp.Client.Pages.ChildBinding.ChildBindingChild",
+          "Components.NameMatch": "Components.FullyQualifiedNameMatch"
+        }
+      },
+      {
+        "HashCode": -587828475,
+        "Kind": "Components.Component",
+        "Name": "BlazorWebAssemblySignalRApp.Client.Pages.ChildBinding.ChildBindingParent",
+        "AssemblyName": "BlazorWebAssemblySignalRApp.Client",
+        "CaseSensitive": true,
+        "TagMatchingRules": [
+          {
+            "TagName": "ChildBindingParent"
+          }
+        ],
+        "Metadata": {
+          "Runtime.Name": "Components.IComponent",
+          "Common.TypeName": "BlazorWebAssemblySignalRApp.Client.Pages.ChildBinding.ChildBindingParent"
+        }
+      },
+      {
+        "HashCode": 401596318,
+        "Kind": "Components.Component",
+        "Name": "BlazorWebAssemblySignalRApp.Client.Pages.ChildBinding.ChildBindingParent",
+        "AssemblyName": "BlazorWebAssemblySignalRApp.Client",
+        "CaseSensitive": true,
+        "TagMatchingRules": [
+          {
+            "TagName": "BlazorWebAssemblySignalRApp.Client.Pages.ChildBinding.ChildBindingParent"
+          }
+        ],
+        "Metadata": {
+          "Runtime.Name": "Components.IComponent",
+          "Common.TypeName": "BlazorWebAssemblySignalRApp.Client.Pages.ChildBinding.ChildBindingParent",
           "Components.NameMatch": "Components.FullyQualifiedNameMatch"
         }
       },
@@ -896,106 +1653,35 @@
         }
       },
       {
-        "HashCode": 838406803,
+        "HashCode": 123234945,
         "Kind": "Components.Component",
-        "Name": "BlazorWebAssemblySignalRApp.Client.Pages.ChildBinding.ChildBindingChild",
+        "Name": "BlazorWebAssemblySignalRApp.Client.Pages.CollacatedJS",
         "AssemblyName": "BlazorWebAssemblySignalRApp.Client",
         "CaseSensitive": true,
         "TagMatchingRules": [
           {
-            "TagName": "ChildBindingChild"
-          }
-        ],
-        "BoundAttributes": [
-          {
-            "Kind": "Components.Component",
-            "Name": "Year",
-            "TypeName": "System.Int32",
-            "Metadata": {
-              "Common.PropertyName": "Year"
-            }
-          },
-          {
-            "Kind": "Components.Component",
-            "Name": "YearChanged",
-            "TypeName": "Microsoft.AspNetCore.Components.EventCallback<System.Int32>",
-            "Metadata": {
-              "Common.PropertyName": "YearChanged",
-              "Components.EventCallback": "True"
-            }
+            "TagName": "CollacatedJS"
           }
         ],
         "Metadata": {
           "Runtime.Name": "Components.IComponent",
-          "Common.TypeName": "BlazorWebAssemblySignalRApp.Client.Pages.ChildBinding.ChildBindingChild"
+          "Common.TypeName": "BlazorWebAssemblySignalRApp.Client.Pages.CollacatedJS"
         }
       },
       {
-        "HashCode": 1905499207,
+        "HashCode": 834941442,
         "Kind": "Components.Component",
-        "Name": "BlazorWebAssemblySignalRApp.Client.Pages.ChildBinding.ChildBindingChild",
+        "Name": "BlazorWebAssemblySignalRApp.Client.Pages.CollacatedJS",
         "AssemblyName": "BlazorWebAssemblySignalRApp.Client",
         "CaseSensitive": true,
         "TagMatchingRules": [
           {
-            "TagName": "BlazorWebAssemblySignalRApp.Client.Pages.ChildBinding.ChildBindingChild"
-          }
-        ],
-        "BoundAttributes": [
-          {
-            "Kind": "Components.Component",
-            "Name": "Year",
-            "TypeName": "System.Int32",
-            "Metadata": {
-              "Common.PropertyName": "Year"
-            }
-          },
-          {
-            "Kind": "Components.Component",
-            "Name": "YearChanged",
-            "TypeName": "Microsoft.AspNetCore.Components.EventCallback<System.Int32>",
-            "Metadata": {
-              "Common.PropertyName": "YearChanged",
-              "Components.EventCallback": "True"
-            }
+            "TagName": "BlazorWebAssemblySignalRApp.Client.Pages.CollacatedJS"
           }
         ],
         "Metadata": {
           "Runtime.Name": "Components.IComponent",
-          "Common.TypeName": "BlazorWebAssemblySignalRApp.Client.Pages.ChildBinding.ChildBindingChild",
-          "Components.NameMatch": "Components.FullyQualifiedNameMatch"
-        }
-      },
-      {
-        "HashCode": -587828475,
-        "Kind": "Components.Component",
-        "Name": "BlazorWebAssemblySignalRApp.Client.Pages.ChildBinding.ChildBindingParent",
-        "AssemblyName": "BlazorWebAssemblySignalRApp.Client",
-        "CaseSensitive": true,
-        "TagMatchingRules": [
-          {
-            "TagName": "ChildBindingParent"
-          }
-        ],
-        "Metadata": {
-          "Runtime.Name": "Components.IComponent",
-          "Common.TypeName": "BlazorWebAssemblySignalRApp.Client.Pages.ChildBinding.ChildBindingParent"
-        }
-      },
-      {
-        "HashCode": 401596318,
-        "Kind": "Components.Component",
-        "Name": "BlazorWebAssemblySignalRApp.Client.Pages.ChildBinding.ChildBindingParent",
-        "AssemblyName": "BlazorWebAssemblySignalRApp.Client",
-        "CaseSensitive": true,
-        "TagMatchingRules": [
-          {
-            "TagName": "BlazorWebAssemblySignalRApp.Client.Pages.ChildBinding.ChildBindingParent"
-          }
-        ],
-        "Metadata": {
-          "Runtime.Name": "Components.IComponent",
-          "Common.TypeName": "BlazorWebAssemblySignalRApp.Client.Pages.ChildBinding.ChildBindingParent",
+          "Common.TypeName": "BlazorWebAssemblySignalRApp.Client.Pages.CollacatedJS",
           "Components.NameMatch": "Components.FullyQualifiedNameMatch"
         }
       },
@@ -1029,6 +1715,191 @@
         "Metadata": {
           "Runtime.Name": "Components.IComponent",
           "Common.TypeName": "BlazorWebAssemblySignalRApp.Client.Pages.ConfigurationSample",
+          "Components.NameMatch": "Components.FullyQualifiedNameMatch"
+        }
+      },
+      {
+        "HashCode": -799464369,
+        "Kind": "Components.Component",
+        "Name": "BlazorWebAssemblySignalRApp.Client.Pages.Contents.GenericRenderFragment",
+        "AssemblyName": "BlazorWebAssemblySignalRApp.Client",
+        "CaseSensitive": true,
+        "TagMatchingRules": [
+          {
+            "TagName": "GenericRenderFragment"
+          }
+        ],
+        "BoundAttributes": [
+          {
+            "Kind": "Components.Component",
+            "Name": "Title",
+            "TypeName": "System.String",
+            "Metadata": {
+              "Common.PropertyName": "Title"
+            }
+          },
+          {
+            "Kind": "Components.Component",
+            "Name": "ChildContent",
+            "TypeName": "Microsoft.AspNetCore.Components.RenderFragment<System.Boolean>",
+            "Metadata": {
+              "Common.PropertyName": "ChildContent",
+              "Components.ChildContent": "True"
+            }
+          },
+          {
+            "Kind": "Components.Component",
+            "Name": "Context",
+            "TypeName": "System.String",
+            "Documentation": "Specifies the parameter name for all child content expressions.",
+            "Metadata": {
+              "Components.ChildContentParameterName": "True",
+              "Common.PropertyName": "Context"
+            }
+          }
+        ],
+        "Metadata": {
+          "Runtime.Name": "Components.IComponent",
+          "Common.TypeName": "BlazorWebAssemblySignalRApp.Client.Pages.Contents.GenericRenderFragment"
+        }
+      },
+      {
+        "HashCode": 1482262932,
+        "Kind": "Components.Component",
+        "Name": "BlazorWebAssemblySignalRApp.Client.Pages.Contents.GenericRenderFragment",
+        "AssemblyName": "BlazorWebAssemblySignalRApp.Client",
+        "CaseSensitive": true,
+        "TagMatchingRules": [
+          {
+            "TagName": "BlazorWebAssemblySignalRApp.Client.Pages.Contents.GenericRenderFragment"
+          }
+        ],
+        "BoundAttributes": [
+          {
+            "Kind": "Components.Component",
+            "Name": "Title",
+            "TypeName": "System.String",
+            "Metadata": {
+              "Common.PropertyName": "Title"
+            }
+          },
+          {
+            "Kind": "Components.Component",
+            "Name": "ChildContent",
+            "TypeName": "Microsoft.AspNetCore.Components.RenderFragment<System.Boolean>",
+            "Metadata": {
+              "Common.PropertyName": "ChildContent",
+              "Components.ChildContent": "True"
+            }
+          },
+          {
+            "Kind": "Components.Component",
+            "Name": "Context",
+            "TypeName": "System.String",
+            "Documentation": "Specifies the parameter name for all child content expressions.",
+            "Metadata": {
+              "Components.ChildContentParameterName": "True",
+              "Common.PropertyName": "Context"
+            }
+          }
+        ],
+        "Metadata": {
+          "Runtime.Name": "Components.IComponent",
+          "Common.TypeName": "BlazorWebAssemblySignalRApp.Client.Pages.Contents.GenericRenderFragment",
+          "Components.NameMatch": "Components.FullyQualifiedNameMatch"
+        }
+      },
+      {
+        "HashCode": 1042442673,
+        "Kind": "Components.ChildContent",
+        "Name": "BlazorWebAssemblySignalRApp.Client.Pages.Contents.GenericRenderFragment.ChildContent",
+        "AssemblyName": "BlazorWebAssemblySignalRApp.Client",
+        "CaseSensitive": true,
+        "TagMatchingRules": [
+          {
+            "TagName": "ChildContent",
+            "ParentTag": "GenericRenderFragment"
+          }
+        ],
+        "BoundAttributes": [
+          {
+            "Kind": "Components.ChildContent",
+            "Name": "Context",
+            "TypeName": "System.String",
+            "Documentation": "Specifies the parameter name for the 'ChildContent' child content expression.",
+            "Metadata": {
+              "Components.ChildContentParameterName": "True",
+              "Common.PropertyName": "Context"
+            }
+          }
+        ],
+        "Metadata": {
+          "Runtime.Name": "Components.None",
+          "Common.TypeName": "BlazorWebAssemblySignalRApp.Client.Pages.Contents.GenericRenderFragment.ChildContent",
+          "Components.IsSpecialKind": "Components.ChildContent"
+        }
+      },
+      {
+        "HashCode": -2026364308,
+        "Kind": "Components.ChildContent",
+        "Name": "BlazorWebAssemblySignalRApp.Client.Pages.Contents.GenericRenderFragment.ChildContent",
+        "AssemblyName": "BlazorWebAssemblySignalRApp.Client",
+        "CaseSensitive": true,
+        "TagMatchingRules": [
+          {
+            "TagName": "ChildContent",
+            "ParentTag": "BlazorWebAssemblySignalRApp.Client.Pages.Contents.GenericRenderFragment"
+          }
+        ],
+        "BoundAttributes": [
+          {
+            "Kind": "Components.ChildContent",
+            "Name": "Context",
+            "TypeName": "System.String",
+            "Documentation": "Specifies the parameter name for the 'ChildContent' child content expression.",
+            "Metadata": {
+              "Components.ChildContentParameterName": "True",
+              "Common.PropertyName": "Context"
+            }
+          }
+        ],
+        "Metadata": {
+          "Runtime.Name": "Components.None",
+          "Common.TypeName": "BlazorWebAssemblySignalRApp.Client.Pages.Contents.GenericRenderFragment.ChildContent",
+          "Components.IsSpecialKind": "Components.ChildContent",
+          "Components.NameMatch": "Components.FullyQualifiedNameMatch"
+        }
+      },
+      {
+        "HashCode": -1539112029,
+        "Kind": "Components.Component",
+        "Name": "BlazorWebAssemblySignalRApp.Client.Pages.Contents.GenerticRenderFragmentParent",
+        "AssemblyName": "BlazorWebAssemblySignalRApp.Client",
+        "CaseSensitive": true,
+        "TagMatchingRules": [
+          {
+            "TagName": "GenerticRenderFragmentParent"
+          }
+        ],
+        "Metadata": {
+          "Runtime.Name": "Components.IComponent",
+          "Common.TypeName": "BlazorWebAssemblySignalRApp.Client.Pages.Contents.GenerticRenderFragmentParent"
+        }
+      },
+      {
+        "HashCode": 1051081236,
+        "Kind": "Components.Component",
+        "Name": "BlazorWebAssemblySignalRApp.Client.Pages.Contents.GenerticRenderFragmentParent",
+        "AssemblyName": "BlazorWebAssemblySignalRApp.Client",
+        "CaseSensitive": true,
+        "TagMatchingRules": [
+          {
+            "TagName": "BlazorWebAssemblySignalRApp.Client.Pages.Contents.GenerticRenderFragmentParent"
+          }
+        ],
+        "Metadata": {
+          "Runtime.Name": "Components.IComponent",
+          "Common.TypeName": "BlazorWebAssemblySignalRApp.Client.Pages.Contents.GenerticRenderFragmentParent",
           "Components.NameMatch": "Components.FullyQualifiedNameMatch"
         }
       },
@@ -1260,110 +2131,876 @@
         }
       },
       {
-        "HashCode": -1463868034,
+        "HashCode": 63420787,
         "Kind": "Components.Component",
-        "Name": "BlazorWebAssemblySignalRApp.Client.Pages.Dialog",
+        "Name": "BlazorWebAssemblySignalRApp.Client.Pages.CounterWithTimer",
         "AssemblyName": "BlazorWebAssemblySignalRApp.Client",
         "CaseSensitive": true,
         "TagMatchingRules": [
           {
-            "TagName": "Dialog"
-          }
-        ],
-        "BoundAttributes": [
-          {
-            "Kind": "Components.Component",
-            "Name": "Title",
-            "TypeName": "System.String",
-            "Metadata": {
-              "Common.PropertyName": "Title"
-            }
-          },
-          {
-            "Kind": "Components.Component",
-            "Name": "ChildContent",
-            "TypeName": "Microsoft.AspNetCore.Components.RenderFragment",
-            "Metadata": {
-              "Common.PropertyName": "ChildContent",
-              "Components.ChildContent": "True"
-            }
+            "TagName": "CounterWithTimer"
           }
         ],
         "Metadata": {
           "Runtime.Name": "Components.IComponent",
-          "Common.TypeName": "BlazorWebAssemblySignalRApp.Client.Pages.Dialog"
+          "Common.TypeName": "BlazorWebAssemblySignalRApp.Client.Pages.CounterWithTimer"
         }
       },
       {
-        "HashCode": 640882473,
+        "HashCode": -1148386066,
         "Kind": "Components.Component",
-        "Name": "BlazorWebAssemblySignalRApp.Client.Pages.Dialog",
+        "Name": "BlazorWebAssemblySignalRApp.Client.Pages.CounterWithTimer",
         "AssemblyName": "BlazorWebAssemblySignalRApp.Client",
         "CaseSensitive": true,
         "TagMatchingRules": [
           {
-            "TagName": "BlazorWebAssemblySignalRApp.Client.Pages.Dialog"
-          }
-        ],
-        "BoundAttributes": [
-          {
-            "Kind": "Components.Component",
-            "Name": "Title",
-            "TypeName": "System.String",
-            "Metadata": {
-              "Common.PropertyName": "Title"
-            }
-          },
-          {
-            "Kind": "Components.Component",
-            "Name": "ChildContent",
-            "TypeName": "Microsoft.AspNetCore.Components.RenderFragment",
-            "Metadata": {
-              "Common.PropertyName": "ChildContent",
-              "Components.ChildContent": "True"
-            }
+            "TagName": "BlazorWebAssemblySignalRApp.Client.Pages.CounterWithTimer"
           }
         ],
         "Metadata": {
           "Runtime.Name": "Components.IComponent",
-          "Common.TypeName": "BlazorWebAssemblySignalRApp.Client.Pages.Dialog",
+          "Common.TypeName": "BlazorWebAssemblySignalRApp.Client.Pages.CounterWithTimer",
           "Components.NameMatch": "Components.FullyQualifiedNameMatch"
         }
       },
       {
-        "HashCode": 1112507100,
-        "Kind": "Components.ChildContent",
-        "Name": "BlazorWebAssemblySignalRApp.Client.Pages.Dialog.ChildContent",
+        "HashCode": 407906853,
+        "Kind": "Components.Component",
+        "Name": "BlazorWebAssemblySignalRApp.Client.Pages.CustomeValidationComponent.CustomeValidator",
         "AssemblyName": "BlazorWebAssemblySignalRApp.Client",
         "CaseSensitive": true,
         "TagMatchingRules": [
           {
+            "TagName": "CustomeValidator"
+          }
+        ],
+        "Metadata": {
+          "Runtime.Name": "Components.IComponent",
+          "Common.TypeName": "BlazorWebAssemblySignalRApp.Client.Pages.CustomeValidationComponent.CustomeValidator"
+        }
+      },
+      {
+        "HashCode": 890961656,
+        "Kind": "Components.Component",
+        "Name": "BlazorWebAssemblySignalRApp.Client.Pages.CustomeValidationComponent.CustomeValidator",
+        "AssemblyName": "BlazorWebAssemblySignalRApp.Client",
+        "CaseSensitive": true,
+        "TagMatchingRules": [
+          {
+            "TagName": "BlazorWebAssemblySignalRApp.Client.Pages.CustomeValidationComponent.CustomeValidator"
+          }
+        ],
+        "Metadata": {
+          "Runtime.Name": "Components.IComponent",
+          "Common.TypeName": "BlazorWebAssemblySignalRApp.Client.Pages.CustomeValidationComponent.CustomeValidator",
+          "Components.NameMatch": "Components.FullyQualifiedNameMatch"
+        }
+      },
+      {
+        "HashCode": 1668446968,
+        "Kind": "Components.Component",
+        "Name": "BlazorWebAssemblySignalRApp.Client.Pages.CustomInputs.CustomeInputNumber",
+        "AssemblyName": "BlazorWebAssemblySignalRApp.Client",
+        "CaseSensitive": true,
+        "TagMatchingRules": [
+          {
+            "TagName": "CustomeInputNumber"
+          }
+        ],
+        "BoundAttributes": [
+          {
+            "Kind": "Components.Component",
+            "Name": "ParsingErrorMessage",
+            "TypeName": "System.String",
+            "Documentation": "\n            <summary>\n            Gets or sets the error message used when displaying an a parsing error.\n            </summary>\n        ",
+            "Metadata": {
+              "Common.PropertyName": "ParsingErrorMessage"
+            }
+          },
+          {
+            "Kind": "Components.Component",
+            "Name": "AdditionalAttributes",
+            "TypeName": "System.Collections.Generic.IReadOnlyDictionary<System.String, System.Object>",
+            "Documentation": "\n            <summary>\n            Gets or sets a collection of additional attributes that will be applied to the created element.\n            </summary>\n        ",
+            "Metadata": {
+              "Common.PropertyName": "AdditionalAttributes"
+            }
+          },
+          {
+            "Kind": "Components.Component",
+            "Name": "Value",
+            "TypeName": "System.Int32",
+            "Documentation": "\n            <summary>\n            Gets or sets the value of the input. This should be used with two-way binding.\n            </summary>\n            <example>\n            @bind-Value=\"model.PropertyName\"\n            </example>\n        ",
+            "Metadata": {
+              "Common.PropertyName": "Value"
+            }
+          },
+          {
+            "Kind": "Components.Component",
+            "Name": "ValueChanged",
+            "TypeName": "Microsoft.AspNetCore.Components.EventCallback<System.Int32>",
+            "Documentation": "\n            <summary>\n            Gets or sets a callback that updates the bound value.\n            </summary>\n        ",
+            "Metadata": {
+              "Common.PropertyName": "ValueChanged",
+              "Components.EventCallback": "True"
+            }
+          },
+          {
+            "Kind": "Components.Component",
+            "Name": "ValueExpression",
+            "TypeName": "System.Linq.Expressions.Expression<System.Func<System.Int32>>",
+            "Documentation": "\n            <summary>\n            Gets or sets an expression that identifies the bound value.\n            </summary>\n        ",
+            "Metadata": {
+              "Common.PropertyName": "ValueExpression"
+            }
+          },
+          {
+            "Kind": "Components.Component",
+            "Name": "DisplayName",
+            "TypeName": "System.String",
+            "Documentation": "\n            <summary>\n            Gets or sets the display name for this field.\n            <para>This value is used when generating error messages when the input value fails to parse correctly.</para>\n            </summary>\n        ",
+            "Metadata": {
+              "Common.PropertyName": "DisplayName"
+            }
+          }
+        ],
+        "Metadata": {
+          "Runtime.Name": "Components.IComponent",
+          "Common.TypeName": "BlazorWebAssemblySignalRApp.Client.Pages.CustomInputs.CustomeInputNumber"
+        }
+      },
+      {
+        "HashCode": -885725584,
+        "Kind": "Components.Component",
+        "Name": "BlazorWebAssemblySignalRApp.Client.Pages.CustomInputs.CustomeInputNumber",
+        "AssemblyName": "BlazorWebAssemblySignalRApp.Client",
+        "CaseSensitive": true,
+        "TagMatchingRules": [
+          {
+            "TagName": "BlazorWebAssemblySignalRApp.Client.Pages.CustomInputs.CustomeInputNumber"
+          }
+        ],
+        "BoundAttributes": [
+          {
+            "Kind": "Components.Component",
+            "Name": "ParsingErrorMessage",
+            "TypeName": "System.String",
+            "Documentation": "\n            <summary>\n            Gets or sets the error message used when displaying an a parsing error.\n            </summary>\n        ",
+            "Metadata": {
+              "Common.PropertyName": "ParsingErrorMessage"
+            }
+          },
+          {
+            "Kind": "Components.Component",
+            "Name": "AdditionalAttributes",
+            "TypeName": "System.Collections.Generic.IReadOnlyDictionary<System.String, System.Object>",
+            "Documentation": "\n            <summary>\n            Gets or sets a collection of additional attributes that will be applied to the created element.\n            </summary>\n        ",
+            "Metadata": {
+              "Common.PropertyName": "AdditionalAttributes"
+            }
+          },
+          {
+            "Kind": "Components.Component",
+            "Name": "Value",
+            "TypeName": "System.Int32",
+            "Documentation": "\n            <summary>\n            Gets or sets the value of the input. This should be used with two-way binding.\n            </summary>\n            <example>\n            @bind-Value=\"model.PropertyName\"\n            </example>\n        ",
+            "Metadata": {
+              "Common.PropertyName": "Value"
+            }
+          },
+          {
+            "Kind": "Components.Component",
+            "Name": "ValueChanged",
+            "TypeName": "Microsoft.AspNetCore.Components.EventCallback<System.Int32>",
+            "Documentation": "\n            <summary>\n            Gets or sets a callback that updates the bound value.\n            </summary>\n        ",
+            "Metadata": {
+              "Common.PropertyName": "ValueChanged",
+              "Components.EventCallback": "True"
+            }
+          },
+          {
+            "Kind": "Components.Component",
+            "Name": "ValueExpression",
+            "TypeName": "System.Linq.Expressions.Expression<System.Func<System.Int32>>",
+            "Documentation": "\n            <summary>\n            Gets or sets an expression that identifies the bound value.\n            </summary>\n        ",
+            "Metadata": {
+              "Common.PropertyName": "ValueExpression"
+            }
+          },
+          {
+            "Kind": "Components.Component",
+            "Name": "DisplayName",
+            "TypeName": "System.String",
+            "Documentation": "\n            <summary>\n            Gets or sets the display name for this field.\n            <para>This value is used when generating error messages when the input value fails to parse correctly.</para>\n            </summary>\n        ",
+            "Metadata": {
+              "Common.PropertyName": "DisplayName"
+            }
+          }
+        ],
+        "Metadata": {
+          "Runtime.Name": "Components.IComponent",
+          "Common.TypeName": "BlazorWebAssemblySignalRApp.Client.Pages.CustomInputs.CustomeInputNumber",
+          "Components.NameMatch": "Components.FullyQualifiedNameMatch"
+        }
+      },
+      {
+        "HashCode": 1311318692,
+        "Kind": "Components.Component",
+        "Name": "BlazorWebAssemblySignalRApp.Client.Pages.CustomInputs.CustomeInputSelect<TValue>",
+        "AssemblyName": "BlazorWebAssemblySignalRApp.Client",
+        "CaseSensitive": true,
+        "TagMatchingRules": [
+          {
+            "TagName": "CustomeInputSelect"
+          }
+        ],
+        "BoundAttributes": [
+          {
+            "Kind": "Components.Component",
+            "Name": "TValue",
+            "TypeName": "System.Type",
+            "Documentation": "Specifies the type of the type parameter TValue for the BlazorWebAssemblySignalRApp.Client.Pages.CustomInputs.CustomeInputSelect<TValue> component.",
+            "Metadata": {
+              "Common.PropertyName": "TValue",
+              "Components.TypeParameter": "True",
+              "Components.TypeParameterIsCascading": "False"
+            }
+          },
+          {
+            "Kind": "Components.Component",
+            "Name": "ChildContent",
+            "TypeName": "Microsoft.AspNetCore.Components.RenderFragment",
+            "Documentation": "\n            <summary>\n            Gets or sets the child content to be rendering inside the select element.\n            </summary>\n        ",
+            "Metadata": {
+              "Common.PropertyName": "ChildContent",
+              "Components.ChildContent": "True"
+            }
+          },
+          {
+            "Kind": "Components.Component",
+            "Name": "AdditionalAttributes",
+            "TypeName": "System.Collections.Generic.IReadOnlyDictionary<System.String, System.Object>",
+            "Documentation": "\n            <summary>\n            Gets or sets a collection of additional attributes that will be applied to the created element.\n            </summary>\n        ",
+            "Metadata": {
+              "Common.PropertyName": "AdditionalAttributes"
+            }
+          },
+          {
+            "Kind": "Components.Component",
+            "Name": "Value",
+            "TypeName": "TValue",
+            "Documentation": "\n            <summary>\n            Gets or sets the value of the input. This should be used with two-way binding.\n            </summary>\n            <example>\n            @bind-Value=\"model.PropertyName\"\n            </example>\n        ",
+            "Metadata": {
+              "Common.PropertyName": "Value",
+              "Components.GenericTyped": "True"
+            }
+          },
+          {
+            "Kind": "Components.Component",
+            "Name": "ValueChanged",
+            "TypeName": "Microsoft.AspNetCore.Components.EventCallback<TValue>",
+            "Documentation": "\n            <summary>\n            Gets or sets a callback that updates the bound value.\n            </summary>\n        ",
+            "Metadata": {
+              "Common.PropertyName": "ValueChanged",
+              "Components.EventCallback": "True",
+              "Components.GenericTyped": "True"
+            }
+          },
+          {
+            "Kind": "Components.Component",
+            "Name": "ValueExpression",
+            "TypeName": "System.Linq.Expressions.Expression<System.Func<TValue>>",
+            "Documentation": "\n            <summary>\n            Gets or sets an expression that identifies the bound value.\n            </summary>\n        ",
+            "Metadata": {
+              "Common.PropertyName": "ValueExpression",
+              "Components.GenericTyped": "True"
+            }
+          },
+          {
+            "Kind": "Components.Component",
+            "Name": "DisplayName",
+            "TypeName": "System.String",
+            "Documentation": "\n            <summary>\n            Gets or sets the display name for this field.\n            <para>This value is used when generating error messages when the input value fails to parse correctly.</para>\n            </summary>\n        ",
+            "Metadata": {
+              "Common.PropertyName": "DisplayName"
+            }
+          }
+        ],
+        "Metadata": {
+          "Runtime.Name": "Components.IComponent",
+          "Common.TypeName": "BlazorWebAssemblySignalRApp.Client.Pages.CustomInputs.CustomeInputSelect<TValue>",
+          "Components.GenericTyped": "True"
+        }
+      },
+      {
+        "HashCode": -2079923126,
+        "Kind": "Components.Component",
+        "Name": "BlazorWebAssemblySignalRApp.Client.Pages.CustomInputs.CustomeInputSelect<TValue>",
+        "AssemblyName": "BlazorWebAssemblySignalRApp.Client",
+        "CaseSensitive": true,
+        "TagMatchingRules": [
+          {
+            "TagName": "BlazorWebAssemblySignalRApp.Client.Pages.CustomInputs.CustomeInputSelect"
+          }
+        ],
+        "BoundAttributes": [
+          {
+            "Kind": "Components.Component",
+            "Name": "TValue",
+            "TypeName": "System.Type",
+            "Documentation": "Specifies the type of the type parameter TValue for the BlazorWebAssemblySignalRApp.Client.Pages.CustomInputs.CustomeInputSelect<TValue> component.",
+            "Metadata": {
+              "Common.PropertyName": "TValue",
+              "Components.TypeParameter": "True",
+              "Components.TypeParameterIsCascading": "False"
+            }
+          },
+          {
+            "Kind": "Components.Component",
+            "Name": "ChildContent",
+            "TypeName": "Microsoft.AspNetCore.Components.RenderFragment",
+            "Documentation": "\n            <summary>\n            Gets or sets the child content to be rendering inside the select element.\n            </summary>\n        ",
+            "Metadata": {
+              "Common.PropertyName": "ChildContent",
+              "Components.ChildContent": "True"
+            }
+          },
+          {
+            "Kind": "Components.Component",
+            "Name": "AdditionalAttributes",
+            "TypeName": "System.Collections.Generic.IReadOnlyDictionary<System.String, System.Object>",
+            "Documentation": "\n            <summary>\n            Gets or sets a collection of additional attributes that will be applied to the created element.\n            </summary>\n        ",
+            "Metadata": {
+              "Common.PropertyName": "AdditionalAttributes"
+            }
+          },
+          {
+            "Kind": "Components.Component",
+            "Name": "Value",
+            "TypeName": "TValue",
+            "Documentation": "\n            <summary>\n            Gets or sets the value of the input. This should be used with two-way binding.\n            </summary>\n            <example>\n            @bind-Value=\"model.PropertyName\"\n            </example>\n        ",
+            "Metadata": {
+              "Common.PropertyName": "Value",
+              "Components.GenericTyped": "True"
+            }
+          },
+          {
+            "Kind": "Components.Component",
+            "Name": "ValueChanged",
+            "TypeName": "Microsoft.AspNetCore.Components.EventCallback<TValue>",
+            "Documentation": "\n            <summary>\n            Gets or sets a callback that updates the bound value.\n            </summary>\n        ",
+            "Metadata": {
+              "Common.PropertyName": "ValueChanged",
+              "Components.EventCallback": "True",
+              "Components.GenericTyped": "True"
+            }
+          },
+          {
+            "Kind": "Components.Component",
+            "Name": "ValueExpression",
+            "TypeName": "System.Linq.Expressions.Expression<System.Func<TValue>>",
+            "Documentation": "\n            <summary>\n            Gets or sets an expression that identifies the bound value.\n            </summary>\n        ",
+            "Metadata": {
+              "Common.PropertyName": "ValueExpression",
+              "Components.GenericTyped": "True"
+            }
+          },
+          {
+            "Kind": "Components.Component",
+            "Name": "DisplayName",
+            "TypeName": "System.String",
+            "Documentation": "\n            <summary>\n            Gets or sets the display name for this field.\n            <para>This value is used when generating error messages when the input value fails to parse correctly.</para>\n            </summary>\n        ",
+            "Metadata": {
+              "Common.PropertyName": "DisplayName"
+            }
+          }
+        ],
+        "Metadata": {
+          "Runtime.Name": "Components.IComponent",
+          "Common.TypeName": "BlazorWebAssemblySignalRApp.Client.Pages.CustomInputs.CustomeInputSelect<TValue>",
+          "Components.GenericTyped": "True",
+          "Components.NameMatch": "Components.FullyQualifiedNameMatch"
+        }
+      },
+      {
+        "HashCode": -1818268338,
+        "Kind": "Components.ChildContent",
+        "Name": "BlazorWebAssemblySignalRApp.Client.Pages.CustomInputs.CustomeInputSelect<TValue>.ChildContent",
+        "AssemblyName": "BlazorWebAssemblySignalRApp.Client",
+        "Documentation": "\n            <summary>\n            Gets or sets the child content to be rendering inside the select element.\n            </summary>\n        ",
+        "CaseSensitive": true,
+        "TagMatchingRules": [
+          {
             "TagName": "ChildContent",
-            "ParentTag": "Dialog"
+            "ParentTag": "CustomeInputSelect"
           }
         ],
         "Metadata": {
           "Runtime.Name": "Components.None",
-          "Common.TypeName": "BlazorWebAssemblySignalRApp.Client.Pages.Dialog.ChildContent",
+          "Common.TypeName": "BlazorWebAssemblySignalRApp.Client.Pages.CustomInputs.CustomeInputSelect<TValue>.ChildContent",
           "Components.IsSpecialKind": "Components.ChildContent"
         }
       },
       {
-        "HashCode": 273958525,
+        "HashCode": -1088022628,
         "Kind": "Components.ChildContent",
-        "Name": "BlazorWebAssemblySignalRApp.Client.Pages.Dialog.ChildContent",
+        "Name": "BlazorWebAssemblySignalRApp.Client.Pages.CustomInputs.CustomeInputSelect<TValue>.ChildContent",
+        "AssemblyName": "BlazorWebAssemblySignalRApp.Client",
+        "Documentation": "\n            <summary>\n            Gets or sets the child content to be rendering inside the select element.\n            </summary>\n        ",
+        "CaseSensitive": true,
+        "TagMatchingRules": [
+          {
+            "TagName": "ChildContent",
+            "ParentTag": "BlazorWebAssemblySignalRApp.Client.Pages.CustomInputs.CustomeInputSelect"
+          }
+        ],
+        "Metadata": {
+          "Runtime.Name": "Components.None",
+          "Common.TypeName": "BlazorWebAssemblySignalRApp.Client.Pages.CustomInputs.CustomeInputSelect<TValue>.ChildContent",
+          "Components.IsSpecialKind": "Components.ChildContent",
+          "Components.NameMatch": "Components.FullyQualifiedNameMatch"
+        }
+      },
+      {
+        "HashCode": 493426746,
+        "Kind": "Components.Component",
+        "Name": "BlazorWebAssemblySignalRApp.Client.Pages.CustomInputs.CustomeInputText",
+        "AssemblyName": "BlazorWebAssemblySignalRApp.Client",
+        "CaseSensitive": true,
+        "TagMatchingRules": [
+          {
+            "TagName": "CustomeInputText"
+          }
+        ],
+        "BoundAttributes": [
+          {
+            "Kind": "Components.Component",
+            "Name": "AdditionalAttributes",
+            "TypeName": "System.Collections.Generic.IReadOnlyDictionary<System.String, System.Object>",
+            "Documentation": "\n            <summary>\n            Gets or sets a collection of additional attributes that will be applied to the created element.\n            </summary>\n        ",
+            "Metadata": {
+              "Common.PropertyName": "AdditionalAttributes"
+            }
+          },
+          {
+            "Kind": "Components.Component",
+            "Name": "Value",
+            "TypeName": "System.String",
+            "Documentation": "\n            <summary>\n            Gets or sets the value of the input. This should be used with two-way binding.\n            </summary>\n            <example>\n            @bind-Value=\"model.PropertyName\"\n            </example>\n        ",
+            "Metadata": {
+              "Common.PropertyName": "Value"
+            }
+          },
+          {
+            "Kind": "Components.Component",
+            "Name": "ValueChanged",
+            "TypeName": "Microsoft.AspNetCore.Components.EventCallback<System.String>",
+            "Documentation": "\n            <summary>\n            Gets or sets a callback that updates the bound value.\n            </summary>\n        ",
+            "Metadata": {
+              "Common.PropertyName": "ValueChanged",
+              "Components.EventCallback": "True"
+            }
+          },
+          {
+            "Kind": "Components.Component",
+            "Name": "ValueExpression",
+            "TypeName": "System.Linq.Expressions.Expression<System.Func<System.String>>",
+            "Documentation": "\n            <summary>\n            Gets or sets an expression that identifies the bound value.\n            </summary>\n        ",
+            "Metadata": {
+              "Common.PropertyName": "ValueExpression"
+            }
+          },
+          {
+            "Kind": "Components.Component",
+            "Name": "DisplayName",
+            "TypeName": "System.String",
+            "Documentation": "\n            <summary>\n            Gets or sets the display name for this field.\n            <para>This value is used when generating error messages when the input value fails to parse correctly.</para>\n            </summary>\n        ",
+            "Metadata": {
+              "Common.PropertyName": "DisplayName"
+            }
+          }
+        ],
+        "Metadata": {
+          "Runtime.Name": "Components.IComponent",
+          "Common.TypeName": "BlazorWebAssemblySignalRApp.Client.Pages.CustomInputs.CustomeInputText"
+        }
+      },
+      {
+        "HashCode": 390451674,
+        "Kind": "Components.Component",
+        "Name": "BlazorWebAssemblySignalRApp.Client.Pages.CustomInputs.CustomeInputText",
+        "AssemblyName": "BlazorWebAssemblySignalRApp.Client",
+        "CaseSensitive": true,
+        "TagMatchingRules": [
+          {
+            "TagName": "BlazorWebAssemblySignalRApp.Client.Pages.CustomInputs.CustomeInputText"
+          }
+        ],
+        "BoundAttributes": [
+          {
+            "Kind": "Components.Component",
+            "Name": "AdditionalAttributes",
+            "TypeName": "System.Collections.Generic.IReadOnlyDictionary<System.String, System.Object>",
+            "Documentation": "\n            <summary>\n            Gets or sets a collection of additional attributes that will be applied to the created element.\n            </summary>\n        ",
+            "Metadata": {
+              "Common.PropertyName": "AdditionalAttributes"
+            }
+          },
+          {
+            "Kind": "Components.Component",
+            "Name": "Value",
+            "TypeName": "System.String",
+            "Documentation": "\n            <summary>\n            Gets or sets the value of the input. This should be used with two-way binding.\n            </summary>\n            <example>\n            @bind-Value=\"model.PropertyName\"\n            </example>\n        ",
+            "Metadata": {
+              "Common.PropertyName": "Value"
+            }
+          },
+          {
+            "Kind": "Components.Component",
+            "Name": "ValueChanged",
+            "TypeName": "Microsoft.AspNetCore.Components.EventCallback<System.String>",
+            "Documentation": "\n            <summary>\n            Gets or sets a callback that updates the bound value.\n            </summary>\n        ",
+            "Metadata": {
+              "Common.PropertyName": "ValueChanged",
+              "Components.EventCallback": "True"
+            }
+          },
+          {
+            "Kind": "Components.Component",
+            "Name": "ValueExpression",
+            "TypeName": "System.Linq.Expressions.Expression<System.Func<System.String>>",
+            "Documentation": "\n            <summary>\n            Gets or sets an expression that identifies the bound value.\n            </summary>\n        ",
+            "Metadata": {
+              "Common.PropertyName": "ValueExpression"
+            }
+          },
+          {
+            "Kind": "Components.Component",
+            "Name": "DisplayName",
+            "TypeName": "System.String",
+            "Documentation": "\n            <summary>\n            Gets or sets the display name for this field.\n            <para>This value is used when generating error messages when the input value fails to parse correctly.</para>\n            </summary>\n        ",
+            "Metadata": {
+              "Common.PropertyName": "DisplayName"
+            }
+          }
+        ],
+        "Metadata": {
+          "Runtime.Name": "Components.IComponent",
+          "Common.TypeName": "BlazorWebAssemblySignalRApp.Client.Pages.CustomInputs.CustomeInputText",
+          "Components.NameMatch": "Components.FullyQualifiedNameMatch"
+        }
+      },
+      {
+        "HashCode": -2120092421,
+        "Kind": "Components.Component",
+        "Name": "BlazorWebAssemblySignalRApp.Client.Pages.DynamicComp.DynamicComponentExample",
+        "AssemblyName": "BlazorWebAssemblySignalRApp.Client",
+        "CaseSensitive": true,
+        "TagMatchingRules": [
+          {
+            "TagName": "DynamicComponentExample"
+          }
+        ],
+        "BoundAttributes": [
+          {
+            "Kind": "Components.Component",
+            "Name": "Id",
+            "TypeName": "System.String",
+            "Metadata": {
+              "Common.PropertyName": "Id"
+            }
+          }
+        ],
+        "Metadata": {
+          "Runtime.Name": "Components.IComponent",
+          "Common.TypeName": "BlazorWebAssemblySignalRApp.Client.Pages.DynamicComp.DynamicComponentExample"
+        }
+      },
+      {
+        "HashCode": 1793133163,
+        "Kind": "Components.Component",
+        "Name": "BlazorWebAssemblySignalRApp.Client.Pages.DynamicComp.DynamicComponentExample",
+        "AssemblyName": "BlazorWebAssemblySignalRApp.Client",
+        "CaseSensitive": true,
+        "TagMatchingRules": [
+          {
+            "TagName": "BlazorWebAssemblySignalRApp.Client.Pages.DynamicComp.DynamicComponentExample"
+          }
+        ],
+        "BoundAttributes": [
+          {
+            "Kind": "Components.Component",
+            "Name": "Id",
+            "TypeName": "System.String",
+            "Metadata": {
+              "Common.PropertyName": "Id"
+            }
+          }
+        ],
+        "Metadata": {
+          "Runtime.Name": "Components.IComponent",
+          "Common.TypeName": "BlazorWebAssemblySignalRApp.Client.Pages.DynamicComp.DynamicComponentExample",
+          "Components.NameMatch": "Components.FullyQualifiedNameMatch"
+        }
+      },
+      {
+        "HashCode": 1824280300,
+        "Kind": "Components.Component",
+        "Name": "BlazorWebAssemblySignalRApp.Client.Pages.DynamicComp.UnitedLaunchAlliance",
+        "AssemblyName": "BlazorWebAssemblySignalRApp.Client",
+        "CaseSensitive": true,
+        "TagMatchingRules": [
+          {
+            "TagName": "UnitedLaunchAlliance"
+          }
+        ],
+        "Metadata": {
+          "Runtime.Name": "Components.IComponent",
+          "Common.TypeName": "BlazorWebAssemblySignalRApp.Client.Pages.DynamicComp.UnitedLaunchAlliance"
+        }
+      },
+      {
+        "HashCode": 123891788,
+        "Kind": "Components.Component",
+        "Name": "BlazorWebAssemblySignalRApp.Client.Pages.DynamicComp.UnitedLaunchAlliance",
+        "AssemblyName": "BlazorWebAssemblySignalRApp.Client",
+        "CaseSensitive": true,
+        "TagMatchingRules": [
+          {
+            "TagName": "BlazorWebAssemblySignalRApp.Client.Pages.DynamicComp.UnitedLaunchAlliance"
+          }
+        ],
+        "Metadata": {
+          "Runtime.Name": "Components.IComponent",
+          "Common.TypeName": "BlazorWebAssemblySignalRApp.Client.Pages.DynamicComp.UnitedLaunchAlliance",
+          "Components.NameMatch": "Components.FullyQualifiedNameMatch"
+        }
+      },
+      {
+        "HashCode": -479045033,
+        "Kind": "Components.Component",
+        "Name": "BlazorWebAssemblySignalRApp.Client.Pages.DynamicComp.VirginGalactic",
+        "AssemblyName": "BlazorWebAssemblySignalRApp.Client",
+        "CaseSensitive": true,
+        "TagMatchingRules": [
+          {
+            "TagName": "VirginGalactic"
+          }
+        ],
+        "BoundAttributes": [
+          {
+            "Kind": "Components.Component",
+            "Name": "Id",
+            "TypeName": "System.String",
+            "Metadata": {
+              "Common.PropertyName": "Id"
+            }
+          },
+          {
+            "Kind": "Components.Component",
+            "Name": "others",
+            "TypeName": "System.Collections.Generic.Dictionary<System.String, System.Object>",
+            "Metadata": {
+              "Common.PropertyName": "others"
+            }
+          }
+        ],
+        "Metadata": {
+          "Runtime.Name": "Components.IComponent",
+          "Common.TypeName": "BlazorWebAssemblySignalRApp.Client.Pages.DynamicComp.VirginGalactic"
+        }
+      },
+      {
+        "HashCode": 1295967926,
+        "Kind": "Components.Component",
+        "Name": "BlazorWebAssemblySignalRApp.Client.Pages.DynamicComp.VirginGalactic",
+        "AssemblyName": "BlazorWebAssemblySignalRApp.Client",
+        "CaseSensitive": true,
+        "TagMatchingRules": [
+          {
+            "TagName": "BlazorWebAssemblySignalRApp.Client.Pages.DynamicComp.VirginGalactic"
+          }
+        ],
+        "BoundAttributes": [
+          {
+            "Kind": "Components.Component",
+            "Name": "Id",
+            "TypeName": "System.String",
+            "Metadata": {
+              "Common.PropertyName": "Id"
+            }
+          },
+          {
+            "Kind": "Components.Component",
+            "Name": "others",
+            "TypeName": "System.Collections.Generic.Dictionary<System.String, System.Object>",
+            "Metadata": {
+              "Common.PropertyName": "others"
+            }
+          }
+        ],
+        "Metadata": {
+          "Runtime.Name": "Components.IComponent",
+          "Common.TypeName": "BlazorWebAssemblySignalRApp.Client.Pages.DynamicComp.VirginGalactic",
+          "Components.NameMatch": "Components.FullyQualifiedNameMatch"
+        }
+      },
+      {
+        "HashCode": 2019255782,
+        "Kind": "Components.Component",
+        "Name": "BlazorWebAssemblySignalRApp.Client.Pages.EventCallback.EventCallbackChild",
+        "AssemblyName": "BlazorWebAssemblySignalRApp.Client",
+        "CaseSensitive": true,
+        "TagMatchingRules": [
+          {
+            "TagName": "EventCallbackChild"
+          }
+        ],
+        "BoundAttributes": [
+          {
+            "Kind": "Components.Component",
+            "Name": "Title",
+            "TypeName": "System.String",
+            "Metadata": {
+              "Common.PropertyName": "Title"
+            }
+          },
+          {
+            "Kind": "Components.Component",
+            "Name": "ChildContent",
+            "TypeName": "Microsoft.AspNetCore.Components.RenderFragment",
+            "Metadata": {
+              "Common.PropertyName": "ChildContent",
+              "Components.ChildContent": "True"
+            }
+          },
+          {
+            "Kind": "Components.Component",
+            "Name": "ChangeBody",
+            "TypeName": "Microsoft.AspNetCore.Components.EventCallback<Microsoft.AspNetCore.Components.Web.MouseEventArgs>",
+            "Metadata": {
+              "Common.PropertyName": "ChangeBody",
+              "Components.EventCallback": "True"
+            }
+          }
+        ],
+        "Metadata": {
+          "Runtime.Name": "Components.IComponent",
+          "Common.TypeName": "BlazorWebAssemblySignalRApp.Client.Pages.EventCallback.EventCallbackChild"
+        }
+      },
+      {
+        "HashCode": 1692109404,
+        "Kind": "Components.Component",
+        "Name": "BlazorWebAssemblySignalRApp.Client.Pages.EventCallback.EventCallbackChild",
+        "AssemblyName": "BlazorWebAssemblySignalRApp.Client",
+        "CaseSensitive": true,
+        "TagMatchingRules": [
+          {
+            "TagName": "BlazorWebAssemblySignalRApp.Client.Pages.EventCallback.EventCallbackChild"
+          }
+        ],
+        "BoundAttributes": [
+          {
+            "Kind": "Components.Component",
+            "Name": "Title",
+            "TypeName": "System.String",
+            "Metadata": {
+              "Common.PropertyName": "Title"
+            }
+          },
+          {
+            "Kind": "Components.Component",
+            "Name": "ChildContent",
+            "TypeName": "Microsoft.AspNetCore.Components.RenderFragment",
+            "Metadata": {
+              "Common.PropertyName": "ChildContent",
+              "Components.ChildContent": "True"
+            }
+          },
+          {
+            "Kind": "Components.Component",
+            "Name": "ChangeBody",
+            "TypeName": "Microsoft.AspNetCore.Components.EventCallback<Microsoft.AspNetCore.Components.Web.MouseEventArgs>",
+            "Metadata": {
+              "Common.PropertyName": "ChangeBody",
+              "Components.EventCallback": "True"
+            }
+          }
+        ],
+        "Metadata": {
+          "Runtime.Name": "Components.IComponent",
+          "Common.TypeName": "BlazorWebAssemblySignalRApp.Client.Pages.EventCallback.EventCallbackChild",
+          "Components.NameMatch": "Components.FullyQualifiedNameMatch"
+        }
+      },
+      {
+        "HashCode": -495179993,
+        "Kind": "Components.ChildContent",
+        "Name": "BlazorWebAssemblySignalRApp.Client.Pages.EventCallback.EventCallbackChild.ChildContent",
         "AssemblyName": "BlazorWebAssemblySignalRApp.Client",
         "CaseSensitive": true,
         "TagMatchingRules": [
           {
             "TagName": "ChildContent",
-            "ParentTag": "BlazorWebAssemblySignalRApp.Client.Pages.Dialog"
+            "ParentTag": "EventCallbackChild"
           }
         ],
         "Metadata": {
           "Runtime.Name": "Components.None",
-          "Common.TypeName": "BlazorWebAssemblySignalRApp.Client.Pages.Dialog.ChildContent",
+          "Common.TypeName": "BlazorWebAssemblySignalRApp.Client.Pages.EventCallback.EventCallbackChild.ChildContent",
+          "Components.IsSpecialKind": "Components.ChildContent"
+        }
+      },
+      {
+        "HashCode": 2085311085,
+        "Kind": "Components.ChildContent",
+        "Name": "BlazorWebAssemblySignalRApp.Client.Pages.EventCallback.EventCallbackChild.ChildContent",
+        "AssemblyName": "BlazorWebAssemblySignalRApp.Client",
+        "CaseSensitive": true,
+        "TagMatchingRules": [
+          {
+            "TagName": "ChildContent",
+            "ParentTag": "BlazorWebAssemblySignalRApp.Client.Pages.EventCallback.EventCallbackChild"
+          }
+        ],
+        "Metadata": {
+          "Runtime.Name": "Components.None",
+          "Common.TypeName": "BlazorWebAssemblySignalRApp.Client.Pages.EventCallback.EventCallbackChild.ChildContent",
           "Components.IsSpecialKind": "Components.ChildContent",
+          "Components.NameMatch": "Components.FullyQualifiedNameMatch"
+        }
+      },
+      {
+        "HashCode": 1926174223,
+        "Kind": "Components.Component",
+        "Name": "BlazorWebAssemblySignalRApp.Client.Pages.EventCallback.EventCallbackParent",
+        "AssemblyName": "BlazorWebAssemblySignalRApp.Client",
+        "CaseSensitive": true,
+        "TagMatchingRules": [
+          {
+            "TagName": "EventCallbackParent"
+          }
+        ],
+        "Metadata": {
+          "Runtime.Name": "Components.IComponent",
+          "Common.TypeName": "BlazorWebAssemblySignalRApp.Client.Pages.EventCallback.EventCallbackParent"
+        }
+      },
+      {
+        "HashCode": 262891006,
+        "Kind": "Components.Component",
+        "Name": "BlazorWebAssemblySignalRApp.Client.Pages.EventCallback.EventCallbackParent",
+        "AssemblyName": "BlazorWebAssemblySignalRApp.Client",
+        "CaseSensitive": true,
+        "TagMatchingRules": [
+          {
+            "TagName": "BlazorWebAssemblySignalRApp.Client.Pages.EventCallback.EventCallbackParent"
+          }
+        ],
+        "Metadata": {
+          "Runtime.Name": "Components.IComponent",
+          "Common.TypeName": "BlazorWebAssemblySignalRApp.Client.Pages.EventCallback.EventCallbackParent",
           "Components.NameMatch": "Components.FullyQualifiedNameMatch"
         }
       },
@@ -1397,6 +3034,138 @@
         "Metadata": {
           "Runtime.Name": "Components.IComponent",
           "Common.TypeName": "BlazorWebAssemblySignalRApp.Client.Pages.FetchData",
+          "Components.NameMatch": "Components.FullyQualifiedNameMatch"
+        }
+      },
+      {
+        "HashCode": -326324124,
+        "Kind": "Components.Component",
+        "Name": "BlazorWebAssemblySignalRApp.Client.Pages.FilesComponent.FileDownloadComponent",
+        "AssemblyName": "BlazorWebAssemblySignalRApp.Client",
+        "CaseSensitive": true,
+        "TagMatchingRules": [
+          {
+            "TagName": "FileDownloadComponent"
+          }
+        ],
+        "Metadata": {
+          "Runtime.Name": "Components.IComponent",
+          "Common.TypeName": "BlazorWebAssemblySignalRApp.Client.Pages.FilesComponent.FileDownloadComponent"
+        }
+      },
+      {
+        "HashCode": -403932429,
+        "Kind": "Components.Component",
+        "Name": "BlazorWebAssemblySignalRApp.Client.Pages.FilesComponent.FileDownloadComponent",
+        "AssemblyName": "BlazorWebAssemblySignalRApp.Client",
+        "CaseSensitive": true,
+        "TagMatchingRules": [
+          {
+            "TagName": "BlazorWebAssemblySignalRApp.Client.Pages.FilesComponent.FileDownloadComponent"
+          }
+        ],
+        "Metadata": {
+          "Runtime.Name": "Components.IComponent",
+          "Common.TypeName": "BlazorWebAssemblySignalRApp.Client.Pages.FilesComponent.FileDownloadComponent",
+          "Components.NameMatch": "Components.FullyQualifiedNameMatch"
+        }
+      },
+      {
+        "HashCode": -531539007,
+        "Kind": "Components.Component",
+        "Name": "BlazorWebAssemblySignalRApp.Client.Pages.FilesComponent.FileUpload2",
+        "AssemblyName": "BlazorWebAssemblySignalRApp.Client",
+        "CaseSensitive": true,
+        "TagMatchingRules": [
+          {
+            "TagName": "FileUpload2"
+          }
+        ],
+        "Metadata": {
+          "Runtime.Name": "Components.IComponent",
+          "Common.TypeName": "BlazorWebAssemblySignalRApp.Client.Pages.FilesComponent.FileUpload2"
+        }
+      },
+      {
+        "HashCode": 931812267,
+        "Kind": "Components.Component",
+        "Name": "BlazorWebAssemblySignalRApp.Client.Pages.FilesComponent.FileUpload2",
+        "AssemblyName": "BlazorWebAssemblySignalRApp.Client",
+        "CaseSensitive": true,
+        "TagMatchingRules": [
+          {
+            "TagName": "BlazorWebAssemblySignalRApp.Client.Pages.FilesComponent.FileUpload2"
+          }
+        ],
+        "Metadata": {
+          "Runtime.Name": "Components.IComponent",
+          "Common.TypeName": "BlazorWebAssemblySignalRApp.Client.Pages.FilesComponent.FileUpload2",
+          "Components.NameMatch": "Components.FullyQualifiedNameMatch"
+        }
+      },
+      {
+        "HashCode": 1169213613,
+        "Kind": "Components.Component",
+        "Name": "BlazorWebAssemblySignalRApp.Client.Pages.FilesComponent.MultipleFileUpload",
+        "AssemblyName": "BlazorWebAssemblySignalRApp.Client",
+        "CaseSensitive": true,
+        "TagMatchingRules": [
+          {
+            "TagName": "MultipleFileUpload"
+          }
+        ],
+        "Metadata": {
+          "Runtime.Name": "Components.IComponent",
+          "Common.TypeName": "BlazorWebAssemblySignalRApp.Client.Pages.FilesComponent.MultipleFileUpload"
+        }
+      },
+      {
+        "HashCode": -1722068639,
+        "Kind": "Components.Component",
+        "Name": "BlazorWebAssemblySignalRApp.Client.Pages.FilesComponent.MultipleFileUpload",
+        "AssemblyName": "BlazorWebAssemblySignalRApp.Client",
+        "CaseSensitive": true,
+        "TagMatchingRules": [
+          {
+            "TagName": "BlazorWebAssemblySignalRApp.Client.Pages.FilesComponent.MultipleFileUpload"
+          }
+        ],
+        "Metadata": {
+          "Runtime.Name": "Components.IComponent",
+          "Common.TypeName": "BlazorWebAssemblySignalRApp.Client.Pages.FilesComponent.MultipleFileUpload",
+          "Components.NameMatch": "Components.FullyQualifiedNameMatch"
+        }
+      },
+      {
+        "HashCode": 1095613142,
+        "Kind": "Components.Component",
+        "Name": "BlazorWebAssemblySignalRApp.Client.Pages.FilesComponent.UploadFileToServer",
+        "AssemblyName": "BlazorWebAssemblySignalRApp.Client",
+        "CaseSensitive": true,
+        "TagMatchingRules": [
+          {
+            "TagName": "UploadFileToServer"
+          }
+        ],
+        "Metadata": {
+          "Runtime.Name": "Components.IComponent",
+          "Common.TypeName": "BlazorWebAssemblySignalRApp.Client.Pages.FilesComponent.UploadFileToServer"
+        }
+      },
+      {
+        "HashCode": -678216147,
+        "Kind": "Components.Component",
+        "Name": "BlazorWebAssemblySignalRApp.Client.Pages.FilesComponent.UploadFileToServer",
+        "AssemblyName": "BlazorWebAssemblySignalRApp.Client",
+        "CaseSensitive": true,
+        "TagMatchingRules": [
+          {
+            "TagName": "BlazorWebAssemblySignalRApp.Client.Pages.FilesComponent.UploadFileToServer"
+          }
+        ],
+        "Metadata": {
+          "Runtime.Name": "Components.IComponent",
+          "Common.TypeName": "BlazorWebAssemblySignalRApp.Client.Pages.FilesComponent.UploadFileToServer",
           "Components.NameMatch": "Components.FullyQualifiedNameMatch"
         }
       },
@@ -1463,6 +3232,244 @@
         "Metadata": {
           "Runtime.Name": "Components.IComponent",
           "Common.TypeName": "BlazorWebAssemblySignalRApp.Client.Pages.Index",
+          "Components.NameMatch": "Components.FullyQualifiedNameMatch"
+        }
+      },
+      {
+        "HashCode": -1482736611,
+        "Kind": "Components.Component",
+        "Name": "BlazorWebAssemblySignalRApp.Client.Pages.JS.PrerenderingInterop",
+        "AssemblyName": "BlazorWebAssemblySignalRApp.Client",
+        "CaseSensitive": true,
+        "TagMatchingRules": [
+          {
+            "TagName": "PrerenderingInterop"
+          }
+        ],
+        "Metadata": {
+          "Runtime.Name": "Components.IComponent",
+          "Common.TypeName": "BlazorWebAssemblySignalRApp.Client.Pages.JS.PrerenderingInterop"
+        }
+      },
+      {
+        "HashCode": 785686148,
+        "Kind": "Components.Component",
+        "Name": "BlazorWebAssemblySignalRApp.Client.Pages.JS.PrerenderingInterop",
+        "AssemblyName": "BlazorWebAssemblySignalRApp.Client",
+        "CaseSensitive": true,
+        "TagMatchingRules": [
+          {
+            "TagName": "BlazorWebAssemblySignalRApp.Client.Pages.JS.PrerenderingInterop"
+          }
+        ],
+        "Metadata": {
+          "Runtime.Name": "Components.IComponent",
+          "Common.TypeName": "BlazorWebAssemblySignalRApp.Client.Pages.JS.PrerenderingInterop",
+          "Components.NameMatch": "Components.FullyQualifiedNameMatch"
+        }
+      },
+      {
+        "HashCode": -1812552851,
+        "Kind": "Components.Component",
+        "Name": "BlazorWebAssemblySignalRApp.Client.Pages.LifeCycle.BackgroundWork",
+        "AssemblyName": "BlazorWebAssemblySignalRApp.Client",
+        "CaseSensitive": true,
+        "TagMatchingRules": [
+          {
+            "TagName": "BackgroundWork"
+          }
+        ],
+        "Metadata": {
+          "Runtime.Name": "Components.IComponent",
+          "Common.TypeName": "BlazorWebAssemblySignalRApp.Client.Pages.LifeCycle.BackgroundWork"
+        }
+      },
+      {
+        "HashCode": 1959106571,
+        "Kind": "Components.Component",
+        "Name": "BlazorWebAssemblySignalRApp.Client.Pages.LifeCycle.BackgroundWork",
+        "AssemblyName": "BlazorWebAssemblySignalRApp.Client",
+        "CaseSensitive": true,
+        "TagMatchingRules": [
+          {
+            "TagName": "BlazorWebAssemblySignalRApp.Client.Pages.LifeCycle.BackgroundWork"
+          }
+        ],
+        "Metadata": {
+          "Runtime.Name": "Components.IComponent",
+          "Common.TypeName": "BlazorWebAssemblySignalRApp.Client.Pages.LifeCycle.BackgroundWork",
+          "Components.NameMatch": "Components.FullyQualifiedNameMatch"
+        }
+      },
+      {
+        "HashCode": 520769337,
+        "Kind": "Components.Component",
+        "Name": "BlazorWebAssemblySignalRApp.Client.Pages.LifeCycle.ControlRender",
+        "AssemblyName": "BlazorWebAssemblySignalRApp.Client",
+        "CaseSensitive": true,
+        "TagMatchingRules": [
+          {
+            "TagName": "ControlRender"
+          }
+        ],
+        "Metadata": {
+          "Runtime.Name": "Components.IComponent",
+          "Common.TypeName": "BlazorWebAssemblySignalRApp.Client.Pages.LifeCycle.ControlRender"
+        }
+      },
+      {
+        "HashCode": -333749548,
+        "Kind": "Components.Component",
+        "Name": "BlazorWebAssemblySignalRApp.Client.Pages.LifeCycle.ControlRender",
+        "AssemblyName": "BlazorWebAssemblySignalRApp.Client",
+        "CaseSensitive": true,
+        "TagMatchingRules": [
+          {
+            "TagName": "BlazorWebAssemblySignalRApp.Client.Pages.LifeCycle.ControlRender"
+          }
+        ],
+        "Metadata": {
+          "Runtime.Name": "Components.IComponent",
+          "Common.TypeName": "BlazorWebAssemblySignalRApp.Client.Pages.LifeCycle.ControlRender",
+          "Components.NameMatch": "Components.FullyQualifiedNameMatch"
+        }
+      },
+      {
+        "HashCode": 1304168508,
+        "Kind": "Components.Component",
+        "Name": "BlazorWebAssemblySignalRApp.Client.Pages.LifeCycle.LifeCycleParametersSet",
+        "AssemblyName": "BlazorWebAssemblySignalRApp.Client",
+        "CaseSensitive": true,
+        "TagMatchingRules": [
+          {
+            "TagName": "LifeCycleParametersSet"
+          }
+        ],
+        "BoundAttributes": [
+          {
+            "Kind": "Components.Component",
+            "Name": "Start",
+            "TypeName": "System.DateTime?",
+            "Metadata": {
+              "Common.PropertyName": "Start"
+            }
+          }
+        ],
+        "Metadata": {
+          "Runtime.Name": "Components.IComponent",
+          "Common.TypeName": "BlazorWebAssemblySignalRApp.Client.Pages.LifeCycle.LifeCycleParametersSet"
+        }
+      },
+      {
+        "HashCode": -676107894,
+        "Kind": "Components.Component",
+        "Name": "BlazorWebAssemblySignalRApp.Client.Pages.LifeCycle.LifeCycleParametersSet",
+        "AssemblyName": "BlazorWebAssemblySignalRApp.Client",
+        "CaseSensitive": true,
+        "TagMatchingRules": [
+          {
+            "TagName": "BlazorWebAssemblySignalRApp.Client.Pages.LifeCycle.LifeCycleParametersSet"
+          }
+        ],
+        "BoundAttributes": [
+          {
+            "Kind": "Components.Component",
+            "Name": "Start",
+            "TypeName": "System.DateTime?",
+            "Metadata": {
+              "Common.PropertyName": "Start"
+            }
+          }
+        ],
+        "Metadata": {
+          "Runtime.Name": "Components.IComponent",
+          "Common.TypeName": "BlazorWebAssemblySignalRApp.Client.Pages.LifeCycle.LifeCycleParametersSet",
+          "Components.NameMatch": "Components.FullyQualifiedNameMatch"
+        }
+      },
+      {
+        "HashCode": 1333865743,
+        "Kind": "Components.Component",
+        "Name": "BlazorWebAssemblySignalRApp.Client.Pages.LifeCycle.LifeCycleParentComponent",
+        "AssemblyName": "BlazorWebAssemblySignalRApp.Client",
+        "CaseSensitive": true,
+        "TagMatchingRules": [
+          {
+            "TagName": "LifeCycleParentComponent"
+          }
+        ],
+        "BoundAttributes": [
+          {
+            "Kind": "Components.Component",
+            "Name": "Id",
+            "TypeName": "System.Int32",
+            "Metadata": {
+              "Common.PropertyName": "Id"
+            }
+          }
+        ],
+        "Metadata": {
+          "Runtime.Name": "Components.IComponent",
+          "Common.TypeName": "BlazorWebAssemblySignalRApp.Client.Pages.LifeCycle.LifeCycleParentComponent"
+        }
+      },
+      {
+        "HashCode": 2072469176,
+        "Kind": "Components.Component",
+        "Name": "BlazorWebAssemblySignalRApp.Client.Pages.LifeCycle.LifeCycleParentComponent",
+        "AssemblyName": "BlazorWebAssemblySignalRApp.Client",
+        "CaseSensitive": true,
+        "TagMatchingRules": [
+          {
+            "TagName": "BlazorWebAssemblySignalRApp.Client.Pages.LifeCycle.LifeCycleParentComponent"
+          }
+        ],
+        "BoundAttributes": [
+          {
+            "Kind": "Components.Component",
+            "Name": "Id",
+            "TypeName": "System.Int32",
+            "Metadata": {
+              "Common.PropertyName": "Id"
+            }
+          }
+        ],
+        "Metadata": {
+          "Runtime.Name": "Components.IComponent",
+          "Common.TypeName": "BlazorWebAssemblySignalRApp.Client.Pages.LifeCycle.LifeCycleParentComponent",
+          "Components.NameMatch": "Components.FullyQualifiedNameMatch"
+        }
+      },
+      {
+        "HashCode": 577294566,
+        "Kind": "Components.Component",
+        "Name": "BlazorWebAssemblySignalRApp.Client.Pages.Localization",
+        "AssemblyName": "BlazorWebAssemblySignalRApp.Client",
+        "CaseSensitive": true,
+        "TagMatchingRules": [
+          {
+            "TagName": "Localization"
+          }
+        ],
+        "Metadata": {
+          "Runtime.Name": "Components.IComponent",
+          "Common.TypeName": "BlazorWebAssemblySignalRApp.Client.Pages.Localization"
+        }
+      },
+      {
+        "HashCode": 388529817,
+        "Kind": "Components.Component",
+        "Name": "BlazorWebAssemblySignalRApp.Client.Pages.Localization",
+        "AssemblyName": "BlazorWebAssemblySignalRApp.Client",
+        "CaseSensitive": true,
+        "TagMatchingRules": [
+          {
+            "TagName": "BlazorWebAssemblySignalRApp.Client.Pages.Localization"
+          }
+        ],
+        "Metadata": {
+          "Runtime.Name": "Components.IComponent",
+          "Common.TypeName": "BlazorWebAssemblySignalRApp.Client.Pages.Localization",
           "Components.NameMatch": "Components.FullyQualifiedNameMatch"
         }
       },
@@ -1829,6 +3836,39 @@
         }
       },
       {
+        "HashCode": -928155673,
+        "Kind": "Components.Component",
+        "Name": "BlazorWebAssemblySignalRApp.Client.Pages.RCL.RCLComponent",
+        "AssemblyName": "BlazorWebAssemblySignalRApp.Client",
+        "CaseSensitive": true,
+        "TagMatchingRules": [
+          {
+            "TagName": "RCLComponent"
+          }
+        ],
+        "Metadata": {
+          "Runtime.Name": "Components.IComponent",
+          "Common.TypeName": "BlazorWebAssemblySignalRApp.Client.Pages.RCL.RCLComponent"
+        }
+      },
+      {
+        "HashCode": 1787704107,
+        "Kind": "Components.Component",
+        "Name": "BlazorWebAssemblySignalRApp.Client.Pages.RCL.RCLComponent",
+        "AssemblyName": "BlazorWebAssemblySignalRApp.Client",
+        "CaseSensitive": true,
+        "TagMatchingRules": [
+          {
+            "TagName": "BlazorWebAssemblySignalRApp.Client.Pages.RCL.RCLComponent"
+          }
+        ],
+        "Metadata": {
+          "Runtime.Name": "Components.IComponent",
+          "Common.TypeName": "BlazorWebAssemblySignalRApp.Client.Pages.RCL.RCLComponent",
+          "Components.NameMatch": "Components.FullyQualifiedNameMatch"
+        }
+      },
+      {
         "HashCode": -1350589805,
         "Kind": "Components.Component",
         "Name": "BlazorWebAssemblySignalRApp.Client.Pages.RenderFragmentParent",
@@ -2014,6 +4054,138 @@
         }
       },
       {
+        "HashCode": -1762680545,
+        "Kind": "Components.Component",
+        "Name": "BlazorWebAssemblySignalRApp.Client.Pages.TemplatedComponents.PetsTable",
+        "AssemblyName": "BlazorWebAssemblySignalRApp.Client",
+        "CaseSensitive": true,
+        "TagMatchingRules": [
+          {
+            "TagName": "PetsTable"
+          }
+        ],
+        "Metadata": {
+          "Runtime.Name": "Components.IComponent",
+          "Common.TypeName": "BlazorWebAssemblySignalRApp.Client.Pages.TemplatedComponents.PetsTable"
+        }
+      },
+      {
+        "HashCode": -396157421,
+        "Kind": "Components.Component",
+        "Name": "BlazorWebAssemblySignalRApp.Client.Pages.TemplatedComponents.PetsTable",
+        "AssemblyName": "BlazorWebAssemblySignalRApp.Client",
+        "CaseSensitive": true,
+        "TagMatchingRules": [
+          {
+            "TagName": "BlazorWebAssemblySignalRApp.Client.Pages.TemplatedComponents.PetsTable"
+          }
+        ],
+        "Metadata": {
+          "Runtime.Name": "Components.IComponent",
+          "Common.TypeName": "BlazorWebAssemblySignalRApp.Client.Pages.TemplatedComponents.PetsTable",
+          "Components.NameMatch": "Components.FullyQualifiedNameMatch"
+        }
+      },
+      {
+        "HashCode": 1704944540,
+        "Kind": "Components.Component",
+        "Name": "BlazorWebAssemblySignalRApp.Client.Pages.TemplatedComponents.PetsTable2",
+        "AssemblyName": "BlazorWebAssemblySignalRApp.Client",
+        "CaseSensitive": true,
+        "TagMatchingRules": [
+          {
+            "TagName": "PetsTable2"
+          }
+        ],
+        "Metadata": {
+          "Runtime.Name": "Components.IComponent",
+          "Common.TypeName": "BlazorWebAssemblySignalRApp.Client.Pages.TemplatedComponents.PetsTable2"
+        }
+      },
+      {
+        "HashCode": -1945061525,
+        "Kind": "Components.Component",
+        "Name": "BlazorWebAssemblySignalRApp.Client.Pages.TemplatedComponents.PetsTable2",
+        "AssemblyName": "BlazorWebAssemblySignalRApp.Client",
+        "CaseSensitive": true,
+        "TagMatchingRules": [
+          {
+            "TagName": "BlazorWebAssemblySignalRApp.Client.Pages.TemplatedComponents.PetsTable2"
+          }
+        ],
+        "Metadata": {
+          "Runtime.Name": "Components.IComponent",
+          "Common.TypeName": "BlazorWebAssemblySignalRApp.Client.Pages.TemplatedComponents.PetsTable2",
+          "Components.NameMatch": "Components.FullyQualifiedNameMatch"
+        }
+      },
+      {
+        "HashCode": -2108675632,
+        "Kind": "Components.Component",
+        "Name": "BlazorWebAssemblySignalRApp.Client.Pages.TemplatedComponents.PetsTable3",
+        "AssemblyName": "BlazorWebAssemblySignalRApp.Client",
+        "CaseSensitive": true,
+        "TagMatchingRules": [
+          {
+            "TagName": "PetsTable3"
+          }
+        ],
+        "Metadata": {
+          "Runtime.Name": "Components.IComponent",
+          "Common.TypeName": "BlazorWebAssemblySignalRApp.Client.Pages.TemplatedComponents.PetsTable3"
+        }
+      },
+      {
+        "HashCode": -1980362207,
+        "Kind": "Components.Component",
+        "Name": "BlazorWebAssemblySignalRApp.Client.Pages.TemplatedComponents.PetsTable3",
+        "AssemblyName": "BlazorWebAssemblySignalRApp.Client",
+        "CaseSensitive": true,
+        "TagMatchingRules": [
+          {
+            "TagName": "BlazorWebAssemblySignalRApp.Client.Pages.TemplatedComponents.PetsTable3"
+          }
+        ],
+        "Metadata": {
+          "Runtime.Name": "Components.IComponent",
+          "Common.TypeName": "BlazorWebAssemblySignalRApp.Client.Pages.TemplatedComponents.PetsTable3",
+          "Components.NameMatch": "Components.FullyQualifiedNameMatch"
+        }
+      },
+      {
+        "HashCode": -930854475,
+        "Kind": "Components.Component",
+        "Name": "BlazorWebAssemblySignalRApp.Client.Pages.TemplatedComponents.PetsTable4",
+        "AssemblyName": "BlazorWebAssemblySignalRApp.Client",
+        "CaseSensitive": true,
+        "TagMatchingRules": [
+          {
+            "TagName": "PetsTable4"
+          }
+        ],
+        "Metadata": {
+          "Runtime.Name": "Components.IComponent",
+          "Common.TypeName": "BlazorWebAssemblySignalRApp.Client.Pages.TemplatedComponents.PetsTable4"
+        }
+      },
+      {
+        "HashCode": 1090182092,
+        "Kind": "Components.Component",
+        "Name": "BlazorWebAssemblySignalRApp.Client.Pages.TemplatedComponents.PetsTable4",
+        "AssemblyName": "BlazorWebAssemblySignalRApp.Client",
+        "CaseSensitive": true,
+        "TagMatchingRules": [
+          {
+            "TagName": "BlazorWebAssemblySignalRApp.Client.Pages.TemplatedComponents.PetsTable4"
+          }
+        ],
+        "Metadata": {
+          "Runtime.Name": "Components.IComponent",
+          "Common.TypeName": "BlazorWebAssemblySignalRApp.Client.Pages.TemplatedComponents.PetsTable4",
+          "Components.NameMatch": "Components.FullyQualifiedNameMatch"
+        }
+      },
+      {
         "HashCode": -74416383,
         "Kind": "Components.Component",
         "Name": "BlazorWebAssemblySignalRApp.Client.Pages.UseCheckbox",
@@ -2047,219 +4219,47 @@
         }
       },
       {
-        "HashCode": -1482736611,
+        "HashCode": 2027470657,
         "Kind": "Components.Component",
-        "Name": "BlazorWebAssemblySignalRApp.Client.Pages.JS.PrerenderingInterop",
+        "Name": "BlazorWebAssemblySignalRApp.Client.Pages.WeatherForecastPreserveState",
         "AssemblyName": "BlazorWebAssemblySignalRApp.Client",
         "CaseSensitive": true,
         "TagMatchingRules": [
           {
-            "TagName": "PrerenderingInterop"
+            "TagName": "WeatherForecastPreserveState"
           }
         ],
         "Metadata": {
           "Runtime.Name": "Components.IComponent",
-          "Common.TypeName": "BlazorWebAssemblySignalRApp.Client.Pages.JS.PrerenderingInterop"
+          "Common.TypeName": "BlazorWebAssemblySignalRApp.Client.Pages.WeatherForecastPreserveState"
         }
       },
       {
-        "HashCode": 785686148,
+        "HashCode": -1148797040,
         "Kind": "Components.Component",
-        "Name": "BlazorWebAssemblySignalRApp.Client.Pages.JS.PrerenderingInterop",
+        "Name": "BlazorWebAssemblySignalRApp.Client.Pages.WeatherForecastPreserveState",
         "AssemblyName": "BlazorWebAssemblySignalRApp.Client",
         "CaseSensitive": true,
         "TagMatchingRules": [
           {
-            "TagName": "BlazorWebAssemblySignalRApp.Client.Pages.JS.PrerenderingInterop"
+            "TagName": "BlazorWebAssemblySignalRApp.Client.Pages.WeatherForecastPreserveState"
           }
         ],
         "Metadata": {
           "Runtime.Name": "Components.IComponent",
-          "Common.TypeName": "BlazorWebAssemblySignalRApp.Client.Pages.JS.PrerenderingInterop",
+          "Common.TypeName": "BlazorWebAssemblySignalRApp.Client.Pages.WeatherForecastPreserveState",
           "Components.NameMatch": "Components.FullyQualifiedNameMatch"
         }
       },
       {
-        "HashCode": 520769337,
+        "HashCode": -1463868034,
         "Kind": "Components.Component",
-        "Name": "BlazorWebAssemblySignalRApp.Client.Pages.LifeCycle.ControlRender",
+        "Name": "BlazorWebAssemblySignalRApp.Client.Pages.Dialog",
         "AssemblyName": "BlazorWebAssemblySignalRApp.Client",
         "CaseSensitive": true,
         "TagMatchingRules": [
           {
-            "TagName": "ControlRender"
-          }
-        ],
-        "Metadata": {
-          "Runtime.Name": "Components.IComponent",
-          "Common.TypeName": "BlazorWebAssemblySignalRApp.Client.Pages.LifeCycle.ControlRender"
-        }
-      },
-      {
-        "HashCode": -333749548,
-        "Kind": "Components.Component",
-        "Name": "BlazorWebAssemblySignalRApp.Client.Pages.LifeCycle.ControlRender",
-        "AssemblyName": "BlazorWebAssemblySignalRApp.Client",
-        "CaseSensitive": true,
-        "TagMatchingRules": [
-          {
-            "TagName": "BlazorWebAssemblySignalRApp.Client.Pages.LifeCycle.ControlRender"
-          }
-        ],
-        "Metadata": {
-          "Runtime.Name": "Components.IComponent",
-          "Common.TypeName": "BlazorWebAssemblySignalRApp.Client.Pages.LifeCycle.ControlRender",
-          "Components.NameMatch": "Components.FullyQualifiedNameMatch"
-        }
-      },
-      {
-        "HashCode": 1333865743,
-        "Kind": "Components.Component",
-        "Name": "BlazorWebAssemblySignalRApp.Client.Pages.LifeCycle.LifeCycleParentComponent",
-        "AssemblyName": "BlazorWebAssemblySignalRApp.Client",
-        "CaseSensitive": true,
-        "TagMatchingRules": [
-          {
-            "TagName": "LifeCycleParentComponent"
-          }
-        ],
-        "BoundAttributes": [
-          {
-            "Kind": "Components.Component",
-            "Name": "Id",
-            "TypeName": "System.Int32",
-            "Metadata": {
-              "Common.PropertyName": "Id"
-            }
-          }
-        ],
-        "Metadata": {
-          "Runtime.Name": "Components.IComponent",
-          "Common.TypeName": "BlazorWebAssemblySignalRApp.Client.Pages.LifeCycle.LifeCycleParentComponent"
-        }
-      },
-      {
-        "HashCode": 2072469176,
-        "Kind": "Components.Component",
-        "Name": "BlazorWebAssemblySignalRApp.Client.Pages.LifeCycle.LifeCycleParentComponent",
-        "AssemblyName": "BlazorWebAssemblySignalRApp.Client",
-        "CaseSensitive": true,
-        "TagMatchingRules": [
-          {
-            "TagName": "BlazorWebAssemblySignalRApp.Client.Pages.LifeCycle.LifeCycleParentComponent"
-          }
-        ],
-        "BoundAttributes": [
-          {
-            "Kind": "Components.Component",
-            "Name": "Id",
-            "TypeName": "System.Int32",
-            "Metadata": {
-              "Common.PropertyName": "Id"
-            }
-          }
-        ],
-        "Metadata": {
-          "Runtime.Name": "Components.IComponent",
-          "Common.TypeName": "BlazorWebAssemblySignalRApp.Client.Pages.LifeCycle.LifeCycleParentComponent",
-          "Components.NameMatch": "Components.FullyQualifiedNameMatch"
-        }
-      },
-      {
-        "HashCode": 1304168508,
-        "Kind": "Components.Component",
-        "Name": "BlazorWebAssemblySignalRApp.Client.Pages.LifeCycle.LifeCycleParametersSet",
-        "AssemblyName": "BlazorWebAssemblySignalRApp.Client",
-        "CaseSensitive": true,
-        "TagMatchingRules": [
-          {
-            "TagName": "LifeCycleParametersSet"
-          }
-        ],
-        "BoundAttributes": [
-          {
-            "Kind": "Components.Component",
-            "Name": "Start",
-            "TypeName": "System.DateTime?",
-            "Metadata": {
-              "Common.PropertyName": "Start"
-            }
-          }
-        ],
-        "Metadata": {
-          "Runtime.Name": "Components.IComponent",
-          "Common.TypeName": "BlazorWebAssemblySignalRApp.Client.Pages.LifeCycle.LifeCycleParametersSet"
-        }
-      },
-      {
-        "HashCode": -676107894,
-        "Kind": "Components.Component",
-        "Name": "BlazorWebAssemblySignalRApp.Client.Pages.LifeCycle.LifeCycleParametersSet",
-        "AssemblyName": "BlazorWebAssemblySignalRApp.Client",
-        "CaseSensitive": true,
-        "TagMatchingRules": [
-          {
-            "TagName": "BlazorWebAssemblySignalRApp.Client.Pages.LifeCycle.LifeCycleParametersSet"
-          }
-        ],
-        "BoundAttributes": [
-          {
-            "Kind": "Components.Component",
-            "Name": "Start",
-            "TypeName": "System.DateTime?",
-            "Metadata": {
-              "Common.PropertyName": "Start"
-            }
-          }
-        ],
-        "Metadata": {
-          "Runtime.Name": "Components.IComponent",
-          "Common.TypeName": "BlazorWebAssemblySignalRApp.Client.Pages.LifeCycle.LifeCycleParametersSet",
-          "Components.NameMatch": "Components.FullyQualifiedNameMatch"
-        }
-      },
-      {
-        "HashCode": -1812552851,
-        "Kind": "Components.Component",
-        "Name": "BlazorWebAssemblySignalRApp.Client.Pages.LifeCycle.BackgroundWork",
-        "AssemblyName": "BlazorWebAssemblySignalRApp.Client",
-        "CaseSensitive": true,
-        "TagMatchingRules": [
-          {
-            "TagName": "BackgroundWork"
-          }
-        ],
-        "Metadata": {
-          "Runtime.Name": "Components.IComponent",
-          "Common.TypeName": "BlazorWebAssemblySignalRApp.Client.Pages.LifeCycle.BackgroundWork"
-        }
-      },
-      {
-        "HashCode": 1959106571,
-        "Kind": "Components.Component",
-        "Name": "BlazorWebAssemblySignalRApp.Client.Pages.LifeCycle.BackgroundWork",
-        "AssemblyName": "BlazorWebAssemblySignalRApp.Client",
-        "CaseSensitive": true,
-        "TagMatchingRules": [
-          {
-            "TagName": "BlazorWebAssemblySignalRApp.Client.Pages.LifeCycle.BackgroundWork"
-          }
-        ],
-        "Metadata": {
-          "Runtime.Name": "Components.IComponent",
-          "Common.TypeName": "BlazorWebAssemblySignalRApp.Client.Pages.LifeCycle.BackgroundWork",
-          "Components.NameMatch": "Components.FullyQualifiedNameMatch"
-        }
-      },
-      {
-        "HashCode": 2019255782,
-        "Kind": "Components.Component",
-        "Name": "BlazorWebAssemblySignalRApp.Client.Pages.EventCallback.EventCallbackChild",
-        "AssemblyName": "BlazorWebAssemblySignalRApp.Client",
-        "CaseSensitive": true,
-        "TagMatchingRules": [
-          {
-            "TagName": "EventCallbackChild"
+            "TagName": "Dialog"
           }
         ],
         "BoundAttributes": [
@@ -2279,31 +4279,22 @@
               "Common.PropertyName": "ChildContent",
               "Components.ChildContent": "True"
             }
-          },
-          {
-            "Kind": "Components.Component",
-            "Name": "ChangeBody",
-            "TypeName": "Microsoft.AspNetCore.Components.EventCallback<Microsoft.AspNetCore.Components.Web.MouseEventArgs>",
-            "Metadata": {
-              "Common.PropertyName": "ChangeBody",
-              "Components.EventCallback": "True"
-            }
           }
         ],
         "Metadata": {
           "Runtime.Name": "Components.IComponent",
-          "Common.TypeName": "BlazorWebAssemblySignalRApp.Client.Pages.EventCallback.EventCallbackChild"
+          "Common.TypeName": "BlazorWebAssemblySignalRApp.Client.Pages.Dialog"
         }
       },
       {
-        "HashCode": 1692109404,
+        "HashCode": 640882473,
         "Kind": "Components.Component",
-        "Name": "BlazorWebAssemblySignalRApp.Client.Pages.EventCallback.EventCallbackChild",
+        "Name": "BlazorWebAssemblySignalRApp.Client.Pages.Dialog",
         "AssemblyName": "BlazorWebAssemblySignalRApp.Client",
         "CaseSensitive": true,
         "TagMatchingRules": [
           {
-            "TagName": "BlazorWebAssemblySignalRApp.Client.Pages.EventCallback.EventCallbackChild"
+            "TagName": "BlazorWebAssemblySignalRApp.Client.Pages.Dialog"
           }
         ],
         "BoundAttributes": [
@@ -2323,156 +4314,134 @@
               "Common.PropertyName": "ChildContent",
               "Components.ChildContent": "True"
             }
-          },
-          {
-            "Kind": "Components.Component",
-            "Name": "ChangeBody",
-            "TypeName": "Microsoft.AspNetCore.Components.EventCallback<Microsoft.AspNetCore.Components.Web.MouseEventArgs>",
-            "Metadata": {
-              "Common.PropertyName": "ChangeBody",
-              "Components.EventCallback": "True"
-            }
           }
         ],
         "Metadata": {
           "Runtime.Name": "Components.IComponent",
-          "Common.TypeName": "BlazorWebAssemblySignalRApp.Client.Pages.EventCallback.EventCallbackChild",
+          "Common.TypeName": "BlazorWebAssemblySignalRApp.Client.Pages.Dialog",
           "Components.NameMatch": "Components.FullyQualifiedNameMatch"
         }
       },
       {
-        "HashCode": -495179993,
+        "HashCode": 1112507100,
         "Kind": "Components.ChildContent",
-        "Name": "BlazorWebAssemblySignalRApp.Client.Pages.EventCallback.EventCallbackChild.ChildContent",
+        "Name": "BlazorWebAssemblySignalRApp.Client.Pages.Dialog.ChildContent",
         "AssemblyName": "BlazorWebAssemblySignalRApp.Client",
         "CaseSensitive": true,
         "TagMatchingRules": [
           {
             "TagName": "ChildContent",
-            "ParentTag": "EventCallbackChild"
+            "ParentTag": "Dialog"
           }
         ],
         "Metadata": {
           "Runtime.Name": "Components.None",
-          "Common.TypeName": "BlazorWebAssemblySignalRApp.Client.Pages.EventCallback.EventCallbackChild.ChildContent",
+          "Common.TypeName": "BlazorWebAssemblySignalRApp.Client.Pages.Dialog.ChildContent",
           "Components.IsSpecialKind": "Components.ChildContent"
         }
       },
       {
-        "HashCode": 2085311085,
+        "HashCode": 273958525,
         "Kind": "Components.ChildContent",
-        "Name": "BlazorWebAssemblySignalRApp.Client.Pages.EventCallback.EventCallbackChild.ChildContent",
+        "Name": "BlazorWebAssemblySignalRApp.Client.Pages.Dialog.ChildContent",
         "AssemblyName": "BlazorWebAssemblySignalRApp.Client",
         "CaseSensitive": true,
         "TagMatchingRules": [
           {
             "TagName": "ChildContent",
-            "ParentTag": "BlazorWebAssemblySignalRApp.Client.Pages.EventCallback.EventCallbackChild"
+            "ParentTag": "BlazorWebAssemblySignalRApp.Client.Pages.Dialog"
           }
         ],
         "Metadata": {
           "Runtime.Name": "Components.None",
-          "Common.TypeName": "BlazorWebAssemblySignalRApp.Client.Pages.EventCallback.EventCallbackChild.ChildContent",
+          "Common.TypeName": "BlazorWebAssemblySignalRApp.Client.Pages.Dialog.ChildContent",
           "Components.IsSpecialKind": "Components.ChildContent",
           "Components.NameMatch": "Components.FullyQualifiedNameMatch"
         }
       },
       {
-        "HashCode": 1926174223,
+        "HashCode": 2115136022,
         "Kind": "Components.Component",
-        "Name": "BlazorWebAssemblySignalRApp.Client.Pages.EventCallback.EventCallbackParent",
+        "Name": "BlazorWebAssemblySignalRApp.Client.Pages.JSInterop.CheckRenderChildComponent",
         "AssemblyName": "BlazorWebAssemblySignalRApp.Client",
         "CaseSensitive": true,
         "TagMatchingRules": [
           {
-            "TagName": "EventCallbackParent"
+            "TagName": "CheckRenderChildComponent"
+          }
+        ],
+        "BoundAttributes": [
+          {
+            "Kind": "Components.Component",
+            "Name": "StudentName",
+            "TypeName": "System.String",
+            "Metadata": {
+              "Common.PropertyName": "StudentName"
+            }
           }
         ],
         "Metadata": {
           "Runtime.Name": "Components.IComponent",
-          "Common.TypeName": "BlazorWebAssemblySignalRApp.Client.Pages.EventCallback.EventCallbackParent"
+          "Common.TypeName": "BlazorWebAssemblySignalRApp.Client.Pages.JSInterop.CheckRenderChildComponent"
         }
       },
       {
-        "HashCode": 262891006,
+        "HashCode": 1919959915,
         "Kind": "Components.Component",
-        "Name": "BlazorWebAssemblySignalRApp.Client.Pages.EventCallback.EventCallbackParent",
+        "Name": "BlazorWebAssemblySignalRApp.Client.Pages.JSInterop.CheckRenderChildComponent",
         "AssemblyName": "BlazorWebAssemblySignalRApp.Client",
         "CaseSensitive": true,
         "TagMatchingRules": [
           {
-            "TagName": "BlazorWebAssemblySignalRApp.Client.Pages.EventCallback.EventCallbackParent"
+            "TagName": "BlazorWebAssemblySignalRApp.Client.Pages.JSInterop.CheckRenderChildComponent"
+          }
+        ],
+        "BoundAttributes": [
+          {
+            "Kind": "Components.Component",
+            "Name": "StudentName",
+            "TypeName": "System.String",
+            "Metadata": {
+              "Common.PropertyName": "StudentName"
+            }
           }
         ],
         "Metadata": {
           "Runtime.Name": "Components.IComponent",
-          "Common.TypeName": "BlazorWebAssemblySignalRApp.Client.Pages.EventCallback.EventCallbackParent",
+          "Common.TypeName": "BlazorWebAssemblySignalRApp.Client.Pages.JSInterop.CheckRenderChildComponent",
           "Components.NameMatch": "Components.FullyQualifiedNameMatch"
         }
       },
       {
-        "HashCode": 63420787,
+        "HashCode": 1825536894,
         "Kind": "Components.Component",
-        "Name": "BlazorWebAssemblySignalRApp.Client.Pages.CounterWithTimer",
+        "Name": "BlazorWebAssemblySignalRApp.Client.Pages.JSInterop.JSInteropComponent",
         "AssemblyName": "BlazorWebAssemblySignalRApp.Client",
         "CaseSensitive": true,
         "TagMatchingRules": [
           {
-            "TagName": "CounterWithTimer"
+            "TagName": "JSInteropComponent"
           }
         ],
         "Metadata": {
           "Runtime.Name": "Components.IComponent",
-          "Common.TypeName": "BlazorWebAssemblySignalRApp.Client.Pages.CounterWithTimer"
+          "Common.TypeName": "BlazorWebAssemblySignalRApp.Client.Pages.JSInterop.JSInteropComponent"
         }
       },
       {
-        "HashCode": -1148386066,
+        "HashCode": -1651455394,
         "Kind": "Components.Component",
-        "Name": "BlazorWebAssemblySignalRApp.Client.Pages.CounterWithTimer",
+        "Name": "BlazorWebAssemblySignalRApp.Client.Pages.JSInterop.JSInteropComponent",
         "AssemblyName": "BlazorWebAssemblySignalRApp.Client",
         "CaseSensitive": true,
         "TagMatchingRules": [
           {
-            "TagName": "BlazorWebAssemblySignalRApp.Client.Pages.CounterWithTimer"
+            "TagName": "BlazorWebAssemblySignalRApp.Client.Pages.JSInterop.JSInteropComponent"
           }
         ],
         "Metadata": {
           "Runtime.Name": "Components.IComponent",
-          "Common.TypeName": "BlazorWebAssemblySignalRApp.Client.Pages.CounterWithTimer",
-          "Components.NameMatch": "Components.FullyQualifiedNameMatch"
-        }
-      },
-      {
-        "HashCode": 2137682839,
-        "Kind": "Components.Component",
-        "Name": "BlazorWebAssemblySignalRApp.Client.Pages.Chat",
-        "AssemblyName": "BlazorWebAssemblySignalRApp.Client",
-        "CaseSensitive": true,
-        "TagMatchingRules": [
-          {
-            "TagName": "Chat"
-          }
-        ],
-        "Metadata": {
-          "Runtime.Name": "Components.IComponent",
-          "Common.TypeName": "BlazorWebAssemblySignalRApp.Client.Pages.Chat"
-        }
-      },
-      {
-        "HashCode": -765211893,
-        "Kind": "Components.Component",
-        "Name": "BlazorWebAssemblySignalRApp.Client.Pages.Chat",
-        "AssemblyName": "BlazorWebAssemblySignalRApp.Client",
-        "CaseSensitive": true,
-        "TagMatchingRules": [
-          {
-            "TagName": "BlazorWebAssemblySignalRApp.Client.Pages.Chat"
-          }
-        ],
-        "Metadata": {
-          "Runtime.Name": "Components.IComponent",
-          "Common.TypeName": "BlazorWebAssemblySignalRApp.Client.Pages.Chat",
+          "Common.TypeName": "BlazorWebAssemblySignalRApp.Client.Pages.JSInterop.JSInteropComponent",
           "Components.NameMatch": "Components.FullyQualifiedNameMatch"
         }
       },
@@ -2784,6 +4753,296 @@
         "Metadata": {
           "Runtime.Name": "Components.IComponent",
           "Common.TypeName": "BlazorWebAssemblySignalRApp.Client.Shared.SurveyPrompt",
+          "Components.NameMatch": "Components.FullyQualifiedNameMatch"
+        }
+      },
+      {
+        "HashCode": -1012387930,
+        "Kind": "Components.Component",
+        "Name": "BlazorWebAssemblySignalRApp.Client.Shared.TableTemplate<TType>",
+        "AssemblyName": "BlazorWebAssemblySignalRApp.Client",
+        "CaseSensitive": true,
+        "TagMatchingRules": [
+          {
+            "TagName": "TableTemplate"
+          }
+        ],
+        "BoundAttributes": [
+          {
+            "Kind": "Components.Component",
+            "Name": "TType",
+            "TypeName": "System.Type",
+            "Documentation": "Specifies the type of the type parameter TType for the BlazorWebAssemblySignalRApp.Client.Shared.TableTemplate<TType> component.",
+            "Metadata": {
+              "Common.PropertyName": "TType",
+              "Components.TypeParameter": "True",
+              "Components.TypeParameterIsCascading": "False"
+            }
+          },
+          {
+            "Kind": "Components.Component",
+            "Name": "ChildContent",
+            "TypeName": "Microsoft.AspNetCore.Components.RenderFragment",
+            "Metadata": {
+              "Common.PropertyName": "ChildContent",
+              "Components.ChildContent": "True"
+            }
+          },
+          {
+            "Kind": "Components.Component",
+            "Name": "Header",
+            "TypeName": "Microsoft.AspNetCore.Components.RenderFragment",
+            "Metadata": {
+              "Common.PropertyName": "Header",
+              "Components.ChildContent": "True"
+            }
+          },
+          {
+            "Kind": "Components.Component",
+            "Name": "RowTemplate",
+            "TypeName": "Microsoft.AspNetCore.Components.RenderFragment<TType>",
+            "Metadata": {
+              "Common.PropertyName": "RowTemplate",
+              "Components.ChildContent": "True",
+              "Components.GenericTyped": "True"
+            }
+          },
+          {
+            "Kind": "Components.Component",
+            "Name": "Items",
+            "TypeName": "System.Collections.Generic.IReadOnlyList<TType>",
+            "Metadata": {
+              "Common.PropertyName": "Items",
+              "Components.GenericTyped": "True"
+            }
+          },
+          {
+            "Kind": "Components.Component",
+            "Name": "Context",
+            "TypeName": "System.String",
+            "Documentation": "Specifies the parameter name for all child content expressions.",
+            "Metadata": {
+              "Components.ChildContentParameterName": "True",
+              "Common.PropertyName": "Context"
+            }
+          }
+        ],
+        "Metadata": {
+          "Runtime.Name": "Components.IComponent",
+          "Common.TypeName": "BlazorWebAssemblySignalRApp.Client.Shared.TableTemplate<TType>",
+          "Components.GenericTyped": "True"
+        }
+      },
+      {
+        "HashCode": 643767560,
+        "Kind": "Components.Component",
+        "Name": "BlazorWebAssemblySignalRApp.Client.Shared.TableTemplate<TType>",
+        "AssemblyName": "BlazorWebAssemblySignalRApp.Client",
+        "CaseSensitive": true,
+        "TagMatchingRules": [
+          {
+            "TagName": "BlazorWebAssemblySignalRApp.Client.Shared.TableTemplate"
+          }
+        ],
+        "BoundAttributes": [
+          {
+            "Kind": "Components.Component",
+            "Name": "TType",
+            "TypeName": "System.Type",
+            "Documentation": "Specifies the type of the type parameter TType for the BlazorWebAssemblySignalRApp.Client.Shared.TableTemplate<TType> component.",
+            "Metadata": {
+              "Common.PropertyName": "TType",
+              "Components.TypeParameter": "True",
+              "Components.TypeParameterIsCascading": "False"
+            }
+          },
+          {
+            "Kind": "Components.Component",
+            "Name": "ChildContent",
+            "TypeName": "Microsoft.AspNetCore.Components.RenderFragment",
+            "Metadata": {
+              "Common.PropertyName": "ChildContent",
+              "Components.ChildContent": "True"
+            }
+          },
+          {
+            "Kind": "Components.Component",
+            "Name": "Header",
+            "TypeName": "Microsoft.AspNetCore.Components.RenderFragment",
+            "Metadata": {
+              "Common.PropertyName": "Header",
+              "Components.ChildContent": "True"
+            }
+          },
+          {
+            "Kind": "Components.Component",
+            "Name": "RowTemplate",
+            "TypeName": "Microsoft.AspNetCore.Components.RenderFragment<TType>",
+            "Metadata": {
+              "Common.PropertyName": "RowTemplate",
+              "Components.ChildContent": "True",
+              "Components.GenericTyped": "True"
+            }
+          },
+          {
+            "Kind": "Components.Component",
+            "Name": "Items",
+            "TypeName": "System.Collections.Generic.IReadOnlyList<TType>",
+            "Metadata": {
+              "Common.PropertyName": "Items",
+              "Components.GenericTyped": "True"
+            }
+          },
+          {
+            "Kind": "Components.Component",
+            "Name": "Context",
+            "TypeName": "System.String",
+            "Documentation": "Specifies the parameter name for all child content expressions.",
+            "Metadata": {
+              "Components.ChildContentParameterName": "True",
+              "Common.PropertyName": "Context"
+            }
+          }
+        ],
+        "Metadata": {
+          "Runtime.Name": "Components.IComponent",
+          "Common.TypeName": "BlazorWebAssemblySignalRApp.Client.Shared.TableTemplate<TType>",
+          "Components.GenericTyped": "True",
+          "Components.NameMatch": "Components.FullyQualifiedNameMatch"
+        }
+      },
+      {
+        "HashCode": -1018825218,
+        "Kind": "Components.ChildContent",
+        "Name": "BlazorWebAssemblySignalRApp.Client.Shared.TableTemplate<TType>.ChildContent",
+        "AssemblyName": "BlazorWebAssemblySignalRApp.Client",
+        "CaseSensitive": true,
+        "TagMatchingRules": [
+          {
+            "TagName": "ChildContent",
+            "ParentTag": "TableTemplate"
+          }
+        ],
+        "Metadata": {
+          "Runtime.Name": "Components.None",
+          "Common.TypeName": "BlazorWebAssemblySignalRApp.Client.Shared.TableTemplate<TType>.ChildContent",
+          "Components.IsSpecialKind": "Components.ChildContent"
+        }
+      },
+      {
+        "HashCode": -1033874236,
+        "Kind": "Components.ChildContent",
+        "Name": "BlazorWebAssemblySignalRApp.Client.Shared.TableTemplate<TType>.ChildContent",
+        "AssemblyName": "BlazorWebAssemblySignalRApp.Client",
+        "CaseSensitive": true,
+        "TagMatchingRules": [
+          {
+            "TagName": "ChildContent",
+            "ParentTag": "BlazorWebAssemblySignalRApp.Client.Shared.TableTemplate"
+          }
+        ],
+        "Metadata": {
+          "Runtime.Name": "Components.None",
+          "Common.TypeName": "BlazorWebAssemblySignalRApp.Client.Shared.TableTemplate<TType>.ChildContent",
+          "Components.IsSpecialKind": "Components.ChildContent",
+          "Components.NameMatch": "Components.FullyQualifiedNameMatch"
+        }
+      },
+      {
+        "HashCode": -222966510,
+        "Kind": "Components.ChildContent",
+        "Name": "BlazorWebAssemblySignalRApp.Client.Shared.TableTemplate<TType>.Header",
+        "AssemblyName": "BlazorWebAssemblySignalRApp.Client",
+        "CaseSensitive": true,
+        "TagMatchingRules": [
+          {
+            "TagName": "Header",
+            "ParentTag": "TableTemplate"
+          }
+        ],
+        "Metadata": {
+          "Runtime.Name": "Components.None",
+          "Common.TypeName": "BlazorWebAssemblySignalRApp.Client.Shared.TableTemplate<TType>.Header",
+          "Components.IsSpecialKind": "Components.ChildContent"
+        }
+      },
+      {
+        "HashCode": -1972041159,
+        "Kind": "Components.ChildContent",
+        "Name": "BlazorWebAssemblySignalRApp.Client.Shared.TableTemplate<TType>.Header",
+        "AssemblyName": "BlazorWebAssemblySignalRApp.Client",
+        "CaseSensitive": true,
+        "TagMatchingRules": [
+          {
+            "TagName": "Header",
+            "ParentTag": "BlazorWebAssemblySignalRApp.Client.Shared.TableTemplate"
+          }
+        ],
+        "Metadata": {
+          "Runtime.Name": "Components.None",
+          "Common.TypeName": "BlazorWebAssemblySignalRApp.Client.Shared.TableTemplate<TType>.Header",
+          "Components.IsSpecialKind": "Components.ChildContent",
+          "Components.NameMatch": "Components.FullyQualifiedNameMatch"
+        }
+      },
+      {
+        "HashCode": -1392985605,
+        "Kind": "Components.ChildContent",
+        "Name": "BlazorWebAssemblySignalRApp.Client.Shared.TableTemplate<TType>.RowTemplate",
+        "AssemblyName": "BlazorWebAssemblySignalRApp.Client",
+        "CaseSensitive": true,
+        "TagMatchingRules": [
+          {
+            "TagName": "RowTemplate",
+            "ParentTag": "TableTemplate"
+          }
+        ],
+        "BoundAttributes": [
+          {
+            "Kind": "Components.ChildContent",
+            "Name": "Context",
+            "TypeName": "System.String",
+            "Documentation": "Specifies the parameter name for the 'RowTemplate' child content expression.",
+            "Metadata": {
+              "Components.ChildContentParameterName": "True",
+              "Common.PropertyName": "Context"
+            }
+          }
+        ],
+        "Metadata": {
+          "Runtime.Name": "Components.None",
+          "Common.TypeName": "BlazorWebAssemblySignalRApp.Client.Shared.TableTemplate<TType>.RowTemplate",
+          "Components.IsSpecialKind": "Components.ChildContent"
+        }
+      },
+      {
+        "HashCode": -318453630,
+        "Kind": "Components.ChildContent",
+        "Name": "BlazorWebAssemblySignalRApp.Client.Shared.TableTemplate<TType>.RowTemplate",
+        "AssemblyName": "BlazorWebAssemblySignalRApp.Client",
+        "CaseSensitive": true,
+        "TagMatchingRules": [
+          {
+            "TagName": "RowTemplate",
+            "ParentTag": "BlazorWebAssemblySignalRApp.Client.Shared.TableTemplate"
+          }
+        ],
+        "BoundAttributes": [
+          {
+            "Kind": "Components.ChildContent",
+            "Name": "Context",
+            "TypeName": "System.String",
+            "Documentation": "Specifies the parameter name for the 'RowTemplate' child content expression.",
+            "Metadata": {
+              "Components.ChildContentParameterName": "True",
+              "Common.PropertyName": "Context"
+            }
+          }
+        ],
+        "Metadata": {
+          "Runtime.Name": "Components.None",
+          "Common.TypeName": "BlazorWebAssemblySignalRApp.Client.Shared.TableTemplate<TType>.RowTemplate",
+          "Components.IsSpecialKind": "Components.ChildContent",
           "Components.NameMatch": "Components.FullyQualifiedNameMatch"
         }
       },
@@ -8954,6 +11213,164 @@
           "Runtime.Name": "Components.None",
           "Common.TypeName": "Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteAuthenticatorViewCore<TAuthenticationState>.LogOutSucceeded",
           "Components.IsSpecialKind": "Components.ChildContent",
+          "Components.NameMatch": "Components.FullyQualifiedNameMatch"
+        }
+      },
+      {
+        "HashCode": -959290858,
+        "Kind": "Components.Component",
+        "Name": "ComponentLibrary.ExtraStyles",
+        "AssemblyName": "ComponentLibrary",
+        "CaseSensitive": true,
+        "TagMatchingRules": [
+          {
+            "TagName": "ExtraStyles"
+          }
+        ],
+        "Metadata": {
+          "Runtime.Name": "Components.IComponent",
+          "Common.TypeName": "ComponentLibrary.ExtraStyles"
+        }
+      },
+      {
+        "HashCode": 1021521483,
+        "Kind": "Components.Component",
+        "Name": "ComponentLibrary.ExtraStyles",
+        "AssemblyName": "ComponentLibrary",
+        "CaseSensitive": true,
+        "TagMatchingRules": [
+          {
+            "TagName": "ComponentLibrary.ExtraStyles"
+          }
+        ],
+        "Metadata": {
+          "Runtime.Name": "Components.IComponent",
+          "Common.TypeName": "ComponentLibrary.ExtraStyles",
+          "Components.NameMatch": "Components.FullyQualifiedNameMatch"
+        }
+      },
+      {
+        "HashCode": -1089906563,
+        "Kind": "Components.Component",
+        "Name": "ComponentLibrary.Component1",
+        "AssemblyName": "ComponentLibrary",
+        "CaseSensitive": true,
+        "TagMatchingRules": [
+          {
+            "TagName": "Component1"
+          }
+        ],
+        "BoundAttributes": [
+          {
+            "Kind": "Components.Component",
+            "Name": "ChildContent",
+            "TypeName": "Microsoft.AspNetCore.Components.RenderFragment",
+            "Metadata": {
+              "Common.PropertyName": "ChildContent",
+              "Components.ChildContent": "True"
+            }
+          }
+        ],
+        "Metadata": {
+          "Runtime.Name": "Components.IComponent",
+          "Common.TypeName": "ComponentLibrary.Component1"
+        }
+      },
+      {
+        "HashCode": 1912838203,
+        "Kind": "Components.Component",
+        "Name": "ComponentLibrary.Component1",
+        "AssemblyName": "ComponentLibrary",
+        "CaseSensitive": true,
+        "TagMatchingRules": [
+          {
+            "TagName": "ComponentLibrary.Component1"
+          }
+        ],
+        "BoundAttributes": [
+          {
+            "Kind": "Components.Component",
+            "Name": "ChildContent",
+            "TypeName": "Microsoft.AspNetCore.Components.RenderFragment",
+            "Metadata": {
+              "Common.PropertyName": "ChildContent",
+              "Components.ChildContent": "True"
+            }
+          }
+        ],
+        "Metadata": {
+          "Runtime.Name": "Components.IComponent",
+          "Common.TypeName": "ComponentLibrary.Component1",
+          "Components.NameMatch": "Components.FullyQualifiedNameMatch"
+        }
+      },
+      {
+        "HashCode": -907767635,
+        "Kind": "Components.ChildContent",
+        "Name": "ComponentLibrary.Component1.ChildContent",
+        "AssemblyName": "ComponentLibrary",
+        "CaseSensitive": true,
+        "TagMatchingRules": [
+          {
+            "TagName": "ChildContent",
+            "ParentTag": "Component1"
+          }
+        ],
+        "Metadata": {
+          "Runtime.Name": "Components.None",
+          "Common.TypeName": "ComponentLibrary.Component1.ChildContent",
+          "Components.IsSpecialKind": "Components.ChildContent"
+        }
+      },
+      {
+        "HashCode": 1015617731,
+        "Kind": "Components.ChildContent",
+        "Name": "ComponentLibrary.Component1.ChildContent",
+        "AssemblyName": "ComponentLibrary",
+        "CaseSensitive": true,
+        "TagMatchingRules": [
+          {
+            "TagName": "ChildContent",
+            "ParentTag": "ComponentLibrary.Component1"
+          }
+        ],
+        "Metadata": {
+          "Runtime.Name": "Components.None",
+          "Common.TypeName": "ComponentLibrary.Component1.ChildContent",
+          "Components.IsSpecialKind": "Components.ChildContent",
+          "Components.NameMatch": "Components.FullyQualifiedNameMatch"
+        }
+      },
+      {
+        "HashCode": 23977389,
+        "Kind": "Components.Component",
+        "Name": "ComponentLibrary.Component2",
+        "AssemblyName": "ComponentLibrary",
+        "CaseSensitive": true,
+        "TagMatchingRules": [
+          {
+            "TagName": "Component2"
+          }
+        ],
+        "Metadata": {
+          "Runtime.Name": "Components.IComponent",
+          "Common.TypeName": "ComponentLibrary.Component2"
+        }
+      },
+      {
+        "HashCode": 893555908,
+        "Kind": "Components.Component",
+        "Name": "ComponentLibrary.Component2",
+        "AssemblyName": "ComponentLibrary",
+        "CaseSensitive": true,
+        "TagMatchingRules": [
+          {
+            "TagName": "ComponentLibrary.Component2"
+          }
+        ],
+        "Metadata": {
+          "Runtime.Name": "Components.IComponent",
+          "Common.TypeName": "ComponentLibrary.Component2",
           "Components.NameMatch": "Components.FullyQualifiedNameMatch"
         }
       },
@@ -18041,6 +20458,87 @@
         }
       },
       {
+        "HashCode": 228918811,
+        "Kind": "Components.Bind",
+        "Name": "BlazorWebAssemblySignalRApp.Client.Pages.ChildBinding.ChildBindingChild",
+        "AssemblyName": "BlazorWebAssemblySignalRApp.Client",
+        "Documentation": "Binds the provided expression to the 'Year' property and a change event delegate to the 'YearChanged' property of the component.",
+        "CaseSensitive": true,
+        "TagMatchingRules": [
+          {
+            "TagName": "ChildBindingChild",
+            "Attributes": [
+              {
+                "Name": "@bind-Year",
+                "Metadata": {
+                  "Common.DirectiveAttribute": "True"
+                }
+              }
+            ]
+          }
+        ],
+        "BoundAttributes": [
+          {
+            "Kind": "Components.Bind",
+            "Name": "@bind-Year",
+            "TypeName": "Microsoft.AspNetCore.Components.EventCallback<System.Int32>",
+            "Documentation": "Binds the provided expression to the 'Year' property and a change event delegate to the 'YearChanged' property of the component.",
+            "Metadata": {
+              "Common.DirectiveAttribute": "True",
+              "Common.PropertyName": "Year"
+            }
+          }
+        ],
+        "Metadata": {
+          "Runtime.Name": "Components.None",
+          "Components.IsSpecialKind": "Components.Bind",
+          "Components.Bind.ValueAttribute": "Year",
+          "Components.Bind.ChangeAttribute": "YearChanged",
+          "Common.TypeName": "BlazorWebAssemblySignalRApp.Client.Pages.ChildBinding.ChildBindingChild"
+        }
+      },
+      {
+        "HashCode": 105364314,
+        "Kind": "Components.Bind",
+        "Name": "BlazorWebAssemblySignalRApp.Client.Pages.ChildBinding.ChildBindingChild",
+        "AssemblyName": "BlazorWebAssemblySignalRApp.Client",
+        "Documentation": "Binds the provided expression to the 'Year' property and a change event delegate to the 'YearChanged' property of the component.",
+        "CaseSensitive": true,
+        "TagMatchingRules": [
+          {
+            "TagName": "BlazorWebAssemblySignalRApp.Client.Pages.ChildBinding.ChildBindingChild",
+            "Attributes": [
+              {
+                "Name": "@bind-Year",
+                "Metadata": {
+                  "Common.DirectiveAttribute": "True"
+                }
+              }
+            ]
+          }
+        ],
+        "BoundAttributes": [
+          {
+            "Kind": "Components.Bind",
+            "Name": "@bind-Year",
+            "TypeName": "Microsoft.AspNetCore.Components.EventCallback<System.Int32>",
+            "Documentation": "Binds the provided expression to the 'Year' property and a change event delegate to the 'YearChanged' property of the component.",
+            "Metadata": {
+              "Common.DirectiveAttribute": "True",
+              "Common.PropertyName": "Year"
+            }
+          }
+        ],
+        "Metadata": {
+          "Runtime.Name": "Components.None",
+          "Components.IsSpecialKind": "Components.Bind",
+          "Components.Bind.ValueAttribute": "Year",
+          "Components.Bind.ChangeAttribute": "YearChanged",
+          "Common.TypeName": "BlazorWebAssemblySignalRApp.Client.Pages.ChildBinding.ChildBindingChild",
+          "Components.NameMatch": "Components.FullyQualifiedNameMatch"
+        }
+      },
+      {
         "HashCode": -276952521,
         "Kind": "Components.Bind",
         "Name": "BlazorWebAssemblySignalRApp.Client.Pages.ChildBinding.NestedBinding.NestedBindingChild",
@@ -18203,18 +20701,18 @@
         }
       },
       {
-        "HashCode": 228918811,
+        "HashCode": -819128996,
         "Kind": "Components.Bind",
-        "Name": "BlazorWebAssemblySignalRApp.Client.Pages.ChildBinding.ChildBindingChild",
+        "Name": "BlazorWebAssemblySignalRApp.Client.Pages.CustomInputs.CustomeInputNumber",
         "AssemblyName": "BlazorWebAssemblySignalRApp.Client",
-        "Documentation": "Binds the provided expression to the 'Year' property and a change event delegate to the 'YearChanged' property of the component.",
+        "Documentation": "Binds the provided expression to the 'Value' property and a change event delegate to the 'ValueChanged' property of the component.",
         "CaseSensitive": true,
         "TagMatchingRules": [
           {
-            "TagName": "ChildBindingChild",
+            "TagName": "CustomeInputNumber",
             "Attributes": [
               {
-                "Name": "@bind-Year",
+                "Name": "@bind-Value",
                 "Metadata": {
                   "Common.DirectiveAttribute": "True"
                 }
@@ -18225,36 +20723,37 @@
         "BoundAttributes": [
           {
             "Kind": "Components.Bind",
-            "Name": "@bind-Year",
+            "Name": "@bind-Value",
             "TypeName": "Microsoft.AspNetCore.Components.EventCallback<System.Int32>",
-            "Documentation": "Binds the provided expression to the 'Year' property and a change event delegate to the 'YearChanged' property of the component.",
+            "Documentation": "Binds the provided expression to the 'Value' property and a change event delegate to the 'ValueChanged' property of the component.",
             "Metadata": {
               "Common.DirectiveAttribute": "True",
-              "Common.PropertyName": "Year"
+              "Common.PropertyName": "Value"
             }
           }
         ],
         "Metadata": {
           "Runtime.Name": "Components.None",
           "Components.IsSpecialKind": "Components.Bind",
-          "Components.Bind.ValueAttribute": "Year",
-          "Components.Bind.ChangeAttribute": "YearChanged",
-          "Common.TypeName": "BlazorWebAssemblySignalRApp.Client.Pages.ChildBinding.ChildBindingChild"
+          "Components.Bind.ValueAttribute": "Value",
+          "Components.Bind.ChangeAttribute": "ValueChanged",
+          "Components.Bind.ExpressionAttribute": "ValueExpression",
+          "Common.TypeName": "BlazorWebAssemblySignalRApp.Client.Pages.CustomInputs.CustomeInputNumber"
         }
       },
       {
-        "HashCode": 105364314,
+        "HashCode": 957512460,
         "Kind": "Components.Bind",
-        "Name": "BlazorWebAssemblySignalRApp.Client.Pages.ChildBinding.ChildBindingChild",
+        "Name": "BlazorWebAssemblySignalRApp.Client.Pages.CustomInputs.CustomeInputNumber",
         "AssemblyName": "BlazorWebAssemblySignalRApp.Client",
-        "Documentation": "Binds the provided expression to the 'Year' property and a change event delegate to the 'YearChanged' property of the component.",
+        "Documentation": "Binds the provided expression to the 'Value' property and a change event delegate to the 'ValueChanged' property of the component.",
         "CaseSensitive": true,
         "TagMatchingRules": [
           {
-            "TagName": "BlazorWebAssemblySignalRApp.Client.Pages.ChildBinding.ChildBindingChild",
+            "TagName": "BlazorWebAssemblySignalRApp.Client.Pages.CustomInputs.CustomeInputNumber",
             "Attributes": [
               {
-                "Name": "@bind-Year",
+                "Name": "@bind-Value",
                 "Metadata": {
                   "Common.DirectiveAttribute": "True"
                 }
@@ -18265,21 +20764,188 @@
         "BoundAttributes": [
           {
             "Kind": "Components.Bind",
-            "Name": "@bind-Year",
+            "Name": "@bind-Value",
             "TypeName": "Microsoft.AspNetCore.Components.EventCallback<System.Int32>",
-            "Documentation": "Binds the provided expression to the 'Year' property and a change event delegate to the 'YearChanged' property of the component.",
+            "Documentation": "Binds the provided expression to the 'Value' property and a change event delegate to the 'ValueChanged' property of the component.",
             "Metadata": {
               "Common.DirectiveAttribute": "True",
-              "Common.PropertyName": "Year"
+              "Common.PropertyName": "Value"
             }
           }
         ],
         "Metadata": {
           "Runtime.Name": "Components.None",
           "Components.IsSpecialKind": "Components.Bind",
-          "Components.Bind.ValueAttribute": "Year",
-          "Components.Bind.ChangeAttribute": "YearChanged",
-          "Common.TypeName": "BlazorWebAssemblySignalRApp.Client.Pages.ChildBinding.ChildBindingChild",
+          "Components.Bind.ValueAttribute": "Value",
+          "Components.Bind.ChangeAttribute": "ValueChanged",
+          "Components.Bind.ExpressionAttribute": "ValueExpression",
+          "Common.TypeName": "BlazorWebAssemblySignalRApp.Client.Pages.CustomInputs.CustomeInputNumber",
+          "Components.NameMatch": "Components.FullyQualifiedNameMatch"
+        }
+      },
+      {
+        "HashCode": 497083310,
+        "Kind": "Components.Bind",
+        "Name": "BlazorWebAssemblySignalRApp.Client.Pages.CustomInputs.CustomeInputSelect<TValue>",
+        "AssemblyName": "BlazorWebAssemblySignalRApp.Client",
+        "Documentation": "Binds the provided expression to the 'Value' property and a change event delegate to the 'ValueChanged' property of the component.",
+        "CaseSensitive": true,
+        "TagMatchingRules": [
+          {
+            "TagName": "CustomeInputSelect",
+            "Attributes": [
+              {
+                "Name": "@bind-Value",
+                "Metadata": {
+                  "Common.DirectiveAttribute": "True"
+                }
+              }
+            ]
+          }
+        ],
+        "BoundAttributes": [
+          {
+            "Kind": "Components.Bind",
+            "Name": "@bind-Value",
+            "TypeName": "Microsoft.AspNetCore.Components.EventCallback<TValue>",
+            "Documentation": "Binds the provided expression to the 'Value' property and a change event delegate to the 'ValueChanged' property of the component.",
+            "Metadata": {
+              "Common.DirectiveAttribute": "True",
+              "Common.PropertyName": "Value"
+            }
+          }
+        ],
+        "Metadata": {
+          "Runtime.Name": "Components.None",
+          "Components.IsSpecialKind": "Components.Bind",
+          "Components.Bind.ValueAttribute": "Value",
+          "Components.Bind.ChangeAttribute": "ValueChanged",
+          "Components.Bind.ExpressionAttribute": "ValueExpression",
+          "Common.TypeName": "BlazorWebAssemblySignalRApp.Client.Pages.CustomInputs.CustomeInputSelect<TValue>"
+        }
+      },
+      {
+        "HashCode": 936291322,
+        "Kind": "Components.Bind",
+        "Name": "BlazorWebAssemblySignalRApp.Client.Pages.CustomInputs.CustomeInputSelect<TValue>",
+        "AssemblyName": "BlazorWebAssemblySignalRApp.Client",
+        "Documentation": "Binds the provided expression to the 'Value' property and a change event delegate to the 'ValueChanged' property of the component.",
+        "CaseSensitive": true,
+        "TagMatchingRules": [
+          {
+            "TagName": "BlazorWebAssemblySignalRApp.Client.Pages.CustomInputs.CustomeInputSelect",
+            "Attributes": [
+              {
+                "Name": "@bind-Value",
+                "Metadata": {
+                  "Common.DirectiveAttribute": "True"
+                }
+              }
+            ]
+          }
+        ],
+        "BoundAttributes": [
+          {
+            "Kind": "Components.Bind",
+            "Name": "@bind-Value",
+            "TypeName": "Microsoft.AspNetCore.Components.EventCallback<TValue>",
+            "Documentation": "Binds the provided expression to the 'Value' property and a change event delegate to the 'ValueChanged' property of the component.",
+            "Metadata": {
+              "Common.DirectiveAttribute": "True",
+              "Common.PropertyName": "Value"
+            }
+          }
+        ],
+        "Metadata": {
+          "Runtime.Name": "Components.None",
+          "Components.IsSpecialKind": "Components.Bind",
+          "Components.Bind.ValueAttribute": "Value",
+          "Components.Bind.ChangeAttribute": "ValueChanged",
+          "Components.Bind.ExpressionAttribute": "ValueExpression",
+          "Common.TypeName": "BlazorWebAssemblySignalRApp.Client.Pages.CustomInputs.CustomeInputSelect<TValue>",
+          "Components.NameMatch": "Components.FullyQualifiedNameMatch"
+        }
+      },
+      {
+        "HashCode": -380301632,
+        "Kind": "Components.Bind",
+        "Name": "BlazorWebAssemblySignalRApp.Client.Pages.CustomInputs.CustomeInputText",
+        "AssemblyName": "BlazorWebAssemblySignalRApp.Client",
+        "Documentation": "Binds the provided expression to the 'Value' property and a change event delegate to the 'ValueChanged' property of the component.",
+        "CaseSensitive": true,
+        "TagMatchingRules": [
+          {
+            "TagName": "CustomeInputText",
+            "Attributes": [
+              {
+                "Name": "@bind-Value",
+                "Metadata": {
+                  "Common.DirectiveAttribute": "True"
+                }
+              }
+            ]
+          }
+        ],
+        "BoundAttributes": [
+          {
+            "Kind": "Components.Bind",
+            "Name": "@bind-Value",
+            "TypeName": "Microsoft.AspNetCore.Components.EventCallback<System.String>",
+            "Documentation": "Binds the provided expression to the 'Value' property and a change event delegate to the 'ValueChanged' property of the component.",
+            "Metadata": {
+              "Common.DirectiveAttribute": "True",
+              "Common.PropertyName": "Value"
+            }
+          }
+        ],
+        "Metadata": {
+          "Runtime.Name": "Components.None",
+          "Components.IsSpecialKind": "Components.Bind",
+          "Components.Bind.ValueAttribute": "Value",
+          "Components.Bind.ChangeAttribute": "ValueChanged",
+          "Components.Bind.ExpressionAttribute": "ValueExpression",
+          "Common.TypeName": "BlazorWebAssemblySignalRApp.Client.Pages.CustomInputs.CustomeInputText"
+        }
+      },
+      {
+        "HashCode": 1988579510,
+        "Kind": "Components.Bind",
+        "Name": "BlazorWebAssemblySignalRApp.Client.Pages.CustomInputs.CustomeInputText",
+        "AssemblyName": "BlazorWebAssemblySignalRApp.Client",
+        "Documentation": "Binds the provided expression to the 'Value' property and a change event delegate to the 'ValueChanged' property of the component.",
+        "CaseSensitive": true,
+        "TagMatchingRules": [
+          {
+            "TagName": "BlazorWebAssemblySignalRApp.Client.Pages.CustomInputs.CustomeInputText",
+            "Attributes": [
+              {
+                "Name": "@bind-Value",
+                "Metadata": {
+                  "Common.DirectiveAttribute": "True"
+                }
+              }
+            ]
+          }
+        ],
+        "BoundAttributes": [
+          {
+            "Kind": "Components.Bind",
+            "Name": "@bind-Value",
+            "TypeName": "Microsoft.AspNetCore.Components.EventCallback<System.String>",
+            "Documentation": "Binds the provided expression to the 'Value' property and a change event delegate to the 'ValueChanged' property of the component.",
+            "Metadata": {
+              "Common.DirectiveAttribute": "True",
+              "Common.PropertyName": "Value"
+            }
+          }
+        ],
+        "Metadata": {
+          "Runtime.Name": "Components.None",
+          "Components.IsSpecialKind": "Components.Bind",
+          "Components.Bind.ValueAttribute": "Value",
+          "Components.Bind.ChangeAttribute": "ValueChanged",
+          "Components.Bind.ExpressionAttribute": "ValueExpression",
+          "Common.TypeName": "BlazorWebAssemblySignalRApp.Client.Pages.CustomInputs.CustomeInputText",
           "Components.NameMatch": "Components.FullyQualifiedNameMatch"
         }
       },
@@ -18953,8 +21619,28 @@
       "FileKind": "component"
     },
     {
+      "FilePath": "/home/selenium/Desktop/Learning/PracticalApps/BlazorWebAssemblySignalRApp/Client/Pages/FilesComponent/MultipleFileUpload.razor",
+      "TargetPath": "Pages\\FilesComponent\\MultipleFileUpload.razor",
+      "FileKind": "component"
+    },
+    {
+      "FilePath": "/home/selenium/Desktop/Learning/PracticalApps/BlazorWebAssemblySignalRApp/Client/Pages/WeatherForecastPreserveState.razor",
+      "TargetPath": "Pages\\WeatherForecastPreserveState.razor",
+      "FileKind": "component"
+    },
+    {
+      "FilePath": "/home/selenium/Desktop/Learning/PracticalApps/BlazorWebAssemblySignalRApp/Client/Pages/CascadingTypeParameter/PetsDetails.razor",
+      "TargetPath": "Pages\\CascadingTypeParameter\\PetsDetails.razor",
+      "FileKind": "component"
+    },
+    {
       "FilePath": "/home/selenium/Desktop/Learning/PracticalApps/BlazorWebAssemblySignalRApp/Client/Pages/Splat.razor",
       "TargetPath": "Pages\\Splat.razor",
+      "FileKind": "component"
+    },
+    {
+      "FilePath": "/home/selenium/Desktop/Learning/PracticalApps/BlazorWebAssemblySignalRApp/Client/Pages/CascadingTypeParameter/CascadingTemplate1.razor",
+      "TargetPath": "Pages\\CascadingTypeParameter\\CascadingTemplate1.razor",
       "FileKind": "component"
     },
     {
@@ -18970,6 +21656,11 @@
     {
       "FilePath": "/home/selenium/Desktop/Learning/PracticalApps/BlazorWebAssemblySignalRApp/Client/Pages/PersonDetails/Details.razor",
       "TargetPath": "Pages\\PersonDetails\\Details.razor",
+      "FileKind": "component"
+    },
+    {
+      "FilePath": "/home/selenium/Desktop/Learning/PracticalApps/BlazorWebAssemblySignalRApp/Client/Pages/DynamicComp/DynamicComponentExample.razor",
+      "TargetPath": "Pages\\DynamicComp\\DynamicComponentExample.razor",
       "FileKind": "component"
     },
     {
@@ -19013,6 +21704,11 @@
       "FileKind": "component"
     },
     {
+      "FilePath": "/home/selenium/Desktop/Learning/PracticalApps/BlazorWebAssemblySignalRApp/Client/Pages/Form/StarshipForm.razor",
+      "TargetPath": "Pages\\Form\\StarshipForm.razor",
+      "FileKind": "component"
+    },
+    {
       "FilePath": "/home/selenium/Desktop/Learning/PracticalApps/BlazorWebAssemblySignalRApp/Client/Pages/Tabs/TabSet.razor",
       "TargetPath": "Pages\\Tabs\\TabSet.razor",
       "FileKind": "component"
@@ -19023,8 +21719,18 @@
       "FileKind": "component"
     },
     {
+      "FilePath": "/home/selenium/Desktop/Learning/PracticalApps/BlazorWebAssemblySignalRApp/Client/Pages/CustomInputs/CustomeInputSelect.razor",
+      "TargetPath": "Pages\\CustomInputs\\CustomeInputSelect.razor",
+      "FileKind": "component"
+    },
+    {
       "FilePath": "/home/selenium/Desktop/Learning/PracticalApps/BlazorWebAssemblySignalRApp/Client/Pages/LogSample.razor",
       "TargetPath": "Pages\\LogSample.razor",
+      "FileKind": "component"
+    },
+    {
+      "FilePath": "/home/selenium/Desktop/Learning/PracticalApps/BlazorWebAssemblySignalRApp/Client/Pages/Form/FormExampl1.razor",
+      "TargetPath": "Pages\\Form\\FormExampl1.razor",
       "FileKind": "component"
     },
     {
@@ -19033,13 +21739,28 @@
       "FileKind": "component"
     },
     {
+      "FilePath": "/home/selenium/Desktop/Learning/PracticalApps/BlazorWebAssemblySignalRApp/Client/Pages/Form/BasicValidation.razor",
+      "TargetPath": "Pages\\Form\\BasicValidation.razor",
+      "FileKind": "component"
+    },
+    {
       "FilePath": "/home/selenium/Desktop/Learning/PracticalApps/BlazorWebAssemblySignalRApp/Client/Pages/CounterWithError.razor",
       "TargetPath": "Pages\\CounterWithError.razor",
       "FileKind": "component"
     },
     {
+      "FilePath": "/home/selenium/Desktop/Learning/PracticalApps/BlazorWebAssemblySignalRApp/Client/Pages/FilesComponent/UploadFileToServer.razor",
+      "TargetPath": "Pages\\FilesComponent\\UploadFileToServer.razor",
+      "FileKind": "component"
+    },
+    {
       "FilePath": "/home/selenium/Desktop/Learning/PracticalApps/BlazorWebAssemblySignalRApp/Client/Pages/JS/PrerenderingInterop.razor",
       "TargetPath": "Pages\\JS\\PrerenderingInterop.razor",
+      "FileKind": "component"
+    },
+    {
+      "FilePath": "/home/selenium/Desktop/Learning/PracticalApps/BlazorWebAssemblySignalRApp/Client/Pages/CustomeValidationComponent/CustomeValidator.razor",
+      "TargetPath": "Pages\\CustomeValidationComponent\\CustomeValidator.razor",
       "FileKind": "component"
     },
     {
@@ -19063,6 +21784,16 @@
       "FileKind": "component"
     },
     {
+      "FilePath": "/home/selenium/Desktop/Learning/PracticalApps/BlazorWebAssemblySignalRApp/Client/Pages/JSInterop/CheckRenderChildComponent.razor",
+      "TargetPath": "Pages\\JSInterop\\CheckRenderChildComponent.razor",
+      "FileKind": "component"
+    },
+    {
+      "FilePath": "/home/selenium/Desktop/Learning/PracticalApps/BlazorWebAssemblySignalRApp/Client/Pages/RCL/RCLComponent.razor",
+      "TargetPath": "Pages\\RCL\\RCLComponent.razor",
+      "FileKind": "component"
+    },
+    {
       "FilePath": "/home/selenium/Desktop/Learning/PracticalApps/BlazorWebAssemblySignalRApp/Client/Pages/RouteParameter.razor",
       "TargetPath": "Pages\\RouteParameter.razor",
       "FileKind": "component"
@@ -19075,6 +21806,11 @@
     {
       "FilePath": "/home/selenium/Desktop/Learning/PracticalApps/BlazorWebAssemblySignalRApp/Client/Pages/DoctorWhoSample/ProductionsLayout.razor",
       "TargetPath": "Pages\\DoctorWhoSample\\ProductionsLayout.razor",
+      "FileKind": "component"
+    },
+    {
+      "FilePath": "/home/selenium/Desktop/Learning/PracticalApps/BlazorWebAssemblySignalRApp/Client/Pages/CustomInputs/CustomeInputNumber.razor",
+      "TargetPath": "Pages\\CustomInputs\\CustomeInputNumber.razor",
       "FileKind": "component"
     },
     {
@@ -19098,6 +21834,11 @@
       "FileKind": "component"
     },
     {
+      "FilePath": "/home/selenium/Desktop/Learning/PracticalApps/BlazorWebAssemblySignalRApp/Client/Pages/Localization.razor",
+      "TargetPath": "Pages\\Localization.razor",
+      "FileKind": "component"
+    },
+    {
       "FilePath": "/home/selenium/Desktop/Learning/PracticalApps/BlazorWebAssemblySignalRApp/Client/Pages/Tabs/Tab.razor",
       "TargetPath": "Pages\\Tabs\\Tab.razor",
       "FileKind": "component"
@@ -19110,6 +21851,16 @@
     {
       "FilePath": "/home/selenium/Desktop/Learning/PracticalApps/BlazorWebAssemblySignalRApp/Client/Pages/Chat.razor",
       "TargetPath": "Pages\\Chat.razor",
+      "FileKind": "component"
+    },
+    {
+      "FilePath": "/home/selenium/Desktop/Learning/PracticalApps/BlazorWebAssemblySignalRApp/Client/Pages/CustomInputs/CustomeInputText.razor",
+      "TargetPath": "Pages\\CustomInputs\\CustomeInputText.razor",
+      "FileKind": "component"
+    },
+    {
+      "FilePath": "/home/selenium/Desktop/Learning/PracticalApps/BlazorWebAssemblySignalRApp/Client/Pages/TemplatedComponents/PetsTable4.razor",
+      "TargetPath": "Pages\\TemplatedComponents\\PetsTable4.razor",
       "FileKind": "component"
     },
     {
@@ -19143,6 +21894,11 @@
       "FileKind": "component"
     },
     {
+      "FilePath": "/home/selenium/Desktop/Learning/PracticalApps/BlazorWebAssemblySignalRApp/Client/Pages/DynamicComp/VirginGalactic.razor",
+      "TargetPath": "Pages\\DynamicComp\\VirginGalactic.razor",
+      "FileKind": "component"
+    },
+    {
       "FilePath": "/home/selenium/Desktop/Learning/PracticalApps/BlazorWebAssemblySignalRApp/Client/Pages/EventCallback/EventCallbackChild.razor",
       "TargetPath": "Pages\\EventCallback\\EventCallbackChild.razor",
       "FileKind": "component"
@@ -19150,6 +21906,16 @@
     {
       "FilePath": "/home/selenium/Desktop/Learning/PracticalApps/BlazorWebAssemblySignalRApp/Client/Pages/CascadingElevation/FirstCascadingChildComponent.razor",
       "TargetPath": "Pages\\CascadingElevation\\FirstCascadingChildComponent.razor",
+      "FileKind": "component"
+    },
+    {
+      "FilePath": "/home/selenium/Desktop/Learning/PracticalApps/BlazorWebAssemblySignalRApp/Client/Pages/DynamicComp/UnitedLaunchAlliance.razor",
+      "TargetPath": "Pages\\DynamicComp\\UnitedLaunchAlliance.razor",
+      "FileKind": "component"
+    },
+    {
+      "FilePath": "/home/selenium/Desktop/Learning/PracticalApps/BlazorWebAssemblySignalRApp/Client/Pages/CascadingTypeParameter/CasadingTypeValue1.razor",
+      "TargetPath": "Pages\\CascadingTypeParameter\\CasadingTypeValue1.razor",
       "FileKind": "component"
     },
     {
@@ -19163,8 +21929,23 @@
       "FileKind": "component"
     },
     {
+      "FilePath": "/home/selenium/Desktop/Learning/PracticalApps/BlazorWebAssemblySignalRApp/Client/Pages/JSInterop/JSInteropComponent.razor",
+      "TargetPath": "Pages\\JSInterop\\JSInteropComponent.razor",
+      "FileKind": "component"
+    },
+    {
       "FilePath": "/home/selenium/Desktop/Learning/PracticalApps/BlazorWebAssemblySignalRApp/Client/Pages/LifeCycle/LifeCycleParentComponent.razor",
       "TargetPath": "Pages\\LifeCycle\\LifeCycleParentComponent.razor",
+      "FileKind": "component"
+    },
+    {
+      "FilePath": "/home/selenium/Desktop/Learning/PracticalApps/BlazorWebAssemblySignalRApp/Client/Pages/TemplatedComponents/PetsTable2.razor",
+      "TargetPath": "Pages\\TemplatedComponents\\PetsTable2.razor",
+      "FileKind": "component"
+    },
+    {
+      "FilePath": "/home/selenium/Desktop/Learning/PracticalApps/BlazorWebAssemblySignalRApp/Client/Pages/FilesComponent/FileDownloadComponent.razor",
+      "TargetPath": "Pages\\FilesComponent\\FileDownloadComponent.razor",
       "FileKind": "component"
     },
     {
@@ -19178,6 +21959,26 @@
       "FileKind": "component"
     },
     {
+      "FilePath": "/home/selenium/Desktop/Learning/PracticalApps/BlazorWebAssemblySignalRApp/Client/Pages/Form/FormExample2.razor",
+      "TargetPath": "Pages\\Form\\FormExample2.razor",
+      "FileKind": "component"
+    },
+    {
+      "FilePath": "/home/selenium/Desktop/Learning/PracticalApps/BlazorWebAssemblySignalRApp/Client/Pages/Contents/GenerticRenderFragmentParent.razor",
+      "TargetPath": "Pages\\Contents\\GenerticRenderFragmentParent.razor",
+      "FileKind": "component"
+    },
+    {
+      "FilePath": "/home/selenium/Desktop/Learning/PracticalApps/BlazorWebAssemblySignalRApp/Client/Pages/CollacatedJS.razor",
+      "TargetPath": "Pages\\CollacatedJS.razor",
+      "FileKind": "component"
+    },
+    {
+      "FilePath": "/home/selenium/Desktop/Learning/PracticalApps/BlazorWebAssemblySignalRApp/Client/Pages/Contents/GenericRenderFragment.razor",
+      "TargetPath": "Pages\\Contents\\GenericRenderFragment.razor",
+      "FileKind": "component"
+    },
+    {
       "FilePath": "/home/selenium/Desktop/Learning/PracticalApps/BlazorWebAssemblySignalRApp/Client/Pages/MarkupStringValues.razor",
       "TargetPath": "Pages\\MarkupStringValues.razor",
       "FileKind": "component"
@@ -19185,6 +21986,21 @@
     {
       "FilePath": "/home/selenium/Desktop/Learning/PracticalApps/BlazorWebAssemblySignalRApp/Client/Pages/CounterWithTimer.razor",
       "TargetPath": "Pages\\CounterWithTimer.razor",
+      "FileKind": "component"
+    },
+    {
+      "FilePath": "/home/selenium/Desktop/Learning/PracticalApps/BlazorWebAssemblySignalRApp/Client/Pages/Form/InsertStudent.razor",
+      "TargetPath": "Pages\\Form\\InsertStudent.razor",
+      "FileKind": "component"
+    },
+    {
+      "FilePath": "/home/selenium/Desktop/Learning/PracticalApps/BlazorWebAssemblySignalRApp/Client/Pages/TemplatedComponents/PetsTable3.razor",
+      "TargetPath": "Pages\\TemplatedComponents\\PetsTable3.razor",
+      "FileKind": "component"
+    },
+    {
+      "FilePath": "/home/selenium/Desktop/Learning/PracticalApps/BlazorWebAssemblySignalRApp/Client/Pages/TemplatedComponents/PetsTable.razor",
+      "TargetPath": "Pages\\TemplatedComponents\\PetsTable.razor",
       "FileKind": "component"
     },
     {
@@ -19198,6 +22014,11 @@
       "FileKind": "component"
     },
     {
+      "FilePath": "/home/selenium/Desktop/Learning/PracticalApps/BlazorWebAssemblySignalRApp/Client/Shared/TableTemplate.razor",
+      "TargetPath": "Shared\\TableTemplate.razor",
+      "FileKind": "component"
+    },
+    {
       "FilePath": "/home/selenium/Desktop/Learning/PracticalApps/BlazorWebAssemblySignalRApp/Client/Pages/Tabs/ExampleTabSet.razor",
       "TargetPath": "Pages\\Tabs\\ExampleTabSet.razor",
       "FileKind": "component"
@@ -19205,6 +22026,11 @@
     {
       "FilePath": "/home/selenium/Desktop/Learning/PracticalApps/BlazorWebAssemblySignalRApp/Client/App.razor",
       "TargetPath": "App.razor",
+      "FileKind": "component"
+    },
+    {
+      "FilePath": "/home/selenium/Desktop/Learning/PracticalApps/BlazorWebAssemblySignalRApp/Client/Pages/FilesComponent/FileUpload2.razor",
+      "TargetPath": "Pages\\FilesComponent\\FileUpload2.razor",
       "FileKind": "component"
     },
     {
@@ -19225,6 +22051,11 @@
     {
       "FilePath": "/home/selenium/Desktop/Learning/PracticalApps/BlazorWebAssemblySignalRApp/Client/Pages/ScopedService.razor",
       "TargetPath": "Pages\\ScopedService.razor",
+      "FileKind": "component"
+    },
+    {
+      "FilePath": "/home/selenium/Desktop/Learning/PracticalApps/BlazorWebAssemblySignalRApp/Client/Pages/ChildBinding/BindValueInputs.razor",
+      "TargetPath": "Pages\\ChildBinding\\BindValueInputs.razor",
       "FileKind": "component"
     },
     {

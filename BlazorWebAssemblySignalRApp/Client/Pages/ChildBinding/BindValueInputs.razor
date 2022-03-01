@@ -1,0 +1,13 @@
+@page "/bind-value"
+
+<div>
+    <input @bind="message">
+    Bound with Bind:@message
+    <input @bind-value="messageValue">
+    Bound using bind-value:@messageValue
+    The bind-value is a child binding pattern which child is native input box where parent is blazor input box. Usually used with InputText
+</div>
+@code {
+    private string? message { get; set; }
+    private string? messageValue { get; set; }
+}

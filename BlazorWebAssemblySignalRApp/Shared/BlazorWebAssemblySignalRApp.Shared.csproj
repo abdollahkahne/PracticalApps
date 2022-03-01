@@ -9,4 +9,5 @@
   <ItemGroup>
     <SupportedPlatform Include="browser" />
   </ItemGroup>
+
 </Project>

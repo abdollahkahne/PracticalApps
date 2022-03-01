@@ -1,0 +1,58 @@
+@page "/receive-notifications"
+@implements IDisposable
+@inject NotifierService _notifier
+@inject TimeService _timer
+
+
+<h1>Receive Notifications</h1>
+
+<h2>Timer Service</h2>
+<button @onclick="startTimer">Start Timer</button>
+
+<h2>Notifications</h2>
+<p>
+    Status: @if (lastNotification.key != null)
+    {
+        <span>
+            @lastNotification.key = @lastNotification.value
+        </span>
+    }
+    else
+    {
+
+        <span>Awaiting first notification</span>
+
+    }
+</p>
+
+@code {
+    // define this tuple as component state
+    private (string key, int value) lastNotification { get; set; }
+    protected override void OnInitialized()
+    {
+        _notifier.Notify += onNotify;
+    }
+
+    private async Task onNotify(string key, int value)
+    @* // since this method is not run by component itself ( out of Blazor's Synchronoization Context), we should use the
+        InvokeAsync method of component to make the context correct. What happen if context be different? *@
+    {
+        await InvokeAsync(() =>
+        {
+            lastNotification = (key, value);
+            StateHasChanged();
+        });
+    }
+
+    private void startTimer()
+    {
+        _timer.Start();
+    }
+
+    public void Dispose()
+    {
+        @* _timer.Dispose();// This should not call here since it registered as singleton and this make it to dispose completely
+            until the next refresh! *@
+        _notifier.Notify -= onNotify;
+    }
+}

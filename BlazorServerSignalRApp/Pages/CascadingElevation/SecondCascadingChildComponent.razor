@@ -1,0 +1,12 @@
+<h1>Elevate State</h1>
+<button @onclick="changeContext">Elevate Context</button>
+
+@code {
+    [CascadingParameter]
+    public TestContext? Context { get; set; }
+
+    private void changeContext()
+    {
+        Context?.SetMyProperty("This is the elevated context");
+    }
+}

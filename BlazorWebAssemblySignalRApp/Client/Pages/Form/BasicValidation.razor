@@ -1,0 +1,120 @@
+@page "/basic-validation"
+@using System.ComponentModel.DataAnnotations
+@implements IDisposable
+
+<EditForm EditContext="editContext" OnValidSubmit="handleValidSubmit">
+    <BlazorWebAssemblySignalRApp.Client.Pages.CustomeValidationComponent.CustomeValidator @ref="customeValidator" />
+    <label>
+        <InputNumber @bind-Value="model.Age" />
+        <ValidationMessage For="()=>model.Age" />
+    </label>
+    <label>
+        <InputCheckbox @bind-Value="model.Feature1" /> Feature 1
+    </label>
+    <label>
+        <InputCheckbox @bind-Value="model.Feature2" /> Feature 2
+    </label>
+    @* To show Validation Message for specific/group/all field use Validation message as below. To specify an expression
+        use it directly in For. *@
+    <ValidationMessage For="()=>model.valid" />
+    <button type="submit">Send</button>
+    <p>
+        <a href="http://www.startrek.com/">Star Trek</a>,
+        &copy;1966-2019 CBS Studios, Inc. and
+        <a href="https://www.paramount.com">Paramount Pictures</a>
+    </p>
+</EditForm>
+
+@code {
+    private BlazorWebAssemblySignalRApp.Client.Pages.CustomeValidationComponent.CustomeValidator? customeValidator
+    { get; set; }
+    private BasicModel model = new();
+    private EditContext? editContext { get; set; }
+    private ValidationMessageStore? store { get; set; }
+    // This is only used for Basic Validation
+    private ValidationMessageStore? _store { get; set; }
+    // this is used for annotation attibutes for Age
+
+    protected override void OnInitialized()
+    {
+        // since all the model, editcontext and store are non static (member-wise), we should instansiate them here
+        editContext = new EditContext(model);
+
+        @* // There is an event which raise by validate() method of EditContext. It also calls before execution of OnValidSubmit
+            Event Callback too. The event is:
+            public event EventHandler<ValidationRequestedEventArgs>? OnValidationRequested;
+            so the signature for event handler function is (object? sender,ValidationRequestedEventArgs e):void.
+            Add basic event handler to it
+        *@
+        editContext.OnFieldChanged += (obj, e) => reflecte();
+        editContext.OnValidationRequested += handleBasicValidation;
+        store = new ValidationMessageStore(editContext);
+        _store = new ValidationMessageStore(editContext);
+        base.OnInitialized();
+    }
+    private void handleValidSubmit()
+    {
+
+        Console.WriteLine("HandleValidSubmit called: Processing the form");
+    }
+
+    private void handleBasicValidation(object? sender, ValidationRequestedEventArgs e)
+    {
+        customeValidator!.ClearAll();
+        store?.Clear(); // this clear all validation message in store (Necessary!)
+        if (!model.valid)
+        {
+            // To add you can use an expression which return an object or a field identifier
+            store?.Add(() => model.valid, "At Least you should select one feature!");
+            customeValidationUse();
+        }
+
+    }
+
+    // simple and sample usage of custom validator
+    private void customeValidationUse()
+    {
+        @* customeValidator?.ClearAll(); *@
+        var errors = new Dictionary<string, List<string>>();
+        var field = FieldIdentifier.Create(() => model.Age);
+        @* Console.WriteLine(field.Model + ":" + field.FieldName); *@
+        errors.Add(field.FieldName, new List<string>() { "This errored added using custome validator component" });
+        customeValidator?.DisplayErrors(errors);
+    }
+    // Unsubscribe event handler in Dispose
+    public void Dispose()
+    {
+        if (editContext is not null)
+        {
+            editContext.OnValidationRequested -= handleBasicValidation;
+            editContext.OnFieldChanged -= (obj, e) => reflecte();
+            editContext?.NotifyValidationStateChanged();
+        }
+    }
+
+    //
+
+    // Leanring Reflection (PropertyInfo) and Blazor FieldIdentifier
+    private void reflecte()
+    {
+        // Here we do some reflection if age has value
+        var field = FieldIdentifier.Create(() => model.Age);
+        var modelObj = field.Model;
+        var fieldName = field.FieldName;
+        var attributes = modelObj.GetType().GetProperty(fieldName)!.Attributes;
+        var memberInfo = model.GetType().GetProperty("Age");
+        var age = memberInfo!.GetValue(modelObj);
+        var validationContext = new ValidationContext(model, items: null) { MemberName = fieldName };
+        var results = new List<ValidationResult>();
+        Validator.TryValidateProperty(age, validationContext, results);
+        _store?.Clear(field);
+        foreach (var result in results)
+        {
+            _store?.Add(field, result.ErrorMessage!);
+        }
+        editContext?.NotifyValidationStateChanged();
+        @* // We should raise validation state changed event when we add an error to an store if we want to have online
+            ValidationSummary, ValidationMessage, InputBase classes(Green or Red) and also on dispose *@
+    }
+
+}

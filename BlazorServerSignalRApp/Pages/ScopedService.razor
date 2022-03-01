@@ -1,0 +1,41 @@
+@page "/scoped"
+@using BlazorServerSignalRApp.Data
+@using Microsoft.Extensions.DependencyInjection
+@inherits OwningComponentBase
+
+@*
+    is used for type checking and pattern checking.
+    since null and not null is a pattern we can use is here
+*@
+<h1>@(_userService is not null?_userService.Name:String.Empty)</h1>
+<ul>
+    @if (_settingService is not null)
+    {
+        foreach (var item in _settingService.GetSettings())
+        {
+            <li>@item.SettingName ":" @item.SettingValue)</li>
+        }
+    }
+</ul>
+
+@code {
+    private IUserService? _userService { get; set; }
+    private ISettingService? _settingService { get; set; }
+
+    protected override void OnInitialized()
+    {
+        // ScopedServices Comes from the base class OwningComponentBase which creates services which is available until the
+        @* component disposal *@
+        @*
+
+        1- DI services injected into the component using @inject or the [Inject] attribute aren't created in the component's
+        scope.
+        2- To use the component's scope, services must be resolved using GetRequiredService or GetService.
+        3- Any services resolved using the ScopedServices provider have their dependencies provided from that same scope
+
+    *@
+        _userService = ScopedServices.GetRequiredService<IUserService>();
+        _settingService = ScopedServices.GetRequiredService<ISettingService>();
+        base.OnInitialized();
+    }
+}

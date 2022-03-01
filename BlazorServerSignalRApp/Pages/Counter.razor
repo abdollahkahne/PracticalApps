@@ -8,11 +8,37 @@
 
 <button class="btn btn-primary" @onclick="IncrementCount">Click me</button>
 
+<ul>
+    @if (_readonlyItem != null) // Why this required if you enable nullable?
+    @* // Answer: foreach loop calls the GetEnumerator method. If the collection is null, this method call results in a
+        NullReferenceException. There is difference between an empty collection and a null reference to a collection here
+        (the empty one work without exception without any loop). It is bad practice to return a null collection; your
+        methods should return an empty collection instead *@
+    {
+        @foreach (var item in _readonlyItem)
+        {
+            <li>@item?.ToString()</li>
+        }
+    }
+</ul>
+<div class="bordered">
+    @DateTime.Now
+</div>
+
 @code {
     private int currentCount = 0;
+    @* Here current Count is local state so it resets on every client side navigation too *@
 
     private void IncrementCount()
     {
+        if (currentCount > 3)
+        {
+            throw new InvalidOperationException("This is a sample error for seeing error boundry!");
+        }
         currentCount++;
     }
+
+    private IReadOnlyList<Object?>? _readonlyItem = new List<string>(4) { "UK", "USA", "UAE", "EUR" };
+    @* The IReadOnlyList<T> represents a list in which the number and order of list elements is read-only. The content of
+        list elements is not guaranteed to be read-only. *@
 }

@@ -1,0 +1,24 @@
+<label>
+    <input type="checkbox" checked="@IsCompleted" />
+    Is Completed? (checked connected to prop)
+</label>
+
+<button @onclick="@(() => IsCompleted = !IsCompleted)">
+    Change IsCompleted
+</button>
+
+<label>
+    <input type="checkbox" @bind="@IsChecked" />
+    Is Checked? (Usin Bind)
+</label>
+
+<button @onclick="@(() => IsChecked = !IsChecked)">
+    Reverse Checked!
+</button>
+
+@code {
+    [Parameter]
+    public bool IsCompleted { get; set; }
+    [Parameter]
+    public bool IsChecked { get; set; }
+}

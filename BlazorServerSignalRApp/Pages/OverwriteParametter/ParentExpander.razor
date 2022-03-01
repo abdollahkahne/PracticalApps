@@ -1,0 +1,29 @@
+@page "/expander-example"
+
+<Expander Expanded="true">
+    Expander 1 content
+</Expander>
+
+<Expander Expanded="true" />
+
+<button @onclick="StateHasChanged">
+    Call StateHasChanged
+</button>
+
+<p>
+    When StateHasChanged is called in the parent:
+    1- The Expanded parameter of the first child component is reset back to its initial value (true).
+    2- The second Expander component's Expanded value isn't reset because no child content is rendered in the second
+    component (The parameter single source of true is not the parent!! It is part of the child component which set on
+    instantiation?).
+
+    Both above behaviour are wrong since:
+    1- The single source of true for parameter should be the Parent component
+    2- State is something internal to Component and the toggling state is a state
+
+    So we should define a state private property and use that for managing the toggling state and initialize it with
+    Parameter value and do not overwrite Parameter value in child components.
+    A child component receives new parameter values that possibly overwrite existing values when the parent component
+    rerenders.
+
+</p>

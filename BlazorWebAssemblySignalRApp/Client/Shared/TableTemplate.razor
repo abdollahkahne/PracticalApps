@@ -1,0 +1,33 @@
+@using System.Diagnostics.CodeAnalysis
+@typeparam TType
+
+<div>
+    @ChildContent
+</div>
+<table class="table">
+    <thead>
+        <tr>@Header</tr>
+    </thead>
+    <tbody>
+        @if (RowTemplate is not null)
+        {
+            foreach (var item in Items)
+            {
+                <tr>
+                    @RowTemplate(item)
+                </tr>
+            }
+        }
+    </tbody>
+</table>
+
+@code {
+    [Parameter]
+    public RenderFragment? ChildContent { get; set; }
+    [Parameter]
+    public RenderFragment? Header { get; set; }
+    [Parameter]
+    public RenderFragment<TType>? RowTemplate { get; set; }
+    [Parameter, AllowNull]
+    public IReadOnlyList<TType> Items { get; set; }
+}

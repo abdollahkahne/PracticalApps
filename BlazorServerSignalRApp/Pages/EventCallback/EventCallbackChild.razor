@@ -1,0 +1,25 @@
+<div>
+    <button @onclick="ChangeBody">Change content of Card</button>
+</div>
+<div class="card">
+    <h1 class="card-title">@Title</h1>
+    <div class="card-body">
+        <p>@ChildContent</p>
+    </div>
+</div>
+<div>
+    <button @onclick="callEventCallback">Change Inside the Component</button>
+</div>
+
+@code {
+    [Parameter]
+    public string? Title { get; set; }
+    [Parameter]
+    public RenderFragment? ChildContent { get; set; }
+    [Parameter]
+    public EventCallback<MouseEventArgs> ChangeBody { get; set; }
+    private async Task callEventCallback(MouseEventArgs e)
+    {
+        await ChangeBody.InvokeAsync(e);
+    }
+}

@@ -1,0 +1,30 @@
+@implements ITab
+
+@* In this implementation of Tab we added body of Tab as a property/parameter but in razor markup we set it as children
+    markup. Also for typing we added an interface which implemented by this component *@
+
+<li>
+    <a @onclick="activateTab" class="nav-link @activeClass" role="button">@Title</a>
+</li>
+
+
+@code {
+    [CascadingParameter]
+    public TabSet? Container { get; set; }
+    [Parameter]
+    public RenderFragment? ChildContent { get; set; }
+    [Parameter]
+    public string? Title { get; set; }
+
+    private void activateTab()
+    {
+        Container?.SetActiveTab(this);
+    }
+    protected override void OnInitialized()
+    {
+        Container?.AddTab(this);
+        base.OnInitialized();
+    }
+
+    private string? activeClass => Container?.ActiveTab == this ? "active" : null;
+}

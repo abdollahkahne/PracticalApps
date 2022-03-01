@@ -1,0 +1,21 @@
+@page "/log"
+@inject ILogger<LogSample> _logger
+@* @inject ILoggerProvider _loggerProvider *@
+@* @inject ILogger _logger
+    // This non generic interface aparantly is not available in components
+*@
+
+<PageTitle>Logging Sample</PageTitle>
+
+<h1>Logging Sample</h1>
+<p> Please check console log</p>
+
+@code {
+    @* private ILogger _logger => _loggerProvider.CreateLogger("LoggingSampleComponent"); *@
+    protected override Task OnInitializedAsync()
+    {
+        _logger.LogInformation("Thi is a log with Information level from inside Component");
+        _logger.LogWarning("Thi is a log with Information level from inside Component");
+        return Task.CompletedTask;
+    }
+}

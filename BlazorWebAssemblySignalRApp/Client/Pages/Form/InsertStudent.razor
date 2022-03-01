@@ -1,0 +1,226 @@
+@page "/students/new"
+@using BlazorWebAssemblySignalRApp.Shared.Models
+@using System.ComponentModel.DataAnnotations
+@using System.Reflection
+@using static BlazorWebAssemblySignalRApp.Shared.Models.ComponentEnums
+@inject HttpClient _Http
+@inject ILogger<InsertStudent> _logger
+@implements IDisposable
+
+<EditForm EditContext="_context" OnValidSubmit="handleSubmit">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+    <BlazorWebAssemblySignalRApp.Client.Pages.CustomeValidationComponent.CustomeValidator @ref="customeValidator" />
+    <p>
+        <label>
+            Full Name:
+            <BlazorWebAssemblySignalRApp.Client.Pages.CustomInputs.CustomeInputText @bind-Value="student.Title" />
+        </label>
+    </p>
+    <p>
+        <label>
+            Age:
+            <BlazorWebAssemblySignalRApp.Client.Pages.CustomInputs.CustomeInputNumber @bind-Value="student.Age" />
+            <ValidationMessage For="()=>student.Age" />
+        </label>
+    </p>
+    <p>
+        <label>
+            Birthdate:
+            <InputDate @bind-Value="student.Birthdate" />
+        </label>
+    </p>
+    <p>
+        <label>
+            Is Married?
+            <InputCheckbox @bind-Value="student.Married" />
+        </label>
+    </p>
+    <p>
+        <label>
+            Continent:
+            <BlazorWebAssemblySignalRApp.Client.Pages.CustomInputs.CustomeInputSelect TValue="Continent"
+                @bind-Value="student.Continent" />
+        </label>
+    </p>
+    <p>
+        <label>
+            Country of Origin:
+            <BlazorWebAssemblySignalRApp.Client.Pages.CustomInputs.CustomeInputSelect TValue="Country"
+                @bind-Value="student.Country" />
+            @* <InputSelect @bind-Value="student.Country">
+                <option value="" disabled>Select a Country</option>
+                @foreach (var item in Enum.GetValues<Country>())
+                {
+                <option value="@item">
+                @(item.GetType().GetField(item.ToString())!.GetCustomAttribute<DisplayAttribute>()!.Name)
+                </option>
+                }
+                </InputSelect> *@
+        </label>
+    </p>
+    <p>
+        <label>
+            Description:
+            <InputTextArea @bind-Value="student.Description" />
+        </label>
+    </p>
+    <h3>Parent Information</h3>
+    <p>
+        <label>
+            MotherName:
+            <BlazorWebAssemblySignalRApp.Client.Pages.CustomInputs.CustomeInputText
+                @bind-Value="student.ParentInfo!.MotherName" />
+        </label>
+    </p>
+    <p>
+        <label>
+            Father Name:
+            <BlazorWebAssemblySignalRApp.Client.Pages.CustomInputs.CustomeInputText
+                @bind-Value="student.ParentInfo!.FatherName" />
+        </label>
+    </p>
+    <p>
+        <label>
+            Parent Mariage Length:
+            <BlazorWebAssemblySignalRApp.Client.Pages.CustomInputs.CustomeInputNumber
+                @bind-Value="student.ParentInfo!.MariagedLength" />
+        </label>
+    </p>
+    <p>
+        <label>
+            Is every thing ok:
+            <InputCheckbox @bind-Value="student.ParentInfo!.IsOKay" />
+        </label>
+    </p>
+    <h3>Favourites</h3>
+    <p>
+        <label>
+            Favourite Sport:
+            <br />
+            <InputRadioGroup @bind-Value="student.FavouriteSport">
+                @foreach (var item in Enum.GetValues<Sports>())
+                {
+                    <InputRadio Value="@item" /><text>&nbsp;</text>@item.ToString() <br />
+                }
+            </InputRadioGroup>
+        </label>
+    </p>
+    <label> Select Your Interested Field and Program:</label>
+    <div class="row">
+
+        <InputRadioGroup @bind-Value="student.Major" Name="@nameof(student.Major)">
+
+
+            @foreach (var interest in Enum.GetValues<Major>())
+            {
+                <div class="card col-md-3">
+                    <div class="card-header">
+                        <InputRadio Value="@interest" Name="@nameof(student.Major)" />
+                        <text>&nbsp;</text>@interest.ToString() <br />
+                    </div>
+                    <div class="card-body">
+                        <InputRadioGroup @bind-Value="student.PreviousDegree" Name="@interest.ToString()">
+
+                            @foreach (var program in Enum.GetValues<Degree>())
+                            {
+                                var interest1 = interest;
+                            <InputRadio disabled="@(student.Major!=interest1)" Value="@program"
+                            Name="@interest1.ToString()" />
+                            <text>&nbsp;</text>@program.ToString() <br />
+                            }
+                    </InputRadioGroup>
+                </div>
+            </div>
+            }
+            <br />
+        </InputRadioGroup>
+    </div>
+    <button type="submit" disabled="@disabled">Register</button>
+    <p style="@messageStyles">
+        @message
+    </p>
+</EditForm>
+
+@code {
+    bool disabled { get; set; } = false;
+    string messageStyles { get; set; } = "visibility:hidden";
+    string? message { get; set; }
+    Student student = new Student() { };
+    EditContext? _context { get; set; }
+    CustomeValidationComponent.CustomeValidator? customeValidator { get; set; }
+    async Task handleSubmit()
+    {
+        customeValidator?.ClearAll();
+        var response = await _Http.PostAsJsonAsync<Student>("api/students", student);
+        var errors = await response.Content.ReadFromJsonAsync<Dictionary<string, List<string>>>();
+        if (response.StatusCode == System.Net.HttpStatusCode.BadRequest && errors!.Any())
+        {
+            customeValidator?.DisplayErrors(errors!);
+        }
+        else if (response.IsSuccessStatusCode)
+        {
+            disabled = true;
+            messageStyles = "color:green";
+            message = "The form submitted and processed successfuly";
+        }
+        else
+        {
+            _logger.LogError($"Validation and submit failed with status code :{((int)response.StatusCode)}");
+            disabled = true;
+            messageStyles = "color:red";
+            message = "There was an error processing the form.";
+        }
+    }
+    private void handleFieldChanged(Object? sender, ValidationStateChangedEventArgs e)
+    {
+        @* disabled = !_context!.Validate(); *@
+        // validate() trigger NotifyValidationStateChange and also StateHasChanged by itself since raise OnValidationRequested.
+        // The above method make validation summary showed up in every field change which is not good so change it as below:
+        disabled = _context!.GetValidationMessages().Any();
+        StateHasChanged();
+    }
+    protected override void OnInitialized()
+    {
+        _context = new EditContext(student);
+        @* _context.SetFieldCssClassProvider(new MyCustomeCSSProvider()); *@
+        @* _context.OnFieldChanged += handleFieldChanged; *@
+        @* // since this does not specify order of execution it may be run the
+        callback just after notification while state change is not yet runned and validation does not added to store. So add the
+        callback on validataion state change. *@
+        _context.OnValidationStateChanged += handleFieldChanged;
+        base.OnInitialized();
+    }
+    public void Dispose()
+    {
+
+        if (_context is not null)
+        {
+            _context.OnValidationStateChanged -= handleFieldChanged;
+        }
+    }
+
+    public class MyCustomeCSSProvider : FieldCssClassProvider
+    {
+        public override string GetFieldCssClass(EditContext editContext, in FieldIdentifier fieldIdentifier)
+        {
+            string className = string.Empty;
+            if (editContext.IsModified(fieldIdentifier))
+            {
+                className += " modifiedField";
+            }
+
+            if (editContext.GetValidationMessages(fieldIdentifier).Any())
+            {
+                className += " invalidField";
+            }
+            else
+            {
+                className += " validField";
+            }
+            return className;
+        }
+
+    }
+
+}

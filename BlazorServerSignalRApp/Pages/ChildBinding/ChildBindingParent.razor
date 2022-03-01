@@ -1,0 +1,24 @@
+@page "/child-binding"
+
+
+
+<h1>Parent Component</h1>
+
+<p>Parent <code>year</code>: @year</p>
+
+<button @onclick="UpdateYear">Update Parent <code>year</code></button>
+
+<ChildBindingChild @bind-Year="year"></ChildBindingChild>
+
+@code {
+    private int year = 1979;
+    private Random rng = new();
+    private void UpdateYear()
+    {
+        year = rng.Next(1955, 2021);
+    }
+    @* protected override bool ShouldRender()
+        {
+        return false;
+        } *@
+}

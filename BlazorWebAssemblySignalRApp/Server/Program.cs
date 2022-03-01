@@ -1,4 +1,8 @@
+using BlazorWebAssemblySignalRApp.Client.Pages.ExternalEvents;
 using BlazorWebAssemblySignalRApp.Server.Hubs;
+using BlazorWebAssemblySignalRApp.Shared;
+using ComponentLibrary;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.ResponseCompression;
 using Microsoft.AspNetCore.StaticFiles;
 
@@ -7,12 +11,36 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddSignalR(); // Add signal R services here since it is not a blazor server and need that separately
 builder.Services.AddControllersWithViews();
+// This filter apply in case of Invalid model state and return result as application/problem+json; if modelstat is invalid. to make it as a simple json which return modelstate as result and not as {erros:modelstate} we can config it as below
+// option.SuppressModelStateInvalidFilter
+builder.Services.AddControllers()
+.ConfigureApiBehaviorOptions(options => options.InvalidModelStateResponseFactory = (ctx) =>
+ {
+     if (ctx.HttpContext.Request.Path.StartsWithSegments("/api"))
+     {
+         return new BadRequestObjectResult(ctx.ModelState);
+     }
+     else
+     {
+         return new BadRequestObjectResult(new ValidationProblemDetails(ctx.ModelState));
+     }
+ });
 builder.Services.AddRazorPages();
+
+// builder.Services.AddHttpClient("default", options => options.BaseAddress = new Uri(builder.Environment.WebRootPath));
+builder.Services.AddHttpClient();
 builder.Services.AddResponseCompression(options =>
 {
     options.MimeTypes = ResponseCompressionDefaults.MimeTypes.Concat(new[] { "application/octet-stream" });
 });
 
+
+builder.Services.AddSingleton<IUserService, UserService>();
+builder.Services.AddSingleton<ISettingService, SettingService>();
+
+builder.Services.AddSingleton<NotifierService>(); // This two service used as an example of an external service which runs in Browser!
+builder.Services.AddSingleton<TimeService>();
+builder.Services.AddScoped<ExampleJsInterop>();
 var app = builder.Build();
 
 app.UseResponseCompression();
@@ -63,7 +91,8 @@ var staticFileOptions = new StaticFileOptions()
 };
 
 
-app.MapFallbackToFile("index.html", staticFileOptions); // This is necessary for blazor to work. And it should has an id #App which connected to blazor wasm
+// app.MapFallbackToFile("index.html", staticFileOptions); // This is necessary for blazor to work. And it should has an id #App which connected to blazor wasm
+app.MapFallbackToPage("/_Host"); // This is used for prerendering instead of index.html
 
 app.Run();
 

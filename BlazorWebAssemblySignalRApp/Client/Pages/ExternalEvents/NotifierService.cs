@@ -12,6 +12,7 @@ namespace BlazorWebAssemblySignalRApp.Client.Pages.ExternalEvents
         {
             if (Notify != null)
             {
+                // Console.WriteLine($"{key}:{value}");
                 await Notify.Invoke(key, value);
             }
 

@@ -1,0 +1,166 @@
+@page "/file-upload-to-api"
+@using BlazorServerSignalRApp.Data
+@using System.Text.Json
+@inject ILogger<UploadFilesToAPI> _logger
+@inject IHttpClientFactory _httpClientFactory
+
+<h1>Upload Files</h1>
+<p>
+    <label>
+        Upload Up to @maximumAllowedFilesCount Files:
+        <InputFile multiple OnChange="OnFileSelection" />
+    </label>
+</p>
+@if (files.Count > 0)
+{
+    <div class="card">
+    <div class="card-body">
+        <ol>
+            @foreach (var item in files)
+                {
+                    <li>
+                        File:@item.Name
+                        <br>
+                        @if (FileUpload(UploadResults, item.Name, _logger, out var uploadResult))
+                        {
+                            <span>Stored File Name: @uploadResult.StoredFileName</span>
+                        }
+                        else
+                        {
+                            <span> There is an error uploading the file (Error: @uploadResult.ErrorCode)</span>
+                        }
+                    </li>
+                }
+            </ol>
+        </div>
+    </div>
+}
+
+@code {
+    private bool shouldRender = false;
+    protected override bool ShouldRender()
+    {
+        return shouldRender;
+    }
+
+    private int maximumAllowedFilesCount = 3;
+    private List<IBrowserFile> files = new List<IBrowserFile>();
+    private List<UploadResult> UploadResults = new();
+    private async Task OnFileSelection(InputFileChangeEventArgs e)
+    {
+        long maxFileSize = 1024 * 1024 * 15;
+        var upload = false; // we have files that should upload
+        @*
+            HttpContent Stream Helper Class can be used for posting from Client to Server and From Server to client.
+            In case of sending FormData from client to server we can use a dreived type named MultipartFormDataContent ( which
+            Provides a container for content encoded using multipart/form-data MIME type). It is an IEnumerable<HttpContent>. so we
+            should build instance of httpcontent and add to it in each iteration
+            To see more info about HttpContent and its inherited types see below section.
+        *@
+        using (var content = new MultipartFormDataContent())
+        {
+            foreach (var file in e.GetMultipleFiles(maximumAllowedFilesCount))
+            {
+                // If we have not yet related upload result (In case we already uploaded the file ignore that)
+                if (UploadResults.SingleOrDefault(r => r.FileName == file.Name) is null)
+                {
+                    try
+                    {
+                        var stream = file.OpenReadStream(maxFileSize);
+                        var fileContent = new StreamContent(stream);
+                        fileContent.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue(file.ContentType);
+                        content.Add(fileContent, "\"files\"", file.Name); // This addes file.Name to files collection
+
+                        files.Add(file);// this only used in UI
+                        upload = true;
+                        _logger.LogInformation("Uploading File:{filename} is started", file.Name);
+                    }
+                    catch (System.Exception ex)
+                    {
+                        _logger.LogInformation("File:{filename} Not uploaded with Error Code 6= {message}", file.Name, ex.Message);
+                        UploadResults.Add(new UploadResult()
+                        {
+                            Uploaded = false,
+                            FileName = file.Name,
+                            ErrorCode = 6,
+                        });
+                    }
+                }
+            }
+            if (upload)
+            {
+                var client = _httpClientFactory.CreateClient();
+                var response = await client.PostAsync("http://localhost:5205/api/files", content);
+                response.EnsureSuccessStatusCode();
+                var serializationOption = new JsonSerializerOptions()
+                {
+                    PropertyNameCaseInsensitive = true
+                };
+                @* var responseBody = response.Content.ReadAsStream();
+                    var uploadResults = JsonSerializer.Deserialize<List<UploadResult>>(responseBody, serializationOption); *@
+                var uploadResults = await response.Content.ReadFromJsonAsync<List<UploadResult>>(serializationOption);
+                if (uploadResults is not null)
+                    UploadResults = UploadResults.Concat(uploadResults).ToList();
+                @* StateHasChanged(); // This is not necessary since it is done in Event callbacks*@
+                shouldRender = true; // this sets ShouldRender which is used in component re rendering
+            }
+
+        }
+
+
+    }
+                // Why Static and Why Logger Passed instead use it directly?
+        // Since it is something specific to component itself but its somehow Helper Method we use it as static
+    @* // And since _logger is specific to each instance of component we should use it as parameter. even I think the static
+        class does not allow to use injected service directly since they injected after static instance creation *@
+    private static bool FileUpload(IList<UploadResult> uploadResults,
+        string? filename, ILogger<UploadFilesToAPI> logger, out UploadResult result)
+    {
+        result = uploadResults.SingleOrDefault(f => f.FileName == filename) ?? new();
+        if (!result.Uploaded)
+        {
+            result.ErrorCode = 5;
+            result.FileName = filename;
+            logger.LogInformation("{filename} Not Uploaded with Error Code: {errorCode}", filename, 5);
+        }
+        return result.Uploaded;
+    }
+}
+
+
+@*
+    HttpContent
+    It is an stream helper class which provide methods to works with low level stream (Here network stream). It is used for
+    content parts of a response (body/content) in Http Responses and it has a Headers property HttpContentHeaders. A base
+    class representing an HTTP entity body and content headers (like content-type, content-length,
+    content-encoding,content-language, ...). So we used its inherited types for our special use cases as below:
+    1-StreamContent: it creates an http content from an stream. its constructor is StreamContent(Stream)
+    2- MultipartContent: Provides a collection of HttpContent objects that get serialized using the multipart/* content type
+    specification. So practically it is a collection of stream content for example. MultipartFormDataContent derived from
+    this class and Provides a container for content encoded using multipart/form-data MIME type. Its constructor can be
+    MultipartContent() or MultipartContent(subType:string). All MultipartFormDataContent does is provide methods to add
+    required Content-Disposition headers to content object added to the collection.
+    https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Disposition
+    3- JsonContent: Provides HTTP content based on JSON. It has two other properties in addition to Headers including
+    ObjectType (Gets the type of the Value to be serialized by this instance) and Value (Gets the value to be serialized and
+    used as the body/content of the HttpRequestMessage that sends this instance). This class does not have constructor but
+    has a static method create which create an instance of itself for example giving object type and value.
+    4- ByteArrayContent: same as stream content but it use Byte Array instead of stream to create http content (new
+    ByteArrayContent(byte[])). It has two inherited class: StringContent (Provides HTTP content based on a string with
+    constructor new StringContent(string,optional encoding)) and FormUrlEncodedContent (A container for name/value tuples
+    encoded using application/x-www-form-urlencoded MIME type with constructor new
+    FormUrlEncodedContent(IEnumerable<KeyValuePair<string,string>>)) which are useful classes.
+
+    Stream (A very quick view)
+    // Consider that StreamContent or HttpContent Class are not inherited from stream. streams are:
+    // 1- storage streams that represent a location where the bytes will be stored like MemoryStream, FileStream and
+    // NetworkStream
+    // 2- function streams that cannot exist on their own. They can only be "plugged onto" other streams to add
+    // functionality like CryptoStream, GzipStream, DeflatedStream, AuthneticatedStream
+    // 3- The helper types for streams implement IDisposable , so they have a Dispose method to release unmanaged resources.
+    // They used where you need to work with streams at a low level, most often, you can plug helper classes into the chain
+    // to make things easier. This helper types includes StreamReader, StreamWriter, BinaryReader, BinaryWriter, XmlReader,
+    // XmlWriter.
+    // Also HttpContent and StreamContent, StreamReader Belong to this Helper Types.
+
+*@

@@ -1,0 +1,73 @@
+@page "/dynamic-component/{*id}"
+@using CascadingTypeParameter
+
+<div>
+    @Type.GetType($"BlazorWebAssemblySignalRApp.Client.Pages.DynamicComp.{componentTypeString}")
+    @if (Type.GetType($"BlazorWebAssemblySignalRApp.Client.Pages.DynamicComp.{componentTypeString}") is not null) {
+        <DynamicComponent Type="@Type.GetType($"BlazorWebAssemblySignalRApp.Client.Pages.DynamicComp.{componentTypeString}")" />
+    }
+    
+</div>
+<select @bind="componentTypeString">
+    <option value="" disabled>Select a component</option>
+    <option value="@nameof(UnitedLaunchAlliance)">United Launch Alliance</option>
+    <option value="@nameof(VirginGalactic)">Virgin Galactic</option>
+    
+</select>
+<DynamicComponent @ref="dc" Type="componentType" Parameters="parameters" />
+<DynamicComponent Type="typeof(PetsDetails)" Parameters="parametersPetsDetails" />"
+
+
+@code {
+    @* private Dictionary<string,Object> dynamicParams=new Dictionary<string, object>() {
+        {"Title","This is a attribute "},
+        {"ChildContent",childContent}
+        }; *@
+    private DynamicComponent? dc { get; set; }
+    private string? componentTypeString {get;set;}
+
+    private Type componentType { get; set; } = typeof(Dialog);
+    private static RenderFragment childContent =
+    @<p>this is a sample for render fragment</p>
+    ;
+    public IDictionary<string, object> parameters = new Dictionary<string, object>() {
+{ "Title", "This is a sample Title" },{"ChildContent",childContent}
+};
+
+    public IDictionary<string, object> parametersPetsDetails = new Dictionary<string,
+    object>() { { "id", "10" } };
+
+    // Lifecycl logging
+    public override async Task SetParametersAsync(ParameterView parameters)
+    {
+        Console.WriteLine("Dynamic SetParameterAsync Runned");
+        await base.SetParametersAsync(parameters);
+    }
+    protected override void OnInitialized()
+    {
+        Console.WriteLine("Dynamic OnInitialized Runned");
+        base.OnInitialized();
+    }
+    protected override void OnParametersSet()
+    {
+        Console.WriteLine("Dynamic OnParametersSet Runned");
+        base.OnParametersSet();
+    }
+    protected override void OnAfterRender(bool firstRender)
+    {
+        // d Its instance type is BlazorWebAssemblySignalRApp.Client.Pages.Dialog
+        // since getType is run on runtime it get the correct type of instance
+        // Also to convert a string to Type we can use Type.GetType("Full Qualified Class Name String")
+        // A nameof expression is evaluated at compile time and has no effect at run time.
+        Console.WriteLine($"Dynamic OnAfterRender Runned and Its instance type is {dc?.Instance?.GetType()} with Title equal to {(dc?.Instance as Dialog)?.Title}");
+        base.OnAfterRender(firstRender);
+    }
+    [Parameter]
+    public string? Id { get; set; }
+    private string message { get; set; } = "This message managed by my parent!";
+
+    private void changeMessage(MouseEventArgs e)
+    {
+        message = "The message changed by parent method which triggered by child!";
+    }
+}

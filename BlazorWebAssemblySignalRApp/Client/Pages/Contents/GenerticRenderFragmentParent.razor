@@ -1,0 +1,33 @@
+@page "/generic-render-fragment"
+<h3>Use Generic Render Fragment Defined and Executed In Parent Properties</h3>
+<GenericRenderFragment Title="Test">
+
+    @temp("TestValue")
+</GenericRenderFragment>
+
+
+<h3>Use Generic Render Fragment Defined In Parent Properties but Executed in Child Component</h3>
+
+<GenericRenderFragment Title="Another Sample" ChildContent="action">
+</GenericRenderFragment>
+
+<h3>Use simple Render Fragment as a Html Element in Parent as an Invoked Generic Render Fragment in Child Component
+</h3>
+<GenericRenderFragment Title="Third Sample">
+
+    <p>I am a simple html p element</p>
+</GenericRenderFragment>
+
+
+@code {
+    private RenderFragment<string> temp = val =>
+    @<p>
+        This is a sample of Generic Render Fragment which used val input as:@val
+    </p>
+    ;
+
+    private RenderFragment<bool> action = value =>
+    @<p>This is a text render fragment without using boolean value: @value!</p>
+    ;
+
+}

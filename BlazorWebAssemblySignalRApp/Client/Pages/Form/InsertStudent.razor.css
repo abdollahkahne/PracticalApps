@@ -1,0 +1,10 @@
+::deep .validField {
+    border-color: lawngreen;
+}
+
+::deep .invalidField {
+    background-color: tomato;
+}
+::deep .modifiedField {
+    border: yellow dashed 2px;
+}

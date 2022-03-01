@@ -5,11 +5,17 @@ using Microsoft.Extensions.Configuration.Memory;
 using BlazorWebAssemblySignalRApp.Shared;
 using BlazorWebAssemblySignalRApp.Client.Pages.ExternalEvents;
 using BlazorWebAssemblySignalRApp.Client.Pages;
+using ComponentLibrary;
 
 var builder = WebAssemblyHostBuilder.CreateDefault(args); // Here we create the default host builder for WebAssembly
-builder.RootComponents.Add<App>("#app");
-builder.RootComponents.Add<HeadOutlet>("head::after");
+// The following to line should be deleted for blazor wasm prerendering since we completely delete the index.html and add index.cshtml!
+// builder.RootComponents.Add<App>("#app");
+// builder.RootComponents.Add<HeadOutlet>("head::after");
+// To register a component to work with in JS
 builder.RootComponents.RegisterForJavaScript<Dialog>("dialog");
+
+// To add a component to a css selector in razor page/view (This does not happen in Prerendering! and if we have other pages which do not have this css selector and uses blazor components in some way browser crashes! Do not USE this approach except for app)
+// builder.RootComponents.Add<Counter>(".counter-from-css");
 
 var http = new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) }; // better to use http client factory here? No. since it runs on client it do not  encounter problems related to server and http handler I think
 builder.Services.AddScoped(sp => http);
@@ -19,6 +25,9 @@ builder.Services.AddSingleton<ISettingService, SettingService>();
 
 builder.Services.AddSingleton<NotifierService>(); // This two service used as an example of an external service which runs in Browser!
 builder.Services.AddSingleton<TimeService>();
+
+// this should be added to Services in order to use it inside ComponentLibrary or outside it.
+builder.Services.AddScoped<ExampleJsInterop>();
 
 using (var response = await http.GetAsync("cars.json"))
 {

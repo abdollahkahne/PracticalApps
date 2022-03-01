@@ -1,0 +1,35 @@
+@* @page "/on-parameters-set" *@
+@page "/on-parameters-set/{start:datetime?}"
+
+@* Note:
+    In case of adding a datetime constraint to route template we can not make it arbitary by adding a ? mark (Apparantly
+    this is wrong if we make the parameter nullable ).
+    We can make it arbitary by using two route template using two page directive. So it is possible to add multiple route
+    template to a component or I think to razor pages.
+    Also consider that default route parameter constraint is string so it throw an error in case of defining a parameter
+    other than string (even int!) related to Url route template parameters
+*@
+<h2>DateTime route Parameter</h2>
+<p>
+    @message
+</p>
+@code {
+    [Parameter]
+    public DateTime? Start { get; set; }
+    private string message { get; set; } = "This message does not set in the url!";
+    protected override void OnParametersSet()
+    {
+        if (Start == default)
+        {
+            // default value for date and time is 1/1/1 but default of DateTime? is null so we define it below
+            Start = DateTime.Now;
+            message = $"No Start date in URL presented. Start is {Start}";
+        }
+        else
+        {
+            message = $"Start date in URL is presented. Start is {Start}";
+        }
+        base.OnParametersSet();
+    }
+
+}

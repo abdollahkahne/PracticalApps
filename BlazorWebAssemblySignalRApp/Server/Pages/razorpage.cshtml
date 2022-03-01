@@ -1,0 +1,21 @@
+@page
+@addTagHelper *,Microsoft.AspNetCore.Mvc.TagHelpers
+@using BlazorWebAssemblySignalRApp.Client.Pages
+@{
+    Layout = "_Layout";
+}
+
+<div>
+    <h2>Using Component Tag Helper</h2>
+    <p>This page show how to use a Blazor razor component in a razor page or mvc razor view using Component Tag Helper.
+    </p>
+    <component type="typeof(WeatherForecastPreserveState)" render-mode="WebAssemblyPrerendered" />
+    <div class="counter-from-css">The css selector component injection does not work in server (Prerendering and Razor
+        page or view component usage) but work after host bootstrap in browser but it has some problem when using with
+        other mechanism so it disabled from program.cs!</div>
+    <component type="@typeof(ComponentLibrary.Component1)" render-mode="WebAssemblyPrerendered" />
+    <div>
+        ChildContent does not work for Component Tag Helper
+    </div>
+    <persist-component-state />
+</div>

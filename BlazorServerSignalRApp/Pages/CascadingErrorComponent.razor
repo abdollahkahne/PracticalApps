@@ -1,0 +1,18 @@
+<CascadingValue Value=this>
+    @ChildContent
+</CascadingValue>
+
+@code {
+    [Parameter]
+    public RenderFragment? ChildContent { get; set; }
+
+    // Here we define method and properties for processing errors
+    public void ProcessError(Exception ex)
+    {
+        Console.WriteLine(ex.Message);
+        ErrorMessage = ex.Message;
+        StateHasChanged(); // This should call to apply changes in UI Rendering (it is only necessary when really required)
+    }
+
+    public string? ErrorMessage { get; set; }
+}
