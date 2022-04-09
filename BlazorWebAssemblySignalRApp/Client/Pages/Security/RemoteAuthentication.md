@@ -378,6 +378,7 @@ services.AddAuthentication()
 
       };
     });
+    
 As it shows, we only require the security key to do verification and then we return the claims associated with token for example in an event as:
  options.Events = new JwtBearerEvents
   {
