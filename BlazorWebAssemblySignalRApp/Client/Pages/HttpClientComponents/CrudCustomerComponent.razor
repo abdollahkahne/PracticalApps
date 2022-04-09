@@ -1,0 +1,165 @@
+@page "/call-cruds"
+@using System.Text.Json
+@using System.Linq
+@inject HttpClient _client
+
+<h1>Customers</h1>
+@if (customers is null)
+{
+    <p>No Customer Found!</p>
+}
+else
+{
+    <table class="table">
+    <thead>
+        <tr>
+            <th>Customer Id</th>
+            <th>Customer Title</th>
+            <th>Country</th>
+            <th>City</th>
+            <th>Operations</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr id="edit-row" style="display: @editRowDisplay;">
+            <td>
+                <input readonly @bind="editItem.CustomerID" />
+            </td>
+            <td>
+                <input @bind="editItem.CompanyName" @ref="editRow" />
+            </td>
+            <td>
+                <input @bind="editItem.Country" />
+            </td>
+            <td>
+                <input @bind="editItem.City" />
+            </td>
+            <td>
+                <button @onclick="applyChanges" class="btn btn-success">Save</button>
+                <button @onclick="cancelChanges" class="btn btn-info">Cancel</button>
+            </td>
+        </tr>
+        @foreach (var item in customers)
+            {
+                <tr>
+                    <td>@item.CustomerID</td>
+                    <td>@item.CompanyName</td>
+                    <td>@item.Country</td>
+                    <td>@item.City</td>
+                    <td>
+                        <button @onclick="@(async()=>await editSelectedItem(item.CustomerID))"
+                    class="btn btn-warning">Edit</button>
+                        <button @onclick="@(async()=>await deleteItem(item.CustomerID))" class="btn btn-danger">Delete</button>
+                    </td>
+                </tr>
+            }
+        </tbody>
+        <tfoot>
+            <tr id="add-row">
+                <th>
+                    <input placeholder="Customer ID" @bind="newItem.CustomerID" />
+                </th>
+                <th>
+                    <input placeholder="Company Name" @bind="newItem.CompanyName" />
+                </th>
+                <th>
+                    <input placeholder="Country" @bind="newItem.Country" />
+                </th>
+                <th>
+                    <input placeholder="City" @bind="newItem.City" />
+                </th>
+                <th>
+                    <button @onclick="addItem" class="btn btn-success">Add</button>
+                    <button @onclick="resetItem" class="btn btn-info">Reset</button>
+                </th>
+            </tr>
+        </tfoot>
+    </table>
+}
+
+@code {
+    private ElementReference? editRow { get; set; }
+    private IEnumerable<Customer>? customers { get; set; }
+    private string editRowDisplay { get; set; } = "none";
+    private Customer editItem { get; set; } = new Customer();
+    private Customer newItem { get; set; } = new Customer();
+    private JsonSerializerOptions options = new()
+    {
+        PropertyNameCaseInsensitive = true,
+    };
+    protected override async Task OnInitializedAsync()
+    {
+
+        var request = new HttpRequestMessage()
+        {
+            Method = HttpMethod.Get,
+            RequestUri = new Uri("http://localhost:5000/_api/customers"),
+        };
+
+        try
+        {
+            customers = (await _client.GetFromJsonAsync<IEnumerable<Customer>>(request.RequestUri, options))?.OrderBy(c
+            => c.CustomerID);
+        }
+        catch (System.Exception ex)
+        {
+            // If GetFromJsonAsync do not return json it throw notsupported exception
+            Console.WriteLine(ex.Message);
+        }
+        await base.OnInitializedAsync();
+    }
+    private async Task applyChanges()
+    {
+        if (!string.IsNullOrEmpty(editItem.CustomerID))
+        {
+            var url = new Uri($"http://localhost:5000/_api/customers/{editItem.CustomerID}");
+            var response = await _client.PutAsJsonAsync(url, editItem, options);
+            response.EnsureSuccessStatusCode();
+            editItem = new Customer();
+            // Update Customers List
+            customers = (await _client.GetFromJsonAsync<IEnumerable<Customer>>(new Uri("http://localhost:5000/_api/customers"),
+            options))?.OrderBy(c => c.CustomerID);
+            editRowDisplay = "none";
+        }
+
+    }
+    private async Task editSelectedItem(string customerId)
+    {
+        // We can also edit item directly from customers or get from API it
+        var url = new Uri($"http://localhost:5000/_api/customers/{customerId}");
+        editItem = await _client.GetFromJsonAsync<Customer>(url, options) ?? new Customer();
+        if (!string.IsNullOrEmpty(editItem.CustomerID))
+        {
+            editRowDisplay = "table-row";
+            await editRow!.Value.FocusAsync();
+        }
+    }
+    private async Task addItem()
+    {
+        var url = new Uri("http://localhost:5000/_api/customers");
+        var response = await _client.PostAsJsonAsync<Customer>(url, newItem, options);
+        response.EnsureSuccessStatusCode();
+        newItem = new Customer();
+        // Update customers to include added item
+        customers = (await _client.GetFromJsonAsync<IEnumerable<Customer>>(url, options))?.OrderBy(c => c.CustomerID);
+    }
+    private void cancelChanges()
+    {
+        editItem = new Customer();
+        editRowDisplay = "none";
+    }
+    private async Task deleteItem(string customerId)
+    {
+        var url = new Uri($"http://localhost:5000/_api/customers/{customerId}");
+        var response = await _client.DeleteAsync(url);
+        response.EnsureSuccessStatusCode();
+        // Update Customers List
+        customers = (await _client.GetFromJsonAsync<IEnumerable<Customer>>(new Uri("http://localhost:5000/_api/customers"),
+        options))?.OrderBy(c => c.CustomerID);
+    }
+    private void resetItem()
+    {
+        newItem = new Customer();
+    }
+
+}

@@ -1,0 +1,56 @@
+@page "/open-source-map"
+@inject IJSRuntime JS
+@implements IAsyncDisposable
+
+<div @ref="mapbox" style="width: 800px;height:600px;">
+
+</div>
+<button @onclick="@(()=>changeMap(51.454514, -2.587910))">Show Bristol, UK</button>
+<button @onclick="()=>changeMap(35.6762, 139.6503)">Show Tokyo, Japan</button>
+<button @onclick="()=>changeMap(35.6762, 67.6503)">Show Random</button>
+<button @onclick="testByteArray">Test Byte Array</button>
+
+<p>
+    This map provided by <a href="https://www.mapbox.com/">Mapbox</a>
+</p>
+
+@code {
+    private ElementReference mapbox { get; set; }
+    private IJSObjectReference? module { get; set; }
+    private IJSObjectReference? mapInstance { get; set; }
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            module = await JS.InvokeAsync<IJSObjectReference>("import", "./Pages/JSInterop/MapComponent/MapComponent.razor.js");
+            mapInstance = await module.InvokeAsync<IJSObjectReference>("addMapToElement", mapbox);
+        }
+        await base.OnAfterRenderAsync(firstRender);
+    }
+    private async Task changeMap(double latitude, double longitude)
+    {
+        if (module is not null && mapInstance is not null)
+            await module.InvokeVoidAsync("setMapCenter", mapInstance, latitude, longitude);
+    }
+
+    public async ValueTask DisposeAsync()
+    {
+        //Dispose all IJSObjectReference
+        if (module is not null)
+            await module.DisposeAsync();
+        if (mapInstance is not null)
+        {
+            await mapInstance.DisposeAsync();
+        }
+    }
+
+    private async Task testByteArray()
+    {
+        var bytes = new byte[] { 0x45, 0x76, 0x65, 0x72, 0x79, 0x74, 0x68, 0x69,
+0x6e, 0x67, 0x27, 0x73, 0x20, 0x73, 0x68, 0x69, 0x6e, 0x79, 0x2c,
+0x20, 0x43, 0x61, 0x70, 0x74, 0x69, 0x61, 0x6e, 0x2e, 0x20, 0x4e,
+0x6f, 0x74, 0x20, 0x74, 0x6f, 0x20, 0x66, 0x72, 0x65, 0x74, 0x2e };
+        var str = await module!.InvokeAsync<string>("decodeByteArray", bytes);
+        Console.WriteLine(str);
+    }
+}

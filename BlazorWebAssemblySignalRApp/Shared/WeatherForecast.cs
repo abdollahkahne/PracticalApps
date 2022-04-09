@@ -1,3 +1,6 @@
+using System.Security.Claims;
+using Microsoft.AspNetCore.Components.Authorization;
+
 namespace BlazorWebAssemblySignalRApp.Shared;
 
 public class WeatherForecast
@@ -47,4 +50,19 @@ public class SettingService : ISettingService
     {
         return _settings;
     }
+}
+
+public class CustomAuthenticationStateProvider : AuthenticationStateProvider
+{
+
+    public override async Task<AuthenticationState> GetAuthenticationStateAsync()
+    {
+        var claims = new List<Claim>() { new Claim(ClaimTypes.Name, "Shahrzad"), new Claim(ClaimTypes.Role, "Programmer"), new Claim(ClaimTypes.Surname, "Sepanlou") };
+        var identity = new ClaimsIdentity(claims, "test-authentication");
+        var user = new ClaimsPrincipal(identity);
+        var authenticationState = new AuthenticationState(user);
+        // await Task.Delay(7000);
+        return await Task.FromResult(authenticationState);
+    }
+
 }

@@ -2,11 +2,30 @@ using BlazorWebAssemblySignalRApp.Client.Pages.ExternalEvents;
 using BlazorWebAssemblySignalRApp.Server.Hubs;
 using BlazorWebAssemblySignalRApp.Shared;
 using ComponentLibrary;
+using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.ResponseCompression;
 using Microsoft.AspNetCore.StaticFiles;
 
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddSingleton<AuthenticationStateProvider>(new CustomAuthenticationStateProvider());
+builder.Services.AddAuthorizationCore(options =>
+{
+    options.AddPolicy("NothAuthorized", policy =>
+    {
+        policy.RequireAssertion(ctx =>
+        {
+            var resource = ctx.Resource;
+            var username = ctx.User.Identity!.Name;
+            if (username == resource.ToString())
+            {
+                return true;
+            }
+            return false;
+        });
+    });
+});
 
 // Add services to the container.
 builder.Services.AddSignalR(); // Add signal R services here since it is not a blazor server and need that separately

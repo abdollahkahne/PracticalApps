@@ -13,11 +13,13 @@
     <link rel="stylesheet" href="css/bootstrap/bootstrap.min.css" />
     <link href="css/app.css" rel="stylesheet" />
     <link href="BlazorWebAssemblySignalRApp.Client.styles.css" rel="stylesheet" />
+    @* <link href="https://api.mapbox.com/mapbox-gl-js/v1.12.0/mapbox-gl.css" rel="stylesheet" /> *@
     <component type="typeof(HeadOutlet)" render-mode="WebAssemblyPrerendered" />
     <script>
         window.setElementInnerText_ = (element, text) => element.innerText = text;
         window.setElementInnerText__ = (element, text) => { element.innerText = text; return text; }
     </script>
+
 </head>
 
 <body>
@@ -34,37 +36,37 @@
         <a class="dismiss">🗙</a>
     </div>
 
-    <script autostart="false" src="_framework/blazor.webassembly.js"></script>
+    <script autostart="true" src="_framework/blazor.webassembly.js"></script>
     <script>
         addEventListener("pagehide", () => { Blazor.disconnect(); });
-        Blazor.start(
-            {
+        @* Blazor.start(
+                {
                 configureSignalR: builder => builder.configureLogging("information"),
                 reconnectionHandler: {
-                    onConnectionUp: () => {
-                        console.log("The connection is Up and OKay! (From client side)")
-                    },
-                    onConnectionDown: (option, err) => {
-                        console.log(option);
-                        console.log(err);
-                    }
+                onConnectionUp: () => {
+                console.log("The connection is Up and OKay! (From client side)")
                 },
-                @* reconnectionOptions: {
+                onConnectionDown: (option, err) => {
+                console.log(option);
+                console.log(err);
+                }
+                },
+                reconnectionOptions: {
                 maxRetries: 3,
                 retryIntervalMilliseconds: 2000,
                 dialogId: "components-reconnect-modal"
-                } *@
-            }
-        );
+                }
+                }
+                ); *@
     </script>
     <script>
-        // this function can be write as lambda expression too
-        function myCustomEventArgs(event) {
-            return {
-                value: "Custom Event Value",
-                src: "Custom Event Name"
+            // this function can be write as lambda expression too
+            function myCustomEventArgs(event) {
+                return {
+                    value: "Custom Event Value",
+                    src: "Custom Event Name"
+                }
             }
-        }
         Blazor.registerCustomEventType("mycustomclick", {
             browserEventName: "click",
             createEventArgs: myCustomEventArgs,
@@ -116,7 +118,66 @@
         // To dispatch the event with another object use obj.dispatchEvent and obj.EventListener to handle it)
 
     </script>
+    <script>
+        window.JSInterop = {
+            clickElem: (elem) => elem.click(),
+        }
+    </script>
+    <script>
+        window.returnObjectReference = () => {
+            return {
+                unmarshalledFunctionReturnBoolean: function (fields) {
+                    const name = Blazor.platform.readStringField(fields, 0);
+                    const year = Blazor.platform.readInt32Field(fields, 8);
 
+                    return name === "Brigadier Alistair Gordon Lethbridge-Stewart" &&
+                        year === 1968;
+                },
+                unmarshalledFunctionReturnString: function (fields) {
+                    const name = Blazor.platform.readStringField(fields, 0);
+                    const year = Blazor.platform.readInt32Field(fields, 8);
+
+                    return BINDING.js_string_to_mono_string(`Hello, ${name} (${year})!`);
+                }
+            };
+        }
+    </script>
+    <script>
+        logDotNetArray = async function () {
+            var arr = await DotNet.invokeMethodAsync("BlazorWebAssemblySignalRApp.Client", "ReturnArrayAsync");
+            console.log(arr);
+        }
+    </script>
+    <script>
+        //   Define a class which has some static method to work with dotnet object
+        class JSLibrary {
+            static _DotNetObjectReference;
+            static CreateInstance(instance) {
+                JSLibrary._DotNetObjectReference = instance;
+            }
+            static GetScores() {
+                var scores = JSLibrary._DotNetObjectReference.invokeMethod("GetScore", 0, 21);
+                JSLibrary._DotNetObjectReference.invokeMethod("ApplyChanges");
+                console.log(scores);
+            }
+            static GetCredits() {
+                var credits = JSLibrary._DotNetObjectReference.invokeMethod("GetCredit", 1, 4);
+                JSLibrary._DotNetObjectReference.invokeMethod("ApplyChanges");
+                console.log(credits);
+            }
+            static GetAverage() {
+                JSLibrary._DotNetObjectReference.invokeMethod("GetAverage");
+                JSLibrary._DotNetObjectReference.invokeMethod("ApplyChanges");
+            }
+        }
+        window.JSLibrary = JSLibrary;
+
+    </script>
+    <script>
+        function changeContent(dotnetObj) {
+            dotnetObj.invokeMethod("changeContent");
+        }
+    </script>
 </body>
 
 </html>

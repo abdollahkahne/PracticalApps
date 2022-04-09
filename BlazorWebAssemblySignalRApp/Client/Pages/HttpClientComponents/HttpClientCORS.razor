@@ -1,0 +1,109 @@
+@page "/northwind-customer"
+@using System.Text.Json
+@inject HttpClient _client
+
+<div>
+    <h1>Get Customers using API</h1>
+    @if (loaded)
+    {
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Customer Id</th>
+                    <th>Title</th>
+                    <th>Country</th>
+                    <th>City</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in customers)
+                {
+                    <tr>
+                        <td>@item.CustomerID</td>
+                        <td>@item.ContactTitle</td>
+                        <td>@item.Country</td>
+                        <td>@item.City</td>
+                        <td>
+                            <a href="/edit-customer/@item.CustomerID">Edit Customer</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+    else
+    {
+        <p>Not Loaded Yet!</p>
+    }
+</div>
+
+
+@code {
+    private IEnumerable<Customer> customers { get; set; }
+
+    // To prevent overriding the page content in case of pre-rendering use should render? No this does not work. The only
+    // approach is using PersistentState!
+    private bool shouldRender = false;
+    protected override bool ShouldRender()
+    {
+        return shouldRender;
+    }
+
+    private bool loaded { get; set; } = false;
+    protected override async Task OnInitializedAsync()
+    {
+        await getCustomers();
+        @* await readCustomers(); *@
+
+        await base.OnInitializedAsync();
+    }
+    private async Task getCustomers()
+    {
+        try
+        {
+            var options = new JsonSerializerOptions() { PropertyNameCaseInsensitive = true };
+            customers = await _client.GetFromJsonAsync<IEnumerable<Customer>>("http://localhost:5000/_api/customers", options) ??
+            new List<Customer>();
+            loaded = true;
+            shouldRender = true;
+        }
+        catch (System.Exception ex)
+        {
+
+            Console.WriteLine(ex.Message);
+        }
+    }
+
+    private async Task readCustomers()
+    {
+        try
+        {
+            var request = new HttpRequestMessage(HttpMethod.Get, new Uri("http://localhost:5000/_api/customers"));
+            @* request.SetBrowserRequestCredentials(BrowserRequestCredentials.Omit);
+                request.SetBrowserRequestCache(BrowserRequestCache.NoCache);
+                request.SetBrowserRequestMode(BrowserRequestMode.NoCors);
+                request.SetBrowserRequestIntegrity("xxx"); *@
+            request.SetBrowserResponseStreamingEnabled(true);
+            // request.SetBrowserRequestOption("redirect", "follow");
+            @* var response = await _client.GetAsync("http://localhost:5000/_api/customers"); // this throws error in case of cors!
+            *@
+            var response = await _client.SendAsync(request);
+
+            if (response.IsSuccessStatusCode)
+            {
+                var options = new JsonSerializerOptions() { PropertyNameCaseInsensitive = true };
+#nullable disable
+                customers = await response.Content.ReadFromJsonAsync<IEnumerable<Customer>>(options);
+                loaded = true;
+                shouldRender = true;
+            }
+        }
+        catch (System.Exception ex)
+        {
+
+            Console.WriteLine(ex.Message);
+        }
+    }
+
+
+}

@@ -1,19 +1,47 @@
-﻿@using Microsoft.AspNetCore.Components.Routing
+﻿@using Data
+@using SharpPad
+@using Microsoft.AspNetCore.Components.Routing
+@inject TokenProvider _tokens
 
-<Router AppAssembly="@typeof(App).Assembly">
+<CascadingAuthenticationState>
+    <Router AppAssembly="@typeof(App).Assembly">
 
-    <Found Context="routeData">
-        <RouteView RouteData="@routeData" DefaultLayout="@typeof(MainLayout)" />
-        <FocusOnNavigate RouteData="@routeData" Selector="h1" />
-    </Found>
-    <NotFound>
-        <PageTitle>Not found</PageTitle>
-        <LayoutView Layout="@typeof(DoctorWhoLayout)">
-            <p role="alert">Sorry, there's nothing at this address.</p>
-            <a href="chat">Chat please</a>
-        </LayoutView>
-    </NotFound>
-</Router>
+        <Found Context="routeData">
+            <RouteView RouteData="@routeData" DefaultLayout="@typeof(MainLayout)" />
+            <FocusOnNavigate RouteData="@routeData" Selector="h1" />
+        </Found>
+        <NotFound>
+            <PageTitle>Not found</PageTitle>
+            <LayoutView Layout="@typeof(DoctorWhoLayout)">
+                <p role="alert">Sorry, there's nothing at this address.</p>
+                <a href="chat">Chat please</a>
+            </LayoutView>
+        </NotFound>
+    </Router>
+</CascadingAuthenticationState>
+@code {
+    [Parameter]
+    public InitialApplicationState? InitialState { get; set; }
+    protected override async Task OnInitializedAsync()
+    {
+        // Here we set Tokens with initial value which get from Main Http Context
+        _tokens.AccessToken = InitialState?.Tokens?.AccessToken;
+        _tokens.RefreshToken = InitialState?.Tokens?.RefreshToken;
+        @* await _tokens.Dump("ReceivedInApp"); *@
+        // Then we can use TokenProvider Service every where and be sure that its filled with data we required!
+        // For example you can have a component which call an API using access token:
+        @* var token = _tokens.AccessToken;
+            var request = new HttpRequestMessage(HttpMethod.Get,
+            "https://localhost:5003/WeatherForecast");
+            request.Headers.Add("Authorization", $"Bearer {token}"); *@
+        await base.OnInitializedAsync();
+    }
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        await InitialState.Dump("InitialState");
+        await base.OnAfterRenderAsync(firstRender);
+    }
+}
 
 @* @code {
     private async Task onNavigation(NavigationContext context)

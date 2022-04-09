@@ -1,0 +1,7 @@
+@page "/jsinterop-observable"
+
+<h1>JS Interop Observable-Observer Example</h1>
+<h2 @ref="title" onclick="@(()=>Console.WriteLine("clicked by observer!"))">Hello world!</h2>
+Welcome to your new App:
+<JSInteropChild Parent="this"
+    Title="How Observer-Observable Pattern work for callback registeration from child component" />

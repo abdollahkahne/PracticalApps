@@ -1,0 +1,79 @@
+@page "/image-src"
+@inject IJSRuntime JS
+@inject HttpClient _client
+
+<h1>Images In Blazor</h1>
+<div>
+    <div>
+        <img src="@selectedImage" alt="Selected Image">
+    </div>
+    <div>
+        @for (int i = 1; i < 4; i++)
+        {
+            // Do not use a loop variable directly in a lambda expression
+            var localI = i;
+            <button @onclick="@(()=>selectImage(localI))">Select Image @i</button>
+        }
+    </div>
+</div>
+<h2>Image From Stream</h2>
+<div>
+    <img id="streamImg" />
+</div>
+<h2>Preview Image</h2>
+<div>
+    <InputFile OnChange="previewImage" />
+    <div>
+        <img id="preview-img">
+    </div>
+    <div>
+        <img id="resized-img">
+    </div>
+</div>
+
+@code {
+    private string selectedImage { get; set; } = "images/default.jpeg";
+    private IJSObjectReference? module { get; set; }
+    private void selectImage(int i)
+    {
+        // This can be done by js too. since it does not any special thing with Blazor!
+        // since when you change source of image (src) in DOM it automaticly try to get the image from address
+        selectedImage = $"images/image{i}.jpeg";
+    }
+    private async Task setImageSrc()
+    {
+        // GetStreamReference is a summarized of GetAsync+readAsStream
+        var stream = await _client.GetStreamAsync("https://avatars.githubusercontent.com/u/9141961");
+        var streamRef = new DotNetStreamReference(stream);
+        await module!.InvokeVoidAsync("setImageUrlFromStream", "streamImg", streamRef);
+
+    }
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            module = await JS.InvokeAsync<IJSObjectReference>("import", "/Pages/Images/ImageSrcComponent.razor.js");
+            await setImageSrc();
+        }
+        await base.OnAfterRenderAsync(firstRender);
+    }
+    private async Task previewImage(InputFileChangeEventArgs e)
+    {
+        var file = e.File;
+        await resizeImage(file);
+        using (var stream = file.OpenReadStream())
+        {
+            var streamRef = new DotNetStreamReference(stream);
+            await module!.InvokeVoidAsync("setImageUrlFromStream", "preview-img", streamRef);
+        }
+    }
+    private async Task resizeImage(IBrowserFile img)
+    {
+        var file = await img.RequestImageFileAsync("image/jpeg", 150, 150);
+        using (var stream = file.OpenReadStream())
+        {
+            var streamRef = new DotNetStreamReference(stream);
+            await module!.InvokeVoidAsync("setImageUrlFromStream", "resized-img", streamRef);
+        }
+    }
+}

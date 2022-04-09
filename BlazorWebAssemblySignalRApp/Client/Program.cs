@@ -6,6 +6,8 @@ using BlazorWebAssemblySignalRApp.Shared;
 using BlazorWebAssemblySignalRApp.Client.Pages.ExternalEvents;
 using BlazorWebAssemblySignalRApp.Client.Pages;
 using ComponentLibrary;
+using Microsoft.AspNetCore.Components.Authorization;
+using System.Security.Claims;
 
 var builder = WebAssemblyHostBuilder.CreateDefault(args); // Here we create the default host builder for WebAssembly
 // The following to line should be deleted for blazor wasm prerendering since we completely delete the index.html and add index.cshtml!
@@ -18,13 +20,41 @@ builder.RootComponents.RegisterForJavaScript<Dialog>("dialog");
 // builder.RootComponents.Add<Counter>(".counter-from-css");
 
 var http = new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) }; // better to use http client factory here? No. since it runs on client it do not  encounter problems related to server and http handler I think
+
+// create http client using SocketsHttpHandler
+// var handler = new SocketsHttpHandler();
+// handler.PooledConnectionLifetime = TimeSpan.FromMinutes(2);
+// builder.Services.AddScoped(sp => new HttpClient(handler, disposeHandler: false)); // 'SocketsHttpHandler' is unsupported on: 'browser'
 builder.Services.AddScoped(sp => http);
+
+// builder.Services.AddRemoteAuthentication()
+builder.Services.AddSingleton<AuthenticationStateProvider>(new CustomAuthenticationStateProvider());
+
+// builder.Services.AddOptions(); // I think this added by default to default web assembly host builder
+builder.Services.AddAuthorizationCore(options =>
+{
+    options.AddPolicy("NothAuthorized", policy =>
+    {
+        policy.RequireAssertion(ctx =>
+        {
+            var resource = ctx.Resource;
+            // If we need to access to resource object in runtime and its methods use
+            // if (ctx.Resource is String str) {// so we have access to string methods}
+            var username = ctx.User.Identity!.Name;
+            if (username == resource.ToString())
+            {
+                return true;
+            }
+            return false;
+        });
+    });
+});
 
 builder.Services.AddSingleton<IUserService, UserService>();
 builder.Services.AddSingleton<ISettingService, SettingService>();
 
 builder.Services.AddSingleton<NotifierService>(); // This two service used as an example of an external service which runs in Browser!
-builder.Services.AddSingleton<TimeService>();
+builder.Services.AddSingleton<TimeService>(); // This and the above services should be singleton (and in this order since Notifier service injected at Timer) since we should have one event handling system which we can add event handler to it and raise it externaly
 
 // this should be added to Services in order to use it inside ComponentLibrary or outside it.
 builder.Services.AddScoped<ExampleJsInterop>();

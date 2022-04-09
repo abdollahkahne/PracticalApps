@@ -1,6 +1,16 @@
 @page "/js-interop-component"
 @inject IJSRuntime JS
+@inject HttpClient Http
+@implements IAsyncDisposable
 
+
+<div onclick="@(()=>Console.WriteLine("I clicked programaticly!"))" @ref="sampleDivision">
+    <h1> Use ElementReference as an HtmlElement in js functions</h1>
+    <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Beatae, maxime voluptate similique harum, eaque
+        obcaecati quos quaerat adipisci suscipit voluptas inventore ipsum quam. Distinctio nisi ullam cupiditate
+        repudiandae, voluptates in!</p>
+</div>
+<button @onclick="changeStyle">Change stryle of above element</button>
 <div>
     <h1>Call JS <code>getStudent</code>function </h1>
     <div>
@@ -22,7 +32,7 @@
         </p>
     </div>
     <div>
-        <CheckRenderChildComponent StudentName="@student?.Name" />
+        <CheckRenderChildComponent StudentName="@student?.Name" Subscription="_subscriptions" />
     </div>
     <button @onclick="getStudent">JS Interop!</button>
 </div>
@@ -50,8 +60,15 @@
         <a href="https://www.imdb.com/name/nm0472710/">David Krumholtz on IMDB</a>
     </p>
 </div>
+<hr>
+<div>
+    <h2>Work With Stream (DotnetStreamReference)</h2>
+    <button @onclick="workWithStream">Read Stream</button>
+</div>
 
 @code {
+    private ElementReference sampleDivision { get; set; }
+    private JSInteropEventSuscription _subscriptions = new();
     private uint[] quoteArray = new uint[] {
 60, 101, 109, 62, 67, 97, 110, 39, 116, 32, 115, 116, 111, 112, 32,
 116, 104, 101, 32, 115, 105, 103, 110, 97, 108, 44, 32, 77, 97,
@@ -63,9 +80,51 @@
     private Student? student { get; set; }
     private IJSObjectReference? module { get; set; }
     private JSInteropClass? _module { get; set; }
+    private async Task workWithStream()
+    {
+        var str = "To remind again: In case of OnParameterAsync and OnInitializedAsyn, the above 2 render" +
+        "exists too. Also consider that in case of rendering from parent, the OnInitialized only run if it is first" +
+        "render but set parameter run on every rerendering from parent but not rerendering through event callbacks!";
+        Byte[] bytes = System.Text.Encoding.UTF8.GetBytes(str);
+        using (var ms = new MemoryStream(bytes))
+        {
+            using (var streamRef = new DotNetStreamReference(ms))
+            {
+                await module!.InvokeVoidAsync("workWithFileStream", streamRef);
+            }
+        }
+        // File stream is not availabe in web assembly without user guesture
+        @* var path = Path.Combine(Environment.CurrentDirectory, "icon-192.png");
+            Console.WriteLine(path);
+            using (var fs = File.OpenRead(path))
+            {
+            using (var streamRef = new DotNetStreamReference(fs))
+            {
+            await module!.InvokeVoidAsync("workWithFileStream", streamRef);
+            }
+            } *@
+
+        // stream from a network file
+        var response = await Http.GetAsync("http://localhost:5104/icon-192.png");
+        response.EnsureSuccessStatusCode();
+
+        using (var networkStream = response.Content.ReadAsStream())
+        {
+            using (var streamRef = new DotNetStreamReference(networkStream))
+            {
+                await module!.InvokeVoidAsync("workWithFileStream", streamRef);
+            }
+        }
+    }
     private async Task ConvertArray()
     {
         decodedText = new MarkupString(await module!.InvokeAsync<string>("convertArray", quoteArray));
+    }
+
+    private async Task changeStyle()
+    {
+        await module!.InvokeVoidAsync("changeBackgroundColor", sampleDivision).AsTask();
+        await sampleDivision.ClickElem(JS);
     }
     private async Task getStudent(EventArgs e)
     {
@@ -112,9 +171,20 @@
     {
         if (firstRender)
         {
+            // Here null means that it has not any event handler (It is a delegate and not the class!)
+            _subscriptions.OnElementHasSet(sampleDivision);
             module = await JS.InvokeAsync<IJSObjectReference>("import", "./Pages/JSInterop/JSInteropComponent.razor.js");
         }
         await base.OnAfterRenderAsync(firstRender);
+    }
+
+    public async ValueTask DisposeAsync()
+    {
+        // We better to dispose JS module (Not JS Runtime since it may be singleton) and every disposable classes created
+        if (_module is not null)
+            await _module.DisposeAsync();
+        if (module is not null)
+            await module.DisposeAsync();
     }
 
     public class Student

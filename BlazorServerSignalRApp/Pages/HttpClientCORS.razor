@@ -1,0 +1,66 @@
+@page "/northwind-customer"
+@using System.Text.Json
+@inject HttpClient _client
+
+<div>
+    <h1>Get Customers using API</h1>
+    @if (loaded)
+    {
+        <ul>
+            @foreach (var item in customers)
+            {
+                <li>
+                    CustomerId: <span>@item.CustomerID</span><br>
+                    Customer Title: <span>@item.ContactTitle</span> <br>
+                    Customer Country: <span>@item.Country</span> <br>
+                    Customer City: <span>@item.City</span> <br>
+                </li>
+            }
+        </ul>
+    }
+    else
+    {
+        <p>Not Loaded Yet!</p>
+    }
+</div>
+
+@code {
+    private IEnumerable<Customer> customers { get; set; }
+    private bool loaded { get; set; } = false;
+    protected override async Task OnInitializedAsync()
+    {
+        try
+        {
+            var response = await _client.GetAsync("http://localhost:5000/_api/customers"); // this throws error in case of cors!
+            if (response.IsSuccessStatusCode)
+            {
+                var options = new JsonSerializerOptions() { PropertyNameCaseInsensitive = true };
+#nullable disable
+                customers = await response.Content.ReadFromJsonAsync<IEnumerable<Customer>>(options);
+                loaded = true;
+            }
+        }
+        catch (System.Exception ex)
+        {
+
+            Console.WriteLine(ex.Message);
+        }
+
+        await base.OnInitializedAsync();
+    }
+
+    public class Customer
+    {
+        public string CustomerID { get; set; }
+        public string CompanyName { get; set; }
+        public string ContactName { get; set; }
+        public string ContactTitle { get; set; }
+        public string Address { get; set; }
+        public string City { get; set; }
+        public string Region { get; set; }
+        public string PostalCode { get; set; }
+        public string Country { get; set; }
+        public string Phone { get; set; }
+        public string Fax { get; set; }
+    }
+}

@@ -1,0 +1,54 @@
+@page "/github-branchs"
+@using System.Net.Http.Headers
+@using Microsoft.Net.Http.Headers
+@using System.Text.Json
+@inject HttpClient _Client
+
+<div>
+    <ul>
+        @foreach (var item in branches)
+        {
+            <li>@item.Name: @item.Protected</li>
+        }
+    </ul>
+</div>
+@code {
+    private IEnumerable<GitHubBranch> branches { get; set; } = new List<GitHubBranch>();
+    protected override async Task OnInitializedAsync()
+    {
+        await getBranches();
+        await base.OnInitializedAsync();
+    }
+
+    private async Task getBranches()
+    {
+        var url = new Uri("https://api.github.com/repos/dotnet/AspNetCore.Docs/branches");
+        var request = new HttpRequestMessage(HttpMethod.Get, url)
+        {
+            Headers ={
+{
+HeaderNames.Accept,"text/json"
+},
+{HeaderNames.UserAgent,"HttpRequestsSample"}
+}
+        };
+        var response = await _Client.SendAsync(request);
+        if (response.IsSuccessStatusCode)
+        {
+            var contentStream = await response.Content.ReadAsStreamAsync();
+            var options = new JsonSerializerOptions()
+            {
+                PropertyNameCaseInsensitive = true
+            };
+            branches = await JsonSerializer.DeserializeAsync<IEnumerable<GitHubBranch>>(contentStream, options) ?? new
+            List<GitHubBranch>();
+        }
+    }
+
+    public class GitHubBranch
+    {
+        public string? Name { get; set; }
+        public bool Protected { get; set; }
+        public object? Commit { get; set; }
+    }
+}

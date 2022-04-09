@@ -1,11 +1,29 @@
 ﻿@page "/"
 @namespace BlazorServerSignalRApp.Pages
+@using Data
+@using Microsoft.AspNetCore.Authentication
+@using SharpPad
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 @{
     Layout = "_Layout";
 }
 
-<component type="typeof(App)" render-mode="ServerPrerendered" />
+@{
+    var initialState = new InitialApplicationState()
+    {
+        Tokens = new TokenProvider()
+        {
+            AccessToken = await HttpContext.GetTokenAsync("access_token"),
+            RefreshToken = await HttpContext.GetTokenAsync("id_token"),
+        },
+        TraceIdentifier = HttpContext.TraceIdentifier,
+        IP = HttpContext.Connection.RemoteIpAddress.Address,
+        LocalPort = HttpContext.Connection.LocalPort,
+    };
+    @* await initialState.Tokens.Dump("SentToApp"); *@
+}
+
+<component type="typeof(App)" render-mode="ServerPrerendered" param-InitialState="initialState" />
 <persist-component-state />
 
 @* in Blazor Server when Circuit disconnect it notify user with a modal. we can customize it as follow *@

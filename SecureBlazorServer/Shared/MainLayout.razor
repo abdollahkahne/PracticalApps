@@ -1,0 +1,32 @@
+﻿@inherits LayoutComponentBase
+
+<PageTitle>SecureBlazorServer</PageTitle>
+
+<div class="page">
+    <div class="sidebar">
+        <NavMenu />
+    </div>
+
+    <main>
+        <div class="top-row px-4 auth">
+            <LoginDisplay />
+            <a href="https://docs.microsoft.com/aspnet/" target="_blank">About</a>
+        </div>
+        <div class="top-row px-4 auth">
+            <p>
+                Layout content refresh on every route change (manually or by navigation manager)? Yes. It refreshs. See
+                the Random Number Here:
+                @rng.Next()
+            </p>
+        </div>
+
+        <article class="content px-4">
+            @Body
+        </article>
+    </main>
+</div>
+
+@code {
+    private Random rng = new();
+
+}

@@ -1,0 +1,55 @@
+@inject IJSRuntime JS
+
+<div>
+    <h4>@title</h4>
+    <p>@message</p>
+    <button @onclick="changeContentByJS">Change Content</button>
+    <button @onclick="changeContentByJSUsingHelper">Change Content using Helper class</button>
+</div>
+
+@code {
+    [Parameter]
+    public string Name { get; set; } = "Sample Name";
+    private string? title { get; set; }
+    private string? message { get; set; }
+    protected override void OnParametersSet()
+    {
+        title = "Title of Component " + Name;
+        message = "Message of Component " + Name;
+        base.OnParametersSet();
+    }
+    private async Task changeContentByJS()
+    {
+        var dotNetObjec = DotNetObjectReference.Create(this);
+        {
+            await JS.InvokeVoidAsync("changeContent", dotNetObjec);
+        }
+
+    }
+    [JSInvokable]
+    public void changeContent()
+    {
+        title = "Changed Title of Component " + Name;
+        message = "Changed Message of Component " + Name;
+        StateHasChanged();
+    }
+
+    private async Task changeContentByJSUsingHelper()
+    {
+        var dotNetObjec = DotNetObjectReference.Create(new HelperClassJSInterop(changeContentUsingHelper));
+        {
+            await JS.InvokeVoidAsync("changeContent", dotNetObjec);
+        }
+
+    }
+    public async void changeContentUsingHelper()
+    {
+        // Here we can use the invoke method of base component to execute it in the synchronization context of the component
+        await this.InvokeAsync(() =>
+        {
+            title = "Changed Title Using Helper of Component " + Name;
+            message = "Changed Message Using Helper of Component " + Name;
+            StateHasChanged();
+        });
+    }
+}

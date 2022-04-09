@@ -1,0 +1,257 @@
+@page "/dotnet-interop"
+@inject IJSRuntime JS
+@implements IDisposable
+
+<div>
+    <h1>Call Dotnet Method From JS</h1>
+    <div>
+        <ul>
+            @foreach (var item in numbers)
+            {
+                <li>@item</li>
+            }
+        </ul>
+    </div>
+    <div>
+        <button @onclick="callJSMethod">Call Dotnet Method From JS using Blazor onclick</button>
+        <button onclick="logDotNetArray()">Call Dotnet from js using js onclick</button>
+        <button @onclick="callDotNetMethod">Call DotNet Method Directly</button>
+        <button @onclick="callJSMethodForStream">Work With Stream</button>
+        <button @onclick="callJSMethodForStreamVersion2">Work With Stream Version 2</button>
+    </div>
+    <hr>
+    <h2>Call Dotnet Instance method</h2>
+    <div>
+        <ul>
+            @foreach (var item in strs)
+            {
+                <li>@item</li>
+            }
+        </ul>
+    </div>
+    <button @onclick="callJSMethodForInstanceDotNetMethod">Call Dotnet Instance Method From JS</button>
+</div>
+<hr>
+<div>
+    <h2>Courses Scores</h2>
+    <div>
+        @* in js/html DOM Event we should invoke a function unlike the Blazor events which we add an event Handler   *@
+        <button onclick="JSLibrary.GetScores()">Create Scores</button>
+        <button onclick="JSLibrary.GetCredits()">Create Credits</button>
+        <button onclick="JSLibrary.GetAverage()">Create Average</button>
+    </div>
+    <table class="table table-bordered table-collapsed table-striped table-light table-sm table-hover">
+        <thead class="thead-dark">
+            <tr>
+                <th>Course</th>
+                <th>Credit</th>
+                <th>Score</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in jSModule!.Courses)
+            {
+                <tr>
+                    <td>@item</td>
+                    <td>@jSModule.Credits.GetValueOrDefault(item)</td>
+                    <td>@jSModule.Scores.GetValueOrDefault(item)</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <p>Your average is <code>@jSModule.Average</code> </p>
+    <button @onclick="getScores">Get Scores</button>
+    <button @onclick="workWithScore">Work with Scores</button>
+</div>
+
+@code {
+    private int[] numbers { get; set; } = new int[] { };
+    private string[] strs { get; set; } = new string[] { };
+    private NotificationSystem Notifier=new();
+    private JSModule? jSModule { get; set; } 
+    // The following has a reference to above property/field
+    private DotNetObjectReference<JSModule>? _jsmodule { get; set; }
+    private IJSObjectReference? _module { get; set; }
+    [JSInvokable]
+    public static Task<int[]> ReturnArrayAsync()
+    {
+        return Task.FromResult(new int[] { 1, 2, 3, 4, 5, 6 });
+    }
+    [JSInvokable("instanceMethodForArray")]
+    public Task<int[]> ReturnArrayAsyncNonStatic()
+    {
+        return Task.FromResult(new int[] { 1, 2, 3, 4, 5, 6 });
+    }
+    private async Task callDotNetMethod()
+    {
+        numbers = await ReturnArrayAsync();
+    }
+    private async Task callJSMethod()
+    {
+        numbers = await _module!.InvokeAsync<int[]>("callArrayFromDotnet");
+    }
+    private async Task callJSMethodForStream()
+    {
+        await _module!.InvokeVoidAsync("workWithStreams");
+    }
+    private async Task callJSMethodForStreamVersion2()
+    {
+        await using (var streamReference=await _module!.InvokeAsync<IJSStreamReference>("workWithStreams"))
+        {
+            using ( var stream=await streamReference.OpenReadStreamAsync())
+            {
+                var path=Path.Combine(Path.GetTempPath(),"file1.txt");
+                Console.WriteLine(path);
+                using (var fs=new FileStream(path,FileMode.Create))
+                {
+                    await stream.CopyToAsync(fs);
+                    
+                }
+                var str=await File.OpenText(path).ReadToEndAsync();
+                Console.WriteLine("Writing from JS Returned Stream");
+                Console.WriteLine(str);
+            }
+        }
+    
+            
+    }
+    private async Task callJSMethodForInstanceDotNetMethod()
+    {
+        // we can dispose the DotNetObjectReference Here with using or inherit from IDisposable/IAsyncDisposable
+        // And disposing Reference do Not dispose value!
+        using (var objectRef = DotNetObjectReference.Create(this))
+        {
+            strs = await _module!.InvokeAsync<string[]>("callInstanceMethod", objectRef);
+        }
+    }
+    private async Task getScores()
+    {
+
+        @* using (var jsModuleRef = DotNetObjectReference.Create(jSModule))
+            { *@
+        
+        await _module!.InvokeVoidAsync("getScores", _jsmodule);
+        @* } *@
+    }
+
+    private async Task workWithScore()
+    {
+
+        using (var jsModuleRef = DotNetObjectReference.Create(jSModule!))
+        {
+            await _module!.InvokeVoidAsync("workWithScores", jsModuleRef);
+        }
+    }
+    protected override void OnInitialized()
+    {
+        jSModule=new(Notifier);
+        Notifier.Notification+=onNotification;
+
+        base.OnInitialized();
+    }
+    private void onNotification(Object? sender,EventArgs e) {
+        this.InvokeAsync(()=>{StateHasChanged();});
+    }
+    
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            _module = await JS.InvokeAsync<IJSObjectReference>("import", "./Pages/JSInterop/DotNetInterop/DotNetInterop.razor.js");
+                // We pass the value of dotnet reference to all static methods required to it in first After Render Life Cycle
+            _jsmodule = DotNetObjectReference.Create(jSModule!);// create the reference and pass to Static methods in js
+            await JS.InvokeVoidAsync("JSLibrary.CreateInstance",_jsmodule);// we should call it with JS and not the module since it is global
+        }
+        await base.OnAfterRenderAsync(firstRender);
+    }
+    public void Dispose()
+    {
+        @* Notifier.Notification-=onNotification; // This is not necessary since both notification and js module here get disposed *@
+        
+        if (_jsmodule is not null)
+        {
+            Console.WriteLine("The Razor Component for DotNetInterop is disposed. Does the Value Object disposed after disposing Reference?! Answer: No!");
+            // Disposing Reference to a DotNet Object through DotNetObjectReference does not dispose dotnet object automatically
+            _jsmodule.Dispose();
+        }
+    }
+    [JSInvokable]
+    public static async void workWithStreams(IJSStreamReference streamReference) {
+       using ( var stream=await streamReference.OpenReadStreamAsync())
+       {
+           var path=Path.Combine(Path.GetTempPath(),"file.txt");
+           Console.WriteLine(path);
+           using (var fs=new FileStream(path,FileMode.Create))
+           {
+               await stream.CopyToAsync(fs);
+               
+           }
+           var str=await File.OpenText(path).ReadToEndAsync();
+           Console.WriteLine(str);
+       }
+    }
+    public class JSModule : IDisposable
+    {
+        private readonly NotificationSystem _notification;
+        private Random rng = new Random();
+        public string[] Courses = new string[] { "Math", "Physic", "Economic", "Statistic",
+"Literature","Philosophy","Programming","Chimistry","Probability" };
+        public Dictionary<string, int> Scores { get; set; } = new();
+        public Dictionary<string, int> Credits { get; set; } = new();
+        public double Average { get; set; } = 0;
+        [JSInvokable]
+        public Dictionary<string, int> GetScore(int rngMin=5,int rngMax=21)
+        {
+            foreach (var item in Courses)
+            {
+                Scores[item] = rng.Next(rngMin, rngMax);
+            }
+            return Scores;
+
+        }
+        [JSInvokable]
+        public Dictionary<string, int> GetCredit(int rngMin=1,int rngMax=3)
+        {
+            foreach (var item in Courses)
+            {
+                Credits[item] = rng.Next(rngMin, rngMax);
+            }
+            return Credits;
+        }
+        [JSInvokable]
+        public void GetAverage()
+        {
+            var total = 0;
+            var totalCredits = 0;
+            foreach (var item in Courses)
+            {
+                totalCredits += Credits[item];
+                total += Credits[item] * Scores[item];
+            }
+            if (totalCredits > 0)
+                Average = (double)total / (double)totalCredits;
+            else Average = 0;
+             
+        }
+        [JSInvokable]
+        public void ApplyChanges() {
+            // When we change to apply it we should notify
+            _notification.Notify();
+        }
+        public void Dispose()
+        {
+            Console.WriteLine("Caution that I Did not dispose when Reference created for me disposed (Value Does not disposed and only Reference disposed!).");
+        }
+        public JSModule(NotificationSystem notification) {
+            _notification=notification;
+        }
+    }
+    public class NotificationSystem {
+        public event EventHandler Notification;
+        public void Notify() {
+            if (Notification is not null) {
+                Notification.Invoke(this,EventArgs.Empty);
+            }
+        }
+    }
+}

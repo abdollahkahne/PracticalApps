@@ -1,9 +1,53 @@
 ﻿@page "/"
+@using Data
+@using SharpPad
+@inject TokenProvider tokens
+@inject AuthenticationStateProvider _tokenProvider
 
 <PageTitle>Index</PageTitle>
 
 <h1>Hello, world!</h1>
 
 Welcome to your new app.
-
+<div>
+    The following data passed from _Host.cshtml to this component. To do data whe done following steps:
+    <ol>
+        <li>Define a Service with structure of data and register it as scoped lifetime</li>
+        <li>Define a parameter for App.razor with every name and type you like and pass the initial data from
+            _Host.cshtml to App.razor using Parameter</li>
+        <li>inject an instance of service defined in step 1 and set its value from initial value passed through
+            Parameters to App.razor</li>
+        <li>Inject scoped instance of service to each component you like and use it (This is work same as cascading
+            parameter but using service injection</li>
+    </ol>
+    <h1>Token Values from Token Provider:</h1>
+    <ul>
+        <li>Access Token: @tokens.AccessToken</li>
+        <li>ID Tpken: @_tokens.RefreshToken</li>
+    </ul>
+</div>
+<div>Only Authorized User should see the following:</div>
+<AuthorizeView>
+    <Authorized>
+        This is for Authorized User!
+    </Authorized>
+    <Authorizing>Authorizing ...</Authorizing>
+    <NotAuthorized>Not Authorized User should see this!</NotAuthorized>
+</AuthorizeView>
 <SurveyPrompt Title="How is Blazor working for you?" />
+
+@code {
+    private TokenProvider? _tokens { get; set; } = new();
+    protected override async Task OnInitializedAsync()
+    {
+        @* await tokens.Dump("OnInit"); *@
+        await (await _tokenProvider.GetAuthenticationStateAsync())?.User?.Identity?.Dump("AuthenticationState");
+        await base.OnInitializedAsync();
+    }
+    protected override async Task OnParametersSetAsync()
+    {
+        @* await tokens.Dump("OnParameterSet"); *@
+        _tokens = tokens;
+        await base.OnParametersSetAsync();
+    }
+}

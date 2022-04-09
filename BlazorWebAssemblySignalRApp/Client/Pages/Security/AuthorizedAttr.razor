@@ -1,0 +1,8 @@
+@page "/authorize-attr"
+@using Microsoft.AspNetCore.Authorization
+@attribute [Authorize(Roles = "Programmer")]
+<div>
+    This does not work in case of not using AuthorizedRouteView (And do not use CascadingAuthenticationState which
+    required for AuthorizedRouteView)?!!
+    It do not conside Authorize attribute at all in case on not using AuthorizedRouteView which seems logical.
+</div>

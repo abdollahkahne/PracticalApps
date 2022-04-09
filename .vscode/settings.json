@@ -1,0 +1,6 @@
+{
+    "omnisharp.useModernNet": false,
+    "omnisharp.useGlobalMono": "auto",
+    "editor.formatOnSave": true,
+    "editor.defaultFormatter": "ms-dotnettools.csharp"
+}

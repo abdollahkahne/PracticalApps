@@ -1,3 +1,5 @@
+using Microsoft.IdentityModel.Tokens;
+
 namespace BlazorServerSignalRApp.Data;
 
 public class WeatherForecast
@@ -46,5 +48,9 @@ public class SettingService : ISettingService
     public IList<Setting> GetSettings()
     {
         return _settings;
+    }
+    public class GoogleKeys
+    {
+        public IEnumerable<JsonWebKey> Keys { get; set; }
     }
 }

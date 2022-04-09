@@ -1,0 +1,109 @@
+@page "/unmarshalled-interop"
+@using System.Runtime.InteropServices
+@inject IJSRuntime JS
+
+<h1>UnMarshalled JS Interop</h1>
+<div>
+    <h2>Caution</h2>
+    <p>
+        The following examples aren't typical use cases for this scenario because the struct passed to JS doesn't result
+        in poor component performance. The example uses a small object merely to demonstrate the concepts for passing
+        unserialized .NET data.
+    </p>
+</div>
+<hr>
+<div>
+    <h2>Result</h2>
+    <div>
+        <h4>Compare Student Age against:</h4>
+        <input @bind="minAge" />
+        <button @onclick="compareStudent">Is Older?</button>
+        <span>@isOlder</span>
+    </div>
+    <hr>
+    <div>
+        <h4>Get Full Info</h4>
+        <button @onclick="showStudentInfo">Show Full Info</button>
+        <span>@studentFullInfo</span>
+    </div>
+    <hr>
+    <div>
+        <h4>Set Student Info From Here</h4>
+        <input @bind="studentName" />
+        <input @bind="studentAge" />
+        <button @onclick="updateStudent">Update Student</button>
+        <button @onclick="updateStudentUsingJSObject">Update Student using JS Object</button>
+    </div>
+    <hr>
+    <div>
+        <h4>Work with Element Reference</h4>
+        <div @ref="divElement">This is a div to be filled!</div>
+        <button @onclick="workWithElementReference">Fill Div with Data</button>
+    </div>
+</div>
+
+
+@code {
+    #nullable disable
+    private ElementReference divElement {get;set;}
+    private string studentName {get;set;}
+    private int studentAge {get;set;}
+    private UnmarshalledJSInteropStudent student {get;set;} = new UnmarshalledJSInteropStudent
+    {
+        Name = "in this case we may not do serialization and use in Razor IJSUnmarshalledObjectReference type to send or receive input and output. To work with .Net  (Razor) object in JS you can use Blazor.Platform object and BINDING object which provide methods to read and write to them."+
+    "IJSUnmarshalledObjectReference Represents a reference to a JavaScript object whose functions can be invoked synchronously without JSON marshalling. It is a .Net type and used in .Net. Also since it works with memory it is sync if does not require another async operations and so it doesnt have the overhead of serializing .NET data",
+        Age = 23
+    };
+    private string studentFullInfo {get;set;}="Not Generated yet!";
+    private int minAge { get; set; } = 25;
+    private bool isOlder { get; set; }
+    private IJSObjectReference _module { get; set; }
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            _module = await
+            JS.InvokeAsync<IJSObjectReference>("import", "./Pages/JSInterop/UnmarshalledJSInterop/UnmarshalledJSInterop.razor.js");
+        }
+        await base.OnAfterRenderAsync(firstRender);
+    }
+    private void compareStudent()
+    {
+        // Here we only used IJSUnmarshalled version of object reference to have access to sync method.
+        // we can do same action for IJSRuntime vs IJSUnmarshalledRuntime
+        isOlder =
+        ((IJSUnmarshalledObjectReference)_module).InvokeUnmarshalled<UnmarshalledJSInteropStudent, int, bool>("compareStudent",
+        student, minAge);
+    }
+    private void showStudentInfo() {
+        // if a js function works with .Net Objects in a direct way (Unmarshalled) we should it invoke it unmarshalled
+        // It has a generic type which is input type and return type as below
+        studentFullInfo=((IJSUnmarshalledObjectReference)_module)
+        .InvokeUnmarshalled<UnmarshalledJSInteropStudent,string>("generateFullInfo",student);
+    }
+    private void updateStudent() {
+        // we can pass to function called Unmarshalled both normal primitive object (This is not included string! so we should create a struct here!)
+        //  an read them as usuall or we can pass struct with Explicit layout and read them using Blazor.Platform in JS
+        var studentCopy=new UnmarshalledJSInteropStudent {Name=studentName,Age=studentAge};
+        student=((IJSUnmarshalledObjectReference)_module)
+        .InvokeUnmarshalled<UnmarshalledJSInteropStudent,UnmarshalledJSInteropStudent>("returnStudent",studentCopy);
+        
+        @* Console.WriteLine($"{_student.Name} has {_student.Age}"); *@
+    }
+    private void updateStudentUsingJSObject() {
+        IJSInProcessObjectReference studentObj=((IJSUnmarshalledObjectReference)_module)
+        .InvokeUnmarshalled<string,int,IJSInProcessObjectReference>("returnStudentObjectRef",studentName,studentAge);
+        Student _student=studentObj.Invoke<Student>("getStudent");
+        Console.WriteLine(@"{0}:{1}",_student.Name,_student.Age);
+
+    }
+    private void workWithElementReference() {
+        Console.WriteLine(divElement.Id);
+       ((IJSUnmarshalledObjectReference)_module).InvokeUnmarshalled<ElementReference,bool>("workWithElements",divElement);
+    }
+    private class Student {
+        public string? Name {get;set;}
+        public int Age {get;set;}
+    }
+    
+}

@@ -1,0 +1,44 @@
+@page "/create-customer"
+@using System.Text.Json
+@inject HttpClient _client
+
+<div>
+    <EditForm class="form" Model="model" OnValidSubmit="handleSubmit">
+        <InputText class="form-control" @bind-Value="model.CustomerID" placeholder="customer id" />
+        <InputText class="form-control" @bind-Value="model.CompanyName" placeholder="company name" />
+        <InputText class="form-control" @bind-Value="model.ContactName" placeholder="contact name" />
+        <InputText class="form-control" @bind-Value="model.ContactTitle" placeholder="contact-title" />
+        <InputTextArea class="form-control" @bind-Value="model.Address" placeholder="Address" />
+        <InputText class="form-control" @bind-Value="model.Country" placeholder="Country" />
+        <InputText class="form-control" @bind-Value="model.Region" placeholder="Region" />
+        <InputText class="form-control" @bind-Value="model.City" placeholder="City" />
+        <InputText class="form-control" @bind-Value="model.PostalCode" placeholder="Zip Code" />
+        <InputText class="form-control" @bind-Value="model.Phone" placeholder="phone" />
+        <InputText class="form-control" @bind-Value="model.Fax" placeholder="fax" />
+        <button type="submit">Create Customer</button>
+    </EditForm>
+</div>
+<style>
+    .form>input {
+        padding: 6px;
+        margin: 4px;
+    }
+</style>
+@code {
+    private Customer model { get; set; } = new();
+    private async Task handleSubmit()
+    {
+        try
+        {
+            var options = new JsonSerializerOptions() { PropertyNameCaseInsensitive = true };
+            var response = await _client.PostAsJsonAsync<Customer>("http://localhost:5000/_api/customers", model, options);
+            response.EnsureSuccessStatusCode();
+            model = new Customer();
+        }
+        catch (System.Exception)
+        {
+
+            throw;
+        }
+    }
+}

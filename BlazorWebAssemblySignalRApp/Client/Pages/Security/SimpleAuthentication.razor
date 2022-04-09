@@ -1,0 +1,54 @@
+@page "/simple-authentication"
+@using System.Security.Claims
+@* @inject AuthenticationStateProvider _provider *@
+
+<h3>
+    Claims Principal Data
+</h3>
+<AuthorizeView Context="authData">
+    <p>Hello @authData.User.Identity.Name</p>
+    <p>Here context variable used since ChildContent is a GenericRenderFragment Parameter</p>
+</AuthorizeView>
+<AuthorizeView Resource="resource" Policy="NothAuthorized">
+    <Authorized>User has access to Resource:@resource</Authorized>
+    <NotAuthorized>User has not access to Resource:@resource</NotAuthorized>
+</AuthorizeView>
+<div>
+    <p>@_authenticationMsg</p>
+    <p>@_surname</p>
+    <ul>
+        @foreach (var item in _claims)
+        {
+            <li>@item.Type: @item.Value</li>
+        }
+    </ul>
+</div>
+
+@code {
+    private string resource = "Shirin";
+    private string? _authenticationMsg { get; set; }
+    private string? _surname { get; set; }
+    [CascadingParameter]
+    public Task<AuthenticationState> state { get; set; }
+    private IEnumerable<Claim> _claims { get; set; } = Enumerable.Empty<Claim>(); // another way is using list
+    private async Task getAuthStateAsync()
+    {
+        @* var state = await _provider.GetAuthenticationStateAsync(); *@
+        var user = (await state).User;
+        if (user is not null && user.Identity!.IsAuthenticated)
+        {
+            _authenticationMsg = $"User Name: {user.Identity.Name} with Authentication Type: {user.Identity.AuthenticationType}";
+            _claims = user.Claims;
+            _surname = $"Surename: {_claims.FirstOrDefault(c => c.Type == ClaimTypes.Surname)?.Value}";
+        }
+        else
+        {
+            _authenticationMsg = "User is not Logged In!";
+        }
+    }
+    protected override async Task OnInitializedAsync()
+    {
+        await getAuthStateAsync();
+        await base.OnInitializedAsync();
+    }
+}

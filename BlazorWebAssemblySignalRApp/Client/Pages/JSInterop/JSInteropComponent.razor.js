@@ -39,6 +39,71 @@ export function convertArray(windows1251Arr) {
 export function showPromptLog(str) {
     console.log(str);
     // The following only works on Chrome and other browsers hang!!
-    debugger;
+    // debugger;
     window.alert(str);
+}
+
+export function changeBackgroundColor(elem) {
+    var divElem=document.createElement("div");
+    divElem.innerHTML=`<h4>Injected By JS</h4><p>since this is injected by JS interop. Blazor may interfere with it. But does it get things changed?</p>`;
+    elem.style.backgroundColor="pink";
+    elem.style.border="2px solid grey";
+    elem.style.padding="10px";
+    elem.style.margin="5px";
+    // elem.appendChild(divElem);
+    elem.innerHTML=divElem.innerHTML;
+}
+export function workWithFileStream(streamRef) {
+    console.log(streamRef);
+    console.log(streamRef.stream()); // this is a promise that resolved to a readable stream in js. 
+    const reader = streamRef.stream().then(stream =>workWithReadableStream(stream));
+    function workWithReadableStream(stream) {
+        const reader=stream.getReader();
+        let count = 0;
+        let receivedText="";
+        reader.read().then(result=>processText(result,count,receivedText));
+
+        // We implemented a loop/recursive function here
+        function processText({done,value},charsReceived,receivedText) {
+            if (done) {
+                console.log("Stream Reading Completed");
+                console.log("Value should be null:",value);
+            } else {
+                let updatedCharsReceived=value.length+charsReceived;
+                console.log('Received ' + updatedCharsReceived + ' characters so far. Current chunk = ' + value);
+                let updatedReceivedText= receivedText+value;
+                console.log("Received Result so far:",updatedReceivedText);
+                return reader.read().then(result=>processText(result,updatedCharsReceived,updatedReceivedText));
+       
+            }
+        }
+    }
+    
+  
+    // // read() returns a promise that resolves
+    // // when a value has been received
+    // reader.read().then(function processText({ done, value }) {
+    //   // Result objects contain two properties:
+    //   // done  - true if the stream has already given you all its data.
+    //   // value - some data. Always undefined when done is true.
+    //   if (done) {
+    //     console.log("Stream complete");
+    //     // para.textContent = value;
+    //     console.log(value);
+    //     return;
+    //   }
+  
+    //   // value for fetch streams is a Uint8Array
+    //   charsReceived += value.length;
+    //   const chunk = value;
+    // //   let listItem = document.createElement('li');
+    // //   listItem.textContent = 'Received ' + charsReceived + ' characters so far. Current chunk = ' + chunk;
+    // //   list2.appendChild(listItem);
+    // console.log('Received ' + charsReceived + ' characters so far. Current chunk = ' + chunk);
+  
+    //   result += chunk;
+  
+    //   // Read some more, and call this function again
+    //   return reader.read().then(processText);
+    // });
 }

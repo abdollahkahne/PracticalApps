@@ -9,10 +9,13 @@
     <link href="css/bootstrap/bootstrap.min.css" rel="stylesheet" />
     <link href="css/app.css" rel="stylesheet" />
     <link href="BlazorWebAssemblySignalRApp.Client.styles.css" rel="stylesheet" />
+    <link href="https://api.mapbox.com/mapbox-gl-js/v1.12.0/mapbox-gl.css" 
+    rel="stylesheet" />
     <script>
         window.setElementInnerText_=(element, text)=>element.innerText=text;
         window.setElementInnerText__=(element, text)=>{element.innerText=text;return text;}
     </script>
+    
 </head>
 
 <body>
@@ -117,6 +120,67 @@
         // To dispatch the event with another object use obj.dispatchEvent and obj.EventListener to handle it)
 
     </script>
+    <script>
+        window.JSInterop={
+            clickElem:(elem)=>elem.click(),
+        }
+    </script>
+    <script>
+        window.returnObjectReference = () => {
+          return {
+            unmarshalledFunctionReturnBoolean: function (fields) {
+              const name = Blazor.platform.readStringField(fields, 0);
+              const year = Blazor.platform.readInt32Field(fields, 8);
+      
+              return name === "Brigadier Alistair Gordon Lethbridge-Stewart" &&
+                  year === 1968;
+            },
+            unmarshalledFunctionReturnString: function (fields) {
+              const name = Blazor.platform.readStringField(fields, 0);
+              const year = Blazor.platform.readInt32Field(fields, 8);
+      
+              return BINDING.js_string_to_mono_string(`Hello, ${name} (${year})!`);
+            }
+          };
+        }
+      </script>
+      <script>
+          logDotNetArray = async function () {
+            var arr = await DotNet.invokeMethodAsync("BlazorWebAssemblySignalRApp.Client","ReturnArrayAsync"); 
+            console.log(arr);
+        }
+      </script>
+      <script>
+        //   Define a class which has some static method to work with dotnet object
+        class JSLibrary {
+            static _DotNetObjectReference;
+            static CreateInstance(instance) {
+                JSLibrary._DotNetObjectReference = instance;
+            }
+            static GetScores() {
+                var scores = JSLibrary._DotNetObjectReference.invokeMethod("GetScore", 0, 21);
+                JSLibrary._DotNetObjectReference.invokeMethod("ApplyChanges");
+                console.log(scores);
+            }
+            static GetCredits() {
+                var credits = JSLibrary._DotNetObjectReference.invokeMethod("GetCredit", 1, 4);
+                JSLibrary._DotNetObjectReference.invokeMethod("ApplyChanges");
+                console.log(credits);
+            }
+            static GetAverage() {
+                JSLibrary._DotNetObjectReference.invokeMethod("GetAverage");
+                JSLibrary._DotNetObjectReference.invokeMethod("ApplyChanges");
+            }
+        }
+        window.JSLibrary = JSLibrary;
+
+    </script>
+    <script>
+        function changeContent(dotnetObj) {
+            dotnetObj.invokeMethod("changeContent");
+        }
+    </script>
+      
 </body>
 
 </html>

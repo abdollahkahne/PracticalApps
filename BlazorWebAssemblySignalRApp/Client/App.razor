@@ -1,18 +1,48 @@
 ﻿@using Microsoft.AspNetCore.Components.Routing
 
-<Router AppAssembly="@typeof(App).Assembly">
+<CascadingAuthenticationState>
+    <Router AppAssembly="@typeof(App).Assembly">
+        <Found Context="routeData">
+            <AuthorizeRouteView RouteData="@routeData" DefaultLayout="@typeof(MainLayout)">
+                <NotAuthorized Context="data">
+                    <div>
+                        <p>This user is not authorized to see the resource/Component!</p>
+                        <p>User Name is: @data.User?.Identity?.Name
+                            (Note: User.Identity may be null if we used Default Policy for authorization)
+                        </p>
+                        <p>Consider that NotAuthorized fragment may be result of using an Authorize attribute in a paged
+                            component. Authorize Attribute should be used at Paged Components and It requires built-in
+                            Router of Blazor and It also requires AuthorizeRouteView component which itself requires
+                            CascadingAuthenticationState component</p>
+                    </div>
+                </NotAuthorized>
+                <Authorizing>User is Authorizing</Authorizing>
+            </AuthorizeRouteView>
+            <FocusOnNavigate RouteData="@routeData" Selector="h1" />
+        </Found>
+        <NotFound>
+            <PageTitle>Not found</PageTitle>
+            <LayoutView Layout="@typeof(DoctorWhoLayout)">
+                <p role="alert">Sorry, there's nothing at this address.</p>
+                <a href="chat">Chat please</a>
+            </LayoutView>
+        </NotFound>
+    </Router>
+</CascadingAuthenticationState>
+@* <Router AppAssembly="@typeof(App).Assembly">
     <Found Context="routeData">
-        <RouteView RouteData="@routeData" DefaultLayout="@typeof(MainLayout)" />
-        <FocusOnNavigate RouteData="@routeData" Selector="h1" />
+    <RouteView RouteData="@routeData" DefaultLayout="@typeof(MainLayout)">
+    </RouteView>
+    <FocusOnNavigate RouteData="@routeData" Selector="h1" />
     </Found>
     <NotFound>
-        <PageTitle>Not found</PageTitle>
-        <LayoutView Layout="@typeof(DoctorWhoLayout)">
-            <p role="alert">Sorry, there's nothing at this address.</p>
-            <a href="chat">Chat please</a>
-        </LayoutView>
+    <PageTitle>Not found</PageTitle>
+    <LayoutView Layout="@typeof(DoctorWhoLayout)">
+    <p role="alert">Sorry, there's nothing at this address.</p>
+    <a href="chat">Chat please</a>
+    </LayoutView>
     </NotFound>
-</Router>
+    </Router> *@
 
 @code {
     private async Task onNavigation(NavigationContext context)
@@ -21,6 +51,17 @@
         Console.WriteLine(context.Path); // Navigation context include Path (string) and cancelation Token
         @* If a user navigates to an endpoint but then immediately navigates to a new endpoint, the app shouldn't continue
             running the OnNavigatingAsync callback. We can use cancellation token for that check *@
+    }
+    private string stringifyRoute(RouteData rd)
+    {
+        IReadOnlyDictionary<string, object> dict = rd.RouteValues;
+        foreach (var item in dict.Keys.ToList<string>())
+        {
+            // RouteValue is every thing specified in Url definition. I only know route parameter now:|
+            Console.WriteLine(item);
+            Console.WriteLine(dict[item].ToString());
+        }
+        return "Logged";
     }
 }
 

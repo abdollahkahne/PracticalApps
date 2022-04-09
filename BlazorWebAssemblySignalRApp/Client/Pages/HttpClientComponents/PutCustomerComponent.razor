@@ -1,0 +1,67 @@
+@page "/edit-customer/{id}"
+@using System.Text.Json
+@inject HttpClient _client
+@inject NavigationManager nav
+
+<div>
+    <EditForm class="form" Model="model" OnValidSubmit="handleSubmit">
+        <InputText class="form-control" @bind-Value="model.CustomerID" readonly />
+        <InputText class="form-control" @bind-Value="model.CompanyName" placeholder="company name" />
+        <InputText class="form-control" @bind-Value="model.ContactName" placeholder="contact name" />
+        <InputText class="form-control" @bind-Value="model.ContactTitle" placeholder="contact-title" />
+        <InputTextArea class="form-control" @bind-Value="model.Address" placeholder="Address" />
+        <InputText class="form-control" @bind-Value="model.Country" placeholder="Country" />
+        <InputText class="form-control" @bind-Value="model.Region" placeholder="Region" />
+        <InputText class="form-control" @bind-Value="model.City" placeholder="City" />
+        <InputText class="form-control" @bind-Value="model.PostalCode" placeholder="Zip Code" />
+        <InputText class="form-control" @bind-Value="model.Phone" placeholder="phone" />
+        <InputText class="form-control" @bind-Value="model.Fax" placeholder="fax" />
+        <button type="submit">Update Customer</button>
+    </EditForm>
+</div>
+<style>
+    .form>input {
+        padding: 6px;
+        margin: 4px;
+    }
+</style>
+@code {
+    [Parameter]
+    public string id {get;set;}
+    private Customer model { get; set; } = new();
+    protected override async Task OnInitializedAsync()
+        {
+            await getCustomer();
+            await base.OnInitializedAsync();
+        }
+    private async Task getCustomer()
+    {
+        try
+        {
+            var options = new JsonSerializerOptions() { PropertyNameCaseInsensitive = true };
+            model=await _client.GetFromJsonAsync<Customer>($"http://localhost:5000/_api/customers/{id}", options) ??
+            new Customer();
+        }
+        catch (System.Exception ex)
+        {
+
+            Console.WriteLine(ex.Message);
+        }
+    }
+    
+    private async Task handleSubmit()
+    {
+        try
+        {
+            var options = new JsonSerializerOptions() { PropertyNameCaseInsensitive = true };
+            var response = await _client.PutAsJsonAsync<Customer>($"http://localhost:5000/_api/customers/{id}", model, options);
+            response.EnsureSuccessStatusCode();
+            nav.NavigateTo("/northwind-customer");
+        }
+        catch (System.Exception)
+        {
+
+            throw;
+        }
+    }
+}

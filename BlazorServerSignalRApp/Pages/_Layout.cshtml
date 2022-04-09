@@ -115,6 +115,16 @@
         // To dispatch the event with another object use obj.dispatchEvent and obj.EventListener to handle it)
 
     </script>
+    <script>
+        window.JSInterop = {
+            clickElem: (elem) => elem.click(),
+        }
+    </script>
+    <script>
+        async function changeContent(dotnetObj) {
+            await dotnetObj.invokeMethodAsync("changeContent");
+        }
+    </script>
 
 </body>
 
